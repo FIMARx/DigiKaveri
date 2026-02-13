@@ -1,0 +1,201 @@
+/* =========================================
+   1. BASE RESET & TYPOGRAPHY
+   ========================================= */
+*, *::before, *::after {
+    box-sizing: border-box; /* Critical for layout stability */
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased; /* Makes text sharper on Mac */
+}
+
+/* Container Utility - used globally */
+.container {
+    padding: 80px 20px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* =========================================
+   2. NAVIGATION (Glassmorphism)
+   ========================================= */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.90); /* Slightly more transparent */
+    
+    /* Fix for "VS Error" & Safari Support */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* High z-index to stay on top */
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.nav-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo Styling */
+.logo { 
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    color: var(--text-dark); 
+    letter-spacing: -0.5px;
+    text-decoration: none;
+}
+.logo span { color: var(--primary); }
+
+/* Links */
+.nav-links { display: flex; gap: 24px; align-items: center; }
+
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--text-dark); 
+    font-weight: 600; 
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--primary); }
+
+/* Nav Call Button (Pill Shape) */
+.btn-nav-call {
+    background: #EFF6FF; /* Light Blue */
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary) !important; /* Force color */
+    font-weight: 700 !important;
+    transition: all 0.2s ease;
+}
+
+.btn-nav-call:hover { 
+    background: var(--primary); 
+    color: white !important;
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   3. FOOTER
+   ========================================= */
+footer { 
+    background: var(--white); 
+    border-top: 1px solid #E5E7EB;
+    padding: 60px 20px; 
+    margin-top: 60px; 
+}
+
+.footer-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows stacking on mobile */
+    gap: 20px;
+}
+
+.footer-col h3 { margin: 0 0 10px 0; color: var(--primary); }
+.footer-col p { margin: 5px 0; color: var(--text-light); }
+
+/* =========================================
+   4. FLOATING UTILITIES
+   ========================================= */
+
+/* Accessibility Button (Left Bottom) */
+.accessibility-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; 
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    color: #111827;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.05);
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.accessibility-btn:hover { 
+    transform: scale(1.1); 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    color: var(--primary);
+}
+
+/* Mobile Sticky Bar (Hidden on Desktop) */
+.mobile-sticky-bar {
+    display: none; /* Default hidden */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    z-index: 998;
+    border-top: 1px solid #E5E7EB;
+}
+
+.btn-sticky-call {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #16A34A; /* Green call color */
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);
+}
+
+/* =========================================
+   5. RESPONSIVE ADJUSTMENTS
+   ========================================= */
+@media (max-width: 768px) {
+    /* Hide regular nav links on mobile to save space */
+    .nav-links > a:not(.btn-nav-call) {
+        display: none; 
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Show Mobile Sticky Bar */
+    .mobile-sticky-bar { display: block; }
+    
+    /* Add padding so content isn't hidden behind the bar */
+    body { padding-bottom: 80px; } 
+    
+    /* Move accessibility button up above the bar */
+    .accessibility-btn { bottom: 90px; left: 20px; }
+}

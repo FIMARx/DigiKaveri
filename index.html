@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiKaveri | Arjen IT-apu Vantaalla</title>
+    <meta name="description" content="Luotettava tietokonehuolto ja IT-tuki Vantaalla. Kotitalousvähennys -60%.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">Digi<span>Kaveri</span></div>
+            <div class="nav-links">
+                <a href="#home">Etusivu</a>
+                <a href="#services">Palvelut</a>
+                <a href="#pricing">Hinnasto</a>
+                <a href="tel:+358401234567" class="btn-nav-call">
+                    <i data-lucide="phone"></i> 040 123 4567
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-split">
+        <div class="hero-text">
+            <div id="serviceStatus" class="status-badge">
+                <div class="signal-dot"></div>
+                <span id="statusText">Ladataan...</span>
+            </div>
+
+            <h1>Tekniikka kiukuttelee? <br>Me korjaamme.</h1>
+            <p>Nopea apu Vantaalla ja etänä koko Suomeen. Jätä yhteydenottopyyntö, niin soitamme sinulle takaisin.</p>
+            
+            <div class="trust-badges">
+                <div class="trust-item"><i data-lucide="check-circle"></i> Kotitalousvähennys -60%</div>
+                <div class="trust-item"><i data-lucide="check-circle"></i> Tyytyväisyystakuu</div>
+            </div>
+        </div>
+
+        <div class="hero-form-card">
+            <h2>Jätä soittopyyntö</h2>
+            <form id="contactForm">
+                <input type="hidden" name="access_key" value="12fdb4b3-8ea3-4afd-9183-0c30b2724399">
+
+                <div class="input-group">
+                    <label>Nimi</label>
+                    <input type="text" name="name" placeholder="Matti Meikäläinen" required>
+                </div>
+                <div class="input-group">
+                    <label>Puhelinnumero</label>
+                    <input type="tel" name="phone" placeholder="040 123 4567" required>
+                </div>
+                <div class="input-group">
+                    <label>Miten voimme auttaa?</label>
+                    <select name="service">
+                        <option>Tietokoneongelma</option>
+                        <option>Puhelin / Tabletti</option>
+                        <option>Tulostin / Verkko</option>
+                        <option>Ostoapu</option>
+                        <option>Muu asia</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">
+                    Lähetä pyyntö <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+            <p class="form-footer">Otamme yhteyttä 24h sisällä.</p>
+        </div>
+    </header>
+
+    <section class="container section-process">
+        <div class="section-header">
+            <span class="badge">🚀 Toimintamalli</span>
+            <h2>Näin helppoa se on</h2>
+            <p>Ei monimutkaisia termejä tai odottelua. Näin saat avun.</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon"><i data-lucide="phone-call"></i></div>
+                <h3>Ota yhteyttä</h3>
+                <p>Soita tai jätä viesti. Kerro lyhyesti mikä laite kiukuttelee.</p>
+            </div>
+            <div class="step-arrow"><i data-lucide="arrow-right"></i></div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon"><i data-lucide="wrench"></i></div>
+                <h3>Me korjaamme</h3>
+                <p>Tulemme luoksesi tai korjaamme vian etänä. Sinun ei tarvitse tehdä mitään.</p>
+            </div>
+            <div class="step-arrow"><i data-lucide="arrow-right"></i></div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon"><i data-lucide="smile"></i></div>
+                <h3>Nauti toimivasta laitteesta</h3>
+                <p>Maksat laskulla vasta kun työ on valmis. Hyödynnä verovähennys!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="container section-services">
+        <div class="section-header">
+            <h2>Hinnasto ja Palvelut</h2>
+            <p>Katso mitä teemme etänä ja mitä paikan päällä.</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Palvelu</th>
+                        <th class="center">Etätuki 🌍</th>
+                        <th class="center">Kotikäynti 🏠</th>
+                        <th>Kuvaus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-name">Ostoapu & Konsultointi</td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="desc">Autamme valitsemaan parhaan laitteen tarpeisiisi.</td>
+                    </tr>
+                    <tr>
+                        <td class="service-name">Tietoturva & Virukset</td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="desc">Mainosten poisto, virustorjunta ja suojaukset.</td>
+                    </tr>
+                    <tr>
+                        <td class="service-name">PC / Mac Korjaukset</td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="desc">Windows/Mac -virheet, päivitykset ja jumitukset.</td>
+                    </tr>
+                    <tr>
+                        <td class="service-name">Fyysinen Huolto</td>
+                        <td class="center"><i data-lucide="x" class="cross"></i></td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="desc">Pölyjen puhdistus, tahnojen vaihto, osien asennus.</td>
+                    </tr>
+                    <tr>
+                        <td class="service-name">Verkko & Wi-Fi</td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="center"><i data-lucide="check" class="check"></i></td>
+                        <td class="desc">Reitittimen asennus ja hitaan verkon korjaus.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="pricing" class="container section-pricing">
+        <div class="section-header">
+            <span class="badge">💶 Hinnasto</span>
+            <h2>Selkeät hinnat, ei yllätyksiä</h2>
+            <p>Tiedät aina mitä maksat. Muista hyödyntää kotitalousvähennys (-60%) verotuksessa.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h3>Etätuki</h3>
+                    <p>Nopea apu pieniin ongelmiin</p>
+                </div>
+                <div class="price">
+                    <span class="amount">29€</span>
+                    <span class="period">/ 30 min</span>
+                </div>
+                <ul class="features-list">
+                    <li><i data-lucide="check"></i> Virusten poisto</li>
+                    <li><i data-lucide="check"></i> Sähköpostin asennus</li>
+                    <li><i data-lucide="check"></i> Ohjelmistojen päivitys</li>
+                    <li><i data-lucide="check"></i> <strong>Ei matkakuluja</strong></li>
+                </ul>
+                <a href="tel:+358401234567" class="btn-pricing outline">Soita ja tilaa</a>
+            </div>
+
+            <div class="pricing-card popular">
+                <div class="badge-popular">Suosituin</div>
+                <div class="card-header">
+                    <h3>Kotikäynti</h3>
+                    <p>Kun tarvitset apua paikan päällä</p>
+                </div>
+                <div class="price">
+                    <span class="amount">59€</span>
+                    <span class="period">/ tunti</span>
+                </div>
+                <p class="tax-note">Hinta vähennyksen jälkeen: <strong>~24€</strong></p>
+                <ul class="features-list">
+                    <li><i data-lucide="check"></i> Tulostimen asennus</li>
+                    <li><i data-lucide="check"></i> Wi-Fi verkon parannus</li>
+                    <li><i data-lucide="check"></i> Uuden laitteen käyttöönotto</li>
+                    <li><i data-lucide="check"></i> <strong>Henkilökohtainen opastus</strong></li>
+                </ul>
+                <a href="#contact-detailed" class="btn-pricing primary">Varaa kotikäynti</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h3>Vuosihuolto</h3>
+                    <p>Tietokoneen täyspuhdistus</p>
+                </div>
+                <div class="price">
+                    <span class="amount">89€</span>
+                    <span class="period">/ kerta</span>
+                </div>
+                <ul class="features-list">
+                    <li><i data-lucide="check"></i> Fyysinen pölynpoisto</li>
+                    <li><i data-lucide="check"></i> Turhien tiedostojen siivous</li>
+                    <li><i data-lucide="check"></i> Tietoturvan tarkistus</li>
+                    <li><i data-lucide="check"></i> <strong>Nopeuttaa konetta</strong></li>
+                </ul>
+                <a href="#contact-detailed" class="btn-pricing outline">Tilaa huolto</a>
+            </div>
+        </div>
+
+        <div class="guarantee-box">
+            <div class="guarantee-icon"><i data-lucide="shield-check"></i></div>
+            <div class="guarantee-text">
+                <h3>Tyytyväisyystakuu</h3>
+                <p>Jos emme saa ongelmaa ratkaistua tai et ole tyytyväinen palveluun, emme veloita käynnistä mitään. Reilua peliä.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-team">
+        <div class="section-header">
+            <span class="badge">👥 Meidän Tiimi</span>
+            <h2>Ketkä sinua auttavat?</h2>
+            <p>Tunnista kasvot, jotka saapuvat ovellesi. Me olemme paikallisia asiantuntijoita.</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Matti">
+                </div>
+                <div class="team-info">
+                    <h3>Matti Meikäläinen</h3>
+                    <span class="role">Perustaja & IT-Tuki</span>
+                    <p>Erikoistunut tietokoneiden huoltoon ja virustorjuntaan. 10 vuoden kokemus.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Liisa">
+                </div>
+                <div class="team-info">
+                    <h3>Liisa Virtanen</h3>
+                    <span class="role">Mobiililaitteet & Opetus</span>
+                    <p>Auttaa sinua käyttämään tablettia ja älypuhelinta. Rauhallinen opettaja.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="Juhani">
+                </div>
+                <div class="team-info">
+                    <h3>Juhani Laaksonen</h3>
+                    <span class="role">Verkot & Asennukset</span>
+                    <p>Wi-Fi-verkkojen asiantuntija. Saa netin toimimaan joka huoneessa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container section-faq">
+        <div class="section-header">
+            <span class="badge">❓ FAQ</span>
+            <h2>Usein kysytyt kysymykset</h2>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Mitä jos vikaa ei saada korjattua?</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Silloin emme veloita käynnistä mitään. Meillä on "Ei korjausta, ei maksua" -takuu.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Voinko maksaa käteisellä?</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Suosimme korttimaksua tai laskua (sähköpostiin tai paperisena). Laskulla saat maksuaikaa 14 päivää.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Onko etätuki turvallista?</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Kyllä. Yhteys on kertakäyttöinen. Kun suljet ohjelman, emme pääse enää koneellesi ilman uutta lupaa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-detailed" class="container section-contact-detailed">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <span class="badge">✉️ Kirjallinen viesti</span>
+                <h2>Ota yhteyttä kirjallisesti</h2>
+                <p>Haluatko kysyä neuvoa, antaa palautetta tai ehdottaa yhteistyötä? Täytä lomake, niin vastaamme sähköpostitse.</p>
+                
+                <div class="info-items">
+                    <div class="info-item">
+                        <div class="icon-box"><i data-lucide="mail"></i></div>
+                        <div>
+                            <strong>Sähköposti</strong>
+                            <p>info@digikaveri.fi</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                        <div>
+                            <strong>Toimialue</strong>
+                            <p>Vantaa & Etäyhteydet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-box">
+                <form id="detailedForm">
+                    <input type="hidden" name="access_key" value="12fdb4b3-8ea3-4afd-9183-0c30b2724399">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                    <div class="form-group">
+                        <label for="d-name">Nimi</label>
+                        <input type="text" id="d-name" name="name" placeholder="Etunimi Sukunimi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-email">Sähköposti</label>
+                        <input type="email" id="d-email" name="email" placeholder="matti@esimerkki.fi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-subject">Mitä asia koskee?</label>
+                        <select id="d-subject" name="Aihe" required>
+                            <option value="" disabled selected>Valitse aihe...</option>
+                            <option>Tarvitsen apua (IT-ongelma)</option>
+                            <option>Haluan antaa palautetta / Kokemuksia</option>
+                            <option>Yhteistyöehdotus (Collab)</option>
+                            <option>Muu asia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="d-message">Viesti</label>
+                        <textarea id="d-message" name="message" rows="5" placeholder="Kirjoita viestisi tähän..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        Lähetä viesti <i data-lucide="send"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>DigiKaveri</h3>
+                <p>Arjen IT-apu Vantaalla.</p>
+                </div>
+            <div class="footer-col">
+                <p>📞 040 123 4567</p>
+                <p>📧 info@digikaveri.fi</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="mobile-sticky-bar">
+        <a href="tel:+358401234567" class="btn-sticky-call">
+            <i data-lucide="phone"></i> Soita 040 123 4567
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/accessibility.js"></script>
+</body>
+</html>
