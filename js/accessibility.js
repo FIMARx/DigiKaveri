@@ -10,27 +10,21 @@ toggleBtn.title = 'Suurenna tekstiä'; // Tooltip
 // 2. Add to page
 document.body.appendChild(toggleBtn);
 
-// 3. FORCE ICON RENDER IMMEDIATELY (The Fix)
+// 3. FORCE ICON RENDER IMMEDIATELY
 if (typeof lucide !== 'undefined') {
     lucide.createIcons();
 }
 
-// 4. State & Click Handler
-let isLargeText = false;
-
+// 4. Click Handler (Clean CSS Class Method)
 toggleBtn.addEventListener('click', () => {
-    isLargeText = !isLargeText;
+    // Toggles the 'large-text' class on the <html> element
+    document.documentElement.classList.toggle('large-text');
     
-    if (isLargeText) {
-        document.documentElement.style.fontSize = '20px'; 
-        toggleBtn.style.background = '#2563EB'; // Blue background
-        toggleBtn.style.color = 'white';        // White text
-    } else {
-        document.documentElement.style.fontSize = '16px'; 
-        toggleBtn.style.background = 'white';   // White background
-        toggleBtn.style.color = '#111827';      // Dark text (Fixes white-on-white)
+    // Toggles the 'active' class on the button (makes it blue)
+    toggleBtn.classList.toggle('active');
+    
+    // Refresh icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
     }
-    
-    // Re-render icons just in case
-    lucide.createIcons();
 });
