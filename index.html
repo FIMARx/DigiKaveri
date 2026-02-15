@@ -20,9 +20,12 @@
         <div class="nav-content">
             <div class="logo">Digi<span>Kaveri</span></div>
             <div class="nav-links">
-                <a href="#home">Etusivu</a>
-                <a href="#services">Palvelut</a>
-                <a href="#pricing">Hinnasto</a>
+                <a href="#home" class="nav-link active">Etusivu</a>
+                <a href="#services" class="nav-link">Palvelut</a>
+                <a href="#pricing" class="nav-link">Hinnasto</a>
+                <a href="#team" class="nav-link">Tiimi</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#contact-detailed" class="nav-link">Yhteystiedot</a>
                 <a href="tel:+358401234567" class="btn-nav-call">
                     <i data-lucide="phone"></i> 040 123 4567
                 </a>
@@ -30,7 +33,7 @@
         </div>
     </nav>
 
-    <header id="home" class="hero-split">
+    <header id="home" class="hero-split section-spy">
         <div class="hero-text">
             <div id="serviceStatus" class="status-badge">
                 <div class="signal-dot"></div>
@@ -61,7 +64,7 @@
                 </div>
                 <div class="input-group">
                     <label>Miten voimme auttaa?</label>
-                    <select name="service">
+                    <select name="service" title="Valitse palvelu" aria-label="Miten voimme auttaa?">
                         <option>Tietokoneongelma</option>
                         <option>Puhelin / Tabletti</option>
                         <option>Tulostin / Verkko</option>
@@ -77,7 +80,7 @@
         </div>
     </header>
 
-    <section class="container section-process">
+    <section id="process" class="container section-process section-spy">
         <div class="section-header">
             <span class="badge">🚀 Toimintamalli</span>
             <h2>Näin helppoa se on</h2>
@@ -108,7 +111,7 @@
         </div>
     </section>
 
-    <section id="services" class="container section-services">
+    <section id="services" class="container section-services section-spy">
         <div class="section-header">
             <h2>Hinnasto ja Palvelut</h2>
             <p>Katso mitä teemme etänä ja mitä paikan päällä.</p>
@@ -118,7 +121,7 @@
             <table class="service-table">
                 <thead>
                     <tr>
-                        <th style="width: 30%;">Palvelu</th>
+                        <th class="col-service">Palvelu</th>
                         <th class="center">Etätuki 🌍</th>
                         <th class="center">Kotikäynti 🏠</th>
                         <th>Kuvaus</th>
@@ -160,7 +163,7 @@
         </div>
     </section>
 
-    <section id="pricing" class="container section-pricing">
+    <section id="pricing" class="container section-pricing section-spy">
         <div class="section-header">
             <span class="badge">💶 Hinnasto</span>
             <h2>Selkeät hinnat, ei yllätyksiä</h2>
@@ -224,17 +227,19 @@
                 <a href="#contact-detailed" class="btn-pricing outline">Tilaa huolto</a>
             </div>
         </div>
+    </section>
 
+    <section id="guarantee" class="container section-spy">
         <div class="guarantee-box">
             <div class="guarantee-icon"><i data-lucide="shield-check"></i></div>
             <div class="guarantee-text">
                 <h3>Tyytyväisyystakuu</h3>
                 <p>Jos emme saa ongelmaa ratkaistua tai et ole tyytyväinen palveluun, emme veloita käynnistä mitään. Reilua peliä.</p>
             </div>
-        </div>
+        </div>       
     </section>
 
-    <section class="container section-team">
+    <section id="team" class="container section-team section-spy">
         <div class="section-header">
             <span class="badge">👥 Meidän Tiimi</span>
             <h2>Ketkä sinua auttavat?</h2>
@@ -275,7 +280,7 @@
         </div>
     </section>
 
-    <section class="container section-faq">
+    <section id="faq" class="container section-faq section-spy">
         <div class="section-header">
             <span class="badge">❓ FAQ</span>
             <h2>Usein kysytyt kysymykset</h2>
@@ -311,7 +316,7 @@
         </div>
     </section>
 
-    <section id="contact-detailed" class="container section-contact-detailed">
+    <section id="contact-detailed" class="container section-contact-detailed section-spy">
         <div class="contact-wrapper">
             <div class="contact-info">
                 <span class="badge">✉️ Kirjallinen viesti</span>
@@ -339,7 +344,7 @@
             <div class="contact-form-box">
                 <form id="detailedForm">
                     <input type="hidden" name="access_key" value="12fdb4b3-8ea3-4afd-9183-0c30b2724399">
-                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <input type="checkbox" name="botcheck" class="botcheck-hidden" title="Bot check">
 
                     <div class="form-group">
                         <label for="d-name">Nimi</label>
@@ -351,7 +356,7 @@
                     </div>
                     <div class="form-group">
                         <label for="d-subject">Mitä asia koskee?</label>
-                        <select id="d-subject" name="Aihe" required>
+                        <select id="d-subject" name="Aihe" title="Valitse aihe" aria-label="Valitse aihe" required>
                             <option value="" disabled selected>Valitse aihe...</option>
                             <option>Tarvitsen apua (IT-ongelma)</option>
                             <option>Haluan antaa palautetta / Kokemuksia</option>
@@ -376,7 +381,7 @@
             <div class="footer-col">
                 <h3>DigiKaveri</h3>
                 <p>Arjen IT-apu Vantaalla.</p>
-                </div>
+            </div>
             <div class="footer-col">
                 <p>📞 040 123 4567</p>
                 <p>📧 info@digikaveri.fi</p>
