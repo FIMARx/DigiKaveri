@@ -2,11 +2,11 @@
    1. BASE RESET & TYPOGRAPHY
    ========================================= */
 *, *::before, *::after {
-    box-sizing: border-box; /* Critical for layout stability */
+    box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -16,12 +16,12 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: antialiased; /* Makes text sharper on Mac */
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Container Utility - used globally */
+/* Container Utility */
 .container {
-    padding: 80px 20px;
+    padding: 40px 20px; 
     max-width: var(--max-width);
     margin: 0 auto;
 }
@@ -30,15 +30,12 @@ body {
    2. NAVIGATION (Glassmorphism)
    ========================================= */
 .glass-nav {
-    background: rgba(255, 255, 255, 0.90); /* Slightly more transparent */
-    
-    /* Fix for "VS Error" & Safari Support */
+    background: rgba(255, 255, 255, 0.90);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    
     position: sticky;
     top: 0;
-    z-index: 1000; /* High z-index to stay on top */
+    z-index: 1000;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     padding: 15px 0;
     transition: all 0.3s ease;
@@ -53,7 +50,6 @@ body {
     padding: 0 20px;
 }
 
-/* Logo Styling */
 .logo { 
     font-size: 1.5rem; 
     font-weight: 800; 
@@ -61,10 +57,16 @@ body {
     letter-spacing: -0.5px;
     text-decoration: none;
 }
-.logo span { color: var(--primary); }
 
-/* Links */
-.nav-links { display: flex; gap: 24px; align-items: center; }
+.logo span { 
+    color: var(--primary); 
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 24px; 
+    align-items: center; 
+}
 
 .nav-links a { 
     text-decoration: none; 
@@ -73,17 +75,19 @@ body {
     font-size: 0.95rem;
     transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--primary); }
 
-/* Nav Call Button (Pill Shape) */
+.nav-links a:hover { 
+    color: var(--primary); 
+}
+
 .btn-nav-call {
-    background: #EFF6FF; /* Light Blue */
+    background: #EFF6FF;
     padding: 10px 20px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--primary) !important; /* Force color */
+    color: var(--primary) !important;
     font-weight: 700 !important;
     transition: all 0.2s ease;
 }
@@ -110,18 +114,23 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Allows stacking on mobile */
+    flex-wrap: wrap; 
     gap: 20px;
 }
 
-.footer-col h3 { margin: 0 0 10px 0; color: var(--primary); }
-.footer-col p { margin: 5px 0; color: var(--text-light); }
+.footer-col h3 { 
+    margin: 0 0 10px 0; 
+    color: var(--primary); 
+}
+
+.footer-col p { 
+    margin: 5px 0; 
+    color: var(--text-light); 
+}
 
 /* =========================================
    4. FLOATING UTILITIES
    ========================================= */
-
-/* Accessibility Button (Left Bottom) */
 .accessibility-btn {
     position: fixed;
     bottom: 30px;
@@ -147,9 +156,8 @@ footer {
     color: var(--primary);
 }
 
-/* Mobile Sticky Bar (Hidden on Desktop) */
 .mobile-sticky-bar {
-    display: none; /* Default hidden */
+    display: none; 
     position: fixed;
     bottom: 0;
     left: 0;
@@ -166,7 +174,7 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background: #16A34A; /* Green call color */
+    background: #16A34A; 
     color: white;
     text-decoration: none;
     font-weight: 700;
@@ -177,10 +185,60 @@ footer {
 }
 
 /* =========================================
-   5. RESPONSIVE ADJUSTMENTS
+   5. UTILITY CLASSES & BADGES
+   ========================================= */
+html.large-text {
+    font-size: 20px;
+}
+
+.accessibility-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.col-service {
+    width: 30%;
+}
+
+.botcheck-hidden {
+    display: none !important;
+}
+
+/* Active Nav Link Styling */
+.nav-links a.nav-link.active {
+    color: var(--primary);
+    position: relative;
+}
+
+.nav-links a.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: var(--primary);
+    border-radius: 50%;
+}
+
+/* =========================================
+   6. RESPONSIVE ADJUSTMENTS (Mobile Base)
    ========================================= */
 @media (max-width: 768px) {
-    /* Hide regular nav links on mobile to save space */
     .nav-links > a:not(.btn-nav-call) {
         display: none; 
     }
@@ -190,12 +248,60 @@ footer {
         text-align: center;
     }
 
-    /* Show Mobile Sticky Bar */
-    .mobile-sticky-bar { display: block; }
+    .mobile-sticky-bar { 
+        display: block; 
+    }
+
+    body { 
+        padding-bottom: 80px; 
+    } 
+
+    .accessibility-btn { 
+        bottom: 90px; 
+        left: 20px; 
+    }
+}
+
+/* =========================================
+   7. FULL-PAGE SCROLLING (Desktop Only)
+   ========================================= */
+@media (min-width: 1025px) {
+    header#home, section.section-spy {
+        min-height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 0 !important; 
+        padding-top: 80px !important; 
+        padding-bottom: 20px !important;
+    }
+
+    header#home {
+        display: grid;
+        align-content: center;
+        padding-top: 90px !important; 
+    }
+}
+
+/* =========================================
+   8. MOBILE & TABLET: FREE SCROLLING
+   ========================================= */
+@media (max-width: 1024px) {
+    html {
+        scroll-snap-type: none !important;
+    }
     
-    /* Add padding so content isn't hidden behind the bar */
-    body { padding-bottom: 80px; } 
-    
-    /* Move accessibility button up above the bar */
-    .accessibility-btn { bottom: 90px; left: 20px; }
+    header#home, section.section-spy, section.container {
+        min-height: 0 !important; 
+        height: auto !important;
+        scroll-snap-align: none !important;
+        display: block !important;
+        margin-bottom: 60px !important; 
+        padding-top: 40px !important;
+        padding-bottom: 20px !important;
+    }
+
+    header#home {
+        margin-top: 20px !important;
+    }
 }
