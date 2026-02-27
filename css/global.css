@@ -1,307 +1,296 @@
 /* =========================================
    1. BASE RESET & TYPOGRAPHY
    ========================================= */
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* Estää navigaatiota peittämästä otsikoita */
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: var(--text-dark);
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Container Utility */
 .container {
-    padding: 40px 20px; 
-    max-width: var(--max-width);
-    margin: 0 auto;
+  padding: 40px 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 /* =========================================
    2. NAVIGATION (Glassmorphism)
    ========================================= */
 .glass-nav {
-    background: rgba(255, 255, 255, 0.90);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding: 15px 0;
-    transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 15px 0;
+  transition: all 0.3s ease;
 }
 
 .nav-content {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
-.logo { 
-    font-size: 1.5rem; 
-    font-weight: 800; 
-    color: var(--text-dark); 
-    letter-spacing: -0.5px;
-    text-decoration: none;
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
-.logo span { 
-    color: var(--primary); 
+.logo span {
+  color: var(--primary);
 }
 
-.nav-links { 
-    display: flex; 
-    gap: 24px; 
-    align-items: center; 
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }
 
-.nav-links a { 
-    text-decoration: none; 
-    color: var(--text-dark); 
-    font-weight: 600; 
-    font-size: 0.95rem;
-    transition: color 0.2s;
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
 }
 
-.nav-links a:hover { 
-    color: var(--primary); 
+.nav-links a:hover {
+  color: var(--primary);
 }
 
 .btn-nav-call {
-    background: #EFF6FF;
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--primary) !important;
-    font-weight: 700 !important;
-    transition: all 0.2s ease;
+  background: #eff6ff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease;
 }
 
-.btn-nav-call:hover { 
-    background: var(--primary); 
-    color: white !important;
-    transform: translateY(-1px);
+.btn-nav-call:hover {
+  background: var(--primary);
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+/* Active Nav Link Styling */
+.nav-links a.nav-link.active {
+  color: var(--primary);
+  position: relative;
+}
+
+.nav-links a.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  background-color: var(--primary);
+  border-radius: 50%;
 }
 
 /* =========================================
    3. FOOTER
    ========================================= */
-footer { 
-    background: var(--white); 
-    border-top: 1px solid #E5E7EB;
-    padding: 60px 20px; 
-    margin-top: 60px; 
+footer {
+  background: var(--white);
+  border-top: 1px solid #e5e7eb;
+  padding: 60px 20px;
+  margin-top: 60px;
 }
 
 .footer-content {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; 
-    gap: 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.footer-col h3 { 
-    margin: 0 0 10px 0; 
-    color: var(--primary); 
+.footer-col h3 {
+  margin: 0 0 10px 0;
+  color: var(--primary);
 }
 
-.footer-col p { 
-    margin: 5px 0; 
-    color: var(--text-light); 
+.footer-col p {
+  margin: 5px 0;
+  color: var(--text-light);
 }
 
 /* =========================================
    4. FLOATING UTILITIES
    ========================================= */
 .accessibility-btn {
-    position: fixed;
-    bottom: 30px;
-    left: 30px; 
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: white;
-    color: #111827;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    border: 1px solid rgba(0,0,0,0.05);
-    cursor: pointer;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  color: #111827;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-.accessibility-btn:hover { 
-    transform: scale(1.1); 
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    color: var(--primary);
-}
-
-.mobile-sticky-bar {
-    display: none; 
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: white;
-    padding: 15px;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-    z-index: 998;
-    border-top: 1px solid #E5E7EB;
-}
-
-.btn-sticky-call {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background: #16A34A; 
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);
-}
-
-/* =========================================
-   5. UTILITY CLASSES & BADGES
-   ========================================= */
-html.large-text {
-    font-size: 20px;
+.accessibility-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: var(--primary);
 }
 
 .accessibility-btn.active {
-    background: var(--primary);
-    color: white;
+  background: var(--primary);
+  color: white;
 }
 
-.badge {
-    display: inline-block;
-    background: var(--primary-light);
-    color: var(--primary-dark);
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    letter-spacing: 0.5px;
+.mobile-sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+  z-index: 998;
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-sticky-call {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #16a34a;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);
+}
+
+/* =========================================
+   5. UTILITY CLASSES
+   ========================================= */
+html.large-text {
+  font-size: 20px;
 }
 
 .col-service {
-    width: 30%;
+  width: 30%;
 }
 
 .botcheck-hidden {
-    display: none !important;
-}
-
-/* Active Nav Link Styling */
-.nav-links a.nav-link.active {
-    color: var(--primary);
-    position: relative;
-}
-
-.nav-links a.nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 5px;
-    height: 5px;
-    background-color: var(--primary);
-    border-radius: 50%;
+  display: none !important;
 }
 
 /* =========================================
-   6. RESPONSIVE ADJUSTMENTS (Mobile Base)
+   6. GLOBAL RESPONSIVE & LAYOUT RULES
    ========================================= */
-@media (max-width: 768px) {
-    .nav-links > a:not(.btn-nav-call) {
-        display: none; 
-    }
-    
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
 
-    .mobile-sticky-bar { 
-        display: block; 
-    }
-
-    body { 
-        padding-bottom: 80px; 
-    } 
-
-    .accessibility-btn { 
-        bottom: 90px; 
-        left: 20px; 
-    }
-}
-
-/* =========================================
-   7. FULL-PAGE SCROLLING (Desktop Only)
-   ========================================= */
+/* DESKTOP LAYOUT (Normaali rullaus, ei 100vh pakotusta) */
 @media (min-width: 1025px) {
-    header#home, section.section-spy {
-        min-height: 100vh; 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: 0 !important; 
-        padding-top: 80px !important; 
-        padding-bottom: 20px !important;
-    }
+  header#home,
+  section.section-spy,
+  section.container {
+    display: block;
+    min-height: 0; /* TÄMÄ POISTAA JÄTTIVÄLIT */
+    height: auto;
+    padding-top: 80px;
+    padding-bottom: 20px;
+  }
 
-    header#home {
-        display: grid;
-        align-content: center;
-        padding-top: 90px !important; 
-    }
+  header#home {
+    padding-top: 100px;
+  }
 }
 
-/* =========================================
-   8. MOBILE & TABLET: FREE SCROLLING
-   ========================================= */
+/* MOBILE & TABLET LAYOUT */
 @media (max-width: 1024px) {
-    html {
-        scroll-snap-type: none !important;
-    }
-    
-    header#home, section.section-spy, section.container {
-        min-height: 0 !important; 
-        height: auto !important;
-        scroll-snap-align: none !important;
-        display: block !important;
-        margin-bottom: 60px !important; 
-        padding-top: 40px !important;
-        padding-bottom: 20px !important;
-    }
+  html {
+    scroll-snap-type: none;
+  }
 
-    header#home {
-        margin-top: 20px !important;
-    }
+  header#home,
+  section.section-spy,
+  section.container {
+    min-height: 0;
+    height: auto;
+    display: block;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+
+  header#home {
+    margin-top: 20px;
+  }
+}
+
+/* MOBIILI-NAVIGAATIO JA ALAPALKKI */
+@media (max-width: 768px) {
+  .nav-links > a:not(.btn-nav-call) {
+    display: none;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .mobile-sticky-bar {
+    display: block;
+  }
+
+  body {
+    padding-bottom: 80px; /* Tilaa alakulmapalkille */
+  }
+
+  .accessibility-btn {
+    bottom: 90px; /* Nostaa saavutettavuusnapin mobiilipalkin yläpuolelle */
+    left: 20px;
+  }
 }
