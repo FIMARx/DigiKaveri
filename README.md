@@ -3,17 +3,24 @@
 # 🖥️ DigiKaveri — Arjen IT-apu
 **Your reliable "Digital Buddy" for everything tech. From buying your first tablet to fixing your old PC.**
 
-[![Status](https://img.shields.io/badge/Status-In--Development-yellowgreen)](#)
-[![Location](https://img.shields.io/badge/Location-Vantaa%2C%20Finland-blue)](https://www.google.com/maps/place/Vantaa)
+[![Status](https://img.shields.io/badge/Status-Live-success)](#)
+[![Location](https://img.shields.io/badge/Location-Uusimaa%2C%20Finland-blue)](https://www.google.com/maps/place/Uusimaa)
 
 ---
 
 ### 🤝 The Mission
 Technology should be a tool, not a barrier. **DigiKaveri** provides a "human-first" approach to IT. We don't just fix problems; we help you choose the right tools and keep them running smoothly for years. 
 
-Based in **Vantaa**, we offer a hybrid service: **Remote support** for speed and cost-efficiency, and **On-site visits** for hardware, cleaning, and personal consulting.
+Based in **Uusimaa**, we offer a hybrid service: **Remote support** for speed and cost-efficiency, and **On-site visits** for hardware, cleaning, and personal consulting.
 
 </div>
+
+---
+
+## 🛡️ Luottamus & Takuu (Trust & Guarantee)
+
+- **100% Tyytyväisyystakuu:** Jos emme osaa auttaa, et maksa mitään. Riski on täysin meillä.
+- **Kotitalousvähennys -60%:** Työmme oikeuttaa merkittävään verovähennykseen kaikilla kotikäynneillä.
 
 ---
 
@@ -35,13 +42,20 @@ Based in **Vantaa**, we offer a hybrid service: **Remote support** for speed and
 1. **Buying Advice:** We help you avoid "overpaying" for tech you don't need.
 2. **Security First:** We ensure your antivirus is active and your data is safe.
 3. **Longevity:** Physical cleaning and software optimization to make your devices last longer.
-4. **Local Trust:** We are Vantaa-based and prefer building long-term relationships with our clients.
+4. **Local Trust:** We are Uusimaa-based and prefer building long-term relationships with our clients.
 
-## 💻 Tech Stack & Tools
+---
 
-- **Frontend:** Ultra-accessible HTML5/CSS3 (Senior-friendly UI).
-- **Remote Access:** [TeamViewer QuickSupport](https://www.teamviewer.com/en/download/windows/) & Android Remote Tools.
-- **Hardware Care:** Professional cleaning tools and diagnostic software for on-site visits.
+## 💻 Tech Stack & Features
+
+*   **Senior-Friendly UI:** Large typography, high contrast, and accessible layout flows.
+*   **Modern Glassmorphism:** Clean, modern CSS navigation and card elements.
+*   **Icons:** Powered by [Lucide Icons](https://lucide.dev/).
+*   **No Framework Clean Code:** Static HTML5 / CSS3 for extreme speed and load time optimization.
+
+### 🏃‍♂️ Running Locally
+1.  Clone this repository.
+2.  Simply open **`index.html`** in your preferred browser.
 
 ---
 
