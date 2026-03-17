@@ -1,12 +1,26 @@
 <div align="center">
 
-# 🖥️ DigiKaveri — Arjen IT-apu
+<img src="images/logo.svg" width="220" alt="DigiKaveri Logo">
+
+# DigiKaveri — Arjen IT-apu
 **Your reliable "Digital Buddy" for everything tech. From buying your first tablet to fixing your old PC.**
 
 [![Status](https://img.shields.io/badge/Status-Live-success)](#)
 [![Location](https://img.shields.io/badge/Location-Uusimaa%2C%20Finland-blue)](https://www.google.com/maps/place/Uusimaa)
 
+</div>
+
 ---
+
+## 📸 Esikatselu (Preview)
+
+<div align="center">
+  <img src="images/preview.png" width="100%" alt="DigiKaveri Website Preview" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
+</div>
+
+---
+
+<div align="center">
 
 ### 🤝 The Mission
 Technology should be a tool, not a barrier. **DigiKaveri** provides a "human-first" approach to IT. We don't just fix problems; we help you choose the right tools and keep them running smoothly for years. 
