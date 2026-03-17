@@ -1,0 +1,17 @@
+:root {
+  --bg: #f3f4f6;
+  --white: #ffffff;
+
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --primary-light: #dbeafe;
+
+  --text-dark: #111827;
+  --text-light: #6b7280;
+
+  --green: #10b981;
+  --red: #ef4444;
+
+  --radius: 16px;
+  --max-width: 1100px;
+}
