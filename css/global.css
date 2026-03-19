@@ -18,6 +18,8 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .container {
