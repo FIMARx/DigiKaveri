@@ -519,7 +519,7 @@ html.large-text {
   }
 
   .accessibility-btn {
-    bottom: 90px;
+    bottom: calc(68px + 1.6rem);
     left: 20px;
   }
 }
