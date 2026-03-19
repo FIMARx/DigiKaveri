@@ -399,6 +399,11 @@ html.large-text {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .nav-links {
     display: none;
   }
@@ -519,7 +524,7 @@ html.large-text {
   }
 
   .accessibility-btn {
-    bottom: calc(68px + 1.6rem);
-    left: 20px;
+    bottom: calc(85px + 2.5rem);
+    left: 15px;
   }
 }
