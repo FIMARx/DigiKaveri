@@ -70,7 +70,7 @@ function initFAQ() {
 
 function initScrollSpy() {
   const sections = document.querySelectorAll(".section-spy");
-  const navLinks = document.querySelectorAll(".nav-link");
+  const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
   window.addEventListener("scroll", () => {
     let current = "";
     sections.forEach((section) => {
