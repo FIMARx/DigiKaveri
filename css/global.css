@@ -398,7 +398,7 @@ html.large-text {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .container {
     padding-left: 10px;
     padding-right: 10px;
