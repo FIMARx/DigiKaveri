@@ -5,6 +5,7 @@
 # DigiKaveri — Arjen IT-apu
 **Your reliable "Digital Buddy" for everything tech. From buying your first tablet to fixing your old PC.**
 
+[![Website](https://img.shields.io/badge/Website-digikaveri.com-blue)](https://digikaveri.com/)
 [![Status](https://img.shields.io/badge/Status-Live-success)](#)
 [![Location](https://img.shields.io/badge/Location-Uusimaa%2C%20Finland-blue)](https://www.google.com/maps/place/Uusimaa)
 
@@ -77,7 +78,7 @@ Based in **Uusimaa**, we offer a hybrid service: **Remote support** for speed an
 
 <div align="center">
 
-### Built by [FIMARx](https://github.com/fimarx)
+### Built by [FIMARx](https://github.com/FIMARx) & [TahirFin](https://github.com/TahirFin)
 *"Making technology accessible, one device at a time."*
 
 </div>
