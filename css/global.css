@@ -532,70 +532,82 @@ html.large-text {
 /* Toast Notification Styles */
 #toast-container {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  top: 40px; /* Placed prominently at the top center */
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
+  width: 90%;
+  max-width: 600px; /* Much wider and centered */
 }
 
 .toast {
   background: white;
   color: var(--text-dark);
-  padding: 16px 24px;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  padding: 24px 32px; /* Bigger padding for readability */
+  border-radius: 16px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-weight: 600;
-  transform: translateY(100px);
+  gap: 16px;
+  font-weight: 700; /* Bolder text */
+  font-size: 1.15rem; /* Larger font size */
+  width: 100%;
+  transform: translateY(-150px);
   opacity: 0;
-  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  border-left: 5px solid transparent;
+  animation: slideInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border-bottom: 6px solid transparent; /* Moved border to bottom for clear visual cue */
+  text-align: center;
+  justify-content: center;
 }
 
 .toast-success {
-  border-left-color: #10B981;
+  border-bottom-color: #10B981;
 }
 .toast-success i, .toast-success svg {
   color: #10B981;
-  width: 24px;
-  height: 24px;
+  width: 36px; /* Bigger icons */
+  height: 36px;
+  flex-shrink: 0;
 }
 
 .toast-error {
-  border-left-color: #EF4444;
+  border-bottom-color: #EF4444;
 }
 .toast-error i, .toast-error svg {
   color: #EF4444;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
 }
 
 .toast.removing {
-  animation: slideOutDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideOutUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes slideInUp {
-  0% { transform: translateY(100px); opacity: 0; }
+@keyframes slideInDown {
+  0% { transform: translateY(-150px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes slideOutDown {
+@keyframes slideOutUp {
   0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(100px); opacity: 0; }
+  100% { transform: translateY(-150px); opacity: 0; }
 }
 
 @media (max-width: 600px) {
   #toast-container {
-    bottom: 90px; /* Above the sticky nav bar */
-    left: 20px;
-    right: 20px;
-    align-items: center;
+    top: 20px;
+    width: 95%;
   }
   .toast {
-    width: 100%;
+    padding: 20px 24px;
+    font-size: 1.05rem;
+    flex-direction: column; /* Stack icon and text on small phones */
+    text-align: center;
+    gap: 12px;
   }
 }
