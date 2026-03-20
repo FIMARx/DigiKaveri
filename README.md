@@ -70,7 +70,7 @@ Based in **Uusimaa**, we offer a hybrid service: **Remote support** for speed an
 ### 🏃‍♂️ Running Locally
 1.  Clone this repository.
 2.  Simply open **`index.html`** in your preferred browser.
-3.  vhjv
+
 
 
 ---
