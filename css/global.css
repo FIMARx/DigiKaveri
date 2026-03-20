@@ -528,3 +528,74 @@ html.large-text {
     left: 15px;
   }
 }
+
+/* Toast Notification Styles */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toast {
+  background: white;
+  color: var(--text-dark);
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  transform: translateY(100px);
+  opacity: 0;
+  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border-left: 5px solid transparent;
+}
+
+.toast-success {
+  border-left-color: #10B981;
+}
+.toast-success i, .toast-success svg {
+  color: #10B981;
+  width: 24px;
+  height: 24px;
+}
+
+.toast-error {
+  border-left-color: #EF4444;
+}
+.toast-error i, .toast-error svg {
+  color: #EF4444;
+  width: 24px;
+  height: 24px;
+}
+
+.toast.removing {
+  animation: slideOutDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInUp {
+  0% { transform: translateY(100px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOutDown {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100px); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  #toast-container {
+    bottom: 90px; /* Above the sticky nav bar */
+    left: 20px;
+    right: 20px;
+    align-items: center;
+  }
+  .toast {
+    width: 100%;
+  }
+}

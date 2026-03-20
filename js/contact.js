@@ -1,3 +1,30 @@
+function showToast(message, isSuccess = true) {
+  let toastContainer = document.getElementById('toast-container');
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.id = 'toast-container';
+    document.body.appendChild(toastContainer);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${isSuccess ? 'toast-success' : 'toast-error'}`;
+  
+  const icon = isSuccess ? 'check-circle' : 'alert-circle';
+  toast.innerHTML = `<i data-lucide="${icon}"></i> <span>${message}</span>`;
+  
+  toastContainer.appendChild(toast);
+  if (typeof lucide !== "undefined") lucide.createIcons({ root: toastContainer });
+
+  setTimeout(() => {
+    toast.classList.add('removing');
+    setTimeout(() => {
+      if (toastContainer.contains(toast)) {
+        toastContainer.removeChild(toast);
+      }
+    }, 300);
+  }, 5000);
+}
+
 function setupForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -117,6 +144,8 @@ function setupForm(formId) {
         if (typeof lucide !== "undefined") lucide.createIcons();
         form.reset();
 
+        showToast("Kiitos viestistäsi! Olemme sinuun pian yhteydessä.", true);
+
         setTimeout(() => {
           btn.innerHTML = originalText;
           btn.style.background = "";
@@ -128,12 +157,14 @@ function setupForm(formId) {
         btn.innerHTML = "Virhe! Yritä uudelleen.";
         btn.style.background = "#EF4444";
         btn.disabled = false;
+        showToast("Viestin lähetyksessä tapahtui virhe. Yritä uudelleen myöhemmin.", false);
       }
     } catch (error) {
       console.error(error);
       btn.innerHTML = "Yhteysvirhe!";
       btn.style.background = "#EF4444";
       btn.disabled = false;
+      showToast("Tapahtui yhteysvirhe. Tarkista verkkoyhteytesi.", false);
     }
   });
 }
