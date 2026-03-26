@@ -3,23 +3,29 @@ async function checkStatus() {
   const text = document.getElementById("statusText");
   if (!badge || !text) return;
   try {
-    const response = await fetch("data/status.json?v=" + Date.now());
+    const isEn = window.location.pathname.includes("/en/");
+    const statusUrl =
+      (isEn ? "../data/status.json?v=" : "data/status.json?v=") + Date.now();
+    const response = await fetch(statusUrl);
     const data = await response.json();
     if (data.isOpen) {
       badge.className = "status-badge open";
-      text.textContent = data.messageOpen;
+      text.textContent = isEn ? "Service Open" : data.messageOpen;
     } else {
       badge.className = "status-badge closed";
-      text.textContent = data.messageClosed;
+      text.textContent = isEn ? "Closed for today" : data.messageClosed;
     }
   } catch (error) {
     console.error("Status check error:", error);
     badge.className = "status-badge closed";
-    text.textContent = "Palvelu suljettu";
+    const isEn = window.location.pathname.includes("/en/");
+    text.textContent = isEn ? "Service Closed" : "Palvelu suljettu";
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initLanguageDetection();
+  initCookieBanner();
   if (typeof lucide !== "undefined") {
     lucide.createIcons();
   }
@@ -30,6 +36,37 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothNav();
   initMobileNav();
 });
+
+function initCookieBanner() {
+  const banner = document.getElementById("cookieBanner");
+  const acceptBtn = document.getElementById("acceptCookies");
+
+  if (!banner || !acceptBtn) return;
+
+  if (!localStorage.getItem("cookiesAccepted")) {
+    setTimeout(() => {
+      banner.classList.add("show");
+    }, 1000);
+  }
+
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("cookiesAccepted", "true");
+    banner.classList.remove("show");
+  });
+}
+
+function initLanguageDetection() {
+  if (!localStorage.getItem("userLang")) {
+    const isEn = navigator.language.toLowerCase().startsWith("en");
+    const isCurrentEn = window.location.pathname.includes("/en/");
+
+    if (isEn && !isCurrentEn) {
+      window.location.href = "/en/";
+    } else if (!isEn && isCurrentEn) {
+      window.location.href = "/";
+    }
+  }
+}
 
 function initSmoothNav() {
   const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
