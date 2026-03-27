@@ -133,9 +133,13 @@ body {
   height: 18px;
 }
 
-.btn-nav-call {
+.btn-nav-call,
+.btn-nav-call:hover,
+.btn-nav-call:active,
+.btn-nav-call:visited {
   background: #eff6ff;
   padding: 8px 18px;
+  text-decoration: none !important;
   border-radius: 50px;
   display: flex;
   align-items: center;
