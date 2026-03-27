@@ -109,7 +109,7 @@ function initLanguageDetection() {
 }
 
 function initSmoothNav() {
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
 
   navLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
