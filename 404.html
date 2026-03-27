@@ -26,19 +26,26 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.digikaveri.com" />
 
-    <link rel="icon" type="image/x-icon" href="images/Ico.ico" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .hero-centered {
+        flex-grow: 1;
+      }
+    </style>
 
     <script type="application/ld+json">
       {
@@ -95,7 +102,7 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <img src="images/logo.svg" alt="DigiKaveri Logo" />
+          <img src="/images/logo.svg" alt="DigiKaveri Logo" />
         </div>
 
         <button class="mobile-menu-btn" aria-label="Avaa valikko">
@@ -103,22 +110,22 @@
         </button>
 
         <div class="nav-links">
-          <a href="#home" class="nav-link active"
+          <a href="/#home" class="nav-link active"
             ><i data-lucide="home"></i> <span>Etusivu</span></a
           >
-          <a href="#solutions" class="nav-link"
+          <a href="/#solutions" class="nav-link"
             ><i data-lucide="grid"></i> <span>Palvelut</span></a
           >
-          <a href="#pricing" class="nav-link"
+          <a href="/#pricing" class="nav-link"
             ><i data-lucide="credit-card"></i> <span>Hinnasto</span></a
           >
-          <a href="#team" class="nav-link"
+          <a href="/#team" class="nav-link"
             ><i data-lucide="users"></i> <span>Tiimi</span></a
           >
-          <a href="#faq" class="nav-link"
+          <a href="/#faq" class="nav-link"
             ><i data-lucide="help-circle"></i> <span>FAQ</span></a
           >
-          <a href="#contact-detailed" class="nav-link"
+          <a href="/#contact-detailed" class="nav-link"
             ><i data-lucide="mail"></i> <span>Yhteystiedot</span></a
           >
           <div class="lang-switcher">
@@ -143,22 +150,22 @@
         <button class="mobile-nav-close" aria-label="Sulje valikko">
           <i data-lucide="x"></i>
         </button>
-        <a href="#home" class="mobile-nav-link active"
+        <a href="/#home" class="mobile-nav-link active"
           ><i data-lucide="home"></i> Etusivu</a
         >
-        <a href="#solutions" class="mobile-nav-link"
+        <a href="/#solutions" class="mobile-nav-link"
           ><i data-lucide="grid"></i> Palvelut</a
         >
-        <a href="#pricing" class="mobile-nav-link"
+        <a href="/#pricing" class="mobile-nav-link"
           ><i data-lucide="credit-card"></i> Hinnasto</a
         >
-        <a href="#team" class="mobile-nav-link"
+        <a href="/#team" class="mobile-nav-link"
           ><i data-lucide="users"></i> Tiimi</a
         >
-        <a href="#faq" class="mobile-nav-link"
+        <a href="/#faq" class="mobile-nav-link"
           ><i data-lucide="help-circle"></i> FAQ</a
         >
-        <a href="#contact-detailed" class="mobile-nav-link"
+        <a href="/#contact-detailed" class="mobile-nav-link"
           ><i data-lucide="mail"></i> Yhteystiedot</a
         >
         <div class="mobile-lang-switcher">
@@ -194,7 +201,7 @@
       <div class="footer-container">
         <div class="footer-brand">
           <div class="logo footer-logo">
-            <img src="images/logo.svg" alt="DigiKaveri Logo" />
+            <img src="/images/logo.svg" alt="DigiKaveri Logo" />
           </div>
           <p class="footer-desc">
             Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
@@ -205,11 +212,11 @@
         <div class="footer-links">
           <h4>Pikalinkit</h4>
           <ul>
-            <li><a href="#home">Etusivu</a></li>
-            <li><a href="#solutions">Palvelut</a></li>
-            <li><a href="#pricing">Hinnasto</a></li>
-            <li><a href="#team">Tiimi</a></li>
-            <li><a href="#faq">Usein kysyttyä</a></li>
+            <li><a href="/#home">Etusivu</a></li>
+            <li><a href="/#solutions">Palvelut</a></li>
+            <li><a href="/#pricing">Hinnasto</a></li>
+            <li><a href="/#team">Tiimi</a></li>
+            <li><a href="/#faq">Usein kysyttyä</a></li>
           </ul>
         </div>
 
@@ -262,7 +269,7 @@
       </a>
     </div>
 
-    <a href="#contact-detailed" class="floating-support-btn">
+    <a href="/#contact-detailed" class="floating-support-btn">
       <i data-lucide="message-circle"></i>
       <span>Kysy apua</span>
     </a>
@@ -276,8 +283,8 @@
       </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/accessibility.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/contact.js"></script>
+    <script src="/js/accessibility.js"></script>
   </body>
 </html>
