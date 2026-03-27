@@ -2,24 +2,44 @@ async function checkStatus() {
   const badge = document.getElementById("serviceStatus");
   const text = document.getElementById("statusText");
   if (!badge || !text) return;
+
+  const isEn = window.location.pathname.includes("/en/");
+  
   try {
-    const isEn = window.location.pathname.includes("/en/");
-    const statusUrl =
-      (isEn ? "../data/status.json?v=" : "data/status.json?v=") + Date.now();
+    const statusUrl = (isEn ? "../data/status.json?v=" : "data/status.json?v=") + Date.now();
     const response = await fetch(statusUrl);
     const data = await response.json();
-    if (data.isOpen) {
+
+    // Calculate current time in Finland
+    const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
+    const hour = finlandTime.getHours();
+    
+    // Auto schedule: 09:00 to 21:00 (hours 9 through 20)
+    let isCurrentlyOpen = (hour >= 9 && hour < 21);
+
+    // If json has an explicit manual override, use it instead
+    if (data.override === "open") isCurrentlyOpen = true;
+    if (data.override === "closed") isCurrentlyOpen = false;
+
+    if (isCurrentlyOpen) {
       badge.className = "status-badge open";
-      text.textContent = isEn ? "Service Open" : data.messageOpen;
+      text.textContent = isEn ? "Service Open" : (data.messageOpen || "Palvelemme nyt");
     } else {
       badge.className = "status-badge closed";
-      text.textContent = isEn ? "Closed for today" : data.messageClosed;
+      text.textContent = isEn ? "Closed for today" : (data.messageClosed || "Palvelu suljettu");
     }
   } catch (error) {
     console.error("Status check error:", error);
-    badge.className = "status-badge closed";
-    const isEn = window.location.pathname.includes("/en/");
-    text.textContent = isEn ? "Service Closed" : "Palvelu suljettu";
+    // Fallback to offline auto schedule
+    const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
+    const hour = finlandTime.getHours();
+    if (hour >= 9 && hour < 21) {
+      badge.className = "status-badge open";
+      text.textContent = isEn ? "Service Open" : "Palvelemme nyt";
+    } else {
+      badge.className = "status-badge closed";
+      text.textContent = isEn ? "Closed for today" : "Palvelu suljettu";
+    }
   }
 }
 

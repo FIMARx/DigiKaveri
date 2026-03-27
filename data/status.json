@@ -1,5 +1,6 @@
 {
-    "isOpen": true,
-    "messageOpen": "Palvelu avoinna",
-    "messageClosed": "Suljettu tältä päivältä"
+  "_comment": "Use 'auto' for 09:00-21:00 automated schedule. Use 'open' or 'closed' to manually force the status for holidays/vacations.",
+  "override": "auto",
+  "messageOpen": "Palvelemme nyt",
+  "messageClosed": "Palvelu suljettu"
 }
