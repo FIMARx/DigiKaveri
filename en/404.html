@@ -1,58 +1,44 @@
 <!doctype html>
-<html lang="fi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      if (window.location.pathname.startsWith('/en/')) {
-        window.location.replace('/en/404.html');
-      }
-    </script>
 
-    <title>404 Sivua ei löytynyt | DigiKaveri</title>
+    <title>404 Page Not Found | DigiKaveri</title>
     <meta
       name="description"
-      content="Luotettava tietokonehuolto, laiteopastus ja IT-tuki Uudellamaalla. Tulemme kotiisi tai autamme etänä. Kotitalousvähennys -60%."
+      content="Reliable computer repair, device guidance, and IT support in Uusimaa. We come to your home or help remotely. Household tax deduction -60%."
     />
     <meta
       name="keywords"
-      content="IT-tuki, tietokonehuolto, Uusimaa, etätuki, laiteopastus, virusten poisto, tulostimen asennus"
+      content="IT support, computer repair, Uusimaa, remote support, device guidance, virus removal, printer setup"
     />
     <meta name="author" content="DigiKaveri" />
 
     <meta
       property="og:title"
-      content="DigiKaveri | Arjen IT-apu Uudellamaalla"
+      content="DigiKaveri | Everyday IT Help in Uusimaa"
     />
     <meta
       property="og:description"
-      content="Nopea ja ystävällinen IT-apu kotiin tai etänä. 100% tyytyväisyystakuu."
+      content="Fast and friendly IT help to your home or remotely. 100% satisfaction guarantee."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.digikaveri.com" />
 
+    <link rel="icon" type="image/x-icon" href="/images/Ico.ico" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/variables.css" />
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/home.css" />
-    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
 
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      .hero-centered {
-        flex-grow: 1;
-      }
-    </style>
 
     <script type="application/ld+json">
       {
@@ -60,7 +46,7 @@
         "@type": "LocalBusiness",
         "name": "DigiKaveri",
         "image": "https://www.digikaveri.com/logo.png",
-        "description": "Luotettava tietokonehuolto ja IT-tuki Uudellamaalla ja etänä koko Suomeen.",
+        "description": "Reliable computer repair and IT support in Uusimaa and remotely across Finland.",
         "telephone": "+3584578338105",
         "address": {
           "@type": "PostalAddress",
@@ -82,29 +68,38 @@
         "@type": "FAQPage",
         "mainEntity": [{
           "@type": "Question",
-          "name": "Mitä jos vikaa ei saada korjattua?",
+          "name": "What if the issue cannot be fixed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Silloin emme veloita käynnistä mitään. Meillä on ehdoton \"Ei korjausta, ei maksua\" -takuu."
+            "text": "Then we do not charge anything for the visit. We have a strict \"No fix, no fee\" guarantee."
           }
         }, {
           "@type": "Question",
-          "name": "Voinko maksaa käteisellä?",
+          "name": "Can I pay with cash?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Suosimme korttimaksua tai laskua (sähköpostiin tai paperisena kotiin). Laskulla saat reilusti maksuaikaa 14 päivää."
+            "text": "We prefer card payments or invoices (by email or paper to your home). You get plenty of time with 14 days payment term on invoices."
           }
         }, {
           "@type": "Question",
-          "name": "Onko etätuki turvallista?",
+          "name": "Is remote support safe?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Kyllä on. Yhteys on kertakäyttöinen. Kun suljet etätukiohjelman, emme pääse enää laitteellesi ilman uutta, antamaasi lupaa."
+            "text": "Yes it is. The connection is one-time only. Once you close the remote support software, we cannot access your device without new permission."
           }
         }]
       }
     </script>
-  </head>
+  
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+    </style>
+    
+</head>
   <body>
     <nav class="glass-nav">
       <div class="nav-content">
@@ -112,38 +107,38 @@
           <img src="/images/logo.svg" alt="DigiKaveri Logo" />
         </div>
 
-        <button class="mobile-menu-btn" aria-label="Avaa valikko">
+        <button class="mobile-menu-btn" aria-label="Open menu">
           <i data-lucide="menu"></i>
         </button>
 
         <div class="nav-links">
-          <a href="/#home" class="nav-link active"
-            ><i data-lucide="home"></i> <span>Etusivu</span></a
+          <a href="/en/" class="nav-link active"
+            ><i data-lucide="home"></i> <span>Home</span></a
           >
-          <a href="/#solutions" class="nav-link"
-            ><i data-lucide="grid"></i> <span>Palvelut</span></a
+          <a href="/en/#solutions" class="nav-link"
+            ><i data-lucide="grid"></i> <span>Services</span></a
           >
-          <a href="/#pricing" class="nav-link"
-            ><i data-lucide="credit-card"></i> <span>Hinnasto</span></a
+          <a href="/en/#pricing" class="nav-link"
+            ><i data-lucide="credit-card"></i> <span>Pricing</span></a
           >
-          <a href="/#team" class="nav-link"
-            ><i data-lucide="users"></i> <span>Tiimi</span></a
+          <a href="/en/#team" class="nav-link"
+            ><i data-lucide="users"></i> <span>Team</span></a
           >
-          <a href="/#faq" class="nav-link"
+          <a href="/en/#faq" class="nav-link"
             ><i data-lucide="help-circle"></i> <span>FAQ</span></a
           >
-          <a href="/#contact-detailed" class="nav-link"
-            ><i data-lucide="mail"></i> <span>Yhteystiedot</span></a
+          <a href="/en/#contact-detailed" class="nav-link"
+            ><i data-lucide="mail"></i> <span>Contact</span></a
           >
           <div class="lang-switcher">
-            <a href="/" class="lang-btn active">FI</a>
-            <span class="lang-divider">|</span>
             <a
-              href="/en/"
+              href="/"
               class="lang-btn"
-              onclick="localStorage.setItem('userLang', 'en')"
-              >EN</a
+              onclick="localStorage.setItem('userLang', 'fi')"
+              >FI</a
             >
+            <span class="lang-divider">|</span>
+            <a href="/en/" class="lang-btn active">EN</a>
           </div>
           <a href="tel:+3584578338105" class="btn-nav-call">
             <i data-lucide="phone"></i> <span>045 7833 8105</span>
@@ -154,53 +149,53 @@
 
     <div class="mobile-nav-overlay">
       <div class="mobile-nav-content">
-        <button class="mobile-nav-close" aria-label="Sulje valikko">
+        <button class="mobile-nav-close" aria-label="Close menu">
           <i data-lucide="x"></i>
         </button>
-        <a href="/#home" class="mobile-nav-link active"
+        <a href="/en/" class="mobile-nav-link active"
           ><i data-lucide="home"></i> Etusivu</a
         >
-        <a href="/#solutions" class="mobile-nav-link"
-          ><i data-lucide="grid"></i> Palvelut</a
+        <a href="/en/#solutions" class="mobile-nav-link"
+          ><i data-lucide="grid"></i> Services</a
         >
-        <a href="/#pricing" class="mobile-nav-link"
-          ><i data-lucide="credit-card"></i> Hinnasto</a
+        <a href="/en/#pricing" class="mobile-nav-link"
+          ><i data-lucide="credit-card"></i> Pricing</a
         >
-        <a href="/#team" class="mobile-nav-link"
+        <a href="/en/#team" class="mobile-nav-link"
           ><i data-lucide="users"></i> Tiimi</a
         >
-        <a href="/#faq" class="mobile-nav-link"
+        <a href="/en/#faq" class="mobile-nav-link"
           ><i data-lucide="help-circle"></i> FAQ</a
         >
-        <a href="/#contact-detailed" class="mobile-nav-link"
-          ><i data-lucide="mail"></i> Yhteystiedot</a
+        <a href="/en/#contact-detailed" class="mobile-nav-link"
+          ><i data-lucide="mail"></i> Contact</a
         >
         <div class="mobile-lang-switcher">
-          <a href="/" class="mobile-lang-btn active">FI</a>
-          <span class="mobile-lang-divider">|</span>
           <a
-            href="/en/"
+            href="/"
             class="mobile-lang-btn"
-            onclick="localStorage.setItem('userLang', 'en')"
-            >EN</a
+            onclick="localStorage.setItem('userLang', 'fi')"
+            >FI</a
           >
+          <span class="mobile-lang-divider">|</span>
+          <a href="/en/" class="mobile-lang-btn active">EN</a>
         </div>
       </div>
     </div>
 
     
-    <header class="hero-centered" style="min-height: 50vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 60px;">
+    <header class="hero-centered" style="min-height: 50vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 60px; flex-grow: 1;">
       <h1 style="margin-top: 20px;">
-        Hups! Sivua ei löytynyt. <br /><span class="highlight-text"
-          >404 Not Found</span
+        Oops! Page not found. <br /><span class="highlight-text"
+          >404 Error</span
         >
       </h1>
       <p class="hero-subtitle">
-        Etsimääsi sivua ei valitettavasti ole olemassa tai se on siirretty.
+        The page you are looking for unfortunately does not exist or has been moved.
       </p>
       <div style="margin-top: 30px; display: flex; justify-content: center;">
-        <a href="/" class="btn-submit" style="display: inline-flex; width: auto; padding: 15px 30px; align-items: center; gap: 8px; text-decoration: none;">
-          Palaa etusivulle <i data-lucide="arrow-right"></i>
+        <a href="/en/" class="btn-submit" style="display: inline-flex; width: auto; padding: 15px 30px; align-items: center; gap: 8px; text-decoration: none;">
+          Return to homepage <i data-lucide="arrow-right"></i>
         </a>
       </div>
     </header>
@@ -211,24 +206,24 @@
             <img src="/images/logo.svg" alt="DigiKaveri Logo" />
           </div>
           <p class="footer-desc">
-            Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
-            koko Suomeen.
+            Reliable home and small business IT support in Uusimaa and remotely
+            across Finland.
           </p>
         </div>
 
         <div class="footer-links">
-          <h4>Pikalinkit</h4>
+          <h4>Quick Links</h4>
           <ul>
-            <li><a href="/#home">Etusivu</a></li>
-            <li><a href="/#solutions">Palvelut</a></li>
-            <li><a href="/#pricing">Hinnasto</a></li>
-            <li><a href="/#team">Tiimi</a></li>
-            <li><a href="/#faq">Usein kysyttyä</a></li>
+            <li><a href="/en/">Home</a></li>
+            <li><a href="/en/#solutions">Services</a></li>
+            <li><a href="/en/#pricing">Pricing</a></li>
+            <li><a href="/en/#team">Team</a></li>
+            <li><a href="/en/#faq">FAQ</a></li>
           </ul>
         </div>
 
         <div class="footer-contact">
-          <h4>Yhteystiedot</h4>
+          <h4>Contact Info</h4>
           <ul>
             <li>
               <i data-lucide="phone"></i>
@@ -240,20 +235,20 @@
             </li>
             <li>
               <i data-lucide="map-pin"></i>
-              <span>Uusimaa, Suomi</span>
+              <span>Uusimaa, Finland</span>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 DigiKaveri. Kaikki oikeudet pidätetään.</p>
+        <p>&copy; 2026 DigiKaveri. All rights reserved.</p>
       </div>
     </footer>
 
     <div class="mobile-sticky-bar">
       <a href="tel:+3584578338105" class="btn-sticky-call">
-        <i data-lucide="phone"></i> Soita
+        <i data-lucide="phone"></i> Call
       </a>
       <a
         href="https://wa.me/3584578338105"
@@ -276,17 +271,17 @@
       </a>
     </div>
 
-    <a href="/#contact-detailed" class="floating-support-btn">
+    <a href="/en/#contact-detailed" class="floating-support-btn">
       <i data-lucide="message-circle"></i>
-      <span>Kysy apua</span>
+      <span>Get help</span>
     </a>
 
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
         <p>
-          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta. Nämä auttavat meitä kehittämään palveluamme.
+          We use cookies to improve your browsing experience. These help us improve our service.
         </p>
-        <button id="acceptCookies" class="btn-submit cookie-btn">Hyväksy</button>
+        <button id="acceptCookies" class="btn-submit cookie-btn">Accept</button>
       </div>
     </div>
 
