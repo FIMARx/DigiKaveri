@@ -422,6 +422,14 @@
   border-color: #fecaca;
 }
 
+.business-hours {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-top: -10px;
+  margin-bottom: 25px;
+}
+
 .trust-bar {
   text-align: center;
   padding: 10px 20px 0;
