@@ -26,6 +26,10 @@ async function checkStatus() {
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageDetection();
   initCookieBanner();
+  
+  if (localStorage.getItem("cookiesAccepted") === "true") {
+    loadAnalytics();
+  }
   if (typeof lucide !== "undefined") {
     lucide.createIcons();
   }
@@ -52,7 +56,23 @@ function initCookieBanner() {
   acceptBtn.addEventListener("click", () => {
     localStorage.setItem("cookiesAccepted", "true");
     banner.classList.remove("show");
+    loadAnalytics();
   });
+}
+
+function loadAnalytics() {
+  if (window.analyticsLoaded) return;
+  window.analyticsLoaded = true;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XL8DBWDDMD';
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){window.dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
 }
 
 function initLanguageDetection() {
