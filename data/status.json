@@ -1,5 +1,9 @@
 {
-  "_comment": "Use 'auto' for 09:00-21:00 automated schedule. Use 'open' or 'closed' to manually force the status for holidays/vacations.",
+  "_INSTRUCTION_1": "HOW TO USE THIS FILE:",
+  "_INSTRUCTION_2": "Change the 'override' value below to control the green/red open light on the website.",
+  "_INSTRUCTION_3": "Option 'auto': Automatically opens at 09:00 and closes at 21:00 Finland time.",
+  "_INSTRUCTION_4": "Option 'open': Forces the light to GREEN immediately. (Ignores the clock)",
+  "_INSTRUCTION_5": "Option 'closed': Forces the light to RED immediately. (Ignores the clock. Great for sick days!)",
   "override": "auto",
   "messageOpen": "Palvelemme nyt",
   "messageClosed": "Palvelu suljettu"
