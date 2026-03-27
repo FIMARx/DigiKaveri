@@ -29,7 +29,11 @@
 
     <link rel="alternate" hreflang="fi" href="https://www.digikaveri.com/" />
     <link rel="alternate" hreflang="en" href="https://www.digikaveri.com/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.digikaveri.com/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.digikaveri.com/"
+    />
 
     <link rel="icon" type="image/x-icon" href="images/Ico.ico" />
     <link rel="apple-touch-icon" href="/images/logo.png" />
@@ -74,28 +78,32 @@
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [{
-          "@type": "Question",
-          "name": "Mitä jos vikaa ei saada korjattua?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Silloin emme veloita käynnistä mitään. Meillä on ehdoton \"Ei korjausta, ei maksua\" -takuu."
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Mitä jos vikaa ei saada korjattua?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Silloin emme veloita käynnistä mitään. Meillä on ehdoton \"Ei korjausta, ei maksua\" -takuu."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Voinko maksaa käteisellä?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Suosimme korttimaksua tai laskua (sähköpostiin tai paperisena kotiin). Laskulla saat reilusti maksuaikaa 14 päivää."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Onko etätuki turvallista?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Kyllä on. Yhteys on kertakäyttöinen. Kun suljet etätukiohjelman, emme pääse enää laitteellesi ilman uutta, antamaasi lupaa."
+            }
           }
-        }, {
-          "@type": "Question",
-          "name": "Voinko maksaa käteisellä?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Suosimme korttimaksua tai laskua (sähköpostiin tai paperisena kotiin). Laskulla saat reilusti maksuaikaa 14 päivää."
-          }
-        }, {
-          "@type": "Question",
-          "name": "Onko etätuki turvallista?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Kyllä on. Yhteys on kertakäyttöinen. Kun suljet etätukiohjelman, emme pääse enää laitteellesi ilman uutta, antamaasi lupaa."
-          }
-        }]
+        ]
       }
     </script>
   </head>
@@ -103,7 +111,12 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <img src="images/logo.svg" alt="DigiKaveri Logo" width="180" height="55" />
+          <img
+            src="images/logo.svg"
+            alt="DigiKaveri Logo"
+            width="180"
+            height="55"
+          />
         </div>
 
         <button class="mobile-menu-btn" aria-label="Avaa valikko">
@@ -679,7 +692,6 @@
               data-lucide="user"
               style="width: 48px; height: 48px; color: #ccc"
             ></i>
-            <!-- TODO: Add actual image path -> src="images/chatani.jpg" -->
           </div>
           <div class="team-info">
             <h3>Chatani</h3>
@@ -692,6 +704,7 @@
             </p>
           </div>
         </div>
+
         <div class="team-card">
           <div
             class="team-img"
@@ -706,7 +719,6 @@
               data-lucide="user"
               style="width: 48px; height: 48px; color: #ccc"
             ></i>
-            <!-- TODO: Add actual image path -> src="images/tahir.jpg" -->
           </div>
           <div class="team-info">
             <h3>Tahir</h3>
@@ -921,7 +933,13 @@
       <div class="footer-container">
         <div class="footer-brand">
           <div class="logo footer-logo">
-            <img src="images/logo.svg" alt="DigiKaveri Logo" loading="lazy" width="110" height="110" />
+            <img
+              src="images/logo.svg"
+              alt="DigiKaveri Logo"
+              loading="lazy"
+              width="110"
+              height="110"
+            />
           </div>
           <p class="footer-desc">
             Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
@@ -997,9 +1015,12 @@
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
         <p>
-          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta. Nämä auttavat meitä kehittämään palveluamme.
+          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta. Nämä
+          auttavat meitä kehittämään palveluamme.
         </p>
-        <button id="acceptCookies" class="btn-submit cookie-btn">Hyväksy</button>
+        <button id="acceptCookies" class="btn-submit cookie-btn">
+          Hyväksy
+        </button>
       </div>
     </div>
 
