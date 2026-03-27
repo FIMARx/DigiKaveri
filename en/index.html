@@ -65,7 +65,8 @@
         "serviceArea": {
           "@type": "GeoCircle",
           "geoMidpoint": {
-            "@type": "GeoCoordinates",
+            "@type": "GeoCoordinates"
+          }
         }
       }
     </script>
@@ -102,7 +103,7 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <img src="../images/logo.svg" alt="DigiKaveri Logo" />
+          <img src="../images/logo.svg" alt="DigiKaveri Logo" width="180" height="55" />
         </div>
 
         <button class="mobile-menu-btn" aria-label="Open menu">
@@ -151,7 +152,7 @@
           <i data-lucide="x"></i>
         </button>
         <a href="#home" class="mobile-nav-link active"
-          ><i data-lucide="home"></i> Etusivu</a
+          ><i data-lucide="home"></i> Home</a
         >
         <a href="#solutions" class="mobile-nav-link"
           ><i data-lucide="grid"></i> Services</a
@@ -160,7 +161,7 @@
           ><i data-lucide="credit-card"></i> Pricing</a
         >
         <a href="#team" class="mobile-nav-link"
-          ><i data-lucide="users"></i> Tiimi</a
+          ><i data-lucide="users"></i> Team</a
         >
         <a href="#faq" class="mobile-nav-link"
           ><i data-lucide="help-circle"></i> FAQ</a
@@ -182,13 +183,15 @@
     </div>
 
     <header id="home" class="hero-centered section-spy">
-      <div id="serviceStatus" class="status-badge">
-        <div class="signal-dot"></div>
-        <span id="statusText">Loading...</span>
-      </div>
-      <div class="business-hours-pill">
-        <i data-lucide="clock"></i>
-        <span>Service open Mon-Sun 09:00 - 21:00</span>
+      <div class="status-schedule-pill">
+        <div id="serviceStatus" class="status-part">
+          <div class="signal-dot"></div>
+          <span id="statusText">Loading...</span>
+        </div>
+        <div class="schedule-part">
+          <i data-lucide="clock"></i>
+          <span>Mon–Sun 09:00–21:00</span>
+        </div>
       </div>
 
       <h1>
@@ -254,6 +257,7 @@
                 placeholder="040 123 4567"
                 required
                 minlength="6"
+                pattern="[\d\s\-\+\(\)]+"
               />
             </div>
           </div>
@@ -816,6 +820,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     style="color: #25d366; font-weight: 600"
+                    aria-label="Send a message via WhatsApp"
                     >Send a message here</a
                   >
                 </p>
@@ -912,7 +917,7 @@
       <div class="footer-container">
         <div class="footer-brand">
           <div class="logo footer-logo">
-            <img src="../images/logo.svg" alt="DigiKaveri Logo" />
+            <img src="../images/logo.svg" alt="DigiKaveri Logo" loading="lazy" width="110" height="110" />
           </div>
           <p class="footer-desc">
             Reliable home and small business IT support in Uusimaa and remotely
@@ -982,7 +987,7 @@
 
     <a href="#contact-detailed" class="floating-support-btn">
       <i data-lucide="message-circle"></i>
-      <span>Get help</span>
+      <span>Ask for help</span>
     </a>
 
     <div id="cookieBanner" class="cookie-banner">

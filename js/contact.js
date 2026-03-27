@@ -25,30 +25,58 @@ function showToast(message, isSuccess = true) {
   }, 5000);
 }
 
+const translations = {
+  fi: {
+    loading: 'Lähetetään...',
+    success: 'Viesti lähetetty!',
+    error: 'Virhe! Yritä uudelleen.',
+    connError: 'Yhteysvirhe!',
+    required: 'Tämä kenttä on pakollinen.',
+    tooShort: (min) => `Tekstin pitää olla vähintään ${min} merkkiä pitkä.`,
+    invalidEmail: 'Anna voimassa oleva sähköpostiosoite.',
+    invalidPhone: 'Anna voimassa oleva puhelinnumero.',
+    thankYou: 'Kiitos viestistäsi! Olemme sinuun pian yhteydessä.',
+    sendError: 'Viestin lähetyksessä tapahtui virhe. Yritä uudelleen myöhemmin.',
+    netError: 'Tapahtui yhteysvirhe. Tarkista verkkoyhteytesi.'
+  },
+  en: {
+    loading: 'Sending...',
+    success: 'Message sent!',
+    error: 'Error! Try again.',
+    connError: 'Connection error!',
+    required: 'This field is required.',
+    tooShort: (min) => `Text must be at least ${min} characters long.`,
+    invalidEmail: 'Please enter a valid email address.',
+    invalidPhone: 'Please enter a valid phone number.',
+    thankYou: 'Thank you for your message! We will get back to you soon.',
+    sendError: 'Error sending message. Please try again later.',
+    netError: 'Connection error. Please check your internet connection.'
+  }
+};
+
 function setupForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
+
+  const isEn = window.location.pathname.includes('/en/');
+  const t = isEn ? translations.en : translations.fi;
 
   const inputs = form.querySelectorAll("input, select, textarea");
 
   inputs.forEach((input) => {
     input.addEventListener("invalid", () => {
       if (input.validity.valueMissing) {
-        input.setCustomValidity("Tämä kenttä on pakollinen.");
+        input.setCustomValidity(t.required);
       } else if (input.validity.tooShort) {
         const minLength = input.getAttribute("minlength");
-        input.setCustomValidity(
-          `Tekstin pitää olla vähintään ${minLength} merkkiä pitkä.`,
-        );
+        input.setCustomValidity(t.tooShort(minLength));
       } else if (
         (input.validity.typeMismatch || input.validity.patternMismatch) &&
         input.type === "email"
       ) {
-        input.setCustomValidity(
-          "Anna voimassa oleva sähköpostiosoite (esim. .com tai .fi).",
-        );
+        input.setCustomValidity(t.invalidEmail);
       } else if (input.validity.typeMismatch && input.type === "tel") {
-        input.setCustomValidity("Anna voimassa oleva puhelinnumero.");
+        input.setCustomValidity(t.invalidPhone);
       }
     });
 
@@ -73,23 +101,14 @@ function setupForm(formId) {
 
         if (!isValid || isManualTooShort) {
           isFormValid = false;
-
           if (isManualTooShort || input.validity.tooShort) {
-            const minLength = minLengthAttr || 2;
-            input.setCustomValidity(
-              `Tekstin pitää olla vähintään ${minLength} merkkiä pitkä.`,
-            );
+            input.setCustomValidity(t.tooShort(minLengthAttr || 2));
           } else if (input.validity.valueMissing) {
-            input.setCustomValidity("Tämä kenttä on pakollinen.");
-          } else if (
-            (input.validity.typeMismatch || input.validity.patternMismatch) &&
-            input.type === "email"
-          ) {
-            input.setCustomValidity(
-              "Anna voimassa oleva sähköpostiosoite (esim. .com tai .fi).",
-            );
-          } else if (input.validity.typeMismatch && input.type === "tel") {
-            input.setCustomValidity("Anna voimassa oleva puhelinnumero.");
+            input.setCustomValidity(t.required);
+          } else if (input.type === "email") {
+            input.setCustomValidity(t.invalidEmail);
+          } else if (input.type === "tel") {
+            input.setCustomValidity(t.invalidPhone);
           }
         } else {
           input.setCustomValidity("");
@@ -104,21 +123,11 @@ function setupForm(formId) {
       return;
     }
 
-    inputs.forEach((input) => {
-      if (!input.hasInputListener) {
-        input.hasInputListener = true;
-        input.addEventListener("input", () => {
-          input.setCustomValidity("");
-        });
-      }
-    });
-
     const btn = form.querySelector(".btn-submit");
     const originalText = btn.innerHTML;
 
     btn.disabled = true;
-
-    btn.innerHTML = 'Lähetetään... <i data-lucide="loader-2" class="spin"></i>';
+    btn.innerHTML = `${t.loading} <i data-lucide="loader-2" class="spin"></i>`;
     btn.style.background = "#2563EB";
     if (typeof lucide !== "undefined") lucide.createIcons();
 
@@ -139,12 +148,11 @@ function setupForm(formId) {
       const result = await response.json();
 
       if (response.status === 200) {
-        btn.innerHTML = 'Viesti lähetetty! <i data-lucide="check"></i>';
+        btn.innerHTML = `${t.success} <i data-lucide="check"></i>`;
         btn.style.background = "#10B981";
         if (typeof lucide !== "undefined") lucide.createIcons();
         form.reset();
-
-        showToast("Kiitos viestistäsi! Olemme sinuun pian yhteydessä.", true);
+        showToast(t.thankYou, true);
 
         setTimeout(() => {
           btn.innerHTML = originalText;
@@ -153,18 +161,16 @@ function setupForm(formId) {
           if (typeof lucide !== "undefined") lucide.createIcons();
         }, 4000);
       } else {
-        console.error(result);
-        btn.innerHTML = "Virhe! Yritä uudelleen.";
+        btn.innerHTML = t.error;
         btn.style.background = "#EF4444";
         btn.disabled = false;
-        showToast("Viestin lähetyksessä tapahtui virhe. Yritä uudelleen myöhemmin.", false);
+        showToast(t.sendError, false);
       }
     } catch (error) {
-      console.error(error);
-      btn.innerHTML = "Yhteysvirhe!";
+      btn.innerHTML = t.connError;
       btn.style.background = "#EF4444";
       btn.disabled = false;
-      showToast("Tapahtui yhteysvirhe. Tarkista verkkoyhteytesi.", false);
+      showToast(t.netError, false);
     }
   });
 }

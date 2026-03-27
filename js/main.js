@@ -22,10 +22,10 @@ async function checkStatus() {
     if (data.override === "closed") isCurrentlyOpen = false;
 
     if (isCurrentlyOpen) {
-      badge.className = "status-badge open";
+      badge.className = "status-part open";
       text.textContent = isEn ? "Service Open" : (data.messageOpen || "Palvelemme nyt");
     } else {
-      badge.className = "status-badge closed";
+      badge.className = "status-part closed";
       text.textContent = isEn ? "Closed for today" : (data.messageClosed || "Palvelu suljettu");
     }
   } catch (error) {
@@ -34,10 +34,10 @@ async function checkStatus() {
     const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
     const hour = finlandTime.getHours();
     if (hour >= 9 && hour < 21) {
-      badge.className = "status-badge open";
+      badge.className = "status-part open";
       text.textContent = isEn ? "Service Open" : "Palvelemme nyt";
     } else {
-      badge.className = "status-badge closed";
+      badge.className = "status-part closed";
       text.textContent = isEn ? "Closed for today" : "Palvelu suljettu";
     }
   }

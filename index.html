@@ -65,7 +65,8 @@
         "serviceArea": {
           "@type": "GeoCircle",
           "geoMidpoint": {
-            "@type": "GeoCoordinates",
+            "@type": "GeoCoordinates"
+          }
         }
       }
     </script>
@@ -102,7 +103,7 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <img src="images/logo.svg" alt="DigiKaveri Logo" />
+          <img src="images/logo.svg" alt="DigiKaveri Logo" width="180" height="55" />
         </div>
 
         <button class="mobile-menu-btn" aria-label="Avaa valikko">
@@ -182,13 +183,15 @@
     </div>
 
     <header id="home" class="hero-centered section-spy">
-      <div id="serviceStatus" class="status-badge">
-        <div class="signal-dot"></div>
-        <span id="statusText">Ladataan...</span>
-      </div>
-      <div class="business-hours-pill">
-        <i data-lucide="clock"></i>
-        <span>Palvelu avoinna ma-su klo 09:00 - 21:00</span>
+      <div class="status-schedule-pill">
+        <div id="serviceStatus" class="status-part">
+          <div class="signal-dot"></div>
+          <span id="statusText">Ladataan...</span>
+        </div>
+        <div class="schedule-part">
+          <i data-lucide="clock"></i>
+          <span>Ma–Su 09:00–21:00</span>
+        </div>
       </div>
 
       <h1>
@@ -254,6 +257,7 @@
                 placeholder="040 123 4567"
                 required
                 minlength="6"
+                pattern="[\d\s\-\+\(\)]+"
               />
             </div>
           </div>
@@ -821,6 +825,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     style="color: #25d366; font-weight: 600"
+                    aria-label="Lähetä viesti WhatsAppilla"
                     >Laita viestiä tästä</a
                   >
                 </p>
@@ -916,7 +921,7 @@
       <div class="footer-container">
         <div class="footer-brand">
           <div class="logo footer-logo">
-            <img src="images/logo.svg" alt="DigiKaveri Logo" />
+            <img src="images/logo.svg" alt="DigiKaveri Logo" loading="lazy" width="110" height="110" />
           </div>
           <p class="footer-desc">
             Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
