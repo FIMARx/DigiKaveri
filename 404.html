@@ -126,7 +126,7 @@
             ><i data-lucide="users"></i> <span>Tiimi</span></a
           >
           <a href="/#faq" class="nav-link"
-            ><i data-lucide="help-circle"></i> <span>FAQ</span></a
+            ><i data-lucide="help-circle"></i> <span>Usein kysyttyä</span></a
           >
           <a href="/#contact-detailed" class="nav-link"
             ><i data-lucide="mail"></i> <span>Yhteystiedot</span></a
@@ -173,7 +173,7 @@
           ><i data-lucide="users"></i> Tiimi</a
         >
         <a href="/#faq" class="mobile-nav-link"
-          ><i data-lucide="help-circle"></i> FAQ</a
+          ><i data-lucide="help-circle"></i> Usein kysyttyä</a
         >
         <a href="/#contact-detailed" class="mobile-nav-link"
           ><i data-lucide="mail"></i> Yhteystiedot</a
@@ -195,7 +195,7 @@
     <header class="hero-centered" style="min-height: 50vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 60px;">
       <h1 style="margin-top: 20px;">
         Hups! Sivua ei löytynyt. <br /><span class="highlight-text"
-          >404 Not Found</span
+          >404 Virhe</span
         >
       </h1>
       <p class="hero-subtitle">
@@ -217,6 +217,14 @@
             Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
             koko Suomeen.
           </p>
+          <div class="footer-social">
+            <a href="https://facebook.com/digikaveri" target="_blank" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com/digikaveri" target="_blank" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="footer-links">
@@ -250,7 +258,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 DigiKaveri. Kaikki oikeudet pidätetään.</p>
+        <p>&copy; 2024&ndash;2025 DigiKaveri. Kaikki oikeudet pidätetään.</p>
       </div>
     </footer>
 
@@ -296,5 +304,10 @@
     <script src="/js/main.js"></script>
     <script src="/js/contact.js"></script>
     <script src="/js/accessibility.js"></script>
+    <script>
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    </script>
   </body>
 </html>
