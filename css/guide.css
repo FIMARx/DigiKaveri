@@ -1,0 +1,227 @@
+/* guide.css - DigiKaveri Remote Support Guide Styles */
+
+.guide-hero {
+  padding: 80px 20px 60px;
+  background: linear-gradient(135deg, var(--white) 0%, #f1f5f9 100%);
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.guide-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.guide-hero p {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.guide-section {
+  padding: 60px 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-title-center {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title-center h2 {
+  font-size: 2.25rem;
+  margin-bottom: 10px;
+}
+
+.section-title-center .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+/* PC Section Styles */
+.pc-guide-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pc-download-info {
+  text-align: center;
+  padding: 30px;
+  background: #f8fafc;
+  border-radius: var(--radius);
+}
+
+.tv-logo {
+  display: block;
+  height: 60px;
+  margin: 0 auto 20px;
+}
+
+.btn-download-tv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  padding: 18px 30px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.btn-download-tv:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+}
+
+.btn-download-tv i {
+  width: 24px;
+  height: 24px;
+}
+
+/* Step-by-Step Instructions */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.step-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.step-circle {
+  width: 45px;
+  height: 45px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+.step-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  color: var(--text-dark);
+}
+
+.step-content p {
+  margin: 0;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Security Note */
+.security-note {
+  margin-top: 40px;
+  padding: 24px;
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  border-left-width: 6px;
+  border-radius: 12px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.security-note i,
+.security-note svg {
+  color: #059669;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0; /* Prevents squashing on mobile */
+}
+
+.security-note p {
+  margin: 0;
+  color: #064e3b;
+  font-weight: 500;
+}
+
+/* Mobile Placeholder Section */
+.mobile-placeholder {
+  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+  border-radius: var(--radius);
+  padding: 60px 40px;
+  text-align: center;
+  border: 2px dashed rgba(0, 0, 0, 0.1);
+}
+
+.mobile-placeholder i {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.mobile-placeholder h3 {
+  font-size: 1.75rem;
+  margin-bottom: 15px;
+}
+
+.mobile-placeholder p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+
+@media (max-width: 1024px) {
+  .pc-guide-card {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .guide-hero h1 {
+    font-size: 2.25rem;
+  }
+  
+  .guide-hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .security-note {
+    padding: 16px;
+    gap: 12px;
+  }
+}

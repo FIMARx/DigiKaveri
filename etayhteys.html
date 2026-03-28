@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Etätuki-opas | DigiKaveri - Miten etäyhteys toimii?</title>
+    <meta
+      name="description"
+      content="Lue ohjeet etätuen aloittamiseen. Ladattava TeamViewer-etäyhteysohjelma ja helpot askeleet tietokoneen etähuoltoon."
+    />
+    <meta name="author" content="DigiKaveri" />
+
+    <link rel="icon" type="image/x-icon" href="images/Ico.ico" />
+    <link rel="apple-touch-icon" href="images/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/guide.css" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <nav class="glass-nav">
+      <div class="nav-content">
+        <div class="logo">
+          <a href="/" style="text-decoration: none; display: flex; align-items: center;">
+            <img
+              src="svg/logo.svg"
+              alt="DigiKaveri Logo"
+              width="180"
+              height="55"
+            />
+          </a>
+        </div>
+
+        <button class="mobile-menu-btn" aria-label="Avaa valikko">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <div class="nav-menu">
+          <a href="/index.html#home" class="nav-link"
+            ><i data-lucide="home"></i> <span>Etusivu</span></a
+          >
+          <a href="/index.html#solutions" class="nav-link"
+            ><i data-lucide="grid"></i> <span>Palvelut</span></a
+          >
+          <div class="nav-item-dropdown">
+            <a href="/etayhteys.html" class="dropdown-trigger active">
+              <i data-lucide="monitor"></i> <span>Etätuki</span>
+              <i data-lucide="chevron-down"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/etayhteys.html#pc-guide" class="nav-link"
+                ><i data-lucide="monitor"></i> PC-ohjeet</a
+              >
+              <a href="/etayhteys.html#mobile-guide" class="nav-link"
+                ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
+              >
+            </div>
+          </div>
+          <a href="/index.html#pricing" class="nav-link"
+            ><i data-lucide="credit-card"></i> <span>Hinnasto</span></a
+          >
+          <div class="nav-item-dropdown">
+            <button class="dropdown-trigger">
+              <i data-lucide="info"></i> <span>Info</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="/index.html#team" class="nav-link"
+                ><i data-lucide="users"></i> Tiimi</a
+              >
+              <a href="/index.html#faq" class="nav-link"
+                ><i data-lucide="help-circle"></i> FAQ</a
+              >
+            </div>
+          </div>
+          <a href="/index.html#contact-detailed" class="nav-link"
+            ><i data-lucide="mail"></i> <span>Yhteystiedot</span></a
+          >
+        </div>
+
+        <div class="nav-actions">
+          <div class="lang-switcher">
+            <a href="/etayhteys.html" class="lang-btn active">FI</a>
+            <span class="lang-divider">|</span>
+            <a
+              href="/en/remote-support.html"
+              class="lang-btn"
+              onclick="localStorage.setItem('userLang', 'en')"
+              >EN</a
+            >
+          </div>
+          <a href="tel:+3584578338105" class="btn-nav-call">
+            <i data-lucide="phone"></i> <span>045 7833 8105</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mobile-nav-overlay">
+      <div class="mobile-nav-content">
+        <button class="mobile-nav-close" aria-label="Sulje valikko">
+          <i data-lucide="x"></i>
+        </button>
+        <a href="/index.html#home" class="mobile-nav-link"
+          ><i data-lucide="home"></i> Etusivu</a
+        >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="monitor"></i> Etätuki</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="/etayhteys.html#pc-guide" class="mobile-nav-link"
+              ><i data-lucide="monitor"></i> PC-ohjeet</a
+            >
+            <a href="/etayhteys.html#mobile-guide" class="mobile-nav-link"
+              ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
+            >
+          </div>
+        </div>
+        <a href="/index.html#solutions" class="mobile-nav-link"
+          ><i data-lucide="grid"></i> Palvelut</a
+        >
+        <a href="/index.html#pricing" class="mobile-nav-link"
+          ><i data-lucide="credit-card"></i> Hinnasto</a
+        >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="info"></i> Info</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="/index.html#team" class="mobile-nav-link"
+              ><i data-lucide="users"></i> Tiimi</a
+            >
+            <a href="/index.html#faq" class="mobile-nav-link"
+              ><i data-lucide="help-circle"></i> UKK</a
+            >
+          </div>
+        </div>
+        <a href="/index.html#contact-detailed" class="mobile-nav-link"
+          ><i data-lucide="mail"></i> Yhteystiedot</a
+        >
+        <div class="mobile-lang-switcher">
+          <a href="/etayhteys.html" class="mobile-lang-btn active">FI</a>
+          <span class="mobile-lang-divider">|</span>
+          <a
+            href="/en/remote-support.html"
+            class="mobile-lang-btn"
+            onclick="localStorage.setItem('userLang', 'en')"
+            >EN</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <header class="guide-hero">
+      <h1>Etätuki-opas</h1>
+      <p>
+        Näillä ohjeilla valmistelet laitteesi etätukea varten. Etäyhteys on
+        turvallinen tapa saada apua ilman, että kenenkään tarvitsee tulla paikan päälle.
+      </p>
+    </header>
+
+    <main>
+      <section id="pc-guide" class="guide-section section-spy">
+        <div class="section-title-center">
+          <span class="badge"><i data-lucide="monitor"></i> Tietokone</span>
+          <h2>Näin aloitat etätuen PC:llä</h2>
+          <p>Käytämme maailman suosituinta ja turvallisinta TeamViewer-ohjelmaa.</p>
+        </div>
+
+        <div class="pc-guide-card">
+          <div class="pc-download-info">
+            <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
+            <h3>Lataa ohjelma</h3>
+            <p>Klikkaa alla olevaa painiketta ladataksesi pienen apuohjelman.</p>
+            <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" id="tv-download-btn" class="btn-download-tv">
+              <i data-lucide="download"></i> Lataa TeamViewer QS
+            </a>
+            <p id="os-text" style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+              Versio: Windows (QuickSupport)
+            </p>
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+              <p style="font-size: 0.9rem; color: var(--text-light);">
+                Haluatko ladata muun version tai vierailla virallisella sivustolla?
+              </p>
+              <a href="https://www.teamviewer.com/fi/lataa/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+                TeamViewerin virallinen lataussivu <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="step-v-container">
+            <div class="step-v-item">
+              <div class="step-v-number">1</div>
+              <div class="step-v-content">
+                <h4>Avaa ladattu tiedosto</h4>
+                <p>Klikkaa ladattua <strong>TeamViewerQS.exe</strong>-tiedostoa selaimesi alareunasta tai Lataukset-kansiosta.</p>
+              </div>
+            </div>
+            <div class="step-v-item">
+              <div class="step-v-number">2</div>
+              <div class="step-v-content">
+                <h4>Salli ohjelman suoritus</h4>
+                <p>Jos Windows kysyy "Haluatko sallia tämän sovelluksen tekevän muutoksia?", vastaa <strong>Kyllä</strong>.</p>
+              </div>
+            </div>
+            <div class="step-v-item">
+              <div class="step-v-number">3</div>
+              <div class="step-v-content">
+                <h4>Kerro ID ja salasana</h4>
+                <p>Eteesi aukeaa ikkuna, jossa näkyy <strong>ID-tunnus</strong> ja <strong>Salasana</strong>. Kerro nämä DigiKaveri-auttajallesi puhelimessa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="security-note">
+          <i data-lucide="shield-check"></i>
+          <p>
+            <strong>Turvallisuustiedote:</strong> Yhteys on kertakäyttöinen. Kun suljet ohjelman, emme pääse enää koneellesi ilman uutta ID:tä ja salasanaa, jotka vaihtuvat jokaisella kerralla.
+          </p>
+        </div>
+      </section>
+
+      <section id="mobile-guide" class="guide-section section-spy">
+        <div class="section-title-center">
+          <span class="badge"><i data-lucide="smartphone"></i> Mobiili</span>
+          <h2>Puhelin & Tabletti</h2>
+          <p>Lataa oikea sovellus ja kerro ID asiantuntijallemme.</p>
+        </div>
+
+        <!-- Platform Pill Switcher -->
+        <div class="platform-pill-switcher">
+          <button id="android-switch" class="btn-platform-switch switcher-btn active" aria-label="Vaihda Android-ohjeisiin">
+            <img src="svg/android.svg" alt="Android" />
+            <span>Android</span>
+          </button>
+          <button id="ios-switch" class="btn-platform-switch switcher-btn" aria-label="Vaihda iPhone & iPad -ohjeisiin">
+            <img src="svg/apple.svg" alt="Apple" />
+            <span>iPhone & iPad</span>
+          </button>
+        </div>
+
+        <div id="guide-container">
+          <!-- Android Card -->
+          <div id="android-card" class="mobile-guide-card platform-card">
+            <div class="guide-detected-badge">
+              <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+            </div>
+            <div class="mobile-platform-header">
+              <img src="svg/android.svg" alt="Android" width="32" height="32" />
+              <h3>Android-ohje</h3>
+            </div>
+            
+            <div class="step-v-container">
+              <div class="step-v-item">
+                <div class="step-v-number">1</div>
+                <div class="step-v-content">
+                  <h4>Lataa sovellus</h4>
+                  <p>Klikkaa alla olevaa painiketta ladataksesi <strong>QuickSupport</strong>-sovelluksen Google Play -kaupasta.</p>
+                  <div style="margin-top: 15px;">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" class="btn-app-store-pill btn-android-green">
+                      <img src="svg/googleplay.svg" alt="Google Play" width="22" height="22" />
+                        <div class="store-info">
+                          <span>Lataa täältä:</span>
+                          <span>Google Play</span>
+                        </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-v-item">
+                <div class="step-v-number">2</div>
+                <div class="step-v-content">
+                  <h4>Avaa ja salli luvat</h4>
+                  <p>Avaa sovellus ja salli tarvittavat luvat (kuten ilmoitukset ja näytön jako), jotta voimme auttaa sinua etänä.</p>
+                </div>
+              </div>
+
+              <div class="step-v-item">
+                <div class="step-v-number">3</div>
+                <div class="step-v-content">
+                  <h4>Kerro ID-koodi</h4>
+                  <p>Lue sovelluksen näytöllä näkyvä 9-numeroinen <strong>ID-koodi</strong> DigiKaveri-auttajallesi puhelimessa.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="safety-indicator">
+              <i data-lucide="lock"></i>
+              <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
+            </div>
+          </div>
+
+          <!-- iOS Card (Hidden by default, shown if detected or toggled) -->
+          <div id="ios-card" class="mobile-guide-card platform-card hidden">
+            <div class="guide-detected-badge">
+              <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+            </div>
+            <div class="mobile-platform-header">
+              <img src="svg/apple.svg" alt="Apple" width="32" height="32" />
+              <h3>iPhone & iPad -ohje</h3>
+            </div>
+
+            <div class="step-v-container">
+              <div class="step-v-item">
+                <div class="step-v-number">1</div>
+                <div class="step-v-content">
+                  <h4>Lataa sovellus</h4>
+                  <p>Klikkaa alla olevaa painiketta ladataksesi <strong>QuickSupport</strong>-sovelluksen App Storesta.</p>
+                  <div style="margin-top: 15px;">
+                    <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" class="btn-app-store-pill btn-apple-black">
+                      <img src="svg/appstore.svg" alt="App Store" width="22" height="22" />
+                      <div class="store-info">
+                        <span>Lataa täältä:</span>
+                        <span>App Store</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-v-item">
+                <div class="step-v-number">2</div>
+                <div class="step-v-content">
+                  <h4>Avaa ja salli luvat</h4>
+                  <p>Avaa sovellus ja salli tarvittavat luvat (kuten ilmoitukset ja näytön jako), jotta voimme auttaa sinua etänä.</p>
+                </div>
+              </div>
+
+              <div class="step-v-item">
+                <div class="step-v-number">3</div>
+                <div class="step-v-content">
+                  <h4>Kerro ID-koodi</h4>
+                  <p>Lue sovelluksen näytöllä näkyvä 9-numeroinen <strong>ID-koodi</strong> DigiKaveri-auttajallesi puhelimessa.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="safety-indicator">
+              <i data-lucide="lock"></i>
+              <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="security-note" style="margin-top: 30px;">
+          <i data-lucide="info"></i>
+          <p>
+            <strong>Huom:</strong> Jotkut laitteet saattavat pyytää asentamaan lisäosan (Add-On) täyttä etähallintaa varten. Hyväksy tämä asennus, jos sovellus sitä ehdottaa.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="modern-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="logo footer-logo">
+            <img
+              src="svg/logo.svg"
+              alt="DigiKaveri Logo"
+              loading="lazy"
+              width="110"
+              height="110"
+            />
+          </div>
+          <p class="footer-desc">
+            Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
+            koko Suomeen.
+          </p>
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Pikalinkit</h4>
+          <ul>
+            <li><a href="/index.html#home">Etusivu</a></li>
+            <li><a href="/etayhteys.html">Etätuki-opas</a></li>
+            <li><a href="/index.html#solutions">Palvelut</a></li>
+            <li><a href="/index.html#pricing">Hinnasto</a></li>
+            <li><a href="/index.html#team">Tiimi</a></li>
+            <li><a href="/index.html#faq">Usein kysyttyä</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Yhteystiedot</h4>
+          <ul>
+            <li>
+              <i data-lucide="phone"></i>
+              <a href="tel:+3584578338105">045 7833 8105</a>
+            </li>
+            <li>
+              <i data-lucide="mail"></i>
+              <a href="mailto:info@digikaveri.com">info@digikaveri.com</a>
+            </li>
+            <li>
+              <i data-lucide="map-pin"></i>
+              <span>Uusimaa, Suomi</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024&ndash;2025 DigiKaveri. Kaikki oikeudet pidätetään.</p>
+      </div>
+    </footer>
+
+    <div class="mobile-sticky-bar">
+      <a href="tel:+3584578338105" class="btn-sticky-call">
+        <i data-lucide="phone"></i> Soita
+      </a>
+      <a
+        href="https://wa.me/3584578338105"
+        class="btn-sticky-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          width="20"
+          height="20"
+          fill="currentColor"
+        >
+          <path
+            d="M380.9 97.1C339 55.1 283.2 32 223.9 32 100.3 32 0 132.3 0 256c0 39.6 10.3 78.1 30 112L0 480l114.5-30c32.7 17.8 69.4 27.2 107.1 27.2 123.6 0 224-100.3 224-224 0-59.2-23.1-114.9-65.1-156.9zM224 446.2c-33.6 0-66.6-8.5-95.6-24.5l-6.8-4.1-71.1 18.6 19-69.3-4.5-7.1c-17.5-27.8-26.7-59.8-26.7-92.7 0-98 79.8-177.8 177.8-177.8 47.5 0 92 18.5 125.6 52.1 33.5 33.6 52 78.2 52 125.7 0 98-79.9 177.8-177.8 177.8zm98.4-134.4c-5.4-2.7-32-15.8-37-17.6-5-1.8-8.5-2.7-12.1 2.7-3.6 5.4-13.9 17.6-17.1 21.2-3.1 3.6-6.3 4.1-11.7 1.4-5.4-2.7-22.9-8.5-43.6-26.9-16.1-14.3-27-32.1-30.1-37.5-3.1-5.4-.3-8.3 2.5-11.1 2.5-2.5 5.4-6.3 8.1-9.5 2.7-3.2 3.6-5.4 5.4-9 1.8-3.6.9-6.8-.5-9.5-1.4-2.7-12.1-29.2-16.6-40.1-4.4-10.6-8.9-9.1-12.1-9.2-3.1-.1-6.7-.1-10.3-.1-3.6 0-9.5 1.4-14.4 6.8-5 5.4-18.9 18.5-18.9 45.1s19.4 52.3 22.1 55.9c2.7 3.6 38.1 58.1 92.3 81.6 12.9 5.6 23 9 30.8 11.5 13 4.1 24.8 3.5 34.2 2.1 10.5-1.5 32-13.1 36.5-25.1 4.5-12 4.5-22.3 3.1-24.4-1.3-2.1-4.9-3.4-10.3-6.1z"
+          />
+        </svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <a href="/index.html#contact-detailed" class="floating-support-btn">
+      <i data-lucide="message-circle"></i>
+      <span>Kysy apua</span>
+    </a>
+
+    <div id="cookieBanner" class="cookie-banner">
+      <div class="cookie-content">
+        <p>
+          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta. Nämä
+          auttavat meitä kehittämään palveluamme.
+        </p>
+        <button id="acceptCookies" class="btn-submit cookie-btn">
+          Hyväksy
+        </button>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/guide.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script>
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    </script>
+  </body>
+</html>

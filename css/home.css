@@ -1091,29 +1091,7 @@
   padding: 40px;
 }
 
-.floating-support-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: var(--primary);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-  z-index: 999;
-  transition:
-    transform 0.3s,
-    background 0.3s;
-}
-.floating-support-btn:hover {
-  transform: translateY(-5px) scale(1.05);
-  background: var(--primary-dark);
-}
+
 
 @media (max-width: 1080px) {
   .hero-centered {
@@ -1204,9 +1182,7 @@
   .badge {
     padding: 8px 12px;
   }
-  .floating-support-btn {
-    display: none;
-  }
+
 }
 
 html {

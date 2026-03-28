@@ -25,7 +25,10 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.digikaveri.com" />
-    <meta property="og:image" content="https://www.digikaveri.com/images/logo.png" />
+    <meta
+      property="og:image"
+      content="https://www.digikaveri.com/images/logo.png"
+    />
 
     <link rel="alternate" hreflang="fi" href="https://www.digikaveri.com/" />
     <link rel="alternate" hreflang="en" href="https://www.digikaveri.com/en/" />
@@ -112,7 +115,7 @@
       <div class="nav-content">
         <div class="logo">
           <img
-            src="images/logo.svg"
+            src="svg/logo.svg"
             alt="DigiKaveri Logo"
             width="180"
             height="55"
@@ -130,15 +133,37 @@
           <a href="#solutions" class="nav-link"
             ><i data-lucide="grid"></i> <span>Palvelut</span></a
           >
+          <div class="nav-item-dropdown">
+            <a href="etayhteys.html" class="dropdown-trigger">
+              <i data-lucide="monitor"></i> <span>Etätuki</span>
+              <i data-lucide="chevron-down"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="etayhteys.html#pc-guide" class="nav-link"
+                ><i data-lucide="monitor"></i> PC-ohjeet</a
+              >
+              <a href="etayhteys.html#mobile-guide" class="nav-link"
+                ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
+              >
+            </div>
+          </div>
           <a href="#pricing" class="nav-link"
             ><i data-lucide="credit-card"></i> <span>Hinnasto</span></a
           >
-          <a href="#team" class="nav-link"
-            ><i data-lucide="users"></i> <span>Tiimi</span></a
-          >
-          <a href="#faq" class="nav-link"
-            ><i data-lucide="help-circle"></i> <span>Usein kysyttyä</span></a
-          >
+          <div class="nav-item-dropdown">
+            <button class="dropdown-trigger">
+              <i data-lucide="info"></i> <span>Info</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#team" class="nav-link"
+                ><i data-lucide="users"></i> Tiimi</a
+              >
+              <a href="#faq" class="nav-link"
+                ><i data-lucide="help-circle"></i> FAQ</a
+              >
+            </div>
+          </div>
           <a href="#contact-detailed" class="nav-link"
             ><i data-lucide="mail"></i> <span>Yhteystiedot</span></a
           >
@@ -170,18 +195,40 @@
         <a href="#home" class="mobile-nav-link active"
           ><i data-lucide="home"></i> Etusivu</a
         >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="monitor"></i> Etätuki</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="etayhteys.html#pc-guide" class="mobile-nav-link"
+              ><i data-lucide="monitor"></i> PC-ohjeet</a
+            >
+            <a href="etayhteys.html#mobile-guide" class="mobile-nav-link"
+              ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
+            >
+          </div>
+        </div>
         <a href="#solutions" class="mobile-nav-link"
           ><i data-lucide="grid"></i> Palvelut</a
         >
         <a href="#pricing" class="mobile-nav-link"
           ><i data-lucide="credit-card"></i> Hinnasto</a
         >
-        <a href="#team" class="mobile-nav-link"
-          ><i data-lucide="users"></i> Tiimi</a
-        >
-        <a href="#faq" class="mobile-nav-link"
-          ><i data-lucide="help-circle"></i> FAQ</a
-        >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="info"></i> Info</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="#team" class="mobile-nav-link"
+              ><i data-lucide="users"></i> Tiimi</a
+            >
+            <a href="#faq" class="mobile-nav-link"
+              ><i data-lucide="help-circle"></i> Usein kysyttyä</a
+            >
+          </div>
+        </div>
         <a href="#contact-detailed" class="mobile-nav-link"
           ><i data-lucide="mail"></i> Yhteystiedot</a
         >
@@ -307,6 +354,20 @@
       </div>
     </header>
 
+    <section class="quick-guide-cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="cta-text">
+            <i data-lucide="info"></i>
+            <p>Lue täältä ohje miten saamme yhteyden laitteeseesi</p>
+          </div>
+          <a href="etayhteys.html" class="btn-cta-link">
+            Miten etätuki toimii? <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <div class="trust-bar container">
       <p>Tuemme kaikkia yleisimpiä laitteita ja merkkejä</p>
       <div class="trust-logos">
@@ -326,7 +387,7 @@
         >
         <h2>Mitä asiakkaamme sanovat</h2>
         <p>
-          Sadat tyytyväiset asiakkaat Vantaalla ja ympäri Suomen luottavat
+          Sadat tyytyväiset asiakkaat Uudellamaalla ja ympäri Suomen luottavat
           meihin.
         </p>
       </div>
@@ -347,7 +408,7 @@
             <div class="author-avatar">M</div>
             <div class="author-info">
               <h4>Matti K.</h4>
-              <span>Vantaa</span>
+              <span>Uusimaa</span>
             </div>
           </div>
         </div>
@@ -389,7 +450,7 @@
             <div class="author-avatar">A</div>
             <div class="author-info">
               <h4>Anna H.</h4>
-              <span>Vantaa</span>
+              <span>Uusimaa</span>
             </div>
           </div>
         </div>
@@ -524,7 +585,7 @@
         <h2>Mitä voimme tehdä puolestasi?</h2>
         <p>
           Tarjoamme luotettavaa apua etänä koko Suomeen ja paikan päällä
-          Vantaalla.
+          Uudellamaalla.
         </p>
       </div>
 
@@ -937,7 +998,7 @@
         <div class="footer-brand">
           <div class="logo footer-logo">
             <img
-              src="images/logo.svg"
+              src="svg/logo.svg"
               alt="DigiKaveri Logo"
               loading="lazy"
               width="110"
@@ -949,11 +1010,49 @@
             koko Suomeen.
           </p>
           <div class="footer-social">
-            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-facebook"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
             </a>
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-instagram"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
             </a>
           </div>
         </div>
@@ -962,6 +1061,7 @@
           <h4>Pikalinkit</h4>
           <ul>
             <li><a href="#home">Etusivu</a></li>
+            <li><a href="etayhteys.html">Etätuki-opas</a></li>
             <li><a href="#solutions">Palvelut</a></li>
             <li><a href="#pricing">Hinnasto</a></li>
             <li><a href="#team">Tiimi</a></li>
@@ -1040,7 +1140,7 @@
     <script src="js/accessibility.js"></script>
     <script>
       // Ensure icons are created after dynamic content or slow loads
-      if (typeof lucide !== 'undefined') {
+      if (typeof lucide !== "undefined") {
         lucide.createIcons();
       }
     </script>

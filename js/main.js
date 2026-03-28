@@ -59,7 +59,21 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollSpy();
   initSmoothNav();
   initMobileNav();
+  initMobileDropdowns();
+  initRemoteDownload();
 });
+
+function initMobileDropdowns() {
+  const triggers = document.querySelectorAll(".mobile-dropdown-trigger");
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const parent = trigger.parentElement;
+      if (parent) {
+        parent.classList.toggle("active");
+      }
+    });
+  });
+}
 
 function initCookieBanner() {
   const banner = document.getElementById("cookieBanner");
@@ -147,17 +161,68 @@ function initFAQ() {
 
 function initScrollSpy() {
   const sections = document.querySelectorAll(".section-spy");
-  const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
+  const navLinks = document.querySelectorAll(".nav-menu .nav-link, .mobile-nav-content .mobile-nav-link");
+  const dropdownTriggers = document.querySelectorAll(".dropdown-trigger");
+
   window.addEventListener("scroll", () => {
     let current = "";
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
       if (scrollY >= sectionTop - 150) current = section.getAttribute("id");
     });
+
     navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`)
-        link.classList.add("active");
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      const isHashLink = href.includes("#");
+      const linkTarget = isHashLink ? href.split("#")[1] : "";
+
+      if (isHashLink && linkTarget) {
+        // Highlighting for specific section links (PC-ohjeet, Mobiili-ohjeet)
+        if (current && linkTarget === current) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      } else {
+        // Highlighting for main pages (Etusivu, Palvelut, etc.)
+        // Only mark active if we ARE on that page AND no sub-section of that page is currently the 'current' spy target
+        // (This prevents parent and child from both being blue if we only want one)
+        const isCurrentPage = window.location.pathname.endsWith(href) || 
+                            (href === "/index.html" && window.location.pathname === "/") ||
+                            (href === "/etayhteys.html" && window.location.pathname.includes("etayhteys.html"));
+        
+        if (isCurrentPage) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      }
+    });
+
+    // Update parent triggers (Desktop & Mobile)
+    const allTriggers = document.querySelectorAll(".dropdown-trigger, .mobile-dropdown-trigger");
+    allTriggers.forEach((trigger) => {
+      const parent = trigger.closest(".nav-item-dropdown, .mobile-nav-item-dropdown");
+      const menu = parent ? parent.querySelector(".dropdown-menu, .mobile-dropdown-menu") : null;
+      
+      if (menu) {
+        const hasActiveChild = menu.querySelector("a.active");
+        if (hasActiveChild) {
+          trigger.classList.add("active");
+        } else {
+          // If no active child, check if the trigger itself represents the current page
+          const triggerHref = trigger.getAttribute("href");
+          const isTriggerPage = triggerHref && (window.location.pathname.includes(triggerHref) && !triggerHref.includes("#"));
+          
+          if (isTriggerPage) {
+            trigger.classList.add("active");
+          } else {
+            trigger.classList.remove("active");
+          }
+        }
+      }
     });
   });
 }
@@ -186,4 +251,27 @@ function initMobileNav() {
       document.body.style.overflow = "";
     });
   });
+}
+
+function initRemoteDownload() {
+  const downloadBtn = document.getElementById("tv-download-btn");
+  const osText = document.getElementById("os-text");
+  if (!downloadBtn) return;
+
+  const platform = window.navigator.platform;
+  const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K', 'Mac'];
+  
+  let os = "Windows";
+  let url = "https://download.teamviewer.com/download/TeamViewerQS.exe";
+
+  if (macosPlatforms.indexOf(platform) !== -1 || /Mac/.test(navigator.userAgent)) {
+    os = "Mac OS";
+    url = "https://download.teamviewer.com/download/TeamViewerQS.dmg";
+  }
+
+  downloadBtn.href = url;
+  if (osText) {
+    const isEn = window.location.pathname.includes("/en/");
+    osText.textContent = isEn ? `Version: ${os} (QuickSupport)` : `Versio: ${os} (QuickSupport)`;
+  }
 }

@@ -25,11 +25,18 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.digikaveri.com/en/" />
-    <meta property="og:image" content="https://www.digikaveri.com/images/logo.png" />
+    <meta
+      property="og:image"
+      content="https://www.digikaveri.com/images/logo.png"
+    />
 
     <link rel="alternate" hreflang="fi" href="https://www.digikaveri.com/" />
     <link rel="alternate" hreflang="en" href="https://www.digikaveri.com/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.digikaveri.com/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.digikaveri.com/"
+    />
 
     <link rel="icon" type="image/x-icon" href="../images/Ico.ico" />
     <link rel="apple-touch-icon" href="../images/logo.png" />
@@ -74,28 +81,32 @@
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [{
-          "@type": "Question",
-          "name": "What if the issue cannot be fixed?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Then we do not charge anything for the visit. We have a strict \"No fix, no fee\" guarantee."
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What if the issue cannot be fixed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Then we do not charge anything for the visit. We have a strict \"No fix, no fee\" guarantee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I pay with cash?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We prefer card payments or invoices (by email or paper to your home). You get plenty of time with 14 days payment term on invoices."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is remote support safe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes it is. The connection is one-time only. Once you close the remote support software, we cannot access your device without new permission."
+            }
           }
-        }, {
-          "@type": "Question",
-          "name": "Can I pay with cash?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We prefer card payments or invoices (by email or paper to your home). You get plenty of time with 14 days payment term on invoices."
-          }
-        }, {
-          "@type": "Question",
-          "name": "Is remote support safe?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes it is. The connection is one-time only. Once you close the remote support software, we cannot access your device without new permission."
-          }
-        }]
+        ]
       }
     </script>
   </head>
@@ -103,7 +114,12 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <img src="../images/logo.svg" alt="DigiKaveri Logo" width="180" height="55" />
+          <img
+            src="../svg/logo.svg"
+            alt="DigiKaveri Logo"
+            width="180"
+            height="55"
+          />
         </div>
 
         <button class="mobile-menu-btn" aria-label="Open menu">
@@ -117,15 +133,37 @@
           <a href="#solutions" class="nav-link"
             ><i data-lucide="grid"></i> <span>Services</span></a
           >
+          <div class="nav-item-dropdown">
+            <a href="remote-support.html" class="dropdown-trigger">
+              <i data-lucide="monitor"></i> <span>Remote Support</span>
+              <i data-lucide="chevron-down"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="remote-support.html#pc-guide" class="nav-link"
+                ><i data-lucide="monitor"></i> PC Guide</a
+              >
+              <a href="remote-support.html#mobile-guide" class="nav-link"
+                ><i data-lucide="smartphone"></i> Mobile Guide</a
+              >
+            </div>
+          </div>
           <a href="#pricing" class="nav-link"
             ><i data-lucide="credit-card"></i> <span>Pricing</span></a
           >
-          <a href="#team" class="nav-link"
-            ><i data-lucide="users"></i> <span>Team</span></a
-          >
-          <a href="#faq" class="nav-link"
-            ><i data-lucide="help-circle"></i> <span>FAQ</span></a
-          >
+          <div class="nav-item-dropdown">
+            <button class="dropdown-trigger">
+              <i data-lucide="info"></i> <span>Info</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#team" class="nav-link"
+                ><i data-lucide="users"></i> Team</a
+              >
+              <a href="#faq" class="nav-link"
+                ><i data-lucide="help-circle"></i> FAQ</a
+              >
+            </div>
+          </div>
           <a href="#contact-detailed" class="nav-link"
             ><i data-lucide="mail"></i> <span>Contact</span></a
           >
@@ -157,18 +195,40 @@
         <a href="#home" class="mobile-nav-link active"
           ><i data-lucide="home"></i> Home</a
         >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="monitor"></i> Remote Support</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="remote-support.html#pc-guide" class="mobile-nav-link"
+              ><i data-lucide="monitor"></i> PC Guide</a
+            >
+            <a href="remote-support.html#mobile-guide" class="mobile-nav-link"
+              ><i data-lucide="smartphone"></i> Mobile Guide</a
+            >
+          </div>
+        </div>
         <a href="#solutions" class="mobile-nav-link"
           ><i data-lucide="grid"></i> Services</a
         >
         <a href="#pricing" class="mobile-nav-link"
           ><i data-lucide="credit-card"></i> Pricing</a
         >
-        <a href="#team" class="mobile-nav-link"
-          ><i data-lucide="users"></i> Team</a
-        >
-        <a href="#faq" class="mobile-nav-link"
-          ><i data-lucide="help-circle"></i> FAQ</a
-        >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="info"></i> Info</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="#team" class="mobile-nav-link"
+              ><i data-lucide="users"></i> Team</a
+            >
+            <a href="#faq" class="mobile-nav-link"
+              ><i data-lucide="help-circle"></i> FAQ</a
+            >
+          </div>
+        </div>
         <a href="#contact-detailed" class="mobile-nav-link"
           ><i data-lucide="mail"></i> Contact</a
         >
@@ -294,6 +354,20 @@
       </div>
     </header>
 
+    <section class="quick-guide-cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="cta-text">
+            <i data-lucide="info"></i>
+            <p>Read here how we connect to your device</p>
+          </div>
+          <a href="remote-support.html" class="btn-cta-link">
+            How does remote support work? <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <div class="trust-bar container">
       <p>We support all major devices and brands</p>
       <div class="trust-logos">
@@ -313,7 +387,8 @@
         >
         <h2>What our customers say</h2>
         <p>
-          Hundreds of satisfied customers in Vantaa and across Finland trust us.
+          Hundreds of satisfied customers in Uusimaa and across Finland trust
+          us.
         </p>
       </div>
       <div class="reviews-grid">
@@ -333,7 +408,7 @@
             <div class="author-avatar">M</div>
             <div class="author-info">
               <h4>Matti K.</h4>
-              <span>Vantaa</span>
+              <span>Uusimaa</span>
             </div>
           </div>
         </div>
@@ -375,7 +450,7 @@
             <div class="author-avatar">A</div>
             <div class="author-info">
               <h4>Anna H.</h4>
-              <span>Vantaa</span>
+              <span>Uusimaa</span>
             </div>
           </div>
         </div>
@@ -515,7 +590,7 @@
         <h2>What can we do for you?</h2>
         <p>
           We offer reliable remote help across Finland, and on-site help in
-          Vantaa.
+          Uusimaa.
         </p>
       </div>
 
@@ -685,10 +760,9 @@
             <h3>Chatani</h3>
             <span class="role">Founder & IT Expert</span>
             <p>
-              Chatani is a calm and reliable IT professional who solves
-              everyday device problems with a smile. His goal is to make
-              technology easy and understandable for everyone, without the
-              complicated jargon.
+              Chatani is a calm and reliable IT professional who solves everyday
+              device problems with a smile. His goal is to make technology easy
+              and understandable for everyone, without the complicated jargon.
             </p>
           </div>
         </div>
@@ -922,18 +996,62 @@
       <div class="footer-container">
         <div class="footer-brand">
           <div class="logo footer-logo">
-            <img src="../images/logo.svg" alt="DigiKaveri Logo" loading="lazy" width="110" height="110" />
+            <img
+              src="../svg/logo.svg"
+              alt="DigiKaveri Logo"
+              loading="lazy"
+              width="110"
+              height="110"
+            />
           </div>
           <p class="footer-desc">
             Reliable home and small business IT support in Uusimaa and remotely
             across Finland.
           </p>
           <div class="footer-social">
-            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-facebook"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
             </a>
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-instagram"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
             </a>
           </div>
         </div>
@@ -942,6 +1060,7 @@
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#home">Home</a></li>
+            <li><a href="remote-support.html">Remote Support Guide</a></li>
             <li><a href="#solutions">Services</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#team">Team</a></li>
@@ -1006,7 +1125,8 @@
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
         <p>
-          We use cookies to improve your browsing experience. These help us improve our service.
+          We use cookies to improve your browsing experience. These help us
+          improve our service.
         </p>
         <button id="acceptCookies" class="btn-submit cookie-btn">Accept</button>
       </div>
@@ -1016,7 +1136,7 @@
     <script src="../js/contact.js"></script>
     <script src="../js/accessibility.js"></script>
     <script>
-      if (typeof lucide !== 'undefined') {
+      if (typeof lucide !== "undefined") {
         lucide.createIcons();
       }
     </script>

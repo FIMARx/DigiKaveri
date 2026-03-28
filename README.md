@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="images/logo.svg" width="220" alt="DigiKaveri Logo">
+<img src="svg/logo.svg" width="220" alt="DigiKaveri Logo">
 
 # DigiKaveri — Arjen IT-apu
 
