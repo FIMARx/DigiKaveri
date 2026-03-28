@@ -179,51 +179,120 @@
           <p>We use TeamViewer, the world's most popular and secure remote support software.</p>
         </div>
 
-        <div class="pc-guide-card">
-          <div class="pc-download-info">
-            <img src="../svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
-            <h3>Download the App</h3>
-            <p>Click the button below to download the small utility program.</p>
-            <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" id="tv-download-btn" class="btn-download-tv">
-              <i data-lucide="download"></i> Download TeamViewer QS
-            </a>
-            <p id="os-text" style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
-              Version: Windows (QuickSupport)
-            </p>
-            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
-              <p style="font-size: 0.9rem; color: var(--text-light);">
-                Want to download a different version or visit the official site?
-              </p>
-              <a href="https://www.teamviewer.com/en/download/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-                TeamViewer Official Download Page <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+        <!-- PC Platform Pill Switcher -->
+        <div class="platform-pill-switcher">
+          <button id="windows-switch" class="btn-platform-switch switcher-btn active" aria-label="Switch to Windows instructions">
+            <img src="../svg/windows.svg" alt="Windows" />
+            <span>Windows</span>
+          </button>
+          <button id="mac-switch" class="btn-platform-switch switcher-btn" aria-label="Switch to macOS instructions">
+            <img src="../svg/apple.svg" alt="macOS" />
+            <span>macOS</span>
+          </button>
+        </div>
+
+        <div id="pc-guide-container">
+          <!-- Windows Card -->
+          <div id="windows-card-pc" class="pc-guide-card platform-card">
+            <div class="pc-download-info">
+              <div class="guide-detected-badge">
+                <i data-lucide="check-circle"></i> Automatically detected
+              </div>
+              <img src="../svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
+              <h3>Download the App</h3>
+              <p>Click the button below to download the small utility program.</p>
+              <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" class="btn-download-tv">
+                <i data-lucide="download"></i> Download TeamViewer QS
               </a>
+              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+                Version: Windows (QuickSupport)
+              </p>
+              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                <p style="font-size: 0.9rem; color: var(--text-light);">
+                  Want to download a different version or visit the official site?
+                </p>
+                <a href="https://www.teamviewer.com/en/download/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+                  TeamViewer Official Download Page <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="step-v-container">
+              <div class="step-v-item">
+                <div class="step-v-number">1</div>
+                <div class="step-v-content">
+                  <h4>Open the downloaded file</h4>
+                  <p>Click the <strong>TeamViewerQS.exe</strong> file at the bottom of your browser or in your Downloads folder.</p>
+                </div>
+              </div>
+              <div class="step-v-item">
+                <div class="step-v-number">2</div>
+                <div class="step-v-content">
+                  <h4>Allow the app to run</h4>
+                  <p>If Windows asks "Do you want to allow this app to make changes?", answer <strong>Yes</strong>.</p>
+                </div>
+              </div>
+              <div class="step-v-item">
+                <div class="step-v-number">3</div>
+                <div class="step-v-content">
+                  <h4>Provide ID and Password</h4>
+                  <p>A window will open showing an <strong>ID</strong> and <strong>Password</strong>. Provide these to your DigiKaveri assistant over the phone.</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="step-v-container">
-            <div class="step-v-item">
-              <div class="step-v-number">1</div>
-              <div class="step-v-content">
-                <h4>Open the downloaded file</h4>
-                <p>Click the <strong>TeamViewerQS.exe</strong> file at the bottom of your browser or in your Downloads folder.</p>
+          <!-- Mac Card -->
+          <div id="mac-card-pc" class="pc-guide-card platform-card hidden">
+            <div class="pc-download-info">
+              <div class="guide-detected-badge">
+                <i data-lucide="check-circle"></i> Automatically detected
+              </div>
+              <img src="../svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
+              <h3>Download the App</h3>
+              <p>Click the button below to download the small utility program.</p>
+              <a href="https://download.teamviewer.com/download/TeamViewerQS.dmg" class="btn-download-tv">
+                <i data-lucide="download"></i> Download TeamViewer (Mac)
+              </a>
+              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+                Version: macOS (QuickSupport)
+              </p>
+              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                <p style="font-size: 0.9rem; color: var(--text-light);">
+                  Want to download a different version or visit the official site?
+                </p>
+                <a href="https://www.teamviewer.com/en/download/mac-os/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+                  TeamViewer Official Download Page <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                </a>
               </div>
             </div>
-            <div class="step-v-item">
-              <div class="step-v-number">2</div>
-              <div class="step-v-content">
-                <h4>Allow the app to run</h4>
-                <p>If Windows asks "Do you want to allow this app to make changes?", answer <strong>Yes</strong>.</p>
+
+            <div class="step-v-container">
+              <div class="step-v-item">
+                <div class="step-v-number">1</div>
+                <div class="step-v-content">
+                  <h4>Open and launch</h4>
+                  <p>Click <strong>TeamViewerQS.dmg</strong> and launch the app. If macOS asks "Are you sure you want to open?", answer <strong>Open</strong>.</p>
+                </div>
               </div>
-            </div>
-            <div class="step-v-item">
-              <div class="step-v-number">3</div>
-              <div class="step-v-content">
-                <h4>Provide ID and Password</h4>
-                <p>A window will open showing an <strong>ID</strong> and <strong>Password</strong>. Provide these to your DigiKaveri assistant over the phone.</p>
+              <div class="step-v-item">
+                <div class="step-v-number">2</div>
+                <div class="step-v-content">
+                  <h4>Grant permissions</h4>
+                  <p>macOS requires remote management permissions. In the app, click <strong>"Review System Access"</strong> and allow DigiKaveri: <em>Accessibility</em> and <em>Screen Recording</em>.</p>
+                </div>
+              </div>
+              <div class="step-v-item">
+                <div class="step-v-number">3</div>
+                <div class="step-v-content">
+                  <h4>Provide ID and Password</h4>
+                  <p>A window will open showing an <strong>ID</strong> and <strong>Password</strong>. Provide these to your DigiKaveri assistant over the phone.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
 
         <div class="security-note">
           <i data-lucide="shield-check"></i>
@@ -458,11 +527,21 @@
 
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
+        <div class="cookie-header">
+          <i data-lucide="cookie"></i>
+          <h4>Cookie Settings</h4>
+        </div>
         <p>
-          We use cookies to improve your browsing experience. These help us
-          improve our service.
+          We use cookies to improve your browsing experience and better understand how our site is used.
         </p>
-        <button id="acceptCookies" class="btn-submit cookie-btn">Accept</button>
+        <div class="cookie-actions">
+          <button id="acceptCookies" class="cookie-btn">
+            Accept All
+          </button>
+          <button id="rejectCookies" class="cookie-btn cookie-btn-secondary">
+            Only Essential
+          </button>
+        </div>
       </div>
     </div>
 

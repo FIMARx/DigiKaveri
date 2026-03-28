@@ -1,73 +1,111 @@
 /**
  * DigiKaveri - Smart Guide Detection & Toggling
- * Handles automatic platform detection and manual switching for the mobile guide.
+ * Handles automatic platform detection and manual switching for both PC and mobile guides.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Mobile Guide Elements ---
     const androidCard = document.getElementById('android-card');
     const iosCard = document.getElementById('ios-card');
     const btnAndroid = document.getElementById('android-switch');
     const btnIos = document.getElementById('ios-switch');
-    
-    if (!androidCard || !iosCard || !btnAndroid || !btnIos) return;
+
+    // --- PC Guide Elements ---
+    const windowsCard = document.getElementById('windows-card-pc');
+    const macCard = document.getElementById('mac-card-pc');
+    const btnWindows = document.getElementById('windows-switch');
+    const btnMac = document.getElementById('mac-switch');
 
     // Detect platform
     const ua = navigator.userAgent.toLowerCase();
     const isIOS = /iphone|ipad|ipod/.test(ua);
     const isAndroid = /android/.test(ua);
+    const isWindows = /win/.test(ua);
+    const isMac = /mac/.test(ua) && !isIOS;
 
-    let currentPlatform = 'android';
+    // --- Mobile Switcher Logic ---
+    if (androidCard && iosCard && btnAndroid && btnIos) {
+        let currentMobilePlatform = 'android';
 
-    const updateUI = (platform) => {
-        if (platform === 'ios') {
-            androidCard.classList.add('hidden');
-            iosCard.classList.remove('hidden');
-            btnIos.classList.add('active');
-            btnAndroid.classList.remove('active');
-        } else {
-            iosCard.classList.add('hidden');
-            androidCard.classList.remove('hidden');
-            btnAndroid.classList.add('active');
-            btnIos.classList.remove('active');
-        }
-        
-        // Refresh icons if lucide is available
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        const updateMobileUI = (platform) => {
+            if (platform === 'ios') {
+                androidCard.classList.add('hidden');
+                iosCard.classList.remove('hidden');
+                btnIos.classList.add('active');
+                btnAndroid.classList.remove('active');
+            } else {
+                iosCard.classList.add('hidden');
+                androidCard.classList.remove('hidden');
+                btnAndroid.classList.add('active');
+                btnIos.classList.remove('active');
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            currentMobilePlatform = platform;
+        };
 
-        currentPlatform = platform;
-    };
+        // Initial Mobile Detection
+        if (isIOS) updateMobileUI('ios');
+        else updateMobileUI('android');
 
-    // Initial Detection
-    if (isIOS) {
-        updateUI('ios');
-    } else if (isAndroid) {
-        updateUI('android');
-    } else {
-        // Desktop or other: default to Android
-        updateUI('android');
+        btnAndroid.addEventListener('click', () => {
+            if (currentMobilePlatform !== 'android') {
+                updateMobileUI('android');
+                scrollToGuide('mobile-guide');
+            }
+        });
+
+        btnIos.addEventListener('click', () => {
+            if (currentMobilePlatform !== 'ios') {
+                updateMobileUI('ios');
+                scrollToGuide('mobile-guide');
+            }
+        });
     }
 
-    // Manual Click Handlers
-    btnAndroid.addEventListener('click', () => {
-        if (currentPlatform !== 'android') {
-            updateUI('android');
-            scrollToGuide();
-        }
-    });
+    // --- PC Switcher Logic ---
+    if (windowsCard && macCard && btnWindows && btnMac) {
+        let currentPCPlatform = 'windows';
 
-    btnIos.addEventListener('click', () => {
-        if (currentPlatform !== 'ios') {
-            updateUI('ios');
-            scrollToGuide();
-        }
-    });
+        const updatePCUI = (platform) => {
+            if (platform === 'mac') {
+                windowsCard.classList.add('hidden');
+                macCard.classList.remove('hidden');
+                btnMac.classList.add('active');
+                btnWindows.classList.remove('active');
+            } else {
+                macCard.classList.add('hidden');
+                windowsCard.classList.remove('hidden');
+                btnWindows.classList.add('active');
+                btnMac.classList.remove('active');
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            currentPCPlatform = platform;
+        };
 
-    const scrollToGuide = () => {
-        const guideSection = document.getElementById('mobile-guide');
+        // Initial PC Detection
+        if (isMac) updatePCUI('mac');
+        else updatePCUI('windows');
+
+        btnWindows.addEventListener('click', () => {
+            if (currentPCPlatform !== 'windows') {
+                updatePCUI('windows');
+                scrollToGuide('pc-guide');
+            }
+        });
+
+        btnMac.addEventListener('click', () => {
+            if (currentPCPlatform !== 'mac') {
+                updatePCUI('mac');
+                scrollToGuide('pc-guide');
+            }
+        });
+    }
+
+    const scrollToGuide = (sectionId) => {
+        const guideSection = document.getElementById(sectionId);
         if (guideSection && window.innerWidth < 1024) {
             guideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 });
+

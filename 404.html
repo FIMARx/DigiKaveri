@@ -72,7 +72,8 @@
         "serviceArea": {
           "@type": "GeoCircle",
           "geoMidpoint": {
-            "@type": "GeoCoordinates",
+            "@type": "GeoCoordinates"
+          }
         }
       }
     </script>
@@ -294,10 +295,21 @@
 
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
+        <div class="cookie-header">
+          <i data-lucide="cookie"></i>
+          <h4>Evästeasetukset</h4>
+        </div>
         <p>
-          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta. Nämä auttavat meitä kehittämään palveluamme.
+          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta ja ymmärtääksemme paremmin, miten sivustoamme käytetään.
         </p>
-        <button id="acceptCookies" class="btn-submit cookie-btn">Hyväksy</button>
+        <div class="cookie-actions">
+          <button id="acceptCookies" class="cookie-btn">
+            Hyväksy kaikki
+          </button>
+          <button id="rejectCookies" class="cookie-btn cookie-btn-secondary">
+            Vain välttämättömät
+          </button>
+        </div>
       </div>
     </div>
 

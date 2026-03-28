@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothNav();
   initMobileNav();
   initMobileDropdowns();
-  initRemoteDownload();
 });
 
 function initMobileDropdowns() {
@@ -78,6 +77,7 @@ function initMobileDropdowns() {
 function initCookieBanner() {
   const banner = document.getElementById("cookieBanner");
   const acceptBtn = document.getElementById("acceptCookies");
+  const rejectBtn = document.getElementById("rejectCookies");
 
   if (!banner || !acceptBtn) return;
 
@@ -92,6 +92,13 @@ function initCookieBanner() {
     banner.classList.remove("show");
     loadAnalytics();
   });
+
+  if (rejectBtn) {
+    rejectBtn.addEventListener("click", () => {
+      localStorage.setItem("cookiesAccepted", "false");
+      banner.classList.remove("show");
+    });
+  }
 }
 
 function loadAnalytics() {
@@ -251,27 +258,4 @@ function initMobileNav() {
       document.body.style.overflow = "";
     });
   });
-}
-
-function initRemoteDownload() {
-  const downloadBtn = document.getElementById("tv-download-btn");
-  const osText = document.getElementById("os-text");
-  if (!downloadBtn) return;
-
-  const platform = window.navigator.platform;
-  const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K', 'Mac'];
-  
-  let os = "Windows";
-  let url = "https://download.teamviewer.com/download/TeamViewerQS.exe";
-
-  if (macosPlatforms.indexOf(platform) !== -1 || /Mac/.test(navigator.userAgent)) {
-    os = "Mac OS";
-    url = "https://download.teamviewer.com/download/TeamViewerQS.dmg";
-  }
-
-  downloadBtn.href = url;
-  if (osText) {
-    const isEn = window.location.pathname.includes("/en/");
-    osText.textContent = isEn ? `Version: ${os} (QuickSupport)` : `Versio: ${os} (QuickSupport)`;
-  }
 }

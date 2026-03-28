@@ -179,51 +179,120 @@
           <p>Käytämme maailman suosituinta ja turvallisinta TeamViewer-ohjelmaa.</p>
         </div>
 
-        <div class="pc-guide-card">
-          <div class="pc-download-info">
-            <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
-            <h3>Lataa ohjelma</h3>
-            <p>Klikkaa alla olevaa painiketta ladataksesi pienen apuohjelman.</p>
-            <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" id="tv-download-btn" class="btn-download-tv">
-              <i data-lucide="download"></i> Lataa TeamViewer QS
-            </a>
-            <p id="os-text" style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
-              Versio: Windows (QuickSupport)
-            </p>
-            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
-              <p style="font-size: 0.9rem; color: var(--text-light);">
-                Haluatko ladata muun version tai vierailla virallisella sivustolla?
-              </p>
-              <a href="https://www.teamviewer.com/fi/lataa/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-                TeamViewerin virallinen lataussivu <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+        <!-- PC Platform Pill Switcher -->
+        <div class="platform-pill-switcher">
+          <button id="windows-switch" class="btn-platform-switch switcher-btn active" aria-label="Vaihda Windows-ohjeisiin">
+            <img src="svg/windows.svg" alt="Windows" />
+            <span>Windows</span>
+          </button>
+          <button id="mac-switch" class="btn-platform-switch switcher-btn" aria-label="Vaihda macOS-ohjeisiin">
+            <img src="svg/apple.svg" alt="macOS" />
+            <span>macOS</span>
+          </button>
+        </div>
+
+        <div id="pc-guide-container">
+          <!-- Windows Card -->
+          <div id="windows-card-pc" class="pc-guide-card platform-card">
+            <div class="pc-download-info">
+              <div class="guide-detected-badge">
+                <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+              </div>
+              <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
+              <h3>Lataa ohjelma</h3>
+              <p>Klikkaa alla olevaa painiketta ladataksesi pienen apuohjelman.</p>
+              <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" class="btn-download-tv">
+                <i data-lucide="download"></i> Lataa TeamViewer QS
               </a>
+              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+                Versio: Windows (QuickSupport)
+              </p>
+              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                <p style="font-size: 0.9rem; color: var(--text-light);">
+                  Haluatko ladata muun version tai vierailla virallisella sivustolla?
+                </p>
+                <a href="https://www.teamviewer.com/fi/lataa/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="step-v-container">
+              <div class="step-v-item">
+                <div class="step-v-number">1</div>
+                <div class="step-v-content">
+                  <h4>Avaa ladattu tiedosto</h4>
+                  <p>Klikkaa ladattua <strong>TeamViewerQS.exe</strong>-tiedostoa selaimesi alareunasta tai Lataukset-kansiosta.</p>
+                </div>
+              </div>
+              <div class="step-v-item">
+                <div class="step-v-number">2</div>
+                <div class="step-v-content">
+                  <h4>Salli ohjelman suoritus</h4>
+                  <p>Jos Windows kysyy "Haluatko sallia tämän sovelluksen tekevän muutoksia?", vastaa <strong>Kyllä</strong>.</p>
+                </div>
+              </div>
+              <div class="step-v-item">
+                <div class="step-v-number">3</div>
+                <div class="step-v-content">
+                  <h4>Kerro ID ja salasana</h4>
+                  <p>Eteesi aukeaa ikkuna, jossa näkyy <strong>ID-tunnus</strong> ja <strong>Salasana</strong>. Kerro nämä DigiKaveri-auttajallesi puhelimessa.</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="step-v-container">
-            <div class="step-v-item">
-              <div class="step-v-number">1</div>
-              <div class="step-v-content">
-                <h4>Avaa ladattu tiedosto</h4>
-                <p>Klikkaa ladattua <strong>TeamViewerQS.exe</strong>-tiedostoa selaimesi alareunasta tai Lataukset-kansiosta.</p>
+          <!-- Mac Card -->
+          <div id="mac-card-pc" class="pc-guide-card platform-card hidden">
+            <div class="pc-download-info">
+              <div class="guide-detected-badge">
+                <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+              </div>
+              <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
+              <h3>Lataa ohjelma</h3>
+              <p>Klikkaa alla olevaa painiketta ladataksesi pienen apuohjelman.</p>
+              <a href="https://download.teamviewer.com/download/TeamViewerQS.dmg" class="btn-download-tv">
+                <i data-lucide="download"></i> Lataa TeamViewer (Mac)
+              </a>
+              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+                Versio: macOS (QuickSupport)
+              </p>
+              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                <p style="font-size: 0.9rem; color: var(--text-light);">
+                  Haluatko ladata muun version tai vierailla virallisella sivustolla?
+                </p>
+                <a href="https://www.teamviewer.com/fi/lataa/mac-os/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                </a>
               </div>
             </div>
-            <div class="step-v-item">
-              <div class="step-v-number">2</div>
-              <div class="step-v-content">
-                <h4>Salli ohjelman suoritus</h4>
-                <p>Jos Windows kysyy "Haluatko sallia tämän sovelluksen tekevän muutoksia?", vastaa <strong>Kyllä</strong>.</p>
+
+            <div class="step-v-container">
+              <div class="step-v-item">
+                <div class="step-v-number">1</div>
+                <div class="step-v-content">
+                  <h4>Avaa ja käynnistä</h4>
+                  <p>Klikkaa <strong>TeamViewerQS.dmg</strong> ja käynnistä ohjelma. Jos macOS kysyy "Haluatko varmasti avata?", vastaa <strong>Avaa</strong>.</p>
+                </div>
               </div>
-            </div>
-            <div class="step-v-item">
-              <div class="step-v-number">3</div>
-              <div class="step-v-content">
-                <h4>Kerro ID ja salasana</h4>
-                <p>Eteesi aukeaa ikkuna, jossa näkyy <strong>ID-tunnus</strong> ja <strong>Salasana</strong>. Kerro nämä DigiKaveri-auttajallesi puhelimessa.</p>
+              <div class="step-v-item">
+                <div class="step-v-number">2</div>
+                <div class="step-v-content">
+                  <h4>Myönnä käyttöoikeudet</h4>
+                  <p>macOS vaatii oikeudet etähallintaan. Klikkaa ohjelmassa <strong>"Review System Access"</strong> ja salli DigiKaverille: <em>Accessibility</em> ja <em>Screen Recording</em>.</p>
+                </div>
+              </div>
+              <div class="step-v-item">
+                <div class="step-v-number">3</div>
+                <div class="step-v-content">
+                  <h4>Kerro ID ja salasana</h4>
+                  <p>Eteesi aukeaa ikkuna, jossa näkyy <strong>ID-tunnus</strong> ja <strong>Salasana</strong>. Kerro nämä DigiKaveri-auttajallesi puhelimessa.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
 
         <div class="security-note">
           <i data-lucide="shield-check"></i>
@@ -459,13 +528,21 @@
 
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
+        <div class="cookie-header">
+          <i data-lucide="cookie"></i>
+          <h4>Evästeasetukset</h4>
+        </div>
         <p>
-          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta. Nämä
-          auttavat meitä kehittämään palveluamme.
+          Käytämme evästeitä parantaaksemme sivuston käyttökokemusta ja ymmärtääksemme paremmin, miten sivustoamme käytetään.
         </p>
-        <button id="acceptCookies" class="btn-submit cookie-btn">
-          Hyväksy
-        </button>
+        <div class="cookie-actions">
+          <button id="acceptCookies" class="cookie-btn">
+            Hyväksy kaikki
+          </button>
+          <button id="rejectCookies" class="cookie-btn cookie-btn-secondary">
+            Vain välttämättömät
+          </button>
+        </div>
       </div>
     </div>
 

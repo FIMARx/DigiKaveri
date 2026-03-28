@@ -58,7 +58,8 @@
         "serviceArea": {
           "@type": "GeoCircle",
           "geoMidpoint": {
-            "@type": "GeoCoordinates",
+            "@type": "GeoCoordinates"
+          }
         }
       }
     </script>
@@ -289,10 +290,21 @@
 
     <div id="cookieBanner" class="cookie-banner">
       <div class="cookie-content">
+        <div class="cookie-header">
+          <i data-lucide="cookie"></i>
+          <h4>Cookie Settings</h4>
+        </div>
         <p>
-          We use cookies to improve your browsing experience. These help us improve our service.
+          We use cookies to improve your browsing experience and better understand how our site is used.
         </p>
-        <button id="acceptCookies" class="btn-submit cookie-btn">Accept</button>
+        <div class="cookie-actions">
+          <button id="acceptCookies" class="cookie-btn">
+            Accept All
+          </button>
+          <button id="rejectCookies" class="cookie-btn cookie-btn-secondary">
+            Only Essential
+          </button>
+        </div>
       </div>
     </div>
 
