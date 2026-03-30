@@ -264,6 +264,64 @@
                 </div>
               </div>
             </div>
+
+            <!-- Detailed Help Section (Windows) -->
+            <div class="detailed-help-section">
+              <button class="help-toggle-btn" data-target="help-content-windows" aria-expanded="false">
+                 <i data-lucide="chevron-down"></i>
+                 <span>Tarvitsetko vielä tarkempia ohjeita?</span>
+              </button>
+
+              <div id="help-content-windows" class="help-content-wrapper">
+                <div class="help-sub-switcher">
+                  <button class="help-tab-btn active" data-view="video">
+                    <i data-lucide="play-circle"></i> Video-opas
+                  </button>
+                  <button class="help-tab-btn" data-view="manual">
+                    <i data-lucide="book-open"></i> Manuaali
+                  </button>
+                </div>
+
+                <div class="help-grid">
+                  <!-- Video View -->
+                  <div class="help-view active" data-view-id="video">
+                    <div class="help-card">
+                      <h3><i data-lucide="play-circle"></i> Video-opas (Windows)</h3>
+                      <div class="video-container">
+                        <div class="video-placeholder">
+                          <i data-lucide="video"></i>
+                          <p>Tässä videossa näytämme Windows-latauksen<br>ja TeamViewerin käynnistämisen.</p>
+                          <p><small>(Video tulossa pian)</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Manual View -->
+                  <div class="help-view" data-view-id="manual">
+                    <div class="help-card">
+                      <h3><i data-lucide="book-open"></i> Windows-manuaali</h3>
+                      <div class="visual-steps">
+                        <div class="visual-step">
+                          <div class="v-step-number">1</div>
+                          <div class="v-step-text">
+                            <h4>Lataus ja suoritus</h4>
+                            <p>Klikkaa .exe-tiedostoa selaimen alalaidasta ja vastaa "Kyllä" Windowsin kyselyyn.</p>
+                          </div>
+                        </div>
+                        <div class="visual-step">
+                          <div class="v-step-number">2</div>
+                          <div class="v-step-text">
+                            <h4>ID ja salasana</h4>
+                            <p>Kun TeamViewer aukeaa, lue meille numero-sarjat ID ja Salasana kohdista.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Mac Card -->
@@ -311,6 +369,64 @@
                 <div class="step-v-content">
                   <h4>Kerro ID ja salasana</h4>
                   <p>Eteesi aukeaa ikkuna, jossa näkyy <strong>ID-tunnus</strong> ja <strong>Salasana</strong>. Kerro nämä DigiKaveri-auttajallesi puhelimessa.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Help Section (Mac) -->
+            <div class="detailed-help-section">
+              <button class="help-toggle-btn" data-target="help-content-mac" aria-expanded="false">
+                 <i data-lucide="chevron-down"></i>
+                 <span>Tarvitsetko vielä tarkempia ohjeita?</span>
+              </button>
+
+              <div id="help-content-mac" class="help-content-wrapper">
+                <div class="help-sub-switcher">
+                  <button class="help-tab-btn active" data-view="video">
+                    <i data-lucide="play-circle"></i> Video-opas
+                  </button>
+                  <button class="help-tab-btn" data-view="manual">
+                    <i data-lucide="book-open"></i> Manuaali
+                  </button>
+                </div>
+
+                <div class="help-grid">
+                  <!-- Video View -->
+                  <div class="help-view active" data-view-id="video">
+                    <div class="help-card">
+                      <h3><i data-lucide="play-circle"></i> Video-opas (Mac)</h3>
+                      <div class="video-container">
+                        <div class="video-placeholder">
+                          <i data-lucide="video"></i>
+                          <p>Tässä videossa näytämme Mac-latauksen<br>ja käyttöoikeuksien sallimisen.</p>
+                          <p><small>(Video tulossa pian)</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Manual View -->
+                  <div class="help-view" data-view-id="manual">
+                    <div class="help-card">
+                      <h3><i data-lucide="book-open"></i> Mac-manuaali</h3>
+                      <div class="visual-steps">
+                        <div class="visual-step">
+                          <div class="v-step-number">1</div>
+                          <div class="v-step-text">
+                            <h4>Salli oikeudet</h4>
+                            <p>Mene Järjestelmäasetukset -> Suojaus ja yksityisyys -> Esteettömyys ja rasti TeamViewerQS.</p>
+                          </div>
+                        </div>
+                        <div class="visual-step">
+                          <div class="v-step-number">2</div>
+                          <div class="v-step-text">
+                            <h4>ID ja salasana</h4>
+                            <p>Mac-sovellus näyttää ID:n ja salasanan aivan kuten Windowsissakin.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -395,6 +511,57 @@
               <i data-lucide="lock"></i>
               <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
             </div>
+
+            <!-- Detailed Help Section (Android) -->
+            <div class="detailed-help-section">
+              <button class="help-toggle-btn" data-target="help-content-android" aria-expanded="false">
+                 <i data-lucide="chevron-down"></i>
+                 <span>Tarvitsetko vielä tarkempia ohjeita?</span>
+              </button>
+
+              <div id="help-content-android" class="help-content-wrapper">
+                <div class="help-sub-switcher">
+                  <button class="help-tab-btn active" data-view="video">
+                    <i data-lucide="play-circle"></i> Video-opas
+                  </button>
+                  <button class="help-tab-btn" data-view="manual">
+                    <i data-lucide="book-open"></i> Manuaali
+                  </button>
+                </div>
+
+                <div class="help-grid">
+                  <!-- Video View -->
+                  <div class="help-view active" data-view-id="video">
+                    <div class="help-card">
+                      <h3><i data-lucide="play-circle"></i> Video-opas (Android)</h3>
+                      <div class="video-container">
+                        <div class="video-placeholder">
+                          <i data-lucide="video"></i>
+                          <p>Tässä videossa näytämme QuickSupportin<br>asennuksen Play-kaupasta.</p>
+                          <p><small>(Video tulossa pian)</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Manual View -->
+                  <div class="help-view" data-view-id="manual">
+                    <div class="help-card">
+                      <h3><i data-lucide="book-open"></i> Android-manuaali</h3>
+                      <div class="visual-steps">
+                        <div class="visual-step">
+                          <div class="v-step-number">1</div>
+                          <div class="v-step-text">
+                            <h4>Salli lisäosat</h4>
+                            <p>Jotkut puhelimet (kuten Samsung) kysyvät lupaa asentaa "Add-On". Salli tämä, se on turvallista.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- iOS Card (Hidden by default, shown if detected or toggled) -->
@@ -446,6 +613,57 @@
               <i data-lucide="lock"></i>
               <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
             </div>
+
+            <!-- Detailed Help Section (iOS) -->
+            <div class="detailed-help-section">
+              <button class="help-toggle-btn" data-target="help-content-ios" aria-expanded="false">
+                 <i data-lucide="chevron-down"></i>
+                 <span>Tarvitsetko vielä tarkempia ohjeita?</span>
+              </button>
+
+              <div id="help-content-ios" class="help-content-wrapper">
+                <div class="help-sub-switcher">
+                  <button class="help-tab-btn active" data-view="video">
+                    <i data-lucide="play-circle"></i> Video-opas
+                  </button>
+                  <button class="help-tab-btn" data-view="manual">
+                    <i data-lucide="book-open"></i> Manuaali
+                  </button>
+                </div>
+
+                <div class="help-grid">
+                  <!-- Video View -->
+                  <div class="help-view active" data-view-id="video">
+                    <div class="help-card">
+                      <h3><i data-lucide="play-circle"></i> Video-opas (iOS)</h3>
+                      <div class="video-container">
+                        <div class="video-placeholder">
+                          <i data-lucide="video"></i>
+                          <p>Tässä videossa näytämme näytön jaon<br>käynnistämisen iPhonella.</p>
+                          <p><small>(Video tulossa pian)</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Manual View -->
+                  <div class="help-view" data-view-id="manual">
+                    <div class="help-card">
+                      <h3><i data-lucide="book-open"></i> iOS-manuaali</h3>
+                      <div class="visual-steps">
+                        <div class="visual-step">
+                          <div class="v-step-number">1</div>
+                          <div class="v-step-text">
+                            <h4>Salli näytön tallennus</h4>
+                            <p>Kun sovellus pyytää, klikkaa "Aloita lähetys" ja valitse TeamViewer.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -454,6 +672,7 @@
           <p>
             <strong>Huom:</strong> Jotkut laitteet saattavat pyytää asentamaan lisäosan (Add-On) täyttä etähallintaa varten. Hyväksy tämä asennus, jos sovellus sitä ehdottaa.
           </p>
+        </div>
         </div>
       </section>
     </main>

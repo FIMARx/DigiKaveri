@@ -107,5 +107,49 @@ document.addEventListener('DOMContentLoaded', () => {
             guideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
-});
 
+    // --- Detailed Help Toggle Logic (Support for multiple toggles) ---
+    const helpToggles = document.querySelectorAll('.help-toggle-btn');
+
+    helpToggles.forEach(btn => {
+        const targetId = btn.getAttribute('data-target');
+        const helpContent = document.getElementById(targetId);
+
+        if (btn && helpContent) {
+            btn.addEventListener('click', () => {
+                const isActive = btn.classList.toggle('active');
+                helpContent.classList.toggle('active');
+                btn.setAttribute('aria-expanded', isActive);
+                if (isActive) {
+                    setTimeout(() => {
+                        const rect = helpContent.getBoundingClientRect();
+                        if (rect.bottom > window.innerHeight) {
+                            helpContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }, 300);
+                }
+            });
+        }
+    });
+
+    // --- Help Sub-tabs Switching logic (Video vs Manual) ---
+    const subTabs = document.querySelectorAll('.help-tab-btn');
+    
+    subTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const container = tab.closest('.help-content-wrapper');
+            const targetView = tab.getAttribute('data-view');
+            
+            // 1. Update buttons in this container
+            container.querySelectorAll('.help-tab-btn').forEach(btn => btn.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // 2. Update views in this container
+            container.querySelectorAll('.help-view').forEach(view => view.classList.remove('active'));
+            const viewToShow = container.querySelector(`.help-view[data-view-id="${targetView}"]`);
+            if (viewToShow) viewToShow.classList.add('active');
+            
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    });
+});
