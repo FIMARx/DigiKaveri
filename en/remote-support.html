@@ -54,7 +54,7 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <a href="/en/" style="text-decoration: none; display: flex; align-items: center;">
+          <a href="/en/" class="flex-center">
             <img
               src="../svg/logo.svg"
               alt="DigiKaveri Logo"
@@ -228,15 +228,15 @@
               <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" class="btn-download-tv">
                 <i data-lucide="download"></i> Download TeamViewer QS
               </a>
-              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+              <p class="download-note">
                 Version: Windows (QuickSupport)
               </p>
-              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
-                <p style="font-size: 0.9rem; color: var(--text-light);">
+              <div class="official-download-container">
+                <p class="official-download-text">
                   Want to download a different version or visit the official site?
                 </p>
-                <a href="https://www.teamviewer.com/en/download/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-                  TeamViewer Official Download Page <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                <a href="https://www.teamviewer.com/en/download/windows/" target="_blank" rel="noopener noreferrer" class="official-download-link">
+                  TeamViewer Official Download Page <i data-lucide="external-link" class="lucide-sm"></i>
                 </a>
               </div>
             </div>
@@ -287,34 +287,88 @@
                   <div class="help-view active" data-view-id="video">
                     <div class="help-card">
                       <h3><i data-lucide="play-circle"></i> Video Guide (Windows)</h3>
-                      <div class="video-container">
-                        <div class="video-placeholder">
-                          <i data-lucide="video"></i>
-                          <p>In this video, we show the Windows download<br>and starting TeamViewer.</p>
-                          <p><small>(Video coming soon)</small></p>
+                    <div class="video-container">
+                      <div class="video-overlay" onclick="this.classList.add('hidden'); const v = this.nextElementSibling; v.setAttribute('controls', 'true'); v.play();">
+                        <div class="play-circle-btn">
+                          <i data-lucide="play"></i>
                         </div>
                       </div>
+                      <video width="100%" poster="../images/guide/pc/win/1.png" class="rounded-12">
+                        <source src="../videos/pc guide/Win guide EN.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Manual View -->
-                  <div class="help-view" data-view-id="manual">
-                    <div class="help-card">
-                      <h3><i data-lucide="book-open"></i> Windows Manual</h3>
-                      <div class="visual-steps">
-                        <div class="visual-step">
+                <!-- Manual View -->
+                <div class="help-view" data-view-id="manual">
+                  <div class="help-card">
+                    <h3><i data-lucide="book-open"></i> Windows Visual Manual</h3>
+                    <div class="visual-steps">
+                      <!-- Step 1 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
                           <div class="v-step-number">1</div>
                           <div class="v-step-text">
-                            <h4>Download and run</h4>
-                            <p>Click the .exe file in your browser and select "Yes" to the Windows prompt.</p>
+                            <h4>Click Download TeamViewer QS</h4>
+                            <p>First, click on Download TeamViewer QS to start the download.</p>
                           </div>
                         </div>
-                        <div class="visual-step">
+                        <div class="v-step-image" data-hint="Click to zoom">
+                          <img src="../images/guide/pc/win/1.png" alt="Step 1: Download TeamViewer" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 2 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
                           <div class="v-step-number">2</div>
                           <div class="v-step-text">
-                            <h4>ID and Password</h4>
-                            <p>Once TeamViewer opens, read us the ID and Password numbers.</p>
+                            <h4>Open the App</h4>
+                            <p>Once the app has downloaded, open it from the bottom of your browser or your downloads folder.</p>
                           </div>
+                        </div>
+                        <div class="v-step-image" data-hint="Click to zoom">
+                          <img src="../images/guide/pc/win/2.png" alt="Step 2: Open File" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 3 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
+                          <div class="v-step-number">3</div>
+                          <div class="v-step-text">
+                            <h4>Accept Terms</h4>
+                            <p>Once the app has opened, accept the terms and conditions by clicking "Accept" or "Continue".</p>
+                          </div>
+                        </div>
+                        <div class="v-step-image" data-hint="Click to zoom">
+                          <img src="../images/guide/pc/win/3.png" alt="Step 3: Accept Terms" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 4 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
+                          <div class="v-step-number">4</div>
+                          <div class="v-step-text">
+                            <h4>ID and Password</h4>
+                            <p>After that, you will see an ID and a password on your screen. Share these with Digikaveri Support so we can assist you via remote connection!</p>
+                          </div>
+                        </div>
+                        <div class="v-step-image">
+                          <img src="../images/guide/pc/win/4.png" alt="Step 4: Provide ID and Password" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 5 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
+                          <div class="v-step-number">5</div>
+                          <div class="v-step-text">
+                            <h4>Connection Successful</h4>
+                            <p>When a small TeamViewer window appears in the bottom right corner of your screen, it means Digikaveri has successfully connected to your computer. Your support person will take it from here.</p>
+                          </div>
+                        </div>
+                        <div class="v-step-image">
+                          <img src="../images/guide/pc/win/5.png" alt="Step 5: Connection Established" loading="lazy">
                         </div>
                       </div>
                     </div>
@@ -323,6 +377,7 @@
               </div>
             </div>
           </div>
+        </div>
 
           <!-- Mac Card -->
           <div id="mac-card-pc" class="pc-guide-card platform-card hidden">
@@ -336,15 +391,15 @@
               <a href="https://download.teamviewer.com/download/TeamViewerQS.dmg" class="btn-download-tv">
                 <i data-lucide="download"></i> Download TeamViewer (Mac)
               </a>
-              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+              <p class="download-note">
                 Version: macOS (QuickSupport)
               </p>
-              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
-                <p style="font-size: 0.9rem; color: var(--text-light);">
+              <div class="official-download-container">
+                <p class="official-download-text">
                   Want to download a different version or visit the official site?
                 </p>
-                <a href="https://www.teamviewer.com/en/download/mac-os/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-                  TeamViewer Official Download Page <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                <a href="https://www.teamviewer.com/en/download/mac-os/" target="_blank" rel="noopener noreferrer" class="official-download-link">
+                  TeamViewer Official Download Page <i data-lucide="external-link" class="lucide-sm"></i>
                 </a>
               </div>
             </div>
@@ -478,7 +533,7 @@
                 <div class="step-v-content">
                   <h4>Download the app</h4>
                   <p>Click the button below to download the <strong>QuickSupport</strong> app from the Google Play Store.</p>
-                  <div style="margin-top: 15px;">
+                  <div class="mt-15">
                     <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" class="btn-app-store-pill btn-android-green">
                       <img src="../svg/googleplay.svg" alt="Google Play" width="22" height="22" />
                         <div class="store-info">
@@ -580,7 +635,7 @@
                 <div class="step-v-content">
                   <h4>Download the app</h4>
                   <p>Click the button below to download the <strong>QuickSupport</strong> app from the App Store.</p>
-                  <div style="margin-top: 15px;">
+                  <div class="mt-15">
                     <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" class="btn-app-store-pill btn-apple-black">
                       <img src="../svg/appstore.svg" alt="App Store" width="22" height="22" />
                       <div class="store-info">
@@ -667,7 +722,7 @@
           </div>
         </div>
 
-        <div class="security-note" style="margin-top: 30px;">
+        <div class="security-note mt-30">
           <i data-lucide="info"></i>
           <p>
             <strong>Note:</strong> Some devices might ask to install an Add-On for full remote control. Please accept the installation if prompted by the app.
@@ -785,6 +840,11 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div id="imageLightbox" class="lightbox-modal">
+      <div class="lightbox-close">&times;</div>
+      <img src="" alt="Zoomed image">
     </div>
 
     <script src="../js/main.js"></script>

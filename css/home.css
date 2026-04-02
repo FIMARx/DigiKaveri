@@ -1087,6 +1087,31 @@
   color: var(--primary);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
+
+/* Utilities for WhatsApp */
+.icon-box.whatsapp-bg {
+  background: #25d366 !important;
+  color: white !important;
+}
+
+.text-whatsapp {
+  color: #25d366 !important;
+  font-weight: 600 !important;
+  text-decoration: none;
+}
+.text-whatsapp:hover {
+  text-decoration: underline;
+}
+
+.lucide-sm {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.items-center { align-items: center !important; }
+.icon-placeholder { width: 48px; height: 48px; color: #ccc !important; }
+.link-underline { color: inherit; text-decoration: underline; }
+
 .contact-form-box {
   padding: 40px;
 }

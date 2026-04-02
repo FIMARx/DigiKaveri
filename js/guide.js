@@ -149,7 +149,47 @@ document.addEventListener('DOMContentLoaded', () => {
             const viewToShow = container.querySelector(`.help-view[data-view-id="${targetView}"]`);
             if (viewToShow) viewToShow.classList.add('active');
             
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
         });
     });
+
+    // --- Image Zoom (Lightbox) Logic ---
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = lightbox ? lightbox.querySelector('img') : null;
+    const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+    const manualImages = document.querySelectorAll('.v-step-image img');
+
+    if (lightbox && lightboxImg && manualImages.length > 0) {
+        manualImages.forEach(img => {
+            img.parentElement.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            setTimeout(() => { lightboxImg.src = ''; }, 300); // Clear src after animation
+        };
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                closeLightbox();
+            }
+        });
+
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closeLightbox);
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+    }
 });

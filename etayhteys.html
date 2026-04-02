@@ -54,7 +54,7 @@
     <nav class="glass-nav">
       <div class="nav-content">
         <div class="logo">
-          <a href="/" style="text-decoration: none; display: flex; align-items: center;">
+          <a href="/" class="flex-center">
             <img
               src="svg/logo.svg"
               alt="DigiKaveri Logo"
@@ -228,15 +228,15 @@
               <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" class="btn-download-tv">
                 <i data-lucide="download"></i> Lataa TeamViewer QS
               </a>
-              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+              <p class="download-note">
                 Versio: Windows (QuickSupport)
               </p>
-              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
-                <p style="font-size: 0.9rem; color: var(--text-light);">
+              <div class="official-download-container">
+                <p class="official-download-text">
                   Haluatko ladata muun version tai vierailla virallisella sivustolla?
                 </p>
-                <a href="https://www.teamviewer.com/fi/lataa/windows/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                <a href="https://www.teamviewer.com/fi/lataa/windows/" target="_blank" rel="noopener noreferrer" class="official-download-link">
+                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" class="lucide-sm"></i>
                 </a>
               </div>
             </div>
@@ -287,34 +287,88 @@
                   <div class="help-view active" data-view-id="video">
                     <div class="help-card">
                       <h3><i data-lucide="play-circle"></i> Video-opas (Windows)</h3>
-                      <div class="video-container">
-                        <div class="video-placeholder">
-                          <i data-lucide="video"></i>
-                          <p>Tässä videossa näytämme Windows-latauksen<br>ja TeamViewerin käynnistämisen.</p>
-                          <p><small>(Video tulossa pian)</small></p>
+                    <div class="video-container">
+                      <div class="video-overlay" onclick="this.classList.add('hidden'); const v = this.nextElementSibling; v.setAttribute('controls', 'true'); v.play();">
+                        <div class="play-circle-btn">
+                          <i data-lucide="play"></i>
                         </div>
                       </div>
+                      <video width="100%" poster="images/guide/pc/win/1.png" class="rounded-12">
+                        <source src="videos/pc guide/Win guide FI.mp4" type="video/mp4">
+                        Selaimesi ei tue videon toistoa.
+                      </video>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Manual View -->
-                  <div class="help-view" data-view-id="manual">
-                    <div class="help-card">
-                      <h3><i data-lucide="book-open"></i> Windows-manuaali</h3>
-                      <div class="visual-steps">
-                        <div class="visual-step">
+                <!-- Manual View -->
+                <div class="help-view" data-view-id="manual">
+                  <div class="help-card">
+                    <h3><i data-lucide="book-open"></i> Windows-manuaali</h3>
+                    <div class="visual-steps">
+                      <!-- Step 1 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
                           <div class="v-step-number">1</div>
                           <div class="v-step-text">
-                            <h4>Lataus ja suoritus</h4>
-                            <p>Klikkaa .exe-tiedostoa selaimen alalaidasta ja vastaa "Kyllä" Windowsin kyselyyn.</p>
+                            <h4>Klikkaa Lataa TeamViewer QS</h4>
+                            <p>Klikkaa ensin Lataa TeamViewer QS -painiketta aloittaaksesi latauksen.</p>
                           </div>
                         </div>
-                        <div class="visual-step">
+                        <div class="v-step-image" data-hint="Klikkaa suurentaaksesi">
+                          <img src="images/guide/pc/win/1.png" alt="Vaihe 1: Lataa TeamViewer" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 2 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
                           <div class="v-step-number">2</div>
                           <div class="v-step-text">
-                            <h4>ID ja salasana</h4>
-                            <p>Kun TeamViewer aukeaa, lue meille numero-sarjat ID ja Salasana kohdista.</p>
+                            <h4>Avaa sovellus</h4>
+                            <p>Kun sovellus on latautunut, avaa se selaimesi alalaidasta tai lataukset-kansiosta.</p>
                           </div>
+                        </div>
+                        <div class="v-step-image" data-hint="Klikkaa suurentaaksesi">
+                          <img src="images/guide/pc/win/2.png" alt="Vaihe 2: Avaa tiedosto" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 3 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
+                          <div class="v-step-number">3</div>
+                          <div class="v-step-text">
+                            <h4>Hyväksy käyttöehdot</h4>
+                            <p>Lue ja hyväksy TeamViewerin käyttöehdot klikkaamalla "Hyväksy" tai "Jatka".</p>
+                          </div>
+                        </div>
+                        <div class="v-step-image" data-hint="Klikkaa suurentaaksesi">
+                          <img src="images/guide/pc/win/3.png" alt="Vaihe 3: Hyväksy ehdot" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 4 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
+                          <div class="v-step-number">4</div>
+                          <div class="v-step-text">
+                            <h4>ID-tunnus ja salasana</h4>
+                            <p>Sen jälkeen näet ruudulla ID:n ja salasanan. Ilmoita ne Digikaveri-tuelle, niin pääsemme auttamaan sinua etäyhteydellä!</p>
+                          </div>
+                        </div>
+                        <div class="v-step-image">
+                          <img src="images/guide/pc/win/4.png" alt="Vaihe 4: Kerro ID ja salasana" loading="lazy">
+                        </div>
+                      </div>
+                      <!-- Step 5 -->
+                      <div class="visual-step">
+                        <div class="v-step-header">
+                          <div class="v-step-number">5</div>
+                          <div class="v-step-text">
+                            <h4>Yhteys on valmis</h4>
+                            <p>Kun ruudun oikeaan alareunaan ilmestyy pieni TeamViewer-ikkuna, Digikaveri on saanut yhteyden koneeseesi. Tukihenkilö auttaa sinua tästä eteenpäin.</p>
+                          </div>
+                        </div>
+                        <div class="v-step-image">
+                          <img src="images/guide/pc/win/5.png" alt="Vaihe 5: Yhteys luotu" loading="lazy">
                         </div>
                       </div>
                     </div>
@@ -323,6 +377,7 @@
               </div>
             </div>
           </div>
+        </div>
 
           <!-- Mac Card -->
           <div id="mac-card-pc" class="pc-guide-card platform-card hidden">
@@ -336,15 +391,15 @@
               <a href="https://download.teamviewer.com/download/TeamViewerQS.dmg" class="btn-download-tv">
                 <i data-lucide="download"></i> Lataa TeamViewer (Mac)
               </a>
-              <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+              <p class="download-note">
                 Versio: macOS (QuickSupport)
               </p>
-              <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
-                <p style="font-size: 0.9rem; color: var(--text-light);">
+              <div class="official-download-container">
+                <p class="official-download-text">
                   Haluatko ladata muun version tai vierailla virallisella sivustolla?
                 </p>
-                <a href="https://www.teamviewer.com/fi/lataa/mac-os/" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                <a href="https://www.teamviewer.com/fi/lataa/mac-os/" target="_blank" rel="noopener noreferrer" class="official-download-link">
+                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" class="lucide-sm"></i>
                 </a>
               </div>
             </div>
@@ -478,7 +533,7 @@
                 <div class="step-v-content">
                   <h4>Lataa sovellus</h4>
                   <p>Klikkaa alla olevaa painiketta ladataksesi <strong>QuickSupport</strong>-sovelluksen Google Play -kaupasta.</p>
-                  <div style="margin-top: 15px;">
+                  <div class="mt-15">
                     <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" class="btn-app-store-pill btn-android-green">
                       <img src="svg/googleplay.svg" alt="Google Play" width="22" height="22" />
                         <div class="store-info">
@@ -580,7 +635,7 @@
                 <div class="step-v-content">
                   <h4>Lataa sovellus</h4>
                   <p>Klikkaa alla olevaa painiketta ladataksesi <strong>QuickSupport</strong>-sovelluksen App Storesta.</p>
-                  <div style="margin-top: 15px;">
+                  <div class="mt-15">
                     <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" class="btn-app-store-pill btn-apple-black">
                       <img src="svg/appstore.svg" alt="App Store" width="22" height="22" />
                       <div class="store-info">
@@ -667,7 +722,7 @@
           </div>
         </div>
 
-        <div class="security-note" style="margin-top: 30px;">
+        <div class="security-note mt-30">
           <i data-lucide="info"></i>
           <p>
             <strong>Huom:</strong> Jotkut laitteet saattavat pyytää asentamaan lisäosan (Add-On) täyttä etähallintaa varten. Hyväksy tämä asennus, jos sovellus sitä ehdottaa.
@@ -787,6 +842,11 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div id="imageLightbox" class="lightbox-modal">
+      <div class="lightbox-close">&times;</div>
+      <img src="" alt="Suurennettu kuva">
     </div>
 
     <script src="js/main.js"></script>
