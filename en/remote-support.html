@@ -847,7 +847,30 @@
       <img src="" alt="Zoomed image">
     </div>
 
+    <!-- Service Closed Modal -->
+    <div id="statusModal" class="status-modal-overlay">
+      <div class="status-modal-card">
+        <div class="status-modal-icon">
+          <i data-lucide="clock"></i>
+        </div>
+        <h2 id="modalTitle">Our service is currently closed</h2>
+        <p id="modalDescription">
+          We are open daily from 09:00 to 21:00 (Finnish time). You can still
+          leave a callback request, and we will get back to you tomorrow morning!
+        </p>
+        <div class="status-modal-actions">
+          <a href="/en/index.html#contact-detailed" id="modalCallback" class="btn-modal-primary">
+            <i data-lucide="phone-call"></i> Leave a callback request
+          </a>
+          <button id="modalUnderstand" class="btn-modal-secondary">
+            I understand
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="../js/main.js"></script>
+
     <script src="../js/guide.js"></script>
     <script src="../js/contact.js"></script>
     <script src="../js/accessibility.js"></script>

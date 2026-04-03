@@ -1,8 +1,7 @@
 async function checkStatus() {
   const badge = document.getElementById("serviceStatus");
   const text = document.getElementById("statusText");
-  if (!badge || !text) return;
-
+  
   const isEn = window.location.pathname.includes("/en/");
   
   try {
@@ -21,27 +20,99 @@ async function checkStatus() {
     if (data.override === "open") isCurrentlyOpen = true;
     if (data.override === "closed") isCurrentlyOpen = false;
 
-    if (isCurrentlyOpen) {
-      badge.className = "status-part open";
-      text.textContent = isEn ? "Service Open" : (data.messageOpen || "Palvelemme nyt");
-    } else {
-      badge.className = "status-part closed";
-      text.textContent = isEn ? "Closed for today" : (data.messageClosed || "Palvelu suljettu");
+    if (badge && text) {
+      if (isCurrentlyOpen) {
+        badge.className = "status-part open";
+        text.textContent = isEn ? "Service Open" : (data.messageOpen || "Palvelemme nyt");
+      } else {
+        badge.className = "status-part closed";
+        text.textContent = isEn ? "Closed for today" : (data.messageClosed || "Palvelu suljettu");
+      }
     }
+
+    // Initialize modal logic
+    initStatusModal(isCurrentlyOpen);
+
   } catch (error) {
     console.error("Status check error:", error);
     // Fallback to offline auto schedule
     const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
     const hour = finlandTime.getHours();
-    if (hour >= 9 && hour < 21) {
-      badge.className = "status-part open";
-      text.textContent = isEn ? "Service Open" : "Palvelemme nyt";
-    } else {
-      badge.className = "status-part closed";
-      text.textContent = isEn ? "Closed for today" : "Palvelu suljettu";
+    let isCurrentlyOpenFallback = (hour >= 9 && hour < 21);
+
+    if (badge && text) {
+      if (isCurrentlyOpenFallback) {
+        badge.className = "status-part open";
+        text.textContent = isEn ? "Service Open" : "Palvelemme nyt";
+      } else {
+        badge.className = "status-part closed";
+        text.textContent = isEn ? "Closed for today" : "Palvelu suljettu";
+      }
     }
+
+    initStatusModal(isCurrentlyOpenFallback);
   }
 }
+
+function initStatusModal(isOpen) {
+  const modal = document.getElementById("statusModal");
+  if (!modal) return;
+
+  // If service is open, ensure modal is hidden and don't proceed
+  if (isOpen) {
+    modal.classList.remove("active");
+    return;
+  }
+
+  // Check if already shown in this session
+  if (sessionStorage.getItem("closedModalShown") === "true") {
+    return;
+  }
+
+  // Show modal with a slight delay for better impact
+  setTimeout(() => {
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }, 1500);
+
+  // Setup button listeners
+  const understandBtn = document.getElementById("modalUnderstand");
+  const callbackBtn = document.getElementById("modalCallback");
+
+  if (understandBtn) {
+    understandBtn.onclick = () => {
+      closeStatusModal(modal);
+    };
+  }
+
+  if (callbackBtn) {
+    callbackBtn.onclick = () => {
+      closeStatusModal(modal);
+      // If it's a button (index.html), scroll to form
+      if (callbackBtn.tagName === "BUTTON") {
+        const contactForm = document.getElementById("contactForm");
+        const targetElement = contactForm ? contactForm.closest(".hero-form-card") : (document.getElementById("contact-detailed") || contactForm);
+        
+        if (targetElement) {
+          setTimeout(() => {
+            targetElement.scrollIntoView({ 
+              behavior: "smooth", 
+              block: "center" 
+            });
+          }, 100);
+        }
+      }
+      // If it's a link (guide pages), the <a> href will handle it
+    };
+  }
+}
+
+function closeStatusModal(modal) {
+  modal.classList.remove("active");
+  document.body.style.overflow = "";
+  sessionStorage.setItem("closedModalShown", "true");
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageDetection();

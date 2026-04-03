@@ -849,7 +849,30 @@
       <img src="" alt="Suurennettu kuva">
     </div>
 
+    <!-- Service Closed Modal -->
+    <div id="statusModal" class="status-modal-overlay">
+      <div class="status-modal-card">
+        <div class="status-modal-icon">
+          <i data-lucide="clock"></i>
+        </div>
+        <h2 id="modalTitle">Palvelumme on tällä hetkellä suljettu</h2>
+        <p id="modalDescription">
+          Palvelemme arkisin ja viikonloppuisin klo 09:00–21:00. Voit kuitenkin
+          jättää soittopyynnön, niin otamme sinuun yhteyttä heti huomenna!
+        </p>
+        <div class="status-modal-actions">
+          <a href="/index.html#contact-detailed" id="modalCallback" class="btn-modal-primary">
+            <i data-lucide="phone-call"></i> Jätä soittopyyntö
+          </a>
+          <button id="modalUnderstand" class="btn-modal-secondary">
+            Selvä, ymmärrän
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="js/main.js"></script>
+
     <script src="js/guide.js"></script>
     <script src="js/contact.js"></script>
     <script src="js/accessibility.js"></script>
