@@ -195,6 +195,69 @@
       </div>
     </nav>
 
+    <div class="mobile-nav-overlay">
+      <div class="mobile-nav-content">
+        <button class="mobile-nav-close" aria-label="Sulje valikko">
+          <i data-lucide="x"></i>
+        </button>
+        <a href="#home" class="mobile-nav-link active"
+          ><i data-lucide="home"></i> Etusivu</a
+        >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="monitor"></i> Etätuki</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="etayhteys.html#pc-guide" class="mobile-nav-link"
+              ><i data-lucide="monitor"></i> PC-ohjeet</a
+            >
+            <a href="etayhteys.html#mobile-guide" class="mobile-nav-link"
+              ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
+            >
+          </div>
+        </div>
+        <a href="#solutions" class="mobile-nav-link"
+          ><i data-lucide="grid"></i> Palvelut</a
+        >
+        <a href="#pricing" class="mobile-nav-link"
+          ><i data-lucide="credit-card"></i> Hinnasto</a
+        >
+        <div class="mobile-nav-item-dropdown">
+          <button class="mobile-dropdown-trigger">
+            <div><i data-lucide="info"></i> Info</div>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="#team" class="mobile-nav-link"
+              ><i data-lucide="users"></i> Tiimi</a
+            >
+            <a href="#faq" class="mobile-nav-link"
+              ><i data-lucide="help-circle"></i> Usein kysyttyä</a
+            >
+            <a href="tietosuoja.html" class="mobile-nav-link"
+              ><i data-lucide="shield-check"></i> Tietosuoja</a
+            >
+            <a href="kayttoehdot.html" class="mobile-nav-link"
+              ><i data-lucide="file-text"></i> Käyttöehdot</a
+            >
+          </div>
+        </div>
+        <a href="#contact-detailed" class="mobile-nav-link"
+          ><i data-lucide="mail"></i> Yhteystiedot</a
+        >
+        <div class="mobile-lang-switcher">
+          <a href="/" class="mobile-lang-btn active">FI</a>
+          <span class="mobile-lang-divider">|</span>
+          <a
+            href="/en/"
+            class="mobile-lang-btn"
+            onclick="localStorage.setItem('userLang', 'en')"
+            >EN</a
+          >
+        </div>
+      </div>
+    </div>
 
     <header id="home" class="hero-centered section-spy" data-aos="fade-up">
       <div class="status-schedule-pill">
