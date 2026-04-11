@@ -9,14 +9,11 @@ async function checkStatus() {
     const response = await fetch(statusUrl);
     const data = await response.json();
 
-    // Calculate current time in Finland
     const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
     const hour = finlandTime.getHours();
     
-    // Auto schedule: 09:00 to 21:00 (hours 9 through 20)
     let isCurrentlyOpen = (hour >= 9 && hour < 21);
 
-    // If json has an explicit manual override, use it instead
     if (data.override === "open") isCurrentlyOpen = true;
     if (data.override === "closed") isCurrentlyOpen = false;
 
@@ -30,12 +27,10 @@ async function checkStatus() {
       }
     }
 
-    // Initialize modal logic
     initStatusModal(isCurrentlyOpen);
 
   } catch (error) {
     console.error("Status check error:", error);
-    // Fallback to offline auto schedule
     const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
     const hour = finlandTime.getHours();
     let isCurrentlyOpenFallback = (hour >= 9 && hour < 21);
@@ -58,24 +53,20 @@ function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
   if (!modal) return;
 
-  // If service is open, ensure modal is hidden and don't proceed
   if (isOpen) {
     modal.classList.remove("active");
     return;
   }
 
-  // Check if already shown in this session
   if (sessionStorage.getItem("closedModalShown") === "true") {
     return;
   }
 
-  // Show modal with a slight delay for better impact
   setTimeout(() => {
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
   }, 1500);
 
-  // Setup button listeners
   const understandBtn = document.getElementById("modalUnderstand");
   const callbackBtn = document.getElementById("modalCallback");
 
@@ -88,7 +79,6 @@ function initStatusModal(isOpen) {
   if (callbackBtn) {
     callbackBtn.onclick = () => {
       closeStatusModal(modal);
-      // If it's a button (index.html), scroll to form
       if (callbackBtn.tagName === "BUTTON") {
         const contactForm = document.getElementById("contactForm");
         const targetElement = contactForm ? contactForm.closest(".hero-form-card") : (document.getElementById("contact-detailed") || contactForm);
@@ -102,7 +92,6 @@ function initStatusModal(isOpen) {
           }, 100);
         }
       }
-      // If it's a link (guide pages), the <a> href will handle it
     };
   }
 }
@@ -113,15 +102,11 @@ function closeStatusModal(modal) {
   sessionStorage.setItem("closedModalShown", "true");
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageDetection();
-  initCookieBanner();
-  
-  if (localStorage.getItem("cookiesAccepted") === "true") {
-    loadAnalytics();
-  }
-  if (typeof lucide !== "undefined") {
+  loadAnalytics();
+
+  if (typeof lucide !== 'undefined') {
     lucide.createIcons();
   }
   checkStatus();
@@ -131,6 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothNav();
   initMobileNav();
   initMobileDropdowns();
+  initFAB();
+  
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      once: true,           
+      offset: 50,           
+      duration: 600,        
+      easing: 'ease-out-cubic', 
+    });
+  }
 });
 
 function initMobileDropdowns() {
@@ -145,46 +140,26 @@ function initMobileDropdowns() {
   });
 }
 
-function initCookieBanner() {
-  const banner = document.getElementById("cookieBanner");
-  const acceptBtn = document.getElementById("acceptCookies");
-  const rejectBtn = document.getElementById("rejectCookies");
-
-  if (!banner || !acceptBtn) return;
-
-  if (!localStorage.getItem("cookiesAccepted")) {
-    setTimeout(() => {
-      banner.classList.add("show");
-    }, 1000);
-  }
-
-  acceptBtn.addEventListener("click", () => {
-    localStorage.setItem("cookiesAccepted", "true");
-    banner.classList.remove("show");
-    loadAnalytics();
-  });
-
-  if (rejectBtn) {
-    rejectBtn.addEventListener("click", () => {
-      localStorage.setItem("cookiesAccepted", "false");
-      banner.classList.remove("show");
-    });
-  }
-}
-
 function loadAnalytics() {
   if (window.analyticsLoaded) return;
   window.analyticsLoaded = true;
 
   const script = document.createElement('script');
-  script.async = true;
+  script.type = 'text/plain';
+  script.setAttribute('data-cookiecategory', 'analytics');
   script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XL8DBWDDMD';
   document.head.appendChild(script);
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){window.dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
+  const inlineScript = document.createElement('script');
+  inlineScript.type = 'text/plain';
+  inlineScript.setAttribute('data-cookiecategory', 'analytics');
+  inlineScript.innerHTML = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
+  `;
+  document.head.appendChild(inlineScript);
 }
 
 function initLanguageDetection() {
@@ -240,7 +215,6 @@ function initFAQ() {
 function initScrollSpy() {
   const sections = document.querySelectorAll(".section-spy");
   const navLinks = document.querySelectorAll(".nav-menu .nav-link, .mobile-nav-content .mobile-nav-link");
-  const dropdownTriggers = document.querySelectorAll(".dropdown-trigger");
 
   window.addEventListener("scroll", () => {
     let current = "";
@@ -257,16 +231,12 @@ function initScrollSpy() {
       const linkTarget = isHashLink ? href.split("#")[1] : "";
 
       if (isHashLink && linkTarget) {
-        // Highlighting for specific section links (PC-ohjeet, Mobiili-ohjeet)
         if (current && linkTarget === current) {
           link.classList.add("active");
         } else {
           link.classList.remove("active");
         }
       } else {
-        // Highlighting for main pages (Etusivu, Palvelut, etc.)
-        // Only mark active if we ARE on that page AND no sub-section of that page is currently the 'current' spy target
-        // (This prevents parent and child from both being blue if we only want one)
         const isCurrentPage = window.location.pathname.endsWith(href) || 
                             (href === "/index.html" && window.location.pathname === "/") ||
                             (href === "/etayhteys.html" && window.location.pathname.includes("etayhteys.html"));
@@ -279,7 +249,6 @@ function initScrollSpy() {
       }
     });
 
-    // Update parent triggers (Desktop & Mobile)
     const allTriggers = document.querySelectorAll(".dropdown-trigger, .mobile-dropdown-trigger");
     allTriggers.forEach((trigger) => {
       const parent = trigger.closest(".nav-item-dropdown, .mobile-nav-item-dropdown");
@@ -290,7 +259,6 @@ function initScrollSpy() {
         if (hasActiveChild) {
           trigger.classList.add("active");
         } else {
-          // If no active child, check if the trigger itself represents the current page
           const triggerHref = trigger.getAttribute("href");
           const isTriggerPage = triggerHref && (window.location.pathname.includes(triggerHref) && !triggerHref.includes("#"));
           
@@ -327,6 +295,51 @@ function initMobileNav() {
     link.addEventListener("click", () => {
       overlay.classList.remove("active");
       document.body.style.overflow = "";
+    });
+  });
+}
+
+function initFAB() {
+  const wrapper = document.getElementById("fabWrapper");
+  const mainBtn = document.getElementById("fabMain");
+  const backdrop = document.getElementById("fabBackdrop");
+  
+  if (!wrapper || !mainBtn) return;
+  
+  const toggleMenu = (forceClose = null) => {
+    const shouldOpen = forceClose === null ? !wrapper.classList.contains("active") : !forceClose;
+    if (shouldOpen) {
+      wrapper.classList.add("active");
+      if (backdrop) backdrop.classList.add("active");
+    } else {
+      wrapper.classList.remove("active");
+      if (backdrop) backdrop.classList.remove("active");
+    }
+  };
+
+  // Toggle on click
+  mainBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+  
+  // Close on click outside (including backdrop)
+  document.addEventListener("click", (e) => {
+    if (wrapper.classList.contains("active") && !wrapper.contains(e.target)) {
+      toggleMenu(true);
+    }
+  });
+
+  if (backdrop) {
+    backdrop.addEventListener("click", () => {
+      toggleMenu(true);
+    });
+  }
+
+  const options = wrapper.querySelectorAll(".fab-option");
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      toggleMenu(true);
     });
   });
 }

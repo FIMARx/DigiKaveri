@@ -246,116 +246,179 @@
   cursor: pointer;
 }
 
-.section-reviews {
-  padding: 80px 20px;
+/* Trustpilot-Style Reviews Widget */
+.trust-header {
+    text-align: center;
+    margin-bottom: 40px;
 }
+
+.trust-main-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.trust-excellent {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.tp-stars-main {
+    display: flex;
+    gap: 4px;
+}
+
+.tp-star-box {
+    width: 32px;
+    height: 32px;
+    background: #00b67a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+.tp-star-box svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    color: white;
+}
+
+.trust-sub-info {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.trust-sub-info a {
+    color: var(--text-dark);
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.trust-sub-info a:hover {
+    text-decoration: underline;
+}
+
+.trust-logo-img {
+    height: 22px;
+    vertical-align: middle;
+}
+
 .reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-}
-.review-card {
-  background: #f8fafc;
-  border-radius: 16px;
-  padding: 30px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-.review-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
-}
-.highlight-review {
-  background: #ffffff;
-  border: 3px solid var(--primary);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
-  transform: translateY(-5px);
-}
-.stars {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 15px;
-}
-.star-filled {
-  color: #f59e0b;
-  fill: #f59e0b;
-  width: 18px;
-  height: 18px;
-}
-.review-text {
-  flex-grow: 1;
-  font-size: 1.05rem;
-  color: var(--text-dark);
-  font-style: italic;
-  line-height: 1.6;
-  margin-bottom: 25px;
-}
-.review-author {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  border-top: 1px solid #e2e8f0;
-  padding-top: 20px;
-}
-.author-avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: #e0f2fe;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.2rem;
-}
-.author-info h4 {
-  margin: 0 0 4px 0;
-  font-size: 1rem;
-  color: var(--text-dark);
-}
-.author-info span {
-  font-size: 0.85rem;
-  color: var(--text-light);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
 }
 
-.reviews-actions {
-  text-align: center;
-  margin-top: 50px;
+.trust-card {
+    background: white;
+    border-radius: 4px; /* Trustpilot uses sharper corners */
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.2s ease;
 }
 
-.reviews-actions .outline-btn {
-  display: inline-flex;
-  width: auto;
-  padding: 14px 32px;
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-  border-radius: 14px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.05rem;
-  transition: all 0.3s ease;
-  align-items: center;
-  gap: 8px;
+.trust-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-.reviews-actions .outline-btn:hover {
-  background: var(--primary);
-  color: white !important;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+.tp-stars-small {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 15px;
 }
 
-.reviews-actions .outline-btn i,
-.reviews-actions .outline-btn svg {
-  color: currentColor;
+.tp-star-box-small {
+    width: 20px;
+    height: 20px;
+    background: #00b67a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1px;
+}
+
+.tp-star-box-small svg {
+    width: 12px;
+    height: 12px;
+    fill: white;
+    color: white;
+}
+
+.trust-card h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.trust-card p {
+    font-size: 1rem;
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.trust-card-footer {
+    border-top: 1px solid #f3f4f6;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trust-author {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+.trust-verified {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.trust-verified svg {
+    width: 14px;
+    height: 14px;
+    color: #10b981;
+}
+
+.trust-footer-action {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-tp-review {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.btn-tp-review:hover {
+    color: #00b67a;
 }
 
 .status-schedule-pill {
@@ -699,6 +762,26 @@
   line-height: 1.6;
   opacity: 0.9;
 }
+.guarantee-legal-note {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.guarantee-link {
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+.guarantee-link:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
 
 .table-wrapper {
   background: var(--white);
