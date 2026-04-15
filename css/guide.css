@@ -724,3 +724,129 @@
   height: 14px !important;
   vertical-align: middle;
 }
+
+/* --- Smart Adaptive Guide Styles --- */
+
+.guide-section {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Specific state for collapsed sections */
+.guide-section.is-collapsed {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.guide-section.is-collapsed .section-title-center,
+.guide-section.is-collapsed .guide-adaptive-content {
+  display: none !important;
+}
+
+/* The Smart Header (Visible only when collapsed) */
+.guide-smart-header {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.guide-section.is-collapsed .guide-smart-header {
+  display: block;
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+
+.smart-header-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(37, 99, 235, 0.1);
+  border-radius: 20px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.smart-header-card:hover {
+  transform: translateY(-4px);
+  background: white;
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+}
+
+.smart-header-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.smart-header-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.2);
+}
+
+.smart-header-icon i, .smart-header-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.smart-header-text h3 {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+  color: var(--text-dark);
+}
+
+.smart-header-text p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.smart-header-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.chevron-pulse {
+  animation: pulseChevron 2s infinite;
+}
+
+@keyframes pulseChevron {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .smart-header-card {
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .smart-header-info {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -23,6 +23,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const isWindows = /win/.test(ua);
     const isMac = /mac/.test(ua) && !isIOS;
 
+    // --- Show "Automatically Detected" badge only for the actual platform ---
+    const showPlatformBadge = () => {
+        // First, ensure all badges start hidden (in case of double execution)
+        document.querySelectorAll('.guide-detected-badge').forEach(b => b.classList.add('hidden'));
+
+        // PC Section Badge
+        let detectedPCCard = null;
+        if (isWindows) detectedPCCard = windowsCard;
+        else if (isMac) detectedPCCard = macCard;
+
+        if (detectedPCCard) {
+            const badge = detectedPCCard.querySelector('.guide-detected-badge');
+            if (badge) badge.classList.remove('hidden');
+        }
+
+        // Mobile Section Badge
+        let detectedMobileCard = null;
+        if (isIOS) detectedMobileCard = iosCard;
+        else if (isAndroid) detectedMobileCard = androidCard;
+
+        if (detectedMobileCard) {
+            const badge = detectedMobileCard.querySelector('.guide-detected-badge');
+            if (badge) badge.classList.remove('hidden');
+        }
+    };
+    showPlatformBadge();
+
     // --- Mobile Switcher Logic ---
     if (androidCard && iosCard && btnAndroid && btnIos) {
         let currentMobilePlatform = 'android';
@@ -152,6 +179,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') lucide.createIcons();
         });
     });
+
+    // --- Smart Adaptive Guide Logic ---
+    const pcGuideSection = document.getElementById('pc-guide');
+    const mobileGuideSection = document.getElementById('mobile-guide');
+    const smartHeaders = document.querySelectorAll('.guide-smart-header');
+
+    if (pcGuideSection && mobileGuideSection) {
+        // Initial adaptive collapse based on device
+        const isMobileDevice = isIOS || isAndroid;
+
+        if (isMobileDevice) {
+            pcGuideSection.classList.add('is-collapsed');
+            // Auto-scroll to mobile guide on load if on mobile
+            setTimeout(() => {
+                mobileGuideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 500);
+        } else {
+            mobileGuideSection.classList.add('is-collapsed');
+        }
+
+        // Fix for AOS (ensure active section triggers even without scroll)
+        if (typeof AOS !== 'undefined') {
+            setTimeout(() => { AOS.refresh(); }, 600);
+        }
+
+        // Handle Smart Header Click (Expansion)
+        smartHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const targetId = header.getAttribute('data-target');
+                const section = document.getElementById(targetId);
+                
+                if (section && section.classList.contains('is-collapsed')) {
+                    section.classList.remove('is-collapsed');
+                    
+                    // Smooth scroll to the expanded section
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                    
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }
+            });
+        });
+    }
 
     // --- Image Zoom (Lightbox) Logic ---
     const lightbox = document.getElementById('imageLightbox');

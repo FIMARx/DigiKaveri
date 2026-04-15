@@ -2197,3 +2197,6 @@ html.large-text {
     margin-bottom: 0.5rem !important;
   }
 }
+
+/* Utilities */
+.hidden { display: none !important; }

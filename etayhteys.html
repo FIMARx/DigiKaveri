@@ -1,208 +1,19 @@
 <!doctype html>
-<html lang="fi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Etätuki-opas | DigiKaveri - Miten etäyhteys toimii?</title>
-    <meta
-      name="description"
-      content="Lue ohjeet etätuen aloittamiseen. Ladattava TeamViewer-etäyhteysohjelma ja helpot askeleet tietokoneen etähuoltoon."
-    />
-    <meta name="author" content="DigiKaveri" />
-
-    <meta
-      property="og:title"
-      content="Etätuki-opas | DigiKaveri - Miten etäyhteys toimii?"
-    />
-    <meta
-      property="og:description"
-      content="Lue ohjeet etätuen aloittamiseen. Ladattava TeamViewer-etäyhteysohjelma ja helpot askeleet tietokoneen etähuoltoon."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://digikaveri.com/etayhteys.html" />
-    <meta
-      property="og:image"
-      content="https://digikaveri.com/images/logo.png"
-    />
-
-    <link rel="canonical" href="https://digikaveri.com/etayhteys.html" />
-    <link rel="alternate" hreflang="fi" href="https://digikaveri.com/etayhteys.html" />
-    <link rel="alternate" hreflang="en" href="https://digikaveri.com/en/remote-support.html" />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://digikaveri.com/etayhteys.html"
-    />
-
-    <link rel="icon" type="image/x-icon" href="images/Ico.ico" />
-    <link rel="apple-touch-icon" href="images/logo.png" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/guide.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css">
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- LIITÄ TÄHÄN TULEVAISUUDESSA COOKIEYES-ASENNUSKOODI -->
-    <!-- <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/TÄHÄN_SINUN_ID/script.js"></script> -->
-  </head>
-  <body>
-    <nav class="glass-nav">
-      <div class="nav-content">
-        <div class="logo">
-          <a href="/" class="flex-center">
-            <img
-              src="svg/logo.svg"
-              alt="DigiKaveri Logo"
-              width="180"
-              height="55"
-            />
-          </a>
-        </div>
-
-        <button class="mobile-menu-btn" aria-label="Avaa valikko">
-          <i data-lucide="menu"></i>
-        </button>
-
-        <div class="nav-menu">
-          <a href="/index.html#home" class="nav-link"
-            ><i data-lucide="home"></i> <span>Etusivu</span></a
-          >
-          <a href="/index.html#solutions" class="nav-link"
-            ><i data-lucide="grid"></i> <span>Palvelut</span></a
-          >
-          <div class="nav-item-dropdown">
-            <a href="/etayhteys.html" class="dropdown-trigger active">
-              <i data-lucide="monitor"></i> <span>Etätuki</span>
-              <i data-lucide="chevron-down"></i>
-            </a>
-            <div class="dropdown-menu">
-              <a href="/etayhteys.html#pc-guide" class="nav-link"
-                ><i data-lucide="monitor"></i> PC-ohjeet</a
-              >
-              <a href="/etayhteys.html#mobile-guide" class="nav-link"
-                ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
-              >
-            </div>
-          </div>
-          <a href="/index.html#pricing" class="nav-link"
-            ><i data-lucide="credit-card"></i> <span>Hinnasto</span></a
-          >
-          <div class="nav-item-dropdown">
-            <button class="dropdown-trigger">
-              <i data-lucide="info"></i> <span>Info</span>
-              <i data-lucide="chevron-down"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a href="/index.html#team" class="nav-link"
-                ><i data-lucide="users"></i> Tiimi</a
-              >
-              <a href="/index.html#faq" class="nav-link"
-                ><i data-lucide="help-circle"></i> FAQ</a
-              >
-              <a href="/tietosuoja.html" class="nav-link"
-                ><i data-lucide="shield-check"></i> Tietosuoja</a
-              >
-              <a href="/kayttoehdot.html" class="nav-link"
-                ><i data-lucide="file-text"></i> Käyttöehdot</a
-              >
-            </div>
-          </div>
-          <a href="/index.html#contact-detailed" class="nav-link"
-            ><i data-lucide="mail"></i> <span>Yhteystiedot</span></a
-          >
-        </div>
-
-        <div class="nav-actions">
-          <div class="lang-switcher">
-            <a href="/etayhteys.html" class="lang-btn active">FI</a>
-            <span class="lang-divider">|</span>
-            <a
-              href="/en/remote-support.html"
-              class="lang-btn"
-              onclick="localStorage.setItem('userLang', 'en')"
-              >EN</a
-            >
-          </div>
-          <a href="tel:+3584578338105" class="btn-nav-call">
-            <i data-lucide="phone"></i> <span>045 7833 8105</span>
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="mobile-nav-overlay">
-      <div class="mobile-nav-content">
-        <button class="mobile-nav-close" aria-label="Sulje valikko">
-          <i data-lucide="x"></i>
-        </button>
-        <a href="/index.html#home" class="mobile-nav-link"
-          ><i data-lucide="home"></i> Etusivu</a
-        >
-        <div class="mobile-nav-item-dropdown">
-          <button class="mobile-dropdown-trigger">
-            <div><i data-lucide="monitor"></i> Etätuki</div>
-            <i data-lucide="chevron-down"></i>
-          </button>
-          <div class="mobile-dropdown-menu">
-            <a href="/etayhteys.html#pc-guide" class="mobile-nav-link"
-              ><i data-lucide="monitor"></i> PC-ohjeet</a
-            >
-            <a href="/etayhteys.html#mobile-guide" class="mobile-nav-link"
-              ><i data-lucide="smartphone"></i> Mobiili-ohjeet</a
-            >
-          </div>
-        </div>
-        <a href="/index.html#solutions" class="mobile-nav-link"
-          ><i data-lucide="grid"></i> Palvelut</a
-        >
-        <a href="/index.html#pricing" class="mobile-nav-link"
-          ><i data-lucide="credit-card"></i> Hinnasto</a
-        >
-        <div class="mobile-nav-item-dropdown">
-          <button class="mobile-dropdown-trigger">
-            <div><i data-lucide="info"></i> Info</div>
-            <i data-lucide="chevron-down"></i>
-          </button>
-          <div class="mobile-dropdown-menu">
-            <a href="/index.html#team" class="mobile-nav-link"
-              ><i data-lucide="users"></i> Tiimi</a
-            >
-            <a href="/index.html#faq" class="mobile-nav-link"
-              ><i data-lucide="help-circle"></i> Usein kysyttyä</a
-            >
-            <a href="/tietosuoja.html" class="mobile-nav-link"
-              ><i data-lucide="shield-check"></i> Tietosuoja</a
-            >
-            <a href="/kayttoehdot.html" class="mobile-nav-link"
-              ><i data-lucide="file-text"></i> Käyttöehdot</a
-            >
-          </div>
-        </div>
-        <a href="/index.html#contact-detailed" class="mobile-nav-link"
-          ><i data-lucide="mail"></i> Yhteystiedot</a
-        >
-        <div class="mobile-lang-switcher">
-          <a href="/etayhteys.html" class="mobile-lang-btn active">FI</a>
-          <span class="mobile-lang-divider">|</span>
-          <a
-            href="/en/remote-support.html"
-            class="mobile-lang-btn"
-            onclick="localStorage.setItem('userLang', 'en')"
-            >EN</a
-          >
-        </div>
-      </div>
-    </div>
+<html lang="{{lang}}">
+<head>
+  {{> header 
+    title="Etätuki-opas | DigiKaveri - Miten etäyhteys toimii?"
+    description="Lue ohjeet etätuen aloittamiseen. Ladattava TeamViewer-etäyhteysohjelma ja helpot askeleet tietokoneen etähuoltoon."
+    keywords="etätuki, TeamViewer, IT-apu, etäyhteys, tietokonehuolto"
+    path="etayhteys.html"
+    fi_path="etayhteys.html"
+    en_path="remote-support.html"
+    extra_css="guide"
+  }}
+</head>
+<body>
+  {{> nav }}
+  {{> mobile-nav }}
 
     <header class="guide-hero" data-aos="fade-up">
       <h1>Etätuki-opas</h1>
@@ -214,11 +25,31 @@
 
     <main>
       <section id="pc-guide" class="guide-section section-spy" data-aos="fade-up" data-aos-delay="100">
-        <div class="section-title-center">
-          <span class="badge"><i data-lucide="monitor"></i> Tietokone</span>
-          <h2>Näin aloitat etätuen PC:llä</h2>
-          <p>Käytämme maailman suosituinta ja turvallisinta TeamViewer-ohjelmaa.</p>
+        <!-- Smart Header for PC (Visible when Mobile is detected) -->
+        <div class="guide-smart-header" data-target="pc-guide">
+          <div class="smart-header-card">
+            <div class="smart-header-info">
+              <div class="smart-header-icon">
+                <i data-lucide="monitor"></i>
+              </div>
+              <div class="smart-header-text">
+                <h3>Käytätkö tietokonetta?</h3>
+                <p>Näytä ohjeet Windows- ja Mac-laitteille.</p>
+              </div>
+            </div>
+            <div class="smart-header-action">
+              <span>Avaa PC-ohjeet</span>
+              <i data-lucide="chevron-down" class="chevron-pulse"></i>
+            </div>
+          </div>
         </div>
+
+        <div class="guide-adaptive-content">
+          <div class="section-title-center">
+            <span class="badge"><i data-lucide="monitor"></i> Tietokone</span>
+            <h2>Näin aloitat etätuen PC:llä</h2>
+            <p>Käytämme maailman suosituinta ja turvallisinta TeamViewer-ohjelmaa.</p>
+          </div>
 
         <!-- PC Platform Pill Switcher -->
         <div class="platform-pill-switcher">
@@ -236,7 +67,7 @@
           <!-- Windows Card -->
           <div id="windows-card-pc" class="pc-guide-card platform-card">
             <div class="pc-download-info">
-              <div class="guide-detected-badge">
+              <div class="guide-detected-badge hidden">
                 <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
               </div>
               <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
@@ -399,7 +230,7 @@
           <!-- Mac Card -->
           <div id="mac-card-pc" class="pc-guide-card platform-card hidden">
             <div class="pc-download-info">
-              <div class="guide-detected-badge">
+              <div class="guide-detected-badge hidden">
                 <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
               </div>
               <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
@@ -512,14 +343,35 @@
             <strong>Turvallisuustiedote:</strong> Yhteys on kertakäyttöinen. Kun suljet ohjelman, emme pääse enää koneellesi ilman uutta ID:tä ja salasanaa, jotka vaihtuvat jokaisella kerralla.
           </p>
         </div>
+        </div> <!-- End guide-adaptive-content -->
       </section>
 
       <section id="mobile-guide" class="guide-section section-spy" data-aos="fade-up" data-aos-delay="100">
-        <div class="section-title-center">
-          <span class="badge"><i data-lucide="smartphone"></i> Mobiili</span>
-          <h2>Puhelin & Tabletti</h2>
-          <p>Lataa oikea sovellus ja kerro ID asiantuntijallemme.</p>
+        <!-- Smart Header for Mobile (Visible when PC is detected) -->
+        <div class="guide-smart-header" data-target="mobile-guide">
+          <div class="smart-header-card">
+            <div class="smart-header-info">
+              <div class="smart-header-icon">
+                <i data-lucide="smartphone"></i>
+              </div>
+              <div class="smart-header-text">
+                <h3>Tarvitsetko apua puhelimella?</h3>
+                <p>Näytä ohjeet Android- ja iPhone-laitteille.</p>
+              </div>
+            </div>
+            <div class="smart-header-action">
+              <span>Avaa Mobiili-ohjeet</span>
+              <i data-lucide="chevron-down" class="chevron-pulse"></i>
+            </div>
+          </div>
         </div>
+
+        <div class="guide-adaptive-content">
+          <div class="section-title-center">
+            <span class="badge"><i data-lucide="smartphone"></i> Mobiili</span>
+            <h2>Puhelin & Tabletti</h2>
+            <p>Lataa oikea sovellus ja kerro ID asiantuntijallemme.</p>
+          </div>
 
         <!-- Platform Pill Switcher -->
         <div class="platform-pill-switcher">
@@ -536,7 +388,7 @@
         <div id="guide-container">
           <!-- Android Card -->
           <div id="android-card" class="mobile-guide-card platform-card">
-            <div class="guide-detected-badge">
+            <div class="guide-detected-badge hidden">
               <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
             </div>
             <div class="mobile-platform-header">
@@ -638,7 +490,7 @@
 
           <!-- iOS Card (Hidden by default, shown if detected or toggled) -->
           <div id="ios-card" class="mobile-guide-card platform-card hidden">
-            <div class="guide-detected-badge">
+            <div class="guide-detected-badge hidden">
               <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
             </div>
             <div class="mobile-platform-header">
@@ -745,104 +597,9 @@
             <strong>Huom:</strong> Jotkut laitteet saattavat pyytää asentamaan lisäosan (Add-On) täyttä etähallintaa varten. Hyväksy tämä asennus, jos sovellus sitä ehdottaa.
           </p>
         </div>
-        </div>
+        </div> <!-- End guide-adaptive-content -->
       </section>
     </main>
-
-    <footer class="modern-footer">
-      <div class="footer-container">
-        <div class="footer-brand">
-          <div class="logo footer-logo">
-            <img
-              src="svg/logo.svg"
-              alt="DigiKaveri Logo"
-              loading="lazy"
-              width="110"
-              height="110"
-            />
-          </div>
-          <p class="footer-desc">
-            Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä
-            koko Suomeen.
-          </p>
-          <div class="footer-social">
-            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </a>
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-links">
-          <h4>Pikalinkit</h4>
-          <ul>
-            <li><a href="/index.html#home">Etusivu</a></li>
-            <li><a href="/etayhteys.html">Etätuki-opas</a></li>
-            <li><a href="/index.html#solutions">Palvelut</a></li>
-            <li><a href="/index.html#pricing">Hinnasto</a></li>
-            <li><a href="/index.html#team">Tiimi</a></li>
-            <li><a href="/index.html#faq">Usein kysyttyä</a></li>
-            <li><a href="tietosuoja.html">Tietosuojaseloste</a></li>
-            <li><a href="kayttoehdot.html">Käyttöehdot</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-contact">
-          <h4>Yhteystiedot</h4>
-          <ul>
-            <li>
-              <i data-lucide="phone"></i>
-              <a href="tel:+3584578338105">045 7833 8105</a>
-            </li>
-            <li>
-              <i data-lucide="mail"></i>
-              <a href="mailto:info@digikaveri.com">info@digikaveri.com</a>
-            </li>
-            <li>
-              <i data-lucide="map-pin"></i>
-              <span>Uusimaa, Suomi</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2024&ndash;2025 DigiKaveri. Kaikki oikeudet pidätetään.</p>
-      </div>
-    </footer>
-
-    <div class="fab-backdrop" id="fabBackdrop"></div>
-    <div class="fab-wrapper" id="fabWrapper">
-      <div class="fab-options">
-        <div class="fab-option-wrapper">
-          <span class="fab-label">WhatsApp</span>
-          <a href="https://wa.me/3584578338105?text=Hei!%20Tarvitsen%20IT-tukea" target="_blank" rel="noopener noreferrer" class="fab-option whatsapp" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          </a>
-        </div>
-        <div class="fab-option-wrapper">
-          <span class="fab-label">Soita meille</span>
-          <a href="tel:+3584578338105" class="fab-option phone" aria-label="Soita meille">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.896-1.596-5.069-3.769-6.665-6.665l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-            </svg>
-          </a>
-        </div>
-      </div>
-      <button class="fab-main" id="fabMain" aria-label="Ota yhteyttä">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="fab-icon-main" width="28" height="28">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
-        </svg>
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="fab-icon-close" width="28" height="28">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-
-
-
 
 
     <div id="imageLightbox" class="lightbox-modal">
@@ -850,43 +607,7 @@
       <img src="" alt="Suurennettu kuva">
     </div>
 
-    <!-- Service Closed Modal -->
-    <div id="statusModal" class="status-modal-overlay">
-      <div class="status-modal-card">
-        <div class="status-modal-icon">
-          <i data-lucide="clock"></i>
-        </div>
-        <h2 id="modalTitle">Palvelumme on tällä hetkellä suljettu</h2>
-        <p id="modalDescription">
-          Palvelemme arkisin ja viikonloppuisin klo 09:00–21:00. Voit kuitenkin
-          jättää soittopyynnön, niin otamme sinuun yhteyttä heti huomenna!
-        </p>
-        <div class="status-modal-actions">
-          <a href="/index.html#contact-detailed" id="modalCallback" class="btn-modal-primary">
-            <i data-lucide="phone-call"></i> Jätä soittopyyntö
-          </a>
-          <button id="modalUnderstand" class="btn-modal-secondary">
-            Selvä, ymmärrän
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="js/guide.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/accessibility.js"></script>
-    <script>
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
-    </script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
-    <script type="text/javascript" src="/js/cookieconsent-config.js"></script>
-
-
-
-  </body>
+  {{> footer }}
+  {{> scripts extra_js="guide" }}
+</body>
 </html>

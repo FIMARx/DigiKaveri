@@ -1,0 +1,58 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{{title}}</title>
+<meta name="description" content="{{description}}" />
+<meta name="keywords" content="{{keywords}}" />
+<meta name="author" content="DigiKaveri" />
+
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://digikaveri.com/{{path}}" />
+<meta property="og:image" content="https://digikaveri.com/images/logo.png" />
+
+<link rel="canonical" href="https://digikaveri.com/{{path}}" />
+<link rel="alternate" hreflang="fi" href="https://digikaveri.com/{{fi_path}}" />
+<link rel="alternate" hreflang="en" href="https://digikaveri.com/en/{{en_path}}" />
+<link rel="alternate" hreflang="x-default" href="https://digikaveri.com/{{fi_path}}" />
+
+<link rel="icon" type="image/x-icon" href="{{base}}images/Ico.ico" />
+<link rel="apple-touch-icon" href="{{base}}images/logo.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{base}}css/variables.css" />
+<link rel="stylesheet" href="{{base}}css/global.css" />
+{{#if extra_css}}
+<link rel="stylesheet" href="{{base}}css/{{extra_css}}.css" />
+{{/if}}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css">
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ComputerStore",
+  "name": "DigiKaveri",
+  "url": "https://digikaveri.com/",
+  "logo": "https://digikaveri.com/svg/logo.svg",
+  "description": "Everyday IT Help & Computer Repair in Uusimaa and remotely across Finland.",
+  "telephone": "+3584578338105",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Uusimaa"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Uusimaa",
+    "addressCountry": "FI"
+  },
+  "priceRange": "€€",
+  "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 09:00-21:00"
+}
+</script>

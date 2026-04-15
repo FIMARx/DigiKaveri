@@ -1,0 +1,58 @@
+<div class="mobile-nav-overlay">
+  <div class="mobile-nav-content">
+    <button class="mobile-nav-close" aria-label="Sulje valikko">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="index.html#home" class="mobile-nav-link {{#if_eq active "home"}}active{{/if_eq}}"
+      ><i data-lucide="home"></i> {{nav_home}}</a
+    >
+    <div class="mobile-nav-item-dropdown">
+      <button class="mobile-dropdown-trigger">
+        <div><i data-lucide="monitor"></i> {{nav_remote}}</div>
+        <i data-lucide="chevron-down"></i>
+      </button>
+      <div class="mobile-dropdown-menu">
+        <a href="{{etätuki_url}}#pc-guide" class="mobile-nav-link"
+          ><i data-lucide="monitor"></i> {{nav_pc_guide}}</a
+        >
+        <a href="{{etätuki_url}}#mobile-guide" class="mobile-nav-link"
+          ><i data-lucide="smartphone"></i> {{nav_mobile_guide}}</a
+        >
+      </div>
+    </div>
+    <a href="index.html#solutions" class="mobile-nav-link {{#if_eq active "solutions"}}active{{/if_eq}}"
+      ><i data-lucide="grid"></i> {{nav_services}}</a
+    >
+    <a href="index.html#pricing" class="mobile-nav-link {{#if_eq active "pricing"}}active{{/if_eq}}"
+      ><i data-lucide="credit-card"></i> {{nav_pricing}}</a
+    >
+    <div class="mobile-nav-item-dropdown">
+      <button class="mobile-dropdown-trigger">
+        <div><i data-lucide="info"></i> Info</div>
+        <i data-lucide="chevron-down"></i>
+      </button>
+      <div class="mobile-dropdown-menu">
+        <a href="index.html#team" class="mobile-nav-link"
+          ><i data-lucide="users"></i> {{nav_team}}</a
+        >
+        <a href="index.html#faq" class="mobile-nav-link"
+          ><i data-lucide="help-circle"></i> FAQ</a
+        >
+        <a href="{{privacy_url}}" class="mobile-nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
+          ><i data-lucide="shield-check"></i> {{nav_privacy}}</a
+        >
+        <a href="{{terms_url}}" class="mobile-nav-link {{#if_eq active "terms"}}active{{/if_eq}}"
+          ><i data-lucide="file-text"></i> {{nav_terms}}</a
+        >
+      </div>
+    </div>
+    <a href="index.html#contact-detailed" class="mobile-nav-link"
+      ><i data-lucide="mail"></i> {{nav_contact}}</a
+    >
+    <div class="mobile-lang-switcher">
+      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')">FI</a>
+      <span class="mobile-lang-divider">|</span>
+      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')">EN</a>
+    </div>
+  </div>
+</div>

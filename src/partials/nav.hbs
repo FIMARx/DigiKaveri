@@ -1,0 +1,78 @@
+<nav class="glass-nav">
+  <div class="nav-content">
+    <div class="logo">
+      <a href="index.html" class="flex-center">
+        <img
+          src="{{base}}svg/logo.svg"
+          alt="DigiKaveri Logo"
+          width="180"
+          height="55"
+        />
+      </a>
+    </div>
+
+    <button class="mobile-menu-btn" aria-label="{{lang_toggle_nav}}">
+      <i data-lucide="menu"></i>
+    </button>
+
+    <div class="nav-menu">
+      <a href="index.html#home" class="nav-link {{#if_eq active "home"}}active{{/if_eq}}"
+        ><i data-lucide="home"></i> <span>{{nav_home}}</span></a
+      >
+      <a href="index.html#solutions" class="nav-link {{#if_eq active "solutions"}}active{{/if_eq}}"
+        ><i data-lucide="grid"></i> <span>{{nav_services}}</span></a
+      >
+      <div class="nav-item-dropdown">
+        <a href="{{etätuki_url}}" class="dropdown-trigger {{#if_eq active "remote"}}active{{/if_eq}}">
+          <i data-lucide="monitor"></i> <span>{{nav_remote}}</span>
+          <i data-lucide="chevron-down"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="{{etätuki_url}}#pc-guide" class="nav-link"
+            ><i data-lucide="monitor"></i> {{nav_pc_guide}}</a
+          >
+          <a href="{{etätuki_url}}#mobile-guide" class="nav-link"
+            ><i data-lucide="smartphone"></i> {{nav_mobile_guide}}</a
+          >
+        </div>
+      </div>
+      <a href="index.html#pricing" class="nav-link {{#if_eq active "pricing"}}active{{/if_eq}}"
+        ><i data-lucide="credit-card"></i> <span>{{nav_pricing}}</span></a
+      >
+      <div class="nav-item-dropdown">
+        <button class="dropdown-trigger {{#if_eq active "info"}}active{{/if_eq}}">
+          <i data-lucide="info"></i> <span>Info</span>
+          <i data-lucide="chevron-down"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a href="index.html#team" class="nav-link"
+            ><i data-lucide="users"></i> {{nav_team}}</a
+          >
+          <a href="index.html#faq" class="nav-link"
+            ><i data-lucide="help-circle"></i> FAQ</a
+          >
+          <a href="{{privacy_url}}" class="nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
+            ><i data-lucide="shield-check"></i> {{nav_privacy}}</a
+          >
+          <a href="{{terms_url}}" class="nav-link {{#if_eq active "terms"}}active{{/if_eq}}"
+            ><i data-lucide="file-text"></i> {{nav_terms}}</a
+          >
+        </div>
+      </div>
+      <a href="index.html#contact-detailed" class="nav-link"
+        ><i data-lucide="mail"></i> <span>{{nav_contact}}</span></a
+      >
+    </div>
+
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <a href="{{base_fi}}{{current_page_fi}}" class="lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')">FI</a>
+        <span class="lang-divider">|</span>
+        <a href="{{base_en}}{{current_page_en}}" class="lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')">EN</a>
+      </div>
+      <a href="tel:+3584578338105" class="btn-nav-call">
+        <i data-lucide="phone"></i> <span>045 7833 8105</span>
+      </a>
+    </div>
+  </div>
+</nav>
