@@ -1,13 +1,16 @@
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="{{base}}js/main.js"></script>
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+<script src="{{base}}js/main.js" defer></script>
 {{#if extra_js}}
-<script src="{{base}}js/{{extra_js}}.js"></script>
+<script src="{{base}}js/{{extra_js}}.js" defer></script>
 {{/if}}
-<script src="{{base}}js/accessibility.js"></script>
+<script src="{{base}}js/accessibility.js" defer></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.umd.js" defer></script>
+<script type="text/javascript" src="{{base}}js/cookieconsent-config.js" defer></script>
 <script>
-  if (typeof lucide !== "undefined") {
-    lucide.createIcons();
-  }
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  });
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
-<script type="text/javascript" src="{{base}}js/cookieconsent-config.js"></script>
