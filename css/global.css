@@ -532,15 +532,15 @@ html.large-text {
   display: block;
   stroke: currentColor;
 }
-.footer-links h4,
+.footer-links h3,
 .section-title-center h2 {
   font-size: 2.25rem;
   margin-bottom: 10px;
   overflow-wrap: break-word;
   hyphens: auto;
 }
-.footer-links h4,
-.footer-contact h4 {
+.footer-links h3,
+.footer-contact h3 {
   font-size: 1.2rem;
   margin-bottom: 25px;
   color: #ffffff;
