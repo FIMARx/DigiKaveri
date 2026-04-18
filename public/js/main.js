@@ -127,19 +127,16 @@ onDOMReady(() => {
   
   if (typeof AOS !== 'undefined') {
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        AOS.init({
-          once: true,           
-          offset: 50,           
-          duration: 600,        
-          easing: 'ease-out-cubic', 
-        });
-      }, 100);
+      AOS.init({
+        once: true,           
+        offset: 50,           
+        duration: 600,        
+        easing: 'ease-out-cubic',
+        disable: window.innerWidth < 768
+      });
 
-      setTimeout(() => {
-        checkStatus();
-        setInterval(checkStatus, 60000);
-      }, 500);
+      checkStatus();
+      setInterval(checkStatus, 60000);
     });
   }
 });

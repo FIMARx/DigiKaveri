@@ -1446,22 +1446,22 @@ html.large-text {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 9999;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 20px;
 }
 
 .status-modal-overlay.active {
   opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
 }
 
 .status-modal-card {
@@ -2224,7 +2224,6 @@ html.large-text {
 #cc-main .cm__btn,
 #cc-main .pm__btn {
   transition: opacity 0.3s ease !important;
-  visibility: visible !important;
   opacity: 1;
 }
 

@@ -8,11 +8,9 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.umd.js" defer></script>
 <script type="text/javascript" src="{{base}}js/cookieconsent-config.js" defer></script>
 <script>
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
-    }, 100);
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
   });
 </script>
