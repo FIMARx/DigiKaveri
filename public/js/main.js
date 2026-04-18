@@ -117,8 +117,7 @@ onDOMReady(() => {
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
   }
-  checkStatus();
-  setInterval(checkStatus, 60000);
+
   initFAQ();
   initScrollSpy();
   initSmoothNav();
@@ -136,6 +135,11 @@ onDOMReady(() => {
           easing: 'ease-out-cubic', 
         });
       }, 100);
+
+      setTimeout(() => {
+        checkStatus();
+        setInterval(checkStatus, 60000);
+      }, 500);
     });
   }
 });

@@ -1,3 +1,4 @@
+setTimeout(() => {
 CookieConsent.run({
   guiOptions: {
     consentModal: {
@@ -123,3 +124,4 @@ CookieConsent.run({
     },
   },
 });
+}, 800);
