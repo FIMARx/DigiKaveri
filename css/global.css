@@ -2217,3 +2217,17 @@ html.large-text {
   color: var(--primary) !important;
   font-weight: 700 !important;
 }
+
+/* Fix non-composited animations */
+#cc-main .cm,
+#cc-main .pm,
+#cc-main .cm__btn,
+#cc-main .pm__btn {
+  transition: opacity 0.3s ease !important;
+  visibility: visible !important;
+  opacity: 1;
+}
+
+#cc-main .cm-wrapper {
+  transition: opacity 0.3s ease !important;
+}
