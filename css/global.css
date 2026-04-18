@@ -595,7 +595,7 @@ html.large-text {
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: #64748b;
+  color: #94a3b8;
   font-size: 0.9rem;
 }
 
@@ -2200,3 +2200,20 @@ html.large-text {
 
 /* Utilities */
 .hidden { display: none !important; }
+
+/* Cookie Consent Accessibility Overrides */
+#cc-main .cm__btn--secondary {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+#cc-main .cm__btn--secondary:hover {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+#cc-main .cm__link {
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+}

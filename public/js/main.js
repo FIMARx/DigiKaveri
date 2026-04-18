@@ -127,11 +127,15 @@ onDOMReady(() => {
   initFAB();
   
   if (typeof AOS !== 'undefined') {
-    AOS.init({
-      once: true,           
-      offset: 50,           
-      duration: 600,        
-      easing: 'ease-out-cubic', 
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        AOS.init({
+          once: true,           
+          offset: 50,           
+          duration: 600,        
+          easing: 'ease-out-cubic', 
+        });
+      }, 100);
     });
   }
 });

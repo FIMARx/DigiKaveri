@@ -98,6 +98,35 @@ export default defineConfig({
         }
       }
     }),
+    {
+      name: 'inline-css',
+      enforce: 'post',
+      generateBundle(options, bundle) {
+        const cssAssets = {};
+        for (const [key, value] of Object.entries(bundle)) {
+          if (key.endsWith('.css')) {
+            cssAssets[key] = value.source;
+          }
+        }
+
+        for (const [key, value] of Object.entries(bundle)) {
+          if (key.endsWith('.html')) {
+            let html = value.source;
+            html = html.replace(/<link rel="stylesheet"([^>]+)href="([^"]+)"([^>]*)>/g, (match, pre, href, post) => {
+              // Extract the filename from the href (e.g., /assets/main-hash.css -> assets/main-hash.css)
+              const fileName = href.split('/').pop();
+              const assetKey = Object.keys(cssAssets).find(k => k.endsWith(fileName));
+              
+              if (assetKey) {
+                return `<style>${cssAssets[assetKey]}</style>`;
+              }
+              return match;
+            });
+            value.source = html;
+          }
+        }
+      }
+    }
   ],
   build: {
     rollupOptions: {
