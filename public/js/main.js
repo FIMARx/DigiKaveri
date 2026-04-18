@@ -5,7 +5,7 @@ async function checkStatus() {
   const isEn = window.location.pathname.includes("/en/");
   
   try {
-    const statusUrl = (isEn ? "../data/status.json?v=" : "data/status.json?v=") + Date.now();
+    const statusUrl = "/data/status.json?v=" + Date.now();
     const response = await fetch(statusUrl);
     const data = await response.json();
 
