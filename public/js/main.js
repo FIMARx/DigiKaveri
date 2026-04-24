@@ -1,3 +1,8 @@
+import {
+  createIcons,
+  ArrowRight, AtSign, Banknote, BookOpen, CalendarX, Check, CheckCircle, ChevronDown, Clock, Cookie, CreditCard, Database, Download, ExternalLink, FileText, Gavel, Globe, Grid, HelpCircle, Home, Info, Key, Laptop, List, Lock, Mail, MapPin, Menu, MessageSquare, Monitor, PenTool, Phone, PhoneCall, Play, PlayCircle, Printer, Rocket, Search, Send, Settings, Share2, ShieldAlert, ShieldCheck, Smartphone, Smile, Star, Tablet, Tag, Tv, User, Users, Video, Wifi, Wrench, X
+} from 'lucide';
+
 async function checkStatus() {
   const badge = document.getElementById("serviceStatus");
   const text = document.getElementById("statusText");
@@ -114,9 +119,11 @@ onDOMReady(() => {
   initLanguageDetection();
   loadAnalytics();
 
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-  }
+  createIcons({
+    icons: {
+      ArrowRight, AtSign, Banknote, BookOpen, CalendarX, Check, CheckCircle, ChevronDown, Clock, Cookie, CreditCard, Database, Download, ExternalLink, FileText, Gavel, Globe, Grid, HelpCircle, Home, Info, Key, Laptop, List, Lock, Mail, MapPin, Menu, MessageSquare, Monitor, PenTool, Phone, PhoneCall, Play, PlayCircle, Printer, Rocket, Search, Send, Settings, Share2, ShieldAlert, ShieldCheck, Smartphone, Smile, Star, Tablet, Tag, Tv, User, Users, Video, Wifi, Wrench, X
+    }
+  });
 
   initFAQ();
   initScrollSpy();

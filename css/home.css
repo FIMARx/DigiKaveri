@@ -1044,7 +1044,7 @@
 .team-info .role {
   display: inline-block;
   background: #dbeafe;
-  color: var(--primary);
+  color: var(--primary-dark);
   font-size: 0.85rem;
   font-weight: 700;
   padding: 4px 12px;
@@ -1137,7 +1137,7 @@
   margin: 15px 0;
 }
 .contact-info p {
-  color: var(--text-light);
+  color: #374151;
   margin-bottom: 30px;
 }
 .info-items {
@@ -1178,7 +1178,7 @@
 }
 
 .text-whatsapp {
-  color: #25d366 !important;
+  color: #15803d !important;
   font-weight: 600 !important;
   text-decoration: none;
 }
