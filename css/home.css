@@ -446,8 +446,9 @@ header#home::before {
 }
 
 .testimonial-card:hover {
-    border-color: #cbd5e1;
-    transform: translateY(-5px);
+    border-color: var(--primary-light);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
 .testimonial-card:focus,
@@ -527,15 +528,40 @@ header#home::before {
 }
 
 .btn-review-outline:hover {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
-    transform: translateY(-2px);
+    background: #f8fafc;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-review-outline.google {
+    color: #1a73e8;
+    background: white;
+    border: 2px solid #1a73e8;
+}
+
+.btn-review-outline.google:hover {
+    background: rgba(26, 115, 232, 0.04);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.1);
 }
 
 .btn-review-outline.tp {
-    color: #166534;
-    background: #f8fafc;
-    border: 2px solid #166534;
+    color: #00b67a;
+    background: white;
+    border: 2px solid #00b67a;
+}
+
+.btn-review-outline.tp:hover {
+    background: rgba(0, 182, 122, 0.04);
+    box-shadow: 0 4px 12px rgba(0, 182, 122, 0.1);
+}
+
+.score-stars.tp svg {
+    color: #00b67a;
+}
+
+.score-stars svg.star-dimmed {
+    color: #e5e7eb !important;
+    fill: #e5e7eb !important;
 }
 
 .testimonial-stars {
