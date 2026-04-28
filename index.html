@@ -22,10 +22,14 @@
           <span id="statusText">...</span>
         </div>
         <script>
-          (function() {
+          (async function() {
             const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
+            const statusUrl = "/data/status.json?v=" + Date.now();
+            const response = await fetch(statusUrl).catch(() => null);
+            
             const hour = finlandTime.getHours();
-            const isOpen = (hour >= 9 && hour < 21);
+            const isOpen = response ? (await response.json()).isOpen : (hour >= 9 && hour < 21);
+            
             const badge = document.getElementById("serviceStatus");
             const text = document.getElementById("statusText");
             if (badge && text) {
@@ -214,7 +218,7 @@
           </p>
           <div class="testimonial-footer">
             <div class="testimonial-author-info">
-              <h4>Nettiostaja</h4>
+              <h3>Nettiostaja</h3>
               <span class="testimonial-source">Google Maps</span>
             </div>
             <div class="verified-badge">
@@ -233,7 +237,7 @@
           </p>
           <div class="testimonial-footer">
             <div class="testimonial-author-info">
-              <h4>Safia Opiskelija</h4>
+              <h3>Safia Opiskelija</h3>
               <span class="testimonial-source">Google Maps</span>
             </div>
             <div class="verified-badge">
@@ -248,7 +252,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 488 512"><path fill="#4285F4" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
           Lue kaikki Google-arvostelut
         </a>
-        <a href="https://fi.trustpilot.com/review/digikaveri.com" target="_blank" rel="noopener" class="btn-review-outline tp">
+        <a href="https://fi.trustpilot.com/review/digikaveri.com" target="_blank" rel="noopener" class="btn-review-outline tp" style="color: #166534; background: #f1f5f9; border: 2px solid #166534;">
           <svg style="color: #00b67a" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           Katso Trustpilot-profiili
         </a>
@@ -629,6 +633,7 @@
         <div class="contact-info">
           <span class="badge"><i data-lucide="mail"></i> Yhteydenottolomake</span>
           <h2>Ota yhteyttä kirjallisesti</h2>
+          <style> .contact-info p { font-size: clamp(1.1rem, 3vw, 1.35rem); color: #1e293b; margin: 0; line-height: 1.6; } </style>
           <p>
             Haluatko kysyä neuvoa, antaa palautetta tai ehdottaa yhteistyötä? Täytä lomake, niin vastaamme sähköpostitse.
           </p>

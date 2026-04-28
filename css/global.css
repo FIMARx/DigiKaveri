@@ -646,7 +646,7 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
   margin-bottom: 24px;
 }
 .footer-desc {
-  color: #94a3b8;
+  color: #cbd5e1;
   line-height: 1.8;
   font-size: 1.1rem;
   max-width: 360px;
@@ -688,7 +688,7 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 }
 .footer-links a,
 .footer-contact a {
-  color: #94a3b8;
+  color: #cbd5e1;
   text-decoration: none;
   transition: all 0.2s ease;
   font-weight: 600;
@@ -714,7 +714,7 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
   text-align: center;
   padding-top: 32px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: #64748b;
+  color: #94a3b8;
   font-size: 0.95rem;
   font-weight: 500;
 }
@@ -1673,7 +1673,7 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 
 .status-modal-card p {
   font-size: 1.1rem;
-  color: #64748b;
+  color: #475569;
   margin-bottom: 32px;
   line-height: 1.6;
 }
@@ -2031,7 +2031,7 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 #cc-main .cm__desc {
   font-size: 1.05rem !important;
   line-height: 1.6 !important;
-  color: #475569 !important;
+  color: #1e293b !important;
   margin: 0 !important;
   text-align: left !important;
 }
@@ -2097,8 +2097,8 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 /* Settings Button - Ghost/Minimal */
 #cc-main .cm__btn[data-role="show"] {
   background-color: transparent !important;
-  color: #64748b !important;
-  text-decoration: none !important;
+  color: #2563eb !important;
+  text-decoration: underline !important;
   padding: 0.85rem 0.5rem !important;
   font-size: 1rem !important;
 }

@@ -22,10 +22,13 @@
           <span id="statusText">...</span>
         </div>
         <script>
-          (function() {
+          (async function() {
             const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
+            const statusUrl = "/data/status.json?v=" + Date.now();
+            const response = await fetch(statusUrl).catch(() => null);
+            
             const hour = finlandTime.getHours();
-            const isOpen = (hour >= 9 && hour < 21);
+            const isOpen = response ? (await response.json()).isOpen : (hour >= 9 && hour < 21);
             const badge = document.getElementById("serviceStatus");
             const text = document.getElementById("statusText");
             if (badge && text) {
@@ -216,7 +219,7 @@
           </p>
           <div class="testimonial-footer">
             <div class="testimonial-author-info">
-              <h4>Nettiostaja</h4>
+              <h3>Nettiostaja</h3>
               <span class="testimonial-source">Google Maps</span>
             </div>
             <div class="verified-badge">
@@ -235,7 +238,7 @@
           </p>
           <div class="testimonial-footer">
             <div class="testimonial-author-info">
-              <h4>Safia Opiskelija</h4>
+              <h3>Safia Opiskelija</h3>
               <span class="testimonial-source">Google Maps</span>
             </div>
             <div class="verified-badge">

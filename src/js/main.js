@@ -12,10 +12,10 @@ async function checkStatus() {
   try {
     // Determine the base path for status.json
     const statusUrl = "/data/status.json?v=" + Date.now();
-    const response = await fetch(statusUrl);
+    const response = await fetch(statusUrl).catch(() => null);
     
-    if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+    if (!response || !response.ok) {
+        throw new Error(response ? `Status: ${response.status}` : "Network Error");
     }
     
     const data = await response.json();
