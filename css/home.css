@@ -483,11 +483,15 @@ header#home::before {
 
 .testimonial-source {
     font-size: 0.9rem;
-    color: #6b7280;
+    color: #64748b;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+}
+
+.testimonial-source svg {
+    flex-shrink: 0;
 }
 
 .verified-badge {
