@@ -139,8 +139,8 @@ onDOMReady(() => {
   checkStatus();
   setInterval(checkStatus, 60000);
   
-  if (typeof AOS !== 'undefined') {
-    window.addEventListener('load', () => {
+  window.addEventListener('load', () => {
+    if (typeof AOS !== 'undefined') {
       AOS.init({
         once: true,           
         offset: 50,           
@@ -148,8 +148,8 @@ onDOMReady(() => {
         easing: 'ease-out-cubic',
         disable: window.innerWidth < 768
       });
-    });
-  }
+    }
+  });
 });
 
 function initMobileDropdowns() {
