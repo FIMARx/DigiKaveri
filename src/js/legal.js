@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
  * Updates the width of the progress bar based on scroll position
  */
 function initScrollProgressBar() {
-    // Target the progress fill inside the ToC box
     const progressFill = document.querySelector(".toc-progress-fill");
     if (!progressFill) return;
 
@@ -33,15 +32,13 @@ function initLegalScrollSpy() {
 
     if (!sections.length || !tocLinks.length) return;
 
-    // Options for regular middle-of-page scrolling
     const options = {
         root: null,
-        rootMargin: "-20% 0px -60% 0px", // More balanced zone
+        rootMargin: "-20% 0px -60% 0px",
         threshold: 0
     };
 
     const observer = new IntersectionObserver((entries) => {
-        // If we are at the very bottom, let the scroll event take over for the last section
         if (isAtBottom()) return;
 
         entries.forEach((entry) => {
@@ -56,7 +53,6 @@ function initLegalScrollSpy() {
         observer.observe(section);
     });
 
-    // Fallback for reaching the bottom of the page (to trigger hard-to-reach sections like #10)
     window.addEventListener("scroll", () => {
         if (isAtBottom()) {
             const lastId = sections[sections.length - 1].getAttribute("id");

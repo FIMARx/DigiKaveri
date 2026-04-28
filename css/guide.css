@@ -1,23 +1,24 @@
 /* guide.css - DigiKaveri Remote Support Guide Styles */
 
 .guide-hero {
-  padding: 80px 20px 60px;
+  padding: 100px 24px 80px;
   background: linear-gradient(135deg, var(--white) 0%, #f1f5f9 100%);
   text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border);
 }
 
 .guide-hero h1 {
-  font-size: 3rem;
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
   font-weight: 800;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   color: var(--text-dark);
+  overflow-wrap: break-word;
 }
 
 .guide-hero p {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   color: var(--text-light);
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -33,38 +34,39 @@
 }
 
 .section-title-center h2 {
-  font-size: 2.25rem;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
   margin-bottom: 10px;
+  overflow-wrap: break-word;
 }
 
 .section-title-center .badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: var(--primary);
-  color: var(--white);
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-weight: 800;
+  gap: 12px;
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-weight: 700;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  margin-bottom: 32px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
 /* PC Section Styles */
 .pc-guide-card {
   background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
-  padding: 50px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 64px;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 50px;
+  gap: 64px;
   align-items: flex-start;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 .pc-guide-card:hover {
@@ -73,10 +75,10 @@
 
 .pc-download-info {
   text-align: center;
-  padding: 40px 30px;
+  padding: 48px;
   background: #f8fafc;
-  border-radius: 20px;
-  border: 1px solid #f1f5f9;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
 .guide-detected-badge {
@@ -111,15 +113,15 @@
   justify-content: center;
   gap: 12px;
   background: var(--primary);
-  color: white;
+  color: var(--white);
   text-decoration: none;
-  padding: 18px 30px;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-  transition: all 0.3s ease;
-  margin-top: 20px;
+  padding: 20px 32px;
+  border-radius: var(--radius);
+  font-size: 1.25rem;
+  font-weight: 800;
+  box-shadow: 0 4px 14px 0 rgba(var(--primary-rgb), 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 24px;
 }
 
 .btn-download-tv:hover {
@@ -216,8 +218,9 @@
 }
 
 .mobile-placeholder h3 {
-  font-size: 1.75rem;
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
   margin-bottom: 15px;
+  overflow-wrap: break-word;
 }
 
 .mobile-placeholder p {

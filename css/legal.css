@@ -3,12 +3,12 @@
 /* Legal Page Premium Design */
 
 .legal-container {
-    padding: 120px 20px 80px;
-    max-width: 1000px; /* Slightly wider to accommodate ToC */
+    padding: 140px 24px 100px;
+    max-width: var(--max-width);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
+    grid-template-columns: 18rem 1fr;
+    gap: 64px;
     align-items: start;
 }
 
@@ -37,11 +37,12 @@
 }
 
 .legal-hero h1 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 6vw, 3rem);
     font-weight: 800;
     color: var(--text-dark);
     margin-bottom: 12px;
     letter-spacing: -1.5px;
+    overflow-wrap: break-word;
 }
 
 .legal-hero .last-updated {

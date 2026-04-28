@@ -1,3 +1,6 @@
+import { createIcons } from 'lucide';
+import { ICON_SET } from './icons';
+
 const isEn = window.location.pathname.includes('/en/');
 const label = isEn ? "Increase text size" : "Suurenna tekstiä";
 
@@ -9,15 +12,10 @@ toggleBtn.title = label;
 
 document.body.appendChild(toggleBtn);
 
-if (typeof lucide !== "undefined") {
-  lucide.createIcons();
-}
+createIcons({ icons: ICON_SET });
 
 toggleBtn.addEventListener("click", () => {
   document.documentElement.classList.toggle("large-text");
   toggleBtn.classList.toggle("active");
-
-  if (typeof lucide !== "undefined") {
-    lucide.createIcons();
-  }
+  createIcons({ icons: ICON_SET });
 });

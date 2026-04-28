@@ -1,3 +1,6 @@
+import { createIcons } from 'lucide';
+import { ICON_SET } from './icons';
+
 function showToast(message, isSuccess = true) {
   let toastContainer = document.getElementById('toast-container');
   if (!toastContainer) {
@@ -13,7 +16,7 @@ function showToast(message, isSuccess = true) {
   toast.innerHTML = `<i data-lucide="${icon}"></i> <span>${message}</span>`;
   
   toastContainer.appendChild(toast);
-  if (typeof lucide !== "undefined") lucide.createIcons({ root: toastContainer });
+  createIcons({ icons: ICON_SET, root: toastContainer });
 
   setTimeout(() => {
     toast.classList.add('removing');
@@ -87,11 +90,11 @@ function setupForm(formId) {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const inputs = form.querySelectorAll("input, select, textarea");
+    const currentInputs = form.querySelectorAll("input, select, textarea");
     let isFormValid = true;
 
     try {
-      inputs.forEach((input) => {
+      currentInputs.forEach((input) => {
         const isValid = input.checkValidity();
         const minLengthAttr = input.getAttribute("minlength");
         const isManualTooShort =
@@ -102,7 +105,7 @@ function setupForm(formId) {
         if (!isValid || isManualTooShort) {
           isFormValid = false;
           if (isManualTooShort || input.validity.tooShort) {
-            input.setCustomValidity(t.tooShort(minLengthAttr || 2));
+            input.setCustomValidity(t.tooShort(minLengthAttr || "2"));
           } else if (input.validity.valueMissing) {
             input.setCustomValidity(t.required);
           } else if (input.type === "email") {
@@ -129,7 +132,8 @@ function setupForm(formId) {
     btn.disabled = true;
     btn.innerHTML = `${t.loading} <i data-lucide="loader-2" class="spin"></i>`;
     btn.style.background = "#2563EB";
-    if (typeof lucide !== "undefined") lucide.createIcons();
+    form.classList.add("form-submitting");
+    createIcons({ icons: ICON_SET });
 
     const formData = new FormData(form);
     const object = Object.fromEntries(formData);
@@ -150,26 +154,54 @@ function setupForm(formId) {
       if (response.status === 200) {
         btn.innerHTML = `${t.success} <i data-lucide="check"></i>`;
         btn.style.background = "#10B981";
-        if (typeof lucide !== "undefined") lucide.createIcons();
+        createIcons({ icons: ICON_SET });
+        
+        // Visual feedback: replace form content with success message
+        const formParent = form.parentElement;
+        const originalDisplay = form.style.display;
+        
         form.reset();
-        showToast(t.thankYou, true);
+        form.style.display = "none";
+        
+        const successEl = document.createElement("div");
+        successEl.className = "form-success-message";
+        successEl.style.display = "flex";
+        successEl.innerHTML = `
+          <i data-lucide="check-circle"></i>
+          <h3>${t.success}</h3>
+          <p>${t.thankYou}</p>
+        `;
+        formParent.appendChild(successEl);
+        createIcons({ icons: ICON_SET, root: successEl });
 
         setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.background = "";
-          btn.disabled = false;
-          if (typeof lucide !== "undefined") lucide.createIcons();
-        }, 4000);
+          successEl.style.opacity = "0";
+          setTimeout(() => {
+            if (formParent.contains(successEl)) {
+              formParent.removeChild(successEl);
+            }
+            form.style.display = originalDisplay;
+            form.classList.remove("form-submitting");
+            btn.innerHTML = originalText;
+            btn.style.background = "";
+            btn.disabled = false;
+            createIcons({ icons: ICON_SET });
+          }, 500);
+        }, 8000);
+
+        showToast(t.thankYou, true);
       } else {
         btn.innerHTML = t.error;
         btn.style.background = "#EF4444";
         btn.disabled = false;
+        form.classList.remove("form-submitting");
         showToast(t.sendError, false);
       }
     } catch (error) {
       btn.innerHTML = t.connError;
       btn.style.background = "#EF4444";
       btn.disabled = false;
+      form.classList.remove("form-submitting");
       showToast(t.netError, false);
     }
   });

@@ -38,6 +38,10 @@
         <a href="index.html#faq" class="mobile-nav-link"
           ><i data-lucide="help-circle"></i> FAQ</a
         >
+        <a href="index.html#contact-detailed" class="mobile-nav-link"
+          ><i data-lucide="mail"></i> {{nav_contact}}</a
+        >
+        <hr class="dropdown-divider">
         <a href="{{privacy_url}}" class="mobile-nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
           ><i data-lucide="shield-check"></i> {{nav_privacy}}</a
         >
@@ -46,9 +50,6 @@
         >
       </div>
     </div>
-    <a href="index.html#contact-detailed" class="mobile-nav-link"
-      ><i data-lucide="mail"></i> {{nav_contact}}</a
-    >
     <div class="mobile-lang-switcher">
       <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')">FI</a>
       <span class="mobile-lang-divider">|</span>

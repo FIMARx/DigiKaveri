@@ -6,27 +6,38 @@
 <title>{{title}}</title>
 <meta name="description" content="{{description}}" />
 <meta name="keywords" content="{{keywords}}" />
-<meta name="author" content="DigiKaveri" />
+  <meta name="author" content="DigiKaveri" />
+  <meta name="theme-color" content="#2563EB" />
 
-<meta property="og:title" content="{{title}}" />
-<meta property="og:description" content="{{description}}" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://digikaveri.com/{{path}}" />
-<meta property="og:image" content="https://digikaveri.com/images/logo.png" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://digikaveri.com/{{path}}" />
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:description" content="{{description}}" />
+  <meta property="og:image" content="https://digikaveri.com/images/preview.png" />
+  <meta property="og:site_name" content="DigiKaveri" />
+  <meta property="og:locale" content="fi_FI" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://digikaveri.com/{{path}}" />
+  <meta property="twitter:title" content="{{title}}" />
+  <meta property="twitter:description" content="{{description}}" />
+  <meta property="twitter:image" content="https://digikaveri.com/images/preview.png" />
 
 <link rel="canonical" href="https://digikaveri.com/{{path}}" />
 <link rel="alternate" hreflang="fi" href="https://digikaveri.com/{{fi_path}}" />
 <link rel="alternate" hreflang="en" href="https://digikaveri.com/en/{{en_path}}" />
 <link rel="alternate" hreflang="x-default" href="https://digikaveri.com/{{fi_path}}" />
 
-<link rel="icon" type="image/x-icon" href="{{base}}images/Ico.ico" />
-<link rel="apple-touch-icon" href="{{base}}images/logo.png" />
+<link rel="icon" type="image/x-icon" href="/images/Ico.ico" />
+<link rel="apple-touch-icon" href="/images/logo.png" />
 <link rel="manifest" href="/site.webmanifest" />
 
-<link rel="stylesheet" href="{{base}}css/variables.css" />
-<link rel="stylesheet" href="{{base}}css/global.css" />
+<link rel="stylesheet" href="/css/variables.css" />
+<link rel="stylesheet" href="/css/global.css" />
 {{#if extra_css}}
-<link rel="stylesheet" href="{{base}}css/{{extra_css}}.css" />
+<link rel="stylesheet" href="/css/{{extra_css}}.css" />
 {{/if}}
 <!-- Non-blocking CSS: loads after initial render -->
 <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />

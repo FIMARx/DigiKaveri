@@ -1,7 +1,5 @@
-/**
- * DigiKaveri - Smart Guide Detection & Toggling
- * Handles automatic platform detection and manual switching for both PC and mobile guides.
- */
+import { createIcons } from 'lucide';
+import { ICON_SET } from './icons';
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Mobile Guide Elements ---
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Show "Automatically Detected" badge only for the actual platform ---
     const showPlatformBadge = () => {
-        // First, ensure all badges start hidden (in case of double execution)
         document.querySelectorAll('.guide-detected-badge').forEach(b => b.classList.add('hidden'));
 
         // PC Section Badge
@@ -66,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnAndroid.classList.add('active');
                 btnIos.classList.remove('active');
             }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            createIcons({ icons: ICON_SET });
             currentMobilePlatform = platform;
         };
 
@@ -105,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnWindows.classList.add('active');
                 btnMac.classList.remove('active');
             }
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            createIcons({ icons: ICON_SET });
             currentPCPlatform = platform;
         };
 
@@ -167,16 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const container = tab.closest('.help-content-wrapper');
             const targetView = tab.getAttribute('data-view');
             
-            // 1. Update buttons in this container
             container.querySelectorAll('.help-tab-btn').forEach(btn => btn.classList.remove('active'));
             tab.classList.add('active');
             
-            // 2. Update views in this container
             container.querySelectorAll('.help-view').forEach(view => view.classList.remove('active'));
             const viewToShow = container.querySelector(`.help-view[data-view-id="${targetView}"]`);
             if (viewToShow) viewToShow.classList.add('active');
             
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+            createIcons({ icons: ICON_SET });
         });
     });
 
@@ -186,12 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const smartHeaders = document.querySelectorAll('.guide-smart-header');
 
     if (pcGuideSection && mobileGuideSection) {
-        // Initial adaptive collapse based on device
         const isMobileDevice = isIOS || isAndroid;
 
         if (isMobileDevice) {
             pcGuideSection.classList.add('is-collapsed');
-            // Auto-scroll to mobile guide on load if on mobile
             setTimeout(() => {
                 mobileGuideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 500);
@@ -199,12 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileGuideSection.classList.add('is-collapsed');
         }
 
-        // Fix for AOS (ensure active section triggers even without scroll)
-        if (typeof AOS !== 'undefined') {
-            setTimeout(() => { AOS.refresh(); }, 600);
-        }
-
-        // Handle Smart Header Click (Expansion)
         smartHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 const targetId = header.getAttribute('data-target');
@@ -213,12 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (section && section.classList.contains('is-collapsed')) {
                     section.classList.remove('is-collapsed');
                     
-                    // Smooth scroll to the expanded section
                     setTimeout(() => {
                         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }, 100);
                     
-                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                    createIcons({ icons: ICON_SET });
                 }
             });
         });
@@ -236,14 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 lightboxImg.src = img.src;
                 lightboxImg.alt = img.alt;
                 lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                document.body.style.overflow = 'hidden';
             });
         });
 
         const closeLightbox = () => {
             lightbox.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-            setTimeout(() => { lightboxImg.src = ''; }, 300); // Clear src after animation
+            document.body.style.overflow = '';
+            setTimeout(() => { lightboxImg.src = ''; }, 300);
         };
 
         lightbox.addEventListener('click', (e) => {
@@ -256,11 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxClose.addEventListener('click', closeLightbox);
         }
 
-        // Close on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
             }
         });
     }
+
+    createIcons({ icons: ICON_SET });
 });

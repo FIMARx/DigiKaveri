@@ -9,6 +9,16 @@
     en_path="404.html"
     extra_css="home"
   }}
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .hero-centered {
+      flex-grow: 1;
+    }
+  </style>
 </head>
 <body>
   {{> nav }}
@@ -22,7 +32,7 @@
         >
       </h1>
       <p class="hero-subtitle">
-        The page you are looking for unfortunately does not exist or has been moved.
+        The page you are looking for does not exist or has been moved.
       </p>
       <div style="margin-top: 30px; display: flex; justify-content: center;">
         <a href="/en/" class="btn-submit" style="display: inline-flex; width: auto; padding: 15px 30px; align-items: center; gap: 8px; text-decoration: none;">

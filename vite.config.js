@@ -1,64 +1,14 @@
 import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+import { readFileSync } from 'fs';
 
-const fi_data = {
-  lang: 'fi',
-  base: '/',
-  base_fi: '/',
-  base_en: '/en/',
-  nav_home: 'Etusivu',
-  nav_services: 'Palvelut',
-  nav_remote: 'Etätuki',
-  nav_pricing: 'Hinnasto',
-  nav_team: 'Tiimi',
-  nav_privacy: 'Tietosuoja',
-  nav_terms: 'Käyttöehdot',
-  nav_contact: 'Yhteystiedot',
-  nav_pc_guide: 'PC-ohjeet',
-  nav_mobile_guide: 'Mobiili-ohjeet',
-  nav_call: 'Soita meille',
-  etätuki_url: 'etayhteys.html',
-  privacy_url: 'tietosuoja.html',
-  terms_url: 'kayttoehdot.html',
-  footer_desc: 'Luotettava kodin ja pienyritysten IT-tuki Uudellamaalla ja etänä koko Suomeen.',
-  footer_links_title: 'Pikalinkit',
-  footer_contact_title: 'Yhteystiedot',
-  footer_rights: 'Kaikki oikeudet pidätetään.',
-  modal_closed_title: 'Palvelumme on tällä hetkellä suljettu',
-  modal_closed_desc: 'Palvelemme arkisin ja viikonloppuisin klo 09:00–21:00. Voit kuitenkin jättää soittopyynnön, niin otamme sinuun yhteyttä heti huomenna!',
-  modal_call_btn: 'Jätä soittopyyntö',
-  modal_ok_btn: 'Selvä, ymmärrän'
-};
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const en_data = {
-  lang: 'en',
-  base: '../',
-  base_fi: '../',
-  base_en: './',
-  nav_home: 'Home',
-  nav_services: 'Services',
-  nav_remote: 'Remote Support',
-  nav_pricing: 'Pricing',
-  nav_team: 'Team',
-  nav_privacy: 'Privacy Policy',
-  nav_terms: 'Terms of Service',
-  nav_contact: 'Contact',
-  nav_pc_guide: 'PC Guide',
-  nav_mobile_guide: 'Mobile Guide',
-  nav_call: 'Call us',
-  etätuki_url: 'remote-support.html',
-  privacy_url: 'privacy-policy.html',
-  terms_url: 'terms-of-service.html',
-  footer_desc: 'Reliable IT support for homes and small businesses in Uusimaa and remotely across Finland.',
-  footer_links_title: 'Quick Links',
-  footer_contact_title: 'Contact Info',
-  footer_rights: 'All rights reserved.',
-  modal_closed_title: 'Our service is currently closed',
-  modal_closed_desc: 'We serve on weekdays and weekends from 09:00 to 21:00. However, you can leave a callback request and we will contact you tomorrow!',
-  modal_call_btn: 'Request a callback',
-  modal_ok_btn: 'Got it'
-};
+const fi_data = JSON.parse(readFileSync(resolve(__dirname, 'src/locales/fi.json'), 'utf-8'));
+const en_data = JSON.parse(readFileSync(resolve(__dirname, 'src/locales/en.json'), 'utf-8'));
 
 export default defineConfig({
   plugins: [
@@ -143,5 +93,10 @@ export default defineConfig({
         en_error404: resolve(__dirname, 'en/404.html'),
       }
     }
+  },
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+    hmr: process.env.DISABLE_HMR !== 'true',
   }
 });

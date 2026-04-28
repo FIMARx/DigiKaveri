@@ -1,7 +1,7 @@
-import {
-  createIcons,
-  ArrowRight, AtSign, Banknote, BookOpen, CalendarX, Check, CheckCircle, ChevronDown, Clock, Cookie, CreditCard, Database, Download, ExternalLink, FileText, Gavel, Globe, Grid, HelpCircle, Home, Info, Key, Laptop, List, Lock, Mail, MapPin, Menu, MessageSquare, Monitor, PenTool, Phone, PhoneCall, Play, PlayCircle, Printer, Rocket, Search, Send, Settings, Share2, ShieldAlert, ShieldCheck, Smartphone, Smile, Star, Tablet, Tag, Tv, User, Users, Video, Wifi, Wrench, X
-} from 'lucide';
+import '/css/variables.css';
+import '/css/global.css';
+import { createIcons } from 'lucide';
+import { ICON_SET } from './icons';
 
 async function checkStatus() {
   const badge = document.getElementById("serviceStatus");
@@ -10,8 +10,14 @@ async function checkStatus() {
   const isEn = window.location.pathname.includes("/en/");
   
   try {
+    // Determine the base path for status.json
     const statusUrl = "/data/status.json?v=" + Date.now();
     const response = await fetch(statusUrl);
+    
+    if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+    
     const data = await response.json();
 
     const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
@@ -120,9 +126,7 @@ onDOMReady(() => {
   loadAnalytics();
 
   createIcons({
-    icons: {
-      ArrowRight, AtSign, Banknote, BookOpen, CalendarX, Check, CheckCircle, ChevronDown, Clock, Cookie, CreditCard, Database, Download, ExternalLink, FileText, Gavel, Globe, Grid, HelpCircle, Home, Info, Key, Laptop, List, Lock, Mail, MapPin, Menu, MessageSquare, Monitor, PenTool, Phone, PhoneCall, Play, PlayCircle, Printer, Rocket, Search, Send, Settings, Share2, ShieldAlert, ShieldCheck, Smartphone, Smile, Star, Tablet, Tag, Tv, User, Users, Video, Wifi, Wrench, X
-    }
+    icons: ICON_SET
   });
 
   initFAQ();
@@ -131,6 +135,9 @@ onDOMReady(() => {
   initMobileNav();
   initMobileDropdowns();
   initFAB();
+  
+  checkStatus();
+  setInterval(checkStatus, 60000);
   
   if (typeof AOS !== 'undefined') {
     window.addEventListener('load', () => {
@@ -141,9 +148,6 @@ onDOMReady(() => {
         easing: 'ease-out-cubic',
         disable: window.innerWidth < 768
       });
-
-      checkStatus();
-      setInterval(checkStatus, 60000);
     });
   }
 });
