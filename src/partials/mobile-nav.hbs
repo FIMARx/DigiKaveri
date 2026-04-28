@@ -6,29 +6,18 @@
     <a href="index.html#home" class="mobile-nav-link {{#if_eq active "home"}}active{{/if_eq}}"
       ><i data-lucide="home"></i> {{nav_home}}</a
     >
-    <div class="mobile-nav-item-dropdown">
-      <button class="mobile-dropdown-trigger" aria-label="{{nav_remote}}-valikko" aria-expanded="false" aria-haspopup="true">
-        <div><i data-lucide="monitor"></i> {{nav_remote}}</div>
-        <i data-lucide="chevron-down"></i>
-      </button>
-      <div class="mobile-dropdown-menu">
-        <a href="{{etätuki_url}}#pc-guide" class="mobile-nav-link"
-          ><i data-lucide="monitor"></i> {{nav_pc_guide}}</a
-        >
-        <a href="{{etätuki_url}}#mobile-guide" class="mobile-nav-link"
-          ><i data-lucide="smartphone"></i> {{nav_mobile_guide}}</a
-        >
-      </div>
-    </div>
-    <a href="index.html#solutions" class="mobile-nav-link {{#if_eq active "solutions"}}active{{/if_eq}}"
-      ><i data-lucide="grid"></i> {{nav_services}}</a
+    <a href="index.html#solutions" class="mobile-nav-link {{#if_eq active "services"}}active{{/if_eq}}"
+      ><i data-lucide="zap"></i> {{nav_services}}</a
+    >
+    <a href="{{etätuki_url}}" class="mobile-nav-link {{#if_eq active "remote"}}active{{/if_eq}}"
+      ><i data-lucide="monitor"></i> {{nav_remote}}</a
     >
     <a href="index.html#pricing" class="mobile-nav-link {{#if_eq active "pricing"}}active{{/if_eq}}"
       ><i data-lucide="credit-card"></i> {{nav_pricing}}</a
     >
     <div class="mobile-nav-item-dropdown">
-      <button class="mobile-dropdown-trigger" aria-label="Info-valikko" aria-expanded="false" aria-haspopup="true">
-        <div><i data-lucide="info"></i> Info</div>
+      <button class="mobile-dropdown-trigger" aria-label="{{nav_more}}-valikko" aria-expanded="false" aria-haspopup="true">
+        <div><i data-lucide="more-horizontal"></i> {{nav_more}}</div>
         <i data-lucide="chevron-down"></i>
       </button>
       <div class="mobile-dropdown-menu">
@@ -41,7 +30,6 @@
         <a href="index.html#contact-detailed" class="mobile-nav-link"
           ><i data-lucide="mail"></i> {{nav_contact}}</a
         >
-        <hr class="dropdown-divider">
         <a href="{{privacy_url}}" class="mobile-nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
           ><i data-lucide="shield-check"></i> {{nav_privacy}}</a
         >
