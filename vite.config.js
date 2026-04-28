@@ -91,6 +91,11 @@ export default defineConfig({
         en_terms: resolve(__dirname, 'en/terms-of-service.html'),
         error404: resolve(__dirname, '404.html'),
         en_error404: resolve(__dirname, 'en/404.html'),
+      },
+      output: {
+        entryFileNames: 'assets/script-[hash].js',
+        chunkFileNames: 'assets/chunk-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     }
   },
