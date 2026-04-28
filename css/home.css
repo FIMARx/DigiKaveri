@@ -429,20 +429,56 @@ header#home::before {
 
 .testimonial-card {
     background: white;
-    border-radius: 20px;
-    padding: 40px;
-    border: 2px solid #f3f4f6;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
-    min-height: 300px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .testimonial-card.featured {
-    border-color: #f3f4f6;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    border-color: #f1f5f9;
+}
+
+.card-header-google {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.reviewer-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.reviewer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.reviewer-meta h3 {
+    margin: 0 !important;
+    font-size: 1.15rem !important;
+    color: #111827 !important;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
 }
 
 .testimonial-card:hover {
@@ -494,16 +530,20 @@ header#home::before {
     flex-shrink: 0;
 }
 
-.verified-badge {
-    background: #f0fdf4;
-    color: #166534;
-    padding: 6px 14px;
-    border-radius: 50px;
+.verified-badge-google {
     font-size: 0.85rem;
     font-weight: 700;
-    display: inline-flex;
+    color: #1a73e8;
+    display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+}
+
+.verified-badge-google i,
+.verified-badge-google svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 3px;
 }
 
 /* Action Buttons */
