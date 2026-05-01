@@ -1,47 +1,47 @@
 <div class="mobile-nav-overlay">
   <div class="mobile-nav-content">
     <button class="mobile-nav-close" aria-label="Sulje valikko">
-      <i data-lucide="x"></i>
+      <i data-lucide="x" aria-hidden="true"></i>
     </button>
     <a href="index.html#home" class="mobile-nav-link {{#if_eq active "home"}}active{{/if_eq}}"
-      ><i data-lucide="home"></i> {{nav_home}}</a
+      ><i data-lucide="home" aria-hidden="true"></i> {{nav_home}}</a
     >
     <a href="index.html#solutions" class="mobile-nav-link {{#if_eq active "services"}}active{{/if_eq}}"
-      ><i data-lucide="zap"></i> {{nav_services}}</a
+      ><i data-lucide="zap" aria-hidden="true"></i> {{nav_services}}</a
     >
     <a href="{{etätuki_url}}" class="mobile-nav-link {{#if_eq active "remote"}}active{{/if_eq}}"
-      ><i data-lucide="monitor"></i> {{nav_remote}}</a
+      ><i data-lucide="monitor" aria-hidden="true"></i> {{nav_remote}}</a
     >
     <a href="index.html#pricing" class="mobile-nav-link {{#if_eq active "pricing"}}active{{/if_eq}}"
-      ><i data-lucide="credit-card"></i> {{nav_pricing}}</a
+      ><i data-lucide="credit-card" aria-hidden="true"></i> {{nav_pricing}}</a
     >
     <div class="mobile-nav-item-dropdown">
       <button class="mobile-dropdown-trigger" aria-label="{{nav_more}}-valikko" aria-expanded="false" aria-haspopup="true">
-        <div><i data-lucide="more-horizontal"></i> {{nav_more}}</div>
-        <i data-lucide="chevron-down"></i>
+        <div><i data-lucide="more-horizontal" aria-hidden="true"></i> {{nav_more}}</div>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
       </button>
       <div class="mobile-dropdown-menu">
         <a href="index.html#team" class="mobile-nav-link"
-          ><i data-lucide="users"></i> {{nav_team}}</a
+          ><i data-lucide="users" aria-hidden="true"></i> {{nav_team}}</a
         >
         <a href="index.html#faq" class="mobile-nav-link"
-          ><i data-lucide="help-circle"></i> FAQ</a
+          ><i data-lucide="help-circle" aria-hidden="true"></i> FAQ</a
         >
         <a href="index.html#contact-detailed" class="mobile-nav-link"
-          ><i data-lucide="mail"></i> {{nav_contact}}</a
+          ><i data-lucide="mail" aria-hidden="true"></i> {{nav_contact}}</a
         >
         <a href="{{privacy_url}}" class="mobile-nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
-          ><i data-lucide="shield-check"></i> {{nav_privacy}}</a
+          ><i data-lucide="shield-check" aria-hidden="true"></i> {{nav_privacy}}</a
         >
         <a href="{{terms_url}}" class="mobile-nav-link {{#if_eq active "terms"}}active{{/if_eq}}"
-          ><i data-lucide="file-text"></i> {{nav_terms}}</a
+          ><i data-lucide="file-text" aria-hidden="true"></i> {{nav_terms}}</a
         >
       </div>
     </div>
     <div class="mobile-lang-switcher">
-      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')">FI</a>
+      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')" aria-label="Vaihda kieli suomeksi">FI</a>
       <span class="mobile-lang-divider">|</span>
-      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')">EN</a>
+      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="Switch language to English">EN</a>
     </div>
   </div>
 </div>

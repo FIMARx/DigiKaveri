@@ -30,7 +30,7 @@
           <div class="smart-header-card">
             <div class="smart-header-info">
               <div class="smart-header-icon">
-                <i data-lucide="monitor"></i>
+                <i data-lucide="monitor" aria-hidden="true"></i>
               </div>
               <div class="smart-header-text">
                 <h3>Käytätkö tietokonetta?</h3>
@@ -39,14 +39,14 @@
             </div>
             <div class="smart-header-action">
               <span>Avaa PC-ohjeet</span>
-              <i data-lucide="chevron-down" class="chevron-pulse"></i>
+              <i data-lucide="chevron-down" class="chevron-pulse" aria-hidden="true"></i>
             </div>
           </div>
         </div>
 
         <div class="guide-adaptive-content">
           <div class="section-title-center">
-            <span class="badge"><i data-lucide="monitor"></i> Tietokone</span>
+            <span class="badge"><i data-lucide="monitor" aria-hidden="true"></i> Tietokone</span>
             <h2>Näin aloitat etätuen PC:llä</h2>
             <p>Käytämme maailman suosituinta ja turvallisinta TeamViewer-ohjelmaa.</p>
           </div>
@@ -68,13 +68,13 @@
           <div id="windows-card-pc" class="pc-guide-card platform-card">
             <div class="pc-download-info">
               <div class="guide-detected-badge hidden">
-                <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+                <i data-lucide="check-circle" aria-hidden="true"></i> Automaattisesti tunnistettu
               </div>
               <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
               <h3>Lataa ohjelma</h3>
               <p>Klikkaa alla olevaa painiketta ladataksesi pienen apuohjelman.</p>
               <a href="https://download.teamviewer.com/download/TeamViewerQS.exe" class="btn-download-tv">
-                <i data-lucide="download"></i> Lataa TeamViewer QS
+                <i data-lucide="download" aria-hidden="true"></i> Lataa TeamViewer QS
               </a>
               <p class="download-note">
                 Versio: Windows (QuickSupport)
@@ -84,7 +84,7 @@
                   Haluatko ladata muun version tai vierailla virallisella sivustolla?
                 </p>
                 <a href="https://www.teamviewer.com/fi/lataa/windows/" target="_blank" rel="noopener noreferrer" class="official-download-link">
-                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" class="lucide-sm"></i>
+                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" class="lucide-sm" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
@@ -116,17 +116,17 @@
             <!-- Detailed Help Section (Windows) -->
             <div class="detailed-help-section">
               <button class="help-toggle-btn" data-target="help-content-windows" aria-expanded="false">
-                 <i data-lucide="chevron-down"></i>
+                 <i data-lucide="chevron-down" aria-hidden="true"></i>
                  <span>Tarvitsetko vielä tarkempia ohjeita?</span>
               </button>
 
               <div id="help-content-windows" class="help-content-wrapper">
                 <div class="help-sub-switcher">
                   <button class="help-tab-btn active" data-view="video">
-                    <i data-lucide="play-circle"></i> Video-opas
+                    <i data-lucide="play-circle" aria-hidden="true"></i> Video-opas
                   </button>
                   <button class="help-tab-btn" data-view="manual">
-                    <i data-lucide="book-open"></i> Manuaali
+                    <i data-lucide="book-open" aria-hidden="true"></i> Manuaali
                   </button>
                 </div>
 
@@ -134,11 +134,11 @@
                   <!-- Video View -->
                   <div class="help-view active" data-view-id="video">
                     <div class="help-card">
-                      <h3><i data-lucide="play-circle"></i> Video-opas (Windows)</h3>
+                      <h3><i data-lucide="play-circle" aria-hidden="true"></i> Video-opas (Windows)</h3>
                     <div class="video-container">
                       <div class="video-overlay" onclick="this.classList.add('hidden'); const v = this.nextElementSibling; v.setAttribute('controls', 'true'); v.play();">
                         <div class="play-circle-btn">
-                          <i data-lucide="play"></i>
+                          <i data-lucide="play" aria-hidden="true"></i>
                         </div>
                       </div>
                       <video width="100%" poster="images/guide/pc/win/1.png" class="rounded-12">
@@ -152,7 +152,7 @@
                 <!-- Manual View -->
                 <div class="help-view" data-view-id="manual">
                   <div class="help-card">
-                    <h3><i data-lucide="book-open"></i> Windows-manuaali</h3>
+                    <h3><i data-lucide="book-open" aria-hidden="true"></i> Windows-manuaali</h3>
                     <div class="visual-steps">
                       <!-- Step 1 -->
                       <div class="visual-step">
@@ -231,13 +231,13 @@
           <div id="mac-card-pc" class="pc-guide-card platform-card hidden">
             <div class="pc-download-info">
               <div class="guide-detected-badge hidden">
-                <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+                <i data-lucide="check-circle" aria-hidden="true"></i> Automaattisesti tunnistettu
               </div>
               <img src="svg/teamviewer.svg" alt="TeamViewer QuickSupport" class="tv-logo" />
               <h3>Lataa ohjelma</h3>
               <p>Klikkaa alla olevaa painiketta ladataksesi pienen apuohjelman.</p>
               <a href="https://download.teamviewer.com/download/TeamViewerQS.dmg" class="btn-download-tv">
-                <i data-lucide="download"></i> Lataa TeamViewer (Mac)
+                <i data-lucide="download" aria-hidden="true"></i> Lataa TeamViewer (Mac)
               </a>
               <p class="download-note">
                 Versio: macOS (QuickSupport)
@@ -247,7 +247,7 @@
                   Haluatko ladata muun version tai vierailla virallisella sivustolla?
                 </p>
                 <a href="https://www.teamviewer.com/fi/lataa/mac-os/" target="_blank" rel="noopener noreferrer" class="official-download-link">
-                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" class="lucide-sm"></i>
+                  TeamViewerin virallinen lataussivu <i data-lucide="external-link" class="lucide-sm" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
@@ -279,17 +279,17 @@
             <!-- Detailed Help Section (Mac) -->
             <div class="detailed-help-section">
               <button class="help-toggle-btn" data-target="help-content-mac" aria-expanded="false">
-                 <i data-lucide="chevron-down"></i>
+                 <i data-lucide="chevron-down" aria-hidden="true"></i>
                  <span>Tarvitsetko vielä tarkempia ohjeita?</span>
               </button>
 
               <div id="help-content-mac" class="help-content-wrapper">
                 <div class="help-sub-switcher">
                   <button class="help-tab-btn active" data-view="video">
-                    <i data-lucide="play-circle"></i> Video-opas
+                    <i data-lucide="play-circle" aria-hidden="true"></i> Video-opas
                   </button>
                   <button class="help-tab-btn" data-view="manual">
-                    <i data-lucide="book-open"></i> Manuaali
+                    <i data-lucide="book-open" aria-hidden="true"></i> Manuaali
                   </button>
                 </div>
 
@@ -297,10 +297,10 @@
                   <!-- Video View -->
                   <div class="help-view active" data-view-id="video">
                     <div class="help-card">
-                      <h3><i data-lucide="play-circle"></i> Video-opas (Mac)</h3>
+                      <h3><i data-lucide="play-circle" aria-hidden="true"></i> Video-opas (Mac)</h3>
                       <div class="video-container">
                         <div class="video-placeholder">
-                          <i data-lucide="video"></i>
+                          <i data-lucide="video" aria-hidden="true"></i>
                           <p>Tässä videossa näytämme Mac-latauksen<br>ja käyttöoikeuksien sallimisen.</p>
                           <p><small>(Video tulossa pian)</small></p>
                         </div>
@@ -311,7 +311,7 @@
                   <!-- Manual View -->
                   <div class="help-view" data-view-id="manual">
                     <div class="help-card">
-                      <h3><i data-lucide="book-open"></i> Mac-manuaali</h3>
+                      <h3><i data-lucide="book-open" aria-hidden="true"></i> Mac-manuaali</h3>
                       <div class="visual-steps">
                         <div class="visual-step">
                           <div class="v-step-number">1</div>
@@ -338,7 +338,7 @@
 
 
         <div class="security-note">
-          <i data-lucide="shield-check"></i>
+          <i data-lucide="shield-check" aria-hidden="true"></i>
           <p>
             <strong>Turvallisuustiedote:</strong> Yhteys on kertakäyttöinen. Kun suljet ohjelman, emme pääse enää koneellesi ilman uutta ID:tä ja salasanaa, jotka vaihtuvat jokaisella kerralla.
           </p>
@@ -352,7 +352,7 @@
           <div class="smart-header-card">
             <div class="smart-header-info">
               <div class="smart-header-icon">
-                <i data-lucide="smartphone"></i>
+                <i data-lucide="smartphone" aria-hidden="true"></i>
               </div>
               <div class="smart-header-text">
                 <h3>Tarvitsetko apua puhelimella?</h3>
@@ -361,14 +361,14 @@
             </div>
             <div class="smart-header-action">
               <span>Avaa Mobiili-ohjeet</span>
-              <i data-lucide="chevron-down" class="chevron-pulse"></i>
+              <i data-lucide="chevron-down" class="chevron-pulse" aria-hidden="true"></i>
             </div>
           </div>
         </div>
 
         <div class="guide-adaptive-content">
           <div class="section-title-center">
-            <span class="badge"><i data-lucide="smartphone"></i> Mobiili</span>
+            <span class="badge"><i data-lucide="smartphone" aria-hidden="true"></i> Mobiili</span>
             <h2>Puhelin & Tabletti</h2>
             <p>Lataa oikea sovellus ja kerro ID asiantuntijallemme.</p>
           </div>
@@ -389,7 +389,7 @@
           <!-- Android Card -->
           <div id="android-card" class="mobile-guide-card platform-card">
             <div class="guide-detected-badge hidden">
-              <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+              <i data-lucide="check-circle" aria-hidden="true"></i> Automaattisesti tunnistettu
             </div>
             <div class="mobile-platform-header">
               <img src="svg/android.svg" alt="Android" width="32" height="32" />
@@ -432,24 +432,24 @@
             </div>
 
             <div class="safety-indicator">
-              <i data-lucide="lock"></i>
+              <i data-lucide="lock" aria-hidden="true"></i>
               <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
             </div>
 
             <!-- Detailed Help Section (Android) -->
             <div class="detailed-help-section">
               <button class="help-toggle-btn" data-target="help-content-android" aria-expanded="false">
-                 <i data-lucide="chevron-down"></i>
+                 <i data-lucide="chevron-down" aria-hidden="true"></i>
                  <span>Tarvitsetko vielä tarkempia ohjeita?</span>
               </button>
 
               <div id="help-content-android" class="help-content-wrapper">
                 <div class="help-sub-switcher">
                   <button class="help-tab-btn active" data-view="video">
-                    <i data-lucide="play-circle"></i> Video-opas
+                    <i data-lucide="play-circle" aria-hidden="true"></i> Video-opas
                   </button>
                   <button class="help-tab-btn" data-view="manual">
-                    <i data-lucide="book-open"></i> Manuaali
+                    <i data-lucide="book-open" aria-hidden="true"></i> Manuaali
                   </button>
                 </div>
 
@@ -457,10 +457,10 @@
                   <!-- Video View -->
                   <div class="help-view active" data-view-id="video">
                     <div class="help-card">
-                      <h3><i data-lucide="play-circle"></i> Video-opas (Android)</h3>
+                      <h3><i data-lucide="play-circle" aria-hidden="true"></i> Video-opas (Android)</h3>
                       <div class="video-container">
                         <div class="video-placeholder">
-                          <i data-lucide="video"></i>
+                          <i data-lucide="video" aria-hidden="true"></i>
                           <p>Tässä videossa näytämme QuickSupportin<br>asennuksen Play-kaupasta.</p>
                           <p><small>(Video tulossa pian)</small></p>
                         </div>
@@ -471,7 +471,7 @@
                   <!-- Manual View -->
                   <div class="help-view" data-view-id="manual">
                     <div class="help-card">
-                      <h3><i data-lucide="book-open"></i> Android-manuaali</h3>
+                      <h3><i data-lucide="book-open" aria-hidden="true"></i> Android-manuaali</h3>
                       <div class="visual-steps">
                         <div class="visual-step">
                           <div class="v-step-number">1</div>
@@ -491,7 +491,7 @@
           <!-- iOS Card (Hidden by default, shown if detected or toggled) -->
           <div id="ios-card" class="mobile-guide-card platform-card hidden">
             <div class="guide-detected-badge hidden">
-              <i data-lucide="check-circle"></i> Automaattisesti tunnistettu
+              <i data-lucide="check-circle" aria-hidden="true"></i> Automaattisesti tunnistettu
             </div>
             <div class="mobile-platform-header">
               <img src="svg/apple.svg" alt="Apple" width="32" height="32" />
@@ -534,24 +534,24 @@
             </div>
 
             <div class="safety-indicator">
-              <i data-lucide="lock"></i>
+              <i data-lucide="lock" aria-hidden="true"></i>
               <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
             </div>
 
             <!-- Detailed Help Section (iOS) -->
             <div class="detailed-help-section">
               <button class="help-toggle-btn" data-target="help-content-ios" aria-expanded="false">
-                 <i data-lucide="chevron-down"></i>
+                 <i data-lucide="chevron-down" aria-hidden="true"></i>
                  <span>Tarvitsetko vielä tarkempia ohjeita?</span>
               </button>
 
               <div id="help-content-ios" class="help-content-wrapper">
                 <div class="help-sub-switcher">
                   <button class="help-tab-btn active" data-view="video">
-                    <i data-lucide="play-circle"></i> Video-opas
+                    <i data-lucide="play-circle" aria-hidden="true"></i> Video-opas
                   </button>
                   <button class="help-tab-btn" data-view="manual">
-                    <i data-lucide="book-open"></i> Manuaali
+                    <i data-lucide="book-open" aria-hidden="true"></i> Manuaali
                   </button>
                 </div>
 
@@ -559,10 +559,10 @@
                   <!-- Video View -->
                   <div class="help-view active" data-view-id="video">
                     <div class="help-card">
-                      <h3><i data-lucide="play-circle"></i> Video-opas (iOS)</h3>
+                      <h3><i data-lucide="play-circle" aria-hidden="true"></i> Video-opas (iOS)</h3>
                       <div class="video-container">
                         <div class="video-placeholder">
-                          <i data-lucide="video"></i>
+                          <i data-lucide="video" aria-hidden="true"></i>
                           <p>Tässä videossa näytämme näytön jaon<br>käynnistämisen iPhonella.</p>
                           <p><small>(Video tulossa pian)</small></p>
                         </div>
@@ -573,7 +573,7 @@
                   <!-- Manual View -->
                   <div class="help-view" data-view-id="manual">
                     <div class="help-card">
-                      <h3><i data-lucide="book-open"></i> iOS-manuaali</h3>
+                      <h3><i data-lucide="book-open" aria-hidden="true"></i> iOS-manuaali</h3>
                       <div class="visual-steps">
                         <div class="visual-step">
                           <div class="v-step-number">1</div>
@@ -592,7 +592,7 @@
         </div>
 
         <div class="security-note mt-30">
-          <i data-lucide="info"></i>
+          <i data-lucide="info" aria-hidden="true"></i>
           <p>
             <strong>Huom:</strong> Jotkut laitteet saattavat pyytää asentamaan lisäosan (Add-On) täyttä etähallintaa varten. Hyväksy tämä asennus, jos sovellus sitä ehdottaa.
           </p>
@@ -603,7 +603,7 @@
 
 
     <div id="imageLightbox" class="lightbox-modal">
-      <div class="lightbox-close">&times;</div>
+      <div class="lightbox-close" aria-label="Sulje">&times;</div>
       <img src="" alt="Suurennettu kuva">
     </div>
 

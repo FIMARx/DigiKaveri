@@ -17,7 +17,7 @@
 }
 .section-header p {
   font-size: clamp(1.1rem, 3vw, 1.35rem);
-  color: #1e293b;
+  color: var(--text-light);
   margin: 0;
   line-height: 1.6;
 }
@@ -27,7 +27,7 @@
   justify-content: center;
   gap: 12px;
   background: rgba(var(--primary-rgb), 0.15);
-  color: #1d4ed8;
+  color: var(--primary);
   padding: 12px 28px;
   border-radius: 100px;
   font-size: 0.9rem;
@@ -47,8 +47,8 @@
 
 .badge i[data-lucide="star"],
 .badge svg[data-lucide="star"] {
-  color: #f59e0b !important;
-  fill: #f59e0b !important;
+  color: #f59e0b;
+  fill: #f59e0b;
 }
 
 .hero-centered {
@@ -120,7 +120,7 @@ header#home::before {
   left: 0;
   width: 100%;
   height: 8px;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(var(--primary-rgb), 0.1);
   z-index: -1;
   border-radius: 4px;
 }
@@ -158,14 +158,15 @@ header#home::before {
 
 .trust-badges-centered .trust-item:hover {
   transform: translateY(-2px);
-  border-color: #e2e8f0;
+  border-color: var(--border);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 .trust-badges-centered .trust-item svg {
-  color: #10b981 !important;
-  width: 24px;
-  height: 24px;
-  stroke-width: 2.5px;
+  color: var(--success);
+  width: 32px !important;
+  height: 32px !important;
+  stroke-width: 2.2px;
+  flex-shrink: 0;
 }
 
 .hero-form-card {
@@ -189,7 +190,7 @@ header#home::before {
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(to right, var(--primary), #60a5fa);
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
 }
 
 .hero-form-card h2 {
@@ -254,7 +255,7 @@ header#home::before {
   font-size: 1.1rem;
   box-sizing: border-box;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #f1f5f9;
+  background: var(--bg);
   font-family: inherit;
   color: var(--text-dark);
 }
@@ -270,7 +271,7 @@ header#home::before {
 .form-group input:hover,
 .form-group select:hover,
 .form-group textarea:hover {
-  background: #e2e8f0;
+  background: var(--border);
 }
 
 .input-group input:focus,
@@ -1077,10 +1078,15 @@ header#home::before {
 .guarantee-text h2 {
   color: white;
   margin-top: 0;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 6vw, 2.2rem);
   margin-bottom: 10px;
+  line-height: 1.2;
   word-break: break-word;
   hyphens: auto;
+}
+
+@media (max-width: 340px) {
+  .guarantee-text h2 { font-size: 1.25rem; }
 }
 .guarantee-text p {
   margin: 0;
@@ -1089,12 +1095,18 @@ header#home::before {
   opacity: 0.9;
 }
 .guarantee-legal-note {
-  margin-top: 15px;
+  margin-top: 25px;
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 0.9;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+}
+.guarantee-legal-note i,
+.guarantee-legal-note svg {
+  margin-top: 3px;
+  flex-shrink: 0;
 }
 .guarantee-link {
   color: white;
@@ -1464,12 +1476,35 @@ header#home::before {
 }
 .contact-info p {
   color: #374151;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+}
+
+.contact-info .contact-intro {
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  color: #1e293b;
+  margin-bottom: 3.5rem;
+  line-height: 1.6;
+}
+
+.info-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #0f172a;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #1e293b;
+  font-weight: 600;
 }
 .info-items {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
 }
 .info-item {
   display: flex;
@@ -1517,6 +1552,13 @@ header#home::before {
   height: 14px !important;
 }
 
+@media (max-width: 768px) {
+  .lucide-sm {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
 .items-center { align-items: center !important; }
 .icon-placeholder { width: 48px; height: 48px; color: #ccc !important; }
 .link-underline { color: inherit; text-decoration: underline; }
@@ -1532,8 +1574,9 @@ header#home::before {
     margin-top: 20px;
   }
   .hero-centered h1 {
-    font-size: 3.5rem;
-    letter-spacing: -1.5px;
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
   }
   .hero-subtitle {
     font-size: 1.1rem;
