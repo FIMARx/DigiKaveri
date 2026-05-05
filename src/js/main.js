@@ -11,32 +11,42 @@ function initApp() {
   if (isInitialized) return;
   isInitialized = true;
 
-  initLanguageDetection();
-  loadAnalytics();
-
-  // Critical UI first
+  // Critical UI (Needs to be instant)
   initMobileNav();
   initSmoothNav();
-  
-  // Stagger non-critical UI to keep main-thread free (TBT optimization)
-  setTimeout(() => {
+
+  // "Sneaky Mode" Optimization: 
+  // Wait for user interaction or 3 seconds before loading heavy assets
+  const lazyLoadAll = () => {
+    if (window.isLazyLoaded) return;
+    window.isLazyLoaded = true;
+
+    // Remove listeners
+    ['mousedown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(e => 
+      window.removeEventListener(e, lazyLoadAll)
+    );
+
+    // Load non-critical components
     createIcons({ icons: ICON_SET });
     initFAQ();
     initScrollSpy();
-  }, 100);
-
-  setTimeout(() => {
     initMobileDropdowns();
     initFAB();
-    // Only init AOS if it exists
+    loadAnalytics();
+    checkStatus();
+
     if (typeof AOS !== 'undefined') {
       AOS.init({ duration: 800, once: true, disable: 'mobile' });
     }
-  }, 200);
-  
-  setTimeout(() => {
-    checkStatus();
-  }, 800);
+  };
+
+  // Listen for any user interaction
+  ['mousedown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(e => 
+    window.addEventListener(e, lazyLoadAll, { once: true, passive: true })
+  );
+
+  // Fallback: Load anyway after 3.5 seconds if no interaction
+  setTimeout(lazyLoadAll, 3500);
 
   // Polling optimization: Only check status when tab is visible
   document.addEventListener("visibilitychange", () => {
