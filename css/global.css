@@ -276,15 +276,9 @@ html[lang="en"] .nav-menu {
 
 /* Pulsing effect to draw attention */
 @keyframes phonePulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(var(--primary-rgb), 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 .btn-nav-call {

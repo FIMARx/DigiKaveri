@@ -14,21 +14,29 @@ function initApp() {
   initLanguageDetection();
   loadAnalytics();
 
-  createIcons({
-    icons: ICON_SET
-  });
-
-  initFAQ();
-  initScrollSpy();
-  initSmoothNav();
+  // Critical UI first
   initMobileNav();
-  initMobileDropdowns();
-  initFAB();
+  initSmoothNav();
   
-  // Defer non-critical status check to break request chains
+  // Stagger non-critical UI to keep main-thread free (TBT optimization)
+  setTimeout(() => {
+    createIcons({ icons: ICON_SET });
+    initFAQ();
+    initScrollSpy();
+  }, 100);
+
+  setTimeout(() => {
+    initMobileDropdowns();
+    initFAB();
+    // Only init AOS if it exists
+    if (typeof AOS !== 'undefined') {
+      AOS.init({ duration: 800, once: true, disable: 'mobile' });
+    }
+  }, 200);
+  
   setTimeout(() => {
     checkStatus();
-  }, 1000);
+  }, 800);
 
   // Polling optimization: Only check status when tab is visible
   document.addEventListener("visibilitychange", () => {
