@@ -24,18 +24,29 @@
         </div>
         <script>
           (async function() {
-            const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
-            const statusUrl = "/data/status.json?v=" + Date.now();
-            const response = await fetch(statusUrl).catch(() => null);
-            
-            const hour = finlandTime.getHours();
-            const isOpen = response ? (await response.json()).isOpen : (hour >= 9 && hour < 21);
-            
-            const badge = document.getElementById("serviceStatus");
-            const text = document.getElementById("statusText");
-            if (badge && text) {
-              badge.className = "status-part " + (isOpen ? "open" : "closed");
-              text.textContent = isOpen ? "Palvelemme nyt" : "Palvelu suljettu";
+            try {
+              const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
+              const hour = finlandTime.getHours();
+              const statusUrl = "/data/status.json?v=" + Date.now();
+              
+              const response = await fetch(statusUrl).catch(() => null);
+              let isOpen = (hour >= 9 && hour < 21);
+              
+              if (response && response.ok) {
+                const data = await response.json();
+                if (data.override === "open") isOpen = true;
+                else if (data.override === "closed") isOpen = false;
+                else if (typeof data.isOpen === "boolean") isOpen = data.isOpen;
+              }
+              
+              const badge = document.getElementById("serviceStatus");
+              const text = document.getElementById("statusText");
+              if (badge && text) {
+                badge.className = "status-part " + (isOpen ? "open" : "closed");
+                text.textContent = isOpen ? "Palvelemme nyt" : "Palvelu suljettu";
+              }
+            } catch (e) {
+              console.error("Status check failed", e);
             }
           })();
         </script>
