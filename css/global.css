@@ -885,6 +885,7 @@ h3 {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateX(100%);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .mobile-nav-overlay.active {
@@ -924,7 +925,8 @@ h3 {
     flex-direction: column;
     gap: 0;
     text-align: left;
-    padding: 0;
+    padding-bottom: 120px; /* Safety space for language buttons */
+    overflow-y: visible;
   }
 
   .footer-container {
