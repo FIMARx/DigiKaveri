@@ -39,7 +39,7 @@ body {
 }
 
 .container {
-  padding: 80px 24px;
+  padding: 80px 24px 120px; /* Increased bottom padding for floating buttons */
   max-width: var(--max-width);
   margin: 0 auto;
 }
