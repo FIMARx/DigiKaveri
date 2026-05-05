@@ -141,7 +141,15 @@ html[lang="en"] .nav-menu {
 .logo img {
   height: 64px;
   width: 66px;
+  object-fit: contain;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    height: 48px;
+    width: auto;
+  }
 }
 
 @media (hover: hover) {
