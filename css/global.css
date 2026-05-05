@@ -698,7 +698,8 @@ h3 {
 }
 .footer-logo img {
   display: block;
-  max-width: 540px;
+  width: 480px; /* Force large size on desktop */
+  max-width: 100%; /* Ensure it fits on smaller desktop views */
   height: auto;
   margin-bottom: 24px;
 }
@@ -939,7 +940,8 @@ h3 {
 
   .footer-logo img {
     height: auto;
-    max-width: 240px;
+    width: 240px;
+    max-width: 100%;
     margin: 0 auto 24px;
   }
 
