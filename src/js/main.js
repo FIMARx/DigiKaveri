@@ -290,8 +290,7 @@ function initSmoothNav() {
       const target = id ? document.getElementById(id) : null;
       
       if (target) {
-        const header = document.querySelector('header');
-        const headerHeight = header ? header.offsetHeight : 80;
+        const headerHeight = 80; // Fixed height for faster execution
         
         window.scrollTo({
           top: target.getBoundingClientRect().top + window.scrollY - headerHeight,

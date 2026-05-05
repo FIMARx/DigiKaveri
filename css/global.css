@@ -140,7 +140,7 @@ html[lang="en"] .nav-menu {
 
 .logo img {
   height: 64px;
-  width: auto;
+  width: 64px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
