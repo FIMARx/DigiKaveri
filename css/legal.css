@@ -154,6 +154,7 @@
     padding: 10px;
     border-radius: 12px;
     box-sizing: content-box;
+    flex-shrink: 0; /* Prevents icons from squeezing on small screens */
 }
 
 .legal-content h2 {
@@ -246,6 +247,7 @@
         width: 18px;
         height: 18px;
         padding: 8px;
+        flex-shrink: 0;
     }
 
     .legal-content h2 {
