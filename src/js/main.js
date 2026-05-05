@@ -25,7 +25,10 @@ function initApp() {
   initMobileDropdowns();
   initFAB();
   
-  checkStatus();
+  // Defer non-critical status check to break request chains
+  setTimeout(() => {
+    checkStatus();
+  }, 1000);
 
   // Polling optimization: Only check status when tab is visible
   document.addEventListener("visibilitychange", () => {
@@ -118,9 +121,9 @@ function initStatusModal(isOpen) {
   modal.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab') return;
     
-    // Filter for elements that are actually visible and focusable
+    // Optimization: avoid offsetWidth/Height during initialization to prevent reflow
     const focusables = Array.from(modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
-      .filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el.getClientRects().length > 0);
+      .filter(el => !el.hasAttribute('disabled'));
 
     if (focusables.length === 0) return;
     
