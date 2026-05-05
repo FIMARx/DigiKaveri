@@ -176,13 +176,13 @@ html[lang="en"] .nav-menu {
 @media (hover: hover) {
   .nav-menu a.nav-link:hover {
     background: rgba(var(--primary-rgb), 0.05);
-    color: var(--primary);
+    color: var(--primary-dark);
   }
 }
 
 .nav-menu a.nav-link.active {
   background: rgba(var(--primary-rgb), 0.1);
-  color: var(--primary);
+  color: var(--primary-dark); /* Darker blue for better contrast */
 }
 
 .nav-menu a.nav-link i,
