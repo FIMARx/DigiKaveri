@@ -51,6 +51,23 @@ A floating action button (speed dial) providing instant, thumb-friendly access t
 
 ---
 
+## 💎 Titanium Hardening & Engineering
+
+The platform has been "Titanium-Hardened" to meet production-grade standards for performance, privacy, and accessibility.
+
+- **Advanced Network Resilience**: Implemented `isFetchingStatus` locks and `AbortController` integration to prevent race conditions and redundant network polling.
+- **Privacy First (Consent Mode v2)**: Fully integrated with Google Consent Mode v2, honoring GPC (Global Privacy Control) signals and loops for secure tracking revocation.
+- **Universal Accessibility (WCAG)**:
+  - High-precision focus traps that filter for visible-only elements.
+  - Dynamic `aria-expanded` and `aria-hidden` synchronization across all UI components.
+  - Smooth navigation with dynamic header offset calculation.
+- **Performance Engineering**:
+  - 30-second throttled polling to preserve user battery.
+  - visibility-aware status checks (stops polling when tab is inactive).
+  - Robust script loading guards for external libraries (AOS, CookieConsent).
+
+---
+
 ## 🛠️ Service Portfolio
 
 | Service | Remote | On-Site | Description |
