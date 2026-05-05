@@ -41,6 +41,19 @@ body {
   width: 100%;
 }
 
+/* When the menu is open and 'is-locked' is on the body */
+body.is-locked {
+  overflow: hidden;
+  height: 100vh; /* Lock height to viewport */
+  position: fixed; /* Extra security for iOS Safari */
+  width: 100%;
+}
+
+/* On some browsers, the scroll happens on the HTML element */
+html:has(body.is-locked) {
+  overflow: hidden;
+}
+
 img, video, iframe {
   max-width: 100%;
   height: auto;
