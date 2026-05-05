@@ -728,6 +728,17 @@ header#home::before {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.status-part.loading {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.status-part.loading .signal-dot {
+  background-color: #cbd5e1;
+  animation: pulse 1.5s infinite;
+}
+
 .schedule-part {
   display: flex;
   align-items: center;
