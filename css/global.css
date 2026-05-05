@@ -14,8 +14,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 110px !important;
   font-size: 18px; /* Slightly larger base size for better readability */
   scrollbar-gutter: stable;
 }
@@ -698,7 +698,7 @@ h3 {
 }
 .footer-logo img {
   display: block;
-  max-width: 480px;
+  max-width: 540px;
   height: auto;
   margin-bottom: 24px;
 }
@@ -835,7 +835,12 @@ h3 {
 
   .glass-nav {
     padding: 10px 0;
-    background: rgba(255, 255, 255, 0.95); /* Ensure solid background on mobile */
+    background: rgba(
+      255,
+      255,
+      255,
+      0.95
+    ); /* Ensure solid background on mobile */
   }
 
   .nav-menu,
@@ -934,7 +939,7 @@ h3 {
 
   .footer-logo img {
     height: auto;
-    max-width: 380px;
+    max-width: 240px;
     margin: 0 auto 24px;
   }
 
