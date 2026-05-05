@@ -2523,12 +2523,9 @@ h3 {
   min-height: 1.2em;
 }
 
-/* iOS Safari Scroll Lock Fix */
+/* Simplified Scroll Lock Fix */
 body.is-locked {
   overflow: hidden;
-  height: 100vh;
-  position: fixed;
-  width: 100%;
 }
 
 /* Bulletproof Scroll Alignment (Fixes header overlap for external links/Ctrl+F) */
