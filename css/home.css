@@ -1533,6 +1533,13 @@ header#home::before {
   justify-content: center;
   color: var(--primary);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0; /* Prevents the icon from being squeezed */
+}
+.icon-box i,
+.icon-box svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke-width: 2.5px;
 }
 
 /* Utilities for WhatsApp */
