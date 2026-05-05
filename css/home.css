@@ -1227,11 +1227,14 @@ header#home::before {
   transform: translateX(-50%);
   background: var(--primary);
   color: white;
-  padding: 6px 16px;
+  padding: 6px 20px;
   border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.8rem;
+  font-weight: 800;
   text-transform: uppercase;
+  white-space: nowrap; /* Prevent the 'blob' effect */
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
 }
 .card-header h3 {
   font-size: 1.5rem;
