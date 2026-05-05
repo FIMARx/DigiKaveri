@@ -41,7 +41,7 @@ function initApp() {
     if (document.visibilityState === "visible") checkStatus();
   }, 60000);
   
-  window.addEventListener('unload', () => clearInterval(statusInterval));
+  window.addEventListener('pagehide', () => clearInterval(statusInterval));
 
   window.addEventListener('load', () => {
     if (typeof AOS !== 'undefined') {
