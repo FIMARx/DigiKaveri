@@ -1215,6 +1215,7 @@ header#home::before {
   border: 2px solid var(--primary);
   box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
   transform: translateY(-8px);
+  padding-top: 50px; /* Space for the badge */
 }
 .pricing-card.popular:hover {
   transform: translateY(-12px);
@@ -1647,6 +1648,7 @@ header#home::before {
   }
   .pricing-card.popular {
     transform: none;
+    padding-top: 40px; /* More space for the badge */
   }
   .pricing-card.popular:hover {
     transform: translateY(-4px);
