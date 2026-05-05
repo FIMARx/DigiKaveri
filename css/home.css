@@ -26,8 +26,8 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: rgba(var(--primary-rgb), 0.15);
-  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-dark);
   padding: 12px 28px;
   border-radius: 100px;
   font-size: 0.9rem;
@@ -593,9 +593,9 @@ header#home::before {
 }
 
 .btn-review-outline.tp {
-    color: #00b67a;
+    color: #00875a;
     background: white;
-    border: 2px solid #00b67a;
+    border: 2px solid #00875a;
 }
 
 .btn-review-outline.tp:hover {

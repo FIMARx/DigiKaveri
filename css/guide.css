@@ -44,7 +44,7 @@
   align-items: center;
   gap: 12px;
   background: rgba(var(--primary-rgb), 0.1);
-  color: var(--primary);
+  color: var(--primary-dark);
   padding: 12px 28px;
   border-radius: 100px;
   font-weight: 700;
