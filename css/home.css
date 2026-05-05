@@ -505,7 +505,9 @@ header#home::before {
 .testimonial-footer {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     border-top: 1px solid #f3f4f6;
     padding-top: 25px;
 }
@@ -569,7 +571,8 @@ header#home::before {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     color: #475569;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
 }
 
 .btn-review-outline:hover {
@@ -1508,7 +1511,7 @@ header#home::before {
 }
 .info-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
 }
 .info-item p {

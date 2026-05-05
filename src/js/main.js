@@ -2,72 +2,143 @@ import '/css/variables.css';
 import '/css/global.css';
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
+import { getFinlandHour, triggerAnalyticsExecution } from './utils.js';
+
+let isInitialized = false;
+let statusController = null;
+
+function initApp() {
+  if (isInitialized) return;
+  isInitialized = true;
+
+  initLanguageDetection();
+  loadAnalytics();
+
+  createIcons({
+    icons: ICON_SET
+  });
+
+  initFAQ();
+  initScrollSpy();
+  initSmoothNav();
+  initMobileNav();
+  initMobileDropdowns();
+  initFAB();
+  
+  checkStatus();
+
+  // Polling optimization: Only check status when tab is visible
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkStatus();
+  });
+
+  // Handle browser back-button/bfcache: Refresh status on page show
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) checkStatus();
+  });
+
+  const statusInterval = setInterval(() => {
+    if (document.visibilityState === "visible") checkStatus();
+  }, 60000);
+  
+  window.addEventListener('unload', () => clearInterval(statusInterval));
+
+  window.addEventListener('load', () => {
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        once: true,           
+        offset: 50,           
+        duration: 600,        
+        easing: 'ease-out-cubic',
+        disable: window.innerWidth < 768
+      });
+    }
+  });
+}
+
+let lastCheck = 0;
+let isFetchingStatus = false;
 
 async function checkStatus() {
-  const badge = document.getElementById("serviceStatus");
-  const text = document.getElementById("statusText");
+  const now = Date.now();
+  if (isFetchingStatus || (now - lastCheck < 30000)) return; // Throttle: 30s
   
+  isFetchingStatus = true;
+  lastCheck = now;
+
+  if (!navigator.onLine) {
+    isFetchingStatus = false;
+    return;
+  }
+  
+  // Prevent network race conditions
+  if (statusController) statusController.abort();
+  statusController = new AbortController();
+
   const isEn = window.location.pathname.includes("/en/");
+  let data = {};
   
   try {
-    // Determine the base path for status.json
-    const statusUrl = "/data/status.json?v=" + Date.now();
-    const response = await fetch(statusUrl).catch(() => null);
-    
-    if (!response || !response.ok) {
-        throw new Error(response ? `Status: ${response.status}` : "Network Error");
-    }
-    
-    const data = await response.json();
-
-    const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
-    const hour = finlandTime.getHours();
-    
-    let isCurrentlyOpen = (hour >= 9 && hour < 21);
-
-    if (data.override === "open") isCurrentlyOpen = true;
-    if (data.override === "closed") isCurrentlyOpen = false;
-
-    if (badge && text) {
-      if (isCurrentlyOpen) {
-        badge.className = "status-part open";
-        text.textContent = isEn ? "Service Open" : (data.messageOpen || "Palvelemme nyt");
-      } else {
-        badge.className = "status-part closed";
-        text.textContent = isEn ? "Closed for today" : (data.messageClosed || "Palvelu suljettu");
-      }
-    }
-
-    initStatusModal(isCurrentlyOpen);
-
-  } catch (error) {
-    console.error("Status check error:", error);
-    const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
-    const hour = finlandTime.getHours();
-    let isCurrentlyOpenFallback = (hour >= 9 && hour < 21);
-
-    if (badge && text) {
-      if (isCurrentlyOpenFallback) {
-        badge.className = "status-part open";
-        text.textContent = isEn ? "Service Open" : "Palvelemme nyt";
-      } else {
-        badge.className = "status-part closed";
-        text.textContent = isEn ? "Closed for today" : "Palvelu suljettu";
-      }
-    }
-
-    initStatusModal(isCurrentlyOpenFallback);
+    const response = await fetch(`/data/status.json?v=${Date.now()}`, {
+      signal: statusController.signal
+    });
+    if (!response.ok) throw new Error("Fetch failed");
+    const result = await response.json();
+    if (result && typeof result === 'object') data = result;
+  } catch (e) { 
+    if (e.name === 'AbortError') return;
+    console.warn("Status check failed. Using time-based fallback."); 
+  } finally {
+    isFetchingStatus = false;
   }
+
+  const hour = getFinlandHour();
+  let isOpen = (hour >= 9 && hour < 21);
+
+  if (data?.override === "open") isOpen = true;
+  if (data?.override === "closed") isOpen = false;
+
+  const badge = document.getElementById("serviceStatus");
+  const text = document.getElementById("statusText");
+
+  if (badge && text) {
+    badge.className = `status-part ${isOpen ? 'open' : 'closed'}`;
+    text.textContent = isOpen 
+      ? (isEn ? "Service Open" : (data?.messageOpen || "Palvelemme nyt"))
+      : (isEn ? "Closed for today" : (data?.messageClosed || "Palvelu suljettu"));
+  }
+  if (typeof initStatusModal === 'function') initStatusModal(isOpen);
 }
 
 function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
-  if (!modal) return;
+  if (!modal || isOpen) return;
 
-  if (isOpen) {
-    modal.classList.remove("active");
-    return;
-  }
+  // Accessibility: Focus Trap Logic
+  modal.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    
+    // Filter for elements that are actually visible and focusable
+    const focusables = Array.from(modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+      .filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el.getClientRects().length > 0);
+
+    if (focusables.length === 0) return;
+    
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey) { // Shift + Tab
+      if (document.activeElement === first || document.activeElement === modal) {
+        last.focus();
+        e.preventDefault();
+      }
+    } else { // Tab
+      if (document.activeElement === last) {
+        first.focus();
+        e.preventDefault();
+      }
+    }
+  });
 
   if (sessionStorage.getItem("closedModalShown") === "true") {
     return;
@@ -75,7 +146,9 @@ function initStatusModal(isOpen) {
 
   setTimeout(() => {
     modal.classList.add("active");
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("is-locked");
+    modal.setAttribute('tabindex', '-1');
+    modal.focus();
   }, 1500);
 
   const understandBtn = document.getElementById("modalUnderstand");
@@ -95,21 +168,32 @@ function initStatusModal(isOpen) {
         const targetElement = contactForm ? contactForm.closest(".hero-form-card") : (document.getElementById("contact-detailed") || contactForm);
         
         if (targetElement) {
-          setTimeout(() => {
-            targetElement.scrollIntoView({ 
-              behavior: "smooth", 
-              block: "center" 
-            });
-          }, 100);
+          // Use requestAnimationFrame to ensure modal transition finished
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              targetElement.scrollIntoView({ 
+                behavior: "smooth", 
+                block: "center" 
+              });
+              targetElement.setAttribute('tabindex', '-1');
+              targetElement.focus({ preventScroll: true });
+            }, 50);
+          });
         }
       }
     };
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeStatusModal(modal);
+    }
+  });
 }
 
 function closeStatusModal(modal) {
   modal.classList.remove("active");
-  document.body.style.overflow = "";
+  document.body.classList.remove("is-locked");
   sessionStorage.setItem("closedModalShown", "true");
 }
 
@@ -121,36 +205,7 @@ function onDOMReady(fn) {
   }
 }
 
-onDOMReady(() => {
-  initLanguageDetection();
-  loadAnalytics();
-
-  createIcons({
-    icons: ICON_SET
-  });
-
-  initFAQ();
-  initScrollSpy();
-  initSmoothNav();
-  initMobileNav();
-  initMobileDropdowns();
-  initFAB();
-  
-  checkStatus();
-  setInterval(checkStatus, 60000);
-  
-  window.addEventListener('load', () => {
-    if (typeof AOS !== 'undefined') {
-      AOS.init({
-        once: true,           
-        offset: 50,           
-        duration: 600,        
-        easing: 'ease-out-cubic',
-        disable: window.innerWidth < 768
-      });
-    }
-  });
-});
+onDOMReady(initApp);
 
 function initMobileDropdowns() {
   const triggers = document.querySelectorAll(".mobile-dropdown-trigger");
@@ -168,57 +223,84 @@ function loadAnalytics() {
   if (window.analyticsLoaded) return;
   window.analyticsLoaded = true;
 
-  const script = document.createElement('script');
-  script.type = 'text/plain';
-  script.setAttribute('data-cookiecategory', 'analytics');
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XL8DBWDDMD';
-  document.head.appendChild(script);
+  // Define the gtag helper stub immediately
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function() { dataLayer.push(arguments); };
+  gtag('js', new Date());
+  
+  // Set default consent to 'denied'
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied'
+  });
 
-  const inlineScript = document.createElement('script');
-  inlineScript.type = 'text/plain';
-  inlineScript.setAttribute('data-cookiecategory', 'analytics');
-  inlineScript.innerHTML = `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){window.dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
-  `;
-  document.head.appendChild(inlineScript);
+  const checkConsentAndLoad = () => {
+    const hasConsent = typeof CookieConsent !== 'undefined' && CookieConsent.acceptedCategory("analytics");
+    const type = hasConsent ? 'text/javascript' : 'text/plain';
+
+    const script = document.createElement('script');
+    script.type = type;
+    script.setAttribute('data-cookiecategory', 'analytics');
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XL8DBWDDMD';
+    document.head.appendChild(script);
+
+    // Fire config immediately if we already have consent
+    if (hasConsent) {
+      gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
+    }
+  };
+
+  // If CookieConsent isn't ready, wait for it (Custom event from config)
+  if (typeof CookieConsent === 'undefined') {
+    document.addEventListener('lcc_initialized', checkConsentAndLoad, { once: true });
+  } else {
+    checkConsentAndLoad();
+  }
 }
 
 function initLanguageDetection() {
-  if (!localStorage.getItem("userLang")) {
-    const isEn = navigator.language.toLowerCase().startsWith("en");
-    const isCurrentEn = window.location.pathname.includes("/en/");
+  const path = window.location.pathname;
+  const isEn = path.includes("/en/");
+  
+  // Sync HTML lang attribute for SEO/Accessibility
+  document.documentElement.lang = isEn ? "en" : "fi";
+  
+  if (isEn) {
+    localStorage.setItem("userLang", "en");
+  } else if (path.length > 1 && !isEn) {
+    localStorage.setItem("userLang", "fi");
+  }
 
-    if (isEn && !isCurrentEn) {
-      window.location.href = "/en/";
-    } else if (!isEn && isCurrentEn) {
-      window.location.href = "/";
-    }
+  if (path === "/" && !localStorage.getItem("userLang")) {
+    const isEnBrowser = navigator.language.toLowerCase().startsWith("en");
+    if (isEnBrowser) window.location.href = "/en/";
   }
 }
 
 function initSmoothNav() {
   const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
-
   navLinks.forEach((link) => {
+    if (!link) return;
     link.addEventListener("click", function (e) {
       e.preventDefault();
-
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
+      const href = this.getAttribute("href");
+      if (!href || href === "#") return;
+      
+      const id = href.substring(1);
+      const target = id ? document.getElementById(id) : null;
+      
+      if (target) {
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 80;
+        
         window.scrollTo({
-          top: offsetPosition,
+          top: target.getBoundingClientRect().top + window.scrollY - headerHeight,
           behavior: "smooth",
         });
+
+        // Accessibility: Move focus to target header/section
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
       }
     });
   });
@@ -228,73 +310,68 @@ function initFAQ() {
   const faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach((item) => {
     const questionBtn = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+    if (!questionBtn) return;
+
     questionBtn.addEventListener("click", () => {
       const isOpen = item.classList.contains("active");
-      faqItems.forEach((i) => i.classList.remove("active"));
-      if (!isOpen) item.classList.add("active");
+      
+      faqItems.forEach((i) => {
+        i.classList.remove("active");
+        const q = i.querySelector(".faq-question");
+        if (q) q.setAttribute("aria-expanded", "false");
+        const a = i.querySelector(".faq-answer");
+        if (a) a.setAttribute("aria-hidden", "true");
+      });
+
+      if (!isOpen) {
+        item.classList.add("active");
+        questionBtn.setAttribute("aria-expanded", "true");
+        if (answer) answer.setAttribute("aria-hidden", "false");
+      }
     });
   });
 }
 
 function initScrollSpy() {
   const sections = document.querySelectorAll(".section-spy");
-  const navLinks = document.querySelectorAll(".nav-menu .nav-link, .mobile-nav-content .mobile-nav-link");
+  const navLinks = document.querySelectorAll(".nav-menu .nav-link, .mobile-nav-link");
 
-  window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      if (scrollY >= sectionTop - 150) current = section.getAttribute("id");
-    });
-
-    navLinks.forEach((link) => {
-      const href = link.getAttribute("href");
-      if (!href) return;
-
-      const isHashLink = href.includes("#");
-      const linkTarget = isHashLink ? href.split("#")[1] : "";
-
-      if (isHashLink && linkTarget) {
-        if (current && linkTarget === current) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      } else {
-        const isCurrentPage = window.location.pathname.endsWith(href) || 
-                            (href === "/index.html" && window.location.pathname === "/") ||
-                            (href === "/etayhteys.html" && window.location.pathname.includes("etayhteys.html"));
-        
-        if (isCurrentPage) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      }
-    });
-
-    const allTriggers = document.querySelectorAll(".dropdown-trigger, .mobile-dropdown-trigger");
+  const allTriggers = document.querySelectorAll(".dropdown-trigger, .mobile-dropdown-trigger");
+  
+  const updateDropdownTriggers = () => {
     allTriggers.forEach((trigger) => {
       const parent = trigger.closest(".nav-item-dropdown, .mobile-nav-item-dropdown");
       const menu = parent ? parent.querySelector(".dropdown-menu, .mobile-dropdown-menu") : null;
-      
       if (menu) {
         const hasActiveChild = menu.querySelector("a.active");
-        if (hasActiveChild) {
-          trigger.classList.add("active");
-        } else {
-          const triggerHref = trigger.getAttribute("href");
-          const isTriggerPage = triggerHref && (window.location.pathname.includes(triggerHref) && !triggerHref.includes("#"));
-          
-          if (isTriggerPage) {
-            trigger.classList.add("active");
-          } else {
-            trigger.classList.remove("active");
-          }
-        }
+        trigger.classList.toggle("active", !!hasActiveChild);
       }
     });
-  });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        navLinks.forEach(link => {
+          const href = link.getAttribute("href");
+          if (href && href.includes("#")) {
+             link.classList.toggle("active", href.endsWith(`#${id}`));
+          } else if (href) {
+             const normalizedPath = window.location.pathname.replace(/\/$/, "") || "/";
+             const normalizedHref = href.replace(/\/$/, "") || "/";
+             const isCurrentPage = normalizedPath === normalizedHref || 
+                                 (normalizedHref === "/index.html" && normalizedPath === "/");
+             link.classList.toggle("active", isCurrentPage);
+          }
+        });
+        updateDropdownTriggers();
+      }
+    });
+  }, { rootMargin: "-20% 0px -70% 0px" });
+
+  sections.forEach(s => observer.observe(s));
 }
 
 function initMobileNav() {
@@ -307,18 +384,25 @@ function initMobileNav() {
 
   menuBtn.addEventListener("click", () => {
     overlay.classList.add("active");
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("is-locked");
   });
 
   closeBtn.addEventListener("click", () => {
     overlay.classList.remove("active");
-    document.body.style.overflow = "";
+    document.body.classList.remove("is-locked");
+  });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("active");
+      document.body.classList.remove("is-locked");
+    }
   });
 
   mobileLinks.forEach((link) => {
     link.addEventListener("click", () => {
       overlay.classList.remove("active");
-      document.body.style.overflow = "";
+      document.body.classList.remove("is-locked");
     });
   });
 }
@@ -332,11 +416,12 @@ function initFAB() {
   
   const toggleMenu = (forceClose = null) => {
     const shouldOpen = forceClose === null ? !wrapper.classList.contains("active") : !forceClose;
+    wrapper.classList.toggle("active", shouldOpen);
+    mainBtn.setAttribute("aria-expanded", shouldOpen);
+    
     if (shouldOpen) {
-      wrapper.classList.add("active");
       if (backdrop) backdrop.classList.add("active");
     } else {
-      wrapper.classList.remove("active");
       if (backdrop) backdrop.classList.remove("active");
     }
   };

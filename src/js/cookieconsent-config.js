@@ -1,12 +1,49 @@
-setTimeout(() => {
-  if (typeof CookieConsent === 'undefined') return;
-  
+import { triggerAnalyticsExecution } from "./utils.js";
+
+const runCookieConsent = () => {
+  if (typeof CookieConsent === "undefined") return;
+
   CookieConsent.run({
+    // Handle Global Privacy Control via config rather than hard return
+    onConsent: () => {
+      const accepted = CookieConsent.acceptedCategory();
+      
+      if (accepted.includes("analytics")) {
+        triggerAnalyticsExecution("analytics");
+        if (window.gtag) {
+          gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        }
+      }
+      
+      if (accepted.includes("marketing")) {
+        if (window.gtag) {
+          gtag('consent', 'update', { 'ad_storage': 'granted' });
+        }
+      }
+    },
+
+    onChange: ({ changedCategories }) => {
+      if (changedCategories.includes("analytics")) {
+        if (CookieConsent.acceptedCategory("analytics")) {
+          window["ga-disable-G-XL8DBWDDMD"] = false;
+          if (window.gtag) {
+            gtag('consent', 'update', { 'analytics_storage': 'granted' });
+            gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
+          }
+          triggerAnalyticsExecution("analytics");
+        } else {
+          window["ga-disable-G-XL8DBWDDMD"] = true;
+          if (window.gtag) {
+            gtag('consent', 'update', { 'analytics_storage': 'denied' });
+          }
+        }
+      }
+    },
     guiOptions: {
       consentModal: {
         layout: "box",
         position: "bottom center",
-        equalWeightButtons: false,
+        equalWeightButtons: true,
         flipButtons: false,
       },
       preferencesModal: {
@@ -29,13 +66,15 @@ setTimeout(() => {
       translations: {
         fi: {
           consentModal: {
-            title: '<svg class="cc-cookie-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path><path d="M8.5 8.5v.01"></path><path d="M16 15.5v.01"></path><path d="M12 12v.01"></path><path d="M11 17v.01"></path><path d="M7 14v.01"></path></svg> Käytämme evästeitä',
+            title:
+              '<svg class="cc-cookie-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path><path d="M8.5 8.5v.01"></path><path d="M16 15.5v.01"></path><path d="M12 12v.01"></path><path d="M11 17v.01"></path><path d="M7 14v.01"></path></svg> Käytämme evästeitä',
             description:
               'Käytämme evästeitä parantaaksemme käyttökokemustasi ja analysoidaksemme sivuston liikennettä. Voit lukea lisää <a href="/tietosuoja.html" class="cc-link">Tietosuojaselosteestamme</a>.',
             acceptAllBtn: "Hyväksy",
             acceptNecessaryBtn: "Hylkää",
             showPreferencesBtn: "Asetukset",
-            footer: '<a href="/tietosuoja.html">Tietosuoja</a><a href="/kayttoehdot.html">Käyttöehdot</a>',
+            footer:
+              '<a href="/tietosuoja.html">Tietosuoja</a><a href="/kayttoehdot.html">Käyttöehdot</a>',
           },
           preferencesModal: {
             title: "Evästeasetukset",
@@ -77,13 +116,15 @@ setTimeout(() => {
         },
         en: {
           consentModal: {
-            title: '<svg class="cc-cookie-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path><path d="M8.5 8.5v.01"></path><path d="M16 15.5v.01"></path><path d="M12 12v.01"></path><path d="M11 17v.01"></path><path d="M7 14v.01"></path></svg> Cookie Consent',
+            title:
+              '<svg class="cc-cookie-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path><path d="M8.5 8.5v.01"></path><path d="M16 15.5v.01"></path><path d="M12 12v.01"></path><path d="M11 17v.01"></path><path d="M7 14v.01"></path></svg> Cookie Consent',
             description:
               'This website uses cookies or similar technologies to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our <a href="/en/privacy-policy.html" class="cc-link">Privacy Policy</a>.',
             acceptAllBtn: "Accept",
             acceptNecessaryBtn: "Decline",
             showPreferencesBtn: "Settings",
-            footer: '<a href="/en/privacy-policy.html">Privacy Policy</a><a href="/en/terms-of-service.html">Terms of Service</a>',
+            footer:
+              '<a href="/en/privacy-policy.html">Privacy Policy</a><a href="/en/terms-of-service.html">Terms of Service</a>',
           },
           preferencesModal: {
             title: "Cookie Preferences",
@@ -126,4 +167,11 @@ setTimeout(() => {
       },
     },
   });
-}, 1500);
+};
+
+// Use a more reliable ready state check
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", runCookieConsent);
+} else {
+  runCookieConsent();
+}
