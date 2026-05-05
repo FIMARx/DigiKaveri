@@ -22,7 +22,7 @@
   <meta property="og:description" content="{{description}}" />
   <meta property="og:image" content="https://digikaveri.com/images/logo.webp" />
   <meta property="og:site_name" content="DigiKaveri" />
-  <meta property="og:locale" content="fi_FI" />
+  <meta property="og:locale" content="{{og_locale}}" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -31,10 +31,10 @@
   <meta property="twitter:description" content="{{description}}" />
   <meta property="twitter:image" content="https://digikaveri.com/images/logo.png" />
 
-<link rel="canonical" href="https://digikaveri.com/{{path}}" />
-<link rel="alternate" hreflang="fi" href="https://digikaveri.com/{{fi_path}}" />
-<link rel="alternate" hreflang="en" href="https://digikaveri.com/en/{{en_path}}" />
-<link rel="alternate" hreflang="x-default" href="https://digikaveri.com/{{fi_path}}" />
+<link rel="canonical" href="https://digikaveri.com/{{#if_eq path 'index.html'}}{{else}}{{#if_eq path 'en/index.html'}}en/{{else}}{{path}}{{/if_eq}}{{/if_eq}}" />
+<link rel="alternate" hreflang="fi" href="https://digikaveri.com/{{#if_eq fi_path 'index.html'}}{{else}}{{fi_path}}{{/if_eq}}" />
+<link rel="alternate" hreflang="en" href="https://digikaveri.com/en/{{#if_eq en_path 'index.html'}}{{else}}{{en_path}}{{/if_eq}}" />
+<link rel="alternate" hreflang="x-default" href="https://digikaveri.com/{{#if_eq fi_path 'index.html'}}{{else}}{{fi_path}}{{/if_eq}}" />
 
 <link rel="icon" type="image/x-icon" sizes="32x32" href="/favicon.ico" />
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />

@@ -26,5 +26,6 @@
   "modal_closed_title": "Palvelumme on tällä hetkellä suljettu",
   "modal_closed_desc": "Palvelemme päivittäin klo 09:00–21:00. Voit kuitenkin jättää soittopyynnön, niin otamme sinuun yhteyttä heti kun avaamme!",
   "modal_call_btn": "Jätä soittopyyntö",
-  "modal_ok_btn": "Selvä, ymmärrän"
+  "modal_ok_btn": "Selvä, ymmärrän",
+  "og_locale": "fi_FI"
 }
