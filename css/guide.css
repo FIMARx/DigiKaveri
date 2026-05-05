@@ -673,12 +673,53 @@
 }
 
 @media (max-width: 768px) {
+  .pc-guide-card {
+    padding: 24px 15px;
+    gap: 30px;
+  }
+  .pc-download-info {
+    padding: 30px 15px;
+  }
+  .btn-download-tv {
+    font-size: 1.1rem;
+    padding: 16px 24px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pc-guide-card {
+    padding: 20px 12px;
+    border-radius: 16px;
+    gap: 20px;
+  }
+  .pc-download-info {
+    padding: 20px 10px;
+  }
+  .btn-download-tv {
+    font-size: 1rem;
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .tv-logo {
+    height: 45px;
+    margin-bottom: 15px;
+  }
+  .pc-download-info h3 {
+    font-size: 1.25rem;
+  }
+  .pc-download-info p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
   .guide-hero h1 {
-    font-size: 2.25rem;
+    font-size: 2.1rem;
   }
   
   .guide-hero p {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }
 

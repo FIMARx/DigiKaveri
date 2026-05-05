@@ -60,15 +60,17 @@ body {
   background: var(--glass-bg);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   backdrop-filter: blur(12px) saturate(180%);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000; /* Original nav value */
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   border-bottom: 1px solid var(--border);
   min-height: var(--nav-height);
   display: flex;
   align-items: center;
   transition: all 0.3s ease;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .nav-content {
@@ -816,7 +818,16 @@ h3 {
   }
 
   .logo {
-    margin-left: -5px; /* Slight nudge to offset any image transparency */
+    margin-left: -5px;
+  }
+
+  .logo img {
+    height: 48px; /* More compact header for mobile */
+  }
+
+  .glass-nav {
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.95); /* Ensure solid background on mobile */
   }
 
   .nav-menu,
