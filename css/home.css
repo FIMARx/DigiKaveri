@@ -719,13 +719,13 @@ header#home::before {
 .status-part.open {
   background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .status-part.closed {
   background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .schedule-part {
@@ -762,7 +762,6 @@ header#home::before {
   background-color: #ffffff;
   border-radius: 50%;
   position: relative;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .status-part.open .signal-dot::after {

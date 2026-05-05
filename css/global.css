@@ -148,7 +148,7 @@ html[lang="en"] .nav-menu {
 @media (max-width: 768px) {
   .logo img {
     height: 48px;
-    width: auto;
+    width: 49px; /* Fixed width to prevent reflow */
   }
 }
 
