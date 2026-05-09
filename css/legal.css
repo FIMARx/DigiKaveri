@@ -64,7 +64,10 @@ aside.legal-toc {
 /* Sticky Navigation / Table of Contents */
 .legal-toc {
     position: sticky;
-    top: 110px;
+    top: 130px; /* Increased offset to avoid fixed header overlap */
+    z-index: 100;
+    will-change: transform;
+    transform: translateZ(0);
     background: var(--white);
     padding: 24px;
     border-radius: 20px;
@@ -150,10 +153,16 @@ aside.legal-toc {
 }
 
 .section-header {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    flex-direction: row !important; /* Forces row layout for legal icons */
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
     gap: 15px;
     margin-bottom: 20px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: none !important;
 }
 
 .section-header i, .section-header svg {
