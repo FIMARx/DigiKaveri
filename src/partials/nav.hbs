@@ -13,21 +13,21 @@
       </a>
     </div>
 
-    <button class="mobile-menu-btn" aria-label="Avaa valikko">
+    <button type="button" class="mobile-menu-btn" aria-label="Avaa valikko">
       <i data-lucide="menu"></i>
     </button>
 
     <div class="nav-menu">
-      <a href="index.html#home" class="nav-link {{#if_eq active "home"}}active{{/if_eq}}" {{#if_eq active "home"}}aria-current="page"{{/if_eq}}
+      <a href="index.html#home" class="nav-link spy-link {{#if_eq active "home"}}active{{/if_eq}}" {{#if_eq active "home"}}aria-current="page"{{/if_eq}}
         ><i data-lucide="home" aria-hidden="true"></i> <span>{{nav_home}}</span></a
       >
-      <a href="index.html#solutions" class="nav-link {{#if_eq active "services"}}active{{/if_eq}}" {{#if_eq active "services"}}aria-current="page"{{/if_eq}}
+      <a href="index.html#solutions" class="nav-link spy-link {{#if_eq active "services"}}active{{/if_eq}}" {{#if_eq active "services"}}aria-current="page"{{/if_eq}}
         ><i data-lucide="zap" aria-hidden="true"></i> <span>{{nav_services}}</span></a
       >
-      <a href="{{etätuki_url}}" class="nav-link {{#if_eq active "remote"}}active{{/if_eq}}" {{#if_eq active "remote"}}aria-current="page"{{/if_eq}}
+      <a href="{{etätuki_url}}" class="nav-link spy-link {{#if_eq active "remote"}}active{{/if_eq}}" {{#if_eq active "remote"}}aria-current="page"{{/if_eq}}
         ><i data-lucide="monitor" aria-hidden="true"></i> <span>{{nav_remote}}</span></a
       >
-      <a href="index.html#pricing" class="nav-link {{#if_eq active "pricing"}}active{{/if_eq}}" {{#if_eq active "pricing"}}aria-current="page"{{/if_eq}}
+      <a href="index.html#pricing" class="nav-link spy-link {{#if_eq active "pricing"}}active{{/if_eq}}" {{#if_eq active "pricing"}}aria-current="page"{{/if_eq}}
         ><i data-lucide="credit-card" aria-hidden="true"></i> <span>{{nav_pricing}}</span></a
       >
       <div class="nav-item-dropdown">
@@ -36,20 +36,20 @@
           <i data-lucide="chevron-down"></i>
         </button>
         <div class="dropdown-menu">
-          <a href="index.html#team" class="nav-link"
+          <a href="index.html#team" class="nav-link spy-link"
             ><i data-lucide="users"></i> {{nav_team}}</a
           >
-          <a href="index.html#faq" class="nav-link"
+          <a href="index.html#faq" class="nav-link spy-link"
             ><i data-lucide="help-circle"></i> FAQ</a
           >
-          <a href="index.html#contact-detailed" class="nav-link"
+          <a href="index.html#contact-detailed" class="nav-link spy-link"
             ><i data-lucide="mail"></i> {{nav_contact}}</a
           >
           <hr class="dropdown-divider">
-          <a href="{{privacy_url}}" class="nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
+          <a href="{{privacy_url}}" class="nav-link spy-link {{#if_eq active "privacy"}}active{{/if_eq}}"
             ><i data-lucide="shield-check"></i> {{nav_privacy}}</a
           >
-          <a href="{{terms_url}}" class="nav-link {{#if_eq active "terms"}}active{{/if_eq}}"
+          <a href="{{terms_url}}" class="nav-link spy-link {{#if_eq active "terms"}}active{{/if_eq}}"
             ><i data-lucide="file-text"></i> {{nav_terms}}</a
           >
         </div>

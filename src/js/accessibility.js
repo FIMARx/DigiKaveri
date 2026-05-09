@@ -10,12 +10,12 @@ toggleBtn.className = "accessibility-btn";
 toggleBtn.ariaLabel = label;
 toggleBtn.title = label;
 
-document.body.appendChild(toggleBtn);
+document.addEventListener("DOMContentLoaded", () => {
+  if (!document.body) return;
+  document.body.appendChild(toggleBtn);
 
-createIcons({ icons: ICON_SET });
-
-toggleBtn.addEventListener("click", () => {
-  document.documentElement.classList.toggle("large-text");
-  toggleBtn.classList.toggle("active");
-  createIcons({ icons: ICON_SET });
+  toggleBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("large-text");
+    toggleBtn.classList.toggle("active");
+  });
 });

@@ -70,6 +70,19 @@ header.hero-centered {
   padding-right: 20px;
 }
 
+/* Target desktop screens (typically 1024px and wider) */
+@media (min-width: 1024px) {
+  header.hero-centered {
+    padding-top: 160px;
+    padding-bottom: 120px;
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .hero-centered::before {
   content: "";
   position: absolute;

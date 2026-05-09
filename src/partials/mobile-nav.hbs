@@ -3,16 +3,16 @@
     <button class="mobile-nav-close" aria-label="Sulje valikko">
       <i data-lucide="x" aria-hidden="true"></i>
     </button>
-    <a href="index.html#home" class="mobile-nav-link {{#if_eq active "home"}}active{{/if_eq}}"
+    <a href="index.html#home" class="mobile-nav-link spy-link {{#if_eq active "home"}}active{{/if_eq}}"
       ><i data-lucide="home" aria-hidden="true"></i> {{nav_home}}</a
     >
-    <a href="index.html#solutions" class="mobile-nav-link {{#if_eq active "services"}}active{{/if_eq}}"
+    <a href="index.html#solutions" class="mobile-nav-link spy-link {{#if_eq active "services"}}active{{/if_eq}}"
       ><i data-lucide="zap" aria-hidden="true"></i> {{nav_services}}</a
     >
-    <a href="{{etätuki_url}}" class="mobile-nav-link {{#if_eq active "remote"}}active{{/if_eq}}"
+    <a href="{{etätuki_url}}" class="mobile-nav-link spy-link {{#if_eq active "remote"}}active{{/if_eq}}"
       ><i data-lucide="monitor" aria-hidden="true"></i> {{nav_remote}}</a
     >
-    <a href="index.html#pricing" class="mobile-nav-link {{#if_eq active "pricing"}}active{{/if_eq}}"
+    <a href="index.html#pricing" class="mobile-nav-link spy-link {{#if_eq active "pricing"}}active{{/if_eq}}"
       ><i data-lucide="credit-card" aria-hidden="true"></i> {{nav_pricing}}</a
     >
     <div class="mobile-nav-item-dropdown">
@@ -21,19 +21,19 @@
         <i data-lucide="chevron-down" aria-hidden="true"></i>
       </button>
       <div class="mobile-dropdown-menu">
-        <a href="index.html#team" class="mobile-nav-link"
+        <a href="index.html#team" class="mobile-nav-link spy-link {{#if_eq active "team"}}active{{/if_eq}}"
           ><i data-lucide="users" aria-hidden="true"></i> {{nav_team}}</a
         >
-        <a href="index.html#faq" class="mobile-nav-link"
+        <a href="index.html#faq" class="mobile-nav-link spy-link {{#if_eq active "faq"}}active{{/if_eq}}"
           ><i data-lucide="help-circle" aria-hidden="true"></i> FAQ</a
         >
-        <a href="index.html#contact-detailed" class="mobile-nav-link"
+        <a href="index.html#contact-detailed" class="mobile-nav-link spy-link {{#if_eq active "contact"}}active{{/if_eq}}"
           ><i data-lucide="mail" aria-hidden="true"></i> {{nav_contact}}</a
         >
-        <a href="{{privacy_url}}" class="mobile-nav-link {{#if_eq active "privacy"}}active{{/if_eq}}"
+        <a href="{{privacy_url}}" class="mobile-nav-link spy-link {{#if_eq active "privacy"}}active{{/if_eq}}"
           ><i data-lucide="shield-check" aria-hidden="true"></i> {{nav_privacy}}</a
         >
-        <a href="{{terms_url}}" class="mobile-nav-link {{#if_eq active "terms"}}active{{/if_eq}}"
+        <a href="{{terms_url}}" class="mobile-nav-link spy-link {{#if_eq active "terms"}}active{{/if_eq}}"
           ><i data-lucide="file-text" aria-hidden="true"></i> {{nav_terms}}</a
         >
       </div>
