@@ -15,6 +15,7 @@ function initApp() {
   createIcons({ icons: ICON_SET }); // Render icons immediately
   initMobileNav();
   initSmoothNav();
+  initScrollSpy(); // Start tracking sections immediately
 
   // "Sneaky Mode" Optimization: 
   // Wait for user interaction or 3 seconds before loading heavy assets
@@ -29,7 +30,6 @@ function initApp() {
 
     // Load non-critical components
     initFAQ();
-    initScrollSpy();
     initMobileDropdowns();
     initFAB();
     loadAnalytics();
@@ -458,6 +458,17 @@ function initScrollSpy() {
   window.addEventListener("scroll", updateScrollSpy, { passive: true });
   window.addEventListener("load", updateScrollSpy);
   updateScrollSpy();
+
+  // Unified Scroll Progress Bar
+  const progressFill = document.querySelector("#scrollProgressBar");
+  if (progressFill) {
+    window.addEventListener("scroll", () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      progressFill.style.width = scrolled + "%";
+    }, { passive: true });
+  }
 }
 
 function initMobileNav() {

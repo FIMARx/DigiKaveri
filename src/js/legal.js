@@ -1,75 +1,8 @@
 /**
  * Legal Pages Interactive Logic
- * Handles Scroll Progress Bar (in ToC) and ToC Scroll Spy
+ * Minimal logic - centralized Scroll Spy in main.js handles tracking
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-    initScrollProgressBar();
-    initLegalScrollSpy();
+    // Централизованная логика в main.js
 });
-
-/**
- * Updates the width of the progress bar based on scroll position
- */
-function initScrollProgressBar() {
-    const progressFill = document.querySelector(".toc-progress-fill");
-    if (!progressFill) return;
-
-    window.addEventListener("scroll", () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        progressFill.style.width = scrolled + "%";
-    });
-}
-
-/**
- * Highlights the active section in the sidebar Table of Contents
- */
-function initLegalScrollSpy() {
-    const sections = document.querySelectorAll(".legal-section");
-    const tocLinks = document.querySelectorAll(".legal-toc a");
-
-    if (!sections.length || !tocLinks.length) return;
-
-    const options = {
-        root: null,
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        if (isAtBottom()) return;
-
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute("id");
-                highlightLink(id);
-            }
-        });
-    }, options);
-
-    sections.forEach((section) => {
-        observer.observe(section);
-    });
-
-    window.addEventListener("scroll", () => {
-        if (isAtBottom()) {
-            const lastId = sections[sections.length - 1].getAttribute("id");
-            highlightLink(lastId);
-        }
-    });
-
-    function highlightLink(id) {
-        tocLinks.forEach((link) => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${id}`) {
-                link.classList.add("active");
-            }
-        });
-    }
-
-    function isAtBottom() {
-        return (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 20);
-    }
-}

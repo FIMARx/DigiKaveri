@@ -8,9 +8,19 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 18rem 1fr;
+    grid-template-areas: 
+        "hero hero"
+        "toc content";
     gap: 64px;
     align-items: start;
 }
+
+header.legal-hero { grid-area: hero; }
+aside.legal-toc { 
+    grid-area: toc;
+    align-self: start;
+}
+.legal-content { grid-area: content; }
 
 /* Glassmorphism Title Section */
 .legal-hero {
