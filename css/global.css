@@ -85,7 +85,7 @@ img, video, iframe {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 9999; /* Higher z-index for legal pages */
   border-bottom: 1px solid var(--border);
   min-height: var(--nav-height);
   display: flex;
@@ -993,8 +993,8 @@ h3 {
 }
 
 #toast-container {
-  position: fixed;
-  top: 40px;
+  position: sticky;
+  top: 120px; /* Aligned with fixed header */
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
