@@ -33,6 +33,7 @@
   flex-direction: column !important;
   align-items: center !important;
   text-align: center !important;
+  padding-top: 80px;
   margin-bottom: 50px;
   gap: 16px;
 }
