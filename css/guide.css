@@ -46,11 +46,11 @@
 }
 
 .section-title-center {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  text-align: center !important;
-  gap: 12px !important; /* Consistent with home headers */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
   margin-bottom: 64px;
   max-width: 800px;
   margin-left: auto;
@@ -92,6 +92,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border: 1px solid rgba(var(--primary-rgb), 0.2);
+  margin-top: 60px; /* Added spacing to separate from previous sections */
 }
 
 /* PC Section Styles */
@@ -825,6 +826,9 @@
 .guide-section.is-collapsed .section-title-center,
 .guide-section.is-collapsed .guide-adaptive-content {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* The Smart Header (Visible only when collapsed) */
