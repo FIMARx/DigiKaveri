@@ -27,5 +27,11 @@
   "modal_closed_desc": "Our service is available daily from 09:00 to 21:00. However, you can leave a callback request and we will get back to you as soon as we open!",
   "modal_call_btn": "Request a callback",
   "modal_ok_btn": "Got it",
+  "whatsapp_msg_encoded": "Hi!%20I%20need%20IT%20support",
+  "nav_toggle_aria": "Open menu",
+  "nav_close_aria": "Close menu",
+  "nav_lang_fi_aria": "Switch language to Finnish",
+  "nav_lang_en_aria": "Switch language to English",
+  "nav_more_aria": "More options",
   "og_locale": "en_US"
 }

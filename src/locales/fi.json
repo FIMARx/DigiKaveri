@@ -27,5 +27,11 @@
   "modal_closed_desc": "Palvelemme päivittäin klo 09:00–21:00. Voit kuitenkin jättää soittopyynnön, niin otamme sinuun yhteyttä heti kun avaamme!",
   "modal_call_btn": "Jätä soittopyyntö",
   "modal_ok_btn": "Selvä, ymmärrän",
+  "whatsapp_msg_encoded": "Hei!%20Tarvitsen%20IT-tukea",
+  "nav_toggle_aria": "Avaa valikko",
+  "nav_close_aria": "Sulje valikko",
+  "nav_lang_fi_aria": "Vaihda kieli suomeksi",
+  "nav_lang_en_aria": "Vaihda kieli englanniksi",
+  "nav_more_aria": "Lisää vaihtoehtoja",
   "og_locale": "fi_FI"
 }

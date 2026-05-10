@@ -225,15 +225,22 @@ aside.legal-toc {
 
 @media (max-width: 768px) {
     .legal-container {
-        padding-top: 110px; /* Adjust for fixed nav */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 110px 20px 60px; /* Preserving top offset for fixed header while applying user's padding */
         gap: 32px;
     }
 
     .legal-content {
         padding: 30px 20px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     .legal-hero {
+        width: 100%;
         padding: 40px 15px;
         border-radius: 20px;
     }

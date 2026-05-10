@@ -1,6 +1,6 @@
 <div class="mobile-nav-overlay">
   <div class="mobile-nav-content">
-    <button class="mobile-nav-close" aria-label="Sulje valikko">
+    <button class="mobile-nav-close" aria-label="{{nav_close_aria}}">
       <i data-lucide="x" aria-hidden="true"></i>
     </button>
     <a href="index.html#home" class="mobile-nav-link spy-link {{#if_eq active "home"}}active{{/if_eq}}"
@@ -16,7 +16,7 @@
       ><i data-lucide="credit-card" aria-hidden="true"></i> {{nav_pricing}}</a
     >
     <div class="mobile-nav-item-dropdown">
-      <button class="mobile-dropdown-trigger" aria-label="{{nav_more}}-valikko" aria-expanded="false" aria-haspopup="true">
+      <button class="mobile-dropdown-trigger" aria-label="{{nav_more_aria}}" aria-expanded="false" aria-haspopup="true">
         <div><i data-lucide="more-horizontal" aria-hidden="true"></i> {{nav_more}}</div>
         <i data-lucide="chevron-down" aria-hidden="true"></i>
       </button>
@@ -39,9 +39,9 @@
       </div>
     </div>
     <div class="mobile-lang-switcher">
-      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')" aria-label="Vaihda kieli suomeksi">FI</a>
+      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')" aria-label="{{nav_lang_fi_aria}}">FI</a>
       <span class="mobile-lang-divider">|</span>
-      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="Switch language to English">EN</a>
+      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
     </div>
   </div>
 </div>

@@ -15,7 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(toggleBtn);
 
   toggleBtn.addEventListener("click", () => {
+    // Capture current relative position
+    const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPct = totalScrollable > 0 ? window.scrollY / totalScrollable : 0;
+
     document.documentElement.classList.toggle("large-text");
     toggleBtn.classList.toggle("active");
+
+    // Restore relative position after layout update
+    // We use requestAnimationFrame to ensure the layout has updated
+    requestAnimationFrame(() => {
+      const newTotalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo(0, scrollPct * newTotalScrollable);
+    });
   });
 });
