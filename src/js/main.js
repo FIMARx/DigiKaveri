@@ -142,6 +142,8 @@ function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
   if (!modal || isOpen) return;
 
+  const isEn = window.location.pathname.includes("/en/");
+
   // Accessibility: Focus Trap Logic
   modal.addEventListener("keydown", (e) => {
     if (e.key !== "Tab") return;
