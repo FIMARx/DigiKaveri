@@ -414,6 +414,113 @@
   transform: scale(1.08);
 }
 
+/* --- Modern Video Container --- */
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(var(--primary-rgb), 0.05);
+  transition: transform 0.3s ease;
+  aspect-ratio: 16/9;
+}
+
+.video-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Custom Video Overlay */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.video-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.video-overlay:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.play-circle-btn {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.play-circle-btn i, .play-circle-btn svg {
+  width: 32px;
+  height: 32px;
+  fill: white;
+  transform: translateX(2px);
+}
+
+.video-overlay:hover .play-circle-btn {
+  transform: scale(1.1);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #1e293b;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+.video-placeholder i, .video-placeholder svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+.video-placeholder p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
 /* --- Smart Header (Adaptive) --- */
 .guide-smart-header {
   margin-bottom: 40px;
