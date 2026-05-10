@@ -84,8 +84,11 @@ export default defineConfig({
           '</head>',
           `  <script>
     window.addEventListener('vite:preloadError', (event) => {
-      console.warn('Chunk load failed! Attempting recovery refresh...', event.payload);
-      window.location.reload();
+      console.warn('Asset load failed! Forcing a fresh reload to sync with the latest deployment...', event.payload);
+      // Adding a timestamp to the query string forces the browser to bypass its cache and fetch the fresh HTML from the server.
+      const url = new URL(window.location.href);
+      url.searchParams.set('reload', Date.now());
+      window.location.href = url.toString();
     });
   </script>
 </head>`
