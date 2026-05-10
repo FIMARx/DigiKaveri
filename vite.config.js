@@ -11,6 +11,7 @@ const fi_data = JSON.parse(readFileSync(resolve(__dirname, 'src/locales/fi.json'
 const en_data = JSON.parse(readFileSync(resolve(__dirname, 'src/locales/en.json'), 'utf-8'));
 
 export default defineConfig({
+  base: '/',
   plugins: [
     handlebars({
       partialDirectory: resolve(__dirname, 'src/partials'),
@@ -81,6 +82,8 @@ export default defineConfig({
   build: {
     minify: 'esbuild',
     cssCodeSplit: false,
+    modulePreload: false,
+    emptyOutDir: true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
@@ -95,9 +98,13 @@ export default defineConfig({
         en_error404: resolve(__dirname, 'en/404.html'),
       },
       output: {
-        entryFileNames: 'assets/script-[hash].js',
+        entryFileNames: 'assets/main-[hash].js',
         chunkFileNames: 'assets/chunk-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        manualChunks(id) {
+          if (id.includes('node_modules')) return 'vendor';
+          if (id.includes('src/js/icons') || id.includes('src/js/utils')) return 'main';
+        }
       }
     }
   },

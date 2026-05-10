@@ -23,7 +23,7 @@
 }
 
 .guide-section {
-  padding: 60px 20px;
+  padding: 100px 20px; /* Increased for premium spacing consistent with home page */
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -33,30 +33,47 @@
   flex-direction: column !important;
   align-items: center !important;
   text-align: center !important;
-  padding-top: 80px;
-  margin-bottom: 50px;
-  gap: 16px;
+  gap: 12px !important; /* Consistent with home headers */
+  margin-bottom: 64px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.section-title-center .badge,
+.section-title-center h2,
+.section-title-center p {
+  margin: 0 !important;
+  line-height: 1.2 !important;
 }
 
 .section-title-center h2 {
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  margin-bottom: 10px;
+  font-size: clamp(2rem, 5vw, 2.75rem); /* Increased size for consistency */
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.025em;
   overflow-wrap: break-word;
+}
+
+.section-title-center p {
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  color: var(--text-light);
 }
 
 .section-title-center .badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   background: rgba(var(--primary-rgb), 0.1);
   color: var(--primary-dark);
   padding: 12px 28px;
   border-radius: 100px;
-  font-weight: 700;
   font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 32px;
   border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
