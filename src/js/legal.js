@@ -1,8 +1,8 @@
 /**
  * Legal Pages Interactive Logic
- * Minimal logic - centralized Scroll Spy in main.js handles tracking
+ * Minimal logic - all scroll tracking and navigation is handled centrally in main.js
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Централизованная логика в main.js
+    // All interactive logic is centralized in main.js
 });

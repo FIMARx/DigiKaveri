@@ -127,6 +127,7 @@ function setupForm(formId) {
     }
 
     const btn = form.querySelector(".btn-submit");
+    if (!btn) return; // Bug 4 fix: guard against forms missing a submit button
     const originalText = btn.innerHTML;
 
     btn.disabled = true;

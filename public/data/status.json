@@ -6,5 +6,7 @@
   "_INSTRUCTION_5": "Option 'closed': Forces the light to RED immediately. (Ignores the clock. Great for sick days!)",
   "override": "auto",
   "messageOpen": "Palvelemme nyt",
-  "messageClosed": "Palvelu suljettu"
+  "messageClosed": "Palvelu suljettu",
+  "messageOpenEn": "Service Open",
+  "messageClosedEn": "Closed for today"
 }

@@ -5,7 +5,9 @@ const label = isEn ? "Increase text size" : "Suurenna tekstiä";
 const toggleBtn = document.createElement("button");
 toggleBtn.innerHTML = '<span style="font-weight: 800; font-size: 1.1rem; letter-spacing: -1px;">AA</span>';
 toggleBtn.className = "accessibility-btn";
-toggleBtn.ariaLabel = label;
+// Bug 8 fix: use setAttribute instead of the non-standard .ariaLabel property
+// for cross-browser compatibility (older browsers don't support ARIA reflection API)
+toggleBtn.setAttribute('aria-label', label);
 toggleBtn.title = label;
 
 document.addEventListener("DOMContentLoaded", () => {

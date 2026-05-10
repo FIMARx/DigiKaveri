@@ -23,7 +23,9 @@ const lazyLoadAll = () => {
   initMobileDropdowns();
   initFAB();
   loadAnalytics();
-  checkStatus();
+  // Bug 3 fix: checkStatus() is intentionally NOT called here.
+  // The inline IIFE in index.html already runs checkStatus on page load.
+  // Only the 60s polling interval (in initApp) should update after that.
 
   if (typeof AOS !== 'undefined') {
     AOS.init({ duration: 800, once: true, disable: 'mobile' });
@@ -36,6 +38,7 @@ function initApp() {
 
   // Critical UI (Needs to be instant)
   createIcons({ icons: ICON_SET }); // Render icons immediately
+  initLanguageDetection(); // Bug 1 fix: was defined but never called
   initMobileNav();
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
@@ -126,10 +129,10 @@ async function checkStatus() {
     badge.className = `status-part ${isOpen ? "open" : "closed"}`;
     text.textContent = isOpen
       ? isEn
-        ? "Service Open"
+        ? data?.messageOpenEn || "Service Open"
         : data?.messageOpen || "Palvelemme nyt"
       : isEn
-        ? "Closed for today"
+        ? data?.messageClosedEn || "Closed for today"
         : data?.messageClosed || "Palvelu suljettu";
   }
   if (typeof initStatusModal === "function") initStatusModal(isOpen);

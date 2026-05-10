@@ -21,6 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const isWindows = /win/.test(ua);
     const isMac = /mac/.test(ua) && !isIOS;
 
+    // Bug 2 fix: Define scrollToGuide HERE, before any event listeners use it.
+    // const arrow functions are NOT hoisted - using them before definition throws ReferenceError.
+    const scrollToGuide = (sectionId) => {
+        const guideSection = document.getElementById(sectionId);
+        if (guideSection && window.innerWidth < 1024) {
+            guideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     // --- Show "Automatically Detected" badge only for the actual platform ---
     const showPlatformBadge = () => {
         document.querySelectorAll('.guide-detected-badge').forEach(b => b.classList.add('hidden'));
@@ -124,13 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    const scrollToGuide = (sectionId) => {
-        const guideSection = document.getElementById(sectionId);
-        if (guideSection && window.innerWidth < 1024) {
-            guideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    };
 
     // --- Detailed Help Toggle Logic (Support for multiple toggles) ---
     const helpToggles = document.querySelectorAll('.help-toggle-btn');
