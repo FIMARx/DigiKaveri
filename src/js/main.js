@@ -1,5 +1,6 @@
 import "/css/variables.css";
 import "/css/global.css";
+import "/css/home.css";
 import { createIcons } from "lucide";
 import { ICON_SET } from "./icons";
 import { getFinlandHour, triggerAnalyticsExecution } from "./utils.js";

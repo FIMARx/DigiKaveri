@@ -1,4 +1,5 @@
 /* guide.js - DigiKaveri Remote Support Logic (V2 - Ground Up) */
+import "/css/guide.css";
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 

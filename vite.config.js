@@ -110,8 +110,12 @@ export default defineConfig({
           if (key.endsWith('.html')) {
             let html = value.source;
             html = html.replace(/<link rel="stylesheet"([^>]+)href="([^"]+)"([^>]*)>/g, (match, pre, href, post) => {
-              const fileName = href.split('/').pop();
-              const assetKey = Object.keys(cssAssets).find(k => k.endsWith(fileName));
+              const fileName = href.split('/').pop().replace('.css', '');
+              // Match the base name before the hash (e.g., 'guide' matches 'guide-hash.css')
+              const assetKey = Object.keys(cssAssets).find(k => {
+                const baseName = k.split('/').pop().split('-')[0]; // Simple hash splitter
+                return baseName === fileName || k.includes(fileName);
+              });
               if (assetKey) {
                 return `<style>${cssAssets[assetKey]}</style>`;
               }
@@ -130,7 +134,7 @@ export default defineConfig({
   ],
   build: {
     minify: 'esbuild',
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     modulePreload: true,
     emptyOutDir: true,
     // Enable manifest for better asset tracking and debugging
