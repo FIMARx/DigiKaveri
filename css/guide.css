@@ -382,14 +382,22 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: transparent;
-  border: 1px solid var(--guide-border);
+  background: var(--guide-primary-light);
+  color: var(--guide-primary);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   padding: 14px 24px;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 24px;
+}
+
+.help-toggle-btn:hover {
+  background: var(--guide-primary);
+  color: var(--white);
+  border-color: var(--guide-primary);
+  box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.15);
 }
 
 .help-toggle-btn.active svg { transform: rotate(180deg); }
