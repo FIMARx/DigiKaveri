@@ -14,9 +14,27 @@
   --guide-radius: 24px;
 }
 
-/* --- Utilities --- */
+/* Utilities */
 .hidden { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+
+/* Accessibility Improvements */
+.btn-platform-switch:focus-visible,
+.help-toggle-btn:focus-visible,
+.help-tab-btn:focus-visible,
+.btn-download-tv:focus-visible,
+.smart-header-card:focus-visible {
+  outline: 3px solid var(--guide-primary);
+  outline-offset: 4px;
+}
+
+/* Ensure minimum touch target size for interactive elements */
+.btn-platform-switch,
+.help-toggle-btn,
+.help-tab-btn,
+.btn-download-tv {
+  min-height: 48px;
+}
 
 /* --- Hero Section --- */
 .guide-hero {
@@ -64,6 +82,7 @@
   margin: 0 auto;
   padding: 80px 24px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  scroll-margin-top: 100px; /* Space for the navigation header */
 }
 
 .guide-section + .guide-section {
@@ -202,7 +221,7 @@
 .btn-platform-switch img {
   width: 20px;
   height: 20px;
-  opacity: 0.6;
+  opacity: 0.8; /* Higher contrast for accessibility */
 }
 
 .btn-platform-switch.active img {
