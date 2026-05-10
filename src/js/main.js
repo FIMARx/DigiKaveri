@@ -7,6 +7,29 @@ import { getFinlandHour, triggerAnalyticsExecution } from "./utils.js";
 let isInitialized = false;
 let statusController = null;
 
+// "Sneaky Mode" Optimization: 
+// Wait for user interaction or 3 seconds before loading heavy assets
+const lazyLoadAll = () => {
+  if (window.isLazyLoaded) return;
+  window.isLazyLoaded = true;
+
+  // Remove listeners
+  ['mousedown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(e => 
+    window.removeEventListener(e, lazyLoadAll)
+  );
+
+  // Load non-critical components
+  initFAQ();
+  initMobileDropdowns();
+  initFAB();
+  loadAnalytics();
+  checkStatus();
+
+  if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 800, once: true, disable: 'mobile' });
+  }
+};
+
 function initApp() {
   if (isInitialized) return;
   isInitialized = true;
@@ -16,29 +39,6 @@ function initApp() {
   initMobileNav();
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
-
-  // "Sneaky Mode" Optimization: 
-  // Wait for user interaction or 3 seconds before loading heavy assets
-  const lazyLoadAll = () => {
-    if (window.isLazyLoaded) return;
-    window.isLazyLoaded = true;
-
-    // Remove listeners
-    ['mousedown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(e => 
-      window.removeEventListener(e, lazyLoadAll)
-    );
-
-    // Load non-critical components
-    initFAQ();
-    initMobileDropdowns();
-    initFAB();
-    loadAnalytics();
-    checkStatus();
-
-    if (typeof AOS !== 'undefined') {
-      AOS.init({ duration: 800, once: true, disable: 'mobile' });
-    }
-  };
 
   // Listen for any user interaction
   ["mousedown", "mousemove", "touchstart", "scroll", "keydown"].forEach((e) =>

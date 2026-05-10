@@ -1,5 +1,3 @@
-import { createIcons } from 'lucide';
-import { ICON_SET } from './icons';
 
 const isEn = window.location.pathname.includes('/en/');
 const label = isEn ? "Increase text size" : "Suurenna tekstiä";

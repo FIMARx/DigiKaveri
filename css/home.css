@@ -1743,13 +1743,20 @@ header#home {
 .section-services,
 .section-pricing,
 .section-team,
-.section-faq,
-.section-contact-detailed,
+#faq,
+#contact-detailed,
 #solutions,
 #reviews,
-#guarantee {
+#guarantee,
+.section-faq,
+.section-contact-detailed {
   margin-bottom: 80px !important;
   margin-top: 0 !important;
+}
+
+#faq,
+#contact-detailed {
+  padding-bottom: 80px !important; /* Clearance for FAB */
 }
 
 @media (max-width: 1080px) {
