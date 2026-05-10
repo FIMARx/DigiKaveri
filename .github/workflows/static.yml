@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
       - name: Install dependencies
         # Use `npm ci` for reproducible installs that exactly match package-lock.json
         run: npm ci --legacy-peer-deps
