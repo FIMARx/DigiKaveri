@@ -1688,6 +1688,12 @@ h3 {
   box-shadow: 0 4px 6px rgba(22, 101, 52, 0.1);
 }
 
+.guide-detected-badge i,
+.guide-detected-badge svg {
+  width: 18px;
+  height: 18px;
+}
+
 .platform-pill-switcher {
   display: flex;
   justify-content: center;

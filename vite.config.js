@@ -2,13 +2,36 @@ import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-import { readFileSync } from 'fs';
+import { readdirSync, statSync, readFileSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const fi_data = JSON.parse(readFileSync(resolve(__dirname, 'src/locales/fi.json'), 'utf-8'));
 const en_data = JSON.parse(readFileSync(resolve(__dirname, 'src/locales/en.json'), 'utf-8'));
+
+/**
+ * Bulletproof helper: Automatically finds all HTML files in the project
+ * so you never have to manually add them to the config again.
+ */
+function getHtmlEntries(dir, fileList = {}) {
+  const items = readdirSync(dir);
+  items.forEach(item => {
+    const fullPath = resolve(dir, item);
+    if (statSync(fullPath).isDirectory()) {
+      // Skip system/build folders
+      if (item !== 'node_modules' && item !== 'dist' && item !== 'src' && item !== 'public' && !item.startsWith('.')) {
+        getHtmlEntries(fullPath, fileList);
+      }
+    } else if (item.endsWith('.html')) {
+      // Create a unique key for Rollup (e.g., 'en_index' for 'en/index.html')
+      const relativePath = fullPath.replace(__dirname, '').replace(/^[\\\/]/, '').replace(/\\/g, '/');
+      const name = relativePath.replace(/\.html$/, '').replace(/\//g, '_');
+      fileList[name || 'main'] = fullPath;
+    }
+  });
+  return fileList;
+}
 
 export default defineConfig({
   base: '/',
@@ -43,13 +66,32 @@ export default defineConfig({
         return data;
       },
       helpers: {
-        // Must be a regular function (not arrow) so `this` is the Handlebars template context
         if_eq: function(a, b, options) {
           if (a === b) return options.fn(this);
           return options.inverse(this);
         }
       }
     }),
+    /**
+     * Bulletproof Plugin: Chunk Recovery
+     * Detects when a script fails to load (404) and automatically reloads the page.
+     * This fixes the "out of sync" error when a new version is deployed.
+     */
+    {
+      name: 'chunk-recovery',
+      transformIndexHtml(html) {
+        return html.replace(
+          '</head>',
+          `  <script>
+    window.addEventListener('vite:preloadError', (event) => {
+      console.warn('Chunk load failed! Attempting recovery refresh...', event.payload);
+      window.location.reload();
+    });
+  </script>
+</head>`
+        );
+      }
+    },
     {
       name: 'inline-css',
       enforce: 'post',
@@ -65,10 +107,8 @@ export default defineConfig({
           if (key.endsWith('.html')) {
             let html = value.source;
             html = html.replace(/<link rel="stylesheet"([^>]+)href="([^"]+)"([^>]*)>/g, (match, pre, href, post) => {
-              // Extract the filename from the href (e.g., /assets/style-hash.css -> style-hash.css)
               const fileName = href.split('/').pop();
               const assetKey = Object.keys(cssAssets).find(k => k.endsWith(fileName));
-              
               if (assetKey) {
                 return `<style>${cssAssets[assetKey]}</style>`;
               }
@@ -78,8 +118,7 @@ export default defineConfig({
           }
         }
 
-        // Bug 6 fix: Remove orphaned CSS files from the bundle after inlining.
-        // Without this, the CSS is both inlined AND emitted as a dead file in dist/assets/.
+        // Remove CSS files from dist/assets after inlining
         for (const key of Object.keys(cssAssets)) {
           delete bundle[key];
         }
@@ -89,32 +128,27 @@ export default defineConfig({
   build: {
     minify: 'esbuild',
     cssCodeSplit: false,
-    modulePreload: false,
+    modulePreload: true,
     emptyOutDir: true,
+    // Enable manifest for better asset tracking and debugging
+    manifest: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        etayhteys: resolve(__dirname, 'etayhteys.html'),
-        tietosuoja: resolve(__dirname, 'tietosuoja.html'),
-        kayttoehdot: resolve(__dirname, 'kayttoehdot.html'),
-        en_index: resolve(__dirname, 'en/index.html'),
-        en_remote: resolve(__dirname, 'en/remote-support.html'),
-        en_privacy: resolve(__dirname, 'en/privacy-policy.html'),
-        en_terms: resolve(__dirname, 'en/terms-of-service.html'),
-        error404: resolve(__dirname, '404.html'),
-        en_error404: resolve(__dirname, 'en/404.html'),
+        // Automatically find all HTML files
+        ...getHtmlEntries(__dirname),
+        
+        // Core JS Entry Points (Named for predictability)
+        main_app: resolve(__dirname, 'src/js/main.js'),
+        contact_app: resolve(__dirname, 'src/js/contact.js'),
+        accessibility_app: resolve(__dirname, 'src/js/accessibility.js'),
+        cookie_app: resolve(__dirname, 'src/js/cookieconsent-config.js'),
       },
       output: {
-        // Bug 1+2 fix: Use [name] so each entry point (main, etayhteys, en_index, etc.) gets
-        // its own predictably-named JS file, preventing hash ambiguity across 10 entry points.
         entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/chunk-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
         manualChunks(id) {
-          // 'vendor': all node_modules (lucide icons, fonts) into one cacheable bundle
           if (id.includes('node_modules')) return 'vendor';
-          // 'app-core': merge icons.js + utils.js so they don't emit as tiny separate chunks.
-          // Name must NOT be 'main' — that collides with the entryFileNames [name] for index.html.
           if (id.includes('src/js/icons') || id.includes('src/js/utils')) return 'app-core';
         }
       }

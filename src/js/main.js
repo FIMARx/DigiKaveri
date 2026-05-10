@@ -217,6 +217,10 @@ function initStatusModal(isOpen) {
               targetElement.focus({ preventScroll: true });
             }, 50);
           });
+        } else {
+          // Redirect to home page with contact hash
+          const homeUrl = isEn ? "/en/index.html" : "/index.html";
+          window.location.href = `${homeUrl}#contact`;
         }
       }
     };

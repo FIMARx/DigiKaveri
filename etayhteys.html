@@ -387,35 +387,32 @@
 
         <div id="guide-container">
           <!-- Android Card -->
-          <div id="android-card" class="mobile-guide-card platform-card">
-            <div class="guide-detected-badge hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Automaattisesti tunnistettu
-            </div>
-            <div class="mobile-platform-header">
-              <img src="svg/android.svg" alt="Android" width="32" height="32" />
+          <div id="android-card" class="pc-guide-card platform-card">
+            <div class="pc-download-info">
+              <div class="guide-detected-badge hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Automaattisesti tunnistettu
+              </div>
+              <img src="svg/android.svg" alt="Android" class="tv-logo" style="height: 50px;">
               <h3>Android-ohje</h3>
+              <p>Lataa <strong>QuickSupport</strong>-sovellus Google Play -kaupasta aloittaaksesi.</p>
+              <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" class="btn-app-store-pill btn-android-green">
+                <img src="svg/googleplay.svg" alt="Google Play" width="22" height="22" />
+                  <div class="store-info">
+                    <span>Lataa täältä:</span>
+                    <span>Google Play</span>
+                  </div>
+              </a>
+              <div class="official-download-container">
+                <p class="official-download-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock lucide-sm"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan.
+                </p>
+              </div>
             </div>
             
             <div class="step-v-container">
               <div class="step-v-item">
                 <div class="step-v-number">1</div>
-                <div class="step-v-content">
-                  <h4>Lataa sovellus</h4>
-                  <p>Klikkaa alla olevaa painiketta ladataksesi <strong>QuickSupport</strong>-sovelluksen Google Play -kaupasta.</p>
-                  <div class="mt-15">
-                    <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" class="btn-app-store-pill btn-android-green">
-                      <img src="svg/googleplay.svg" alt="Google Play" width="22" height="22" />
-                        <div class="store-info">
-                          <span>Lataa täältä:</span>
-                          <span>Google Play</span>
-                        </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="step-v-item">
-                <div class="step-v-number">2</div>
                 <div class="step-v-content">
                   <h4>Avaa ja salli luvat</h4>
                   <p>Avaa sovellus ja salli tarvittavat luvat (kuten ilmoitukset ja näytön jako), jotta voimme auttaa sinua etänä.</p>
@@ -423,17 +420,12 @@
               </div>
 
               <div class="step-v-item">
-                <div class="step-v-number">3</div>
+                <div class="step-v-number">2</div>
                 <div class="step-v-content">
                   <h4>Kerro ID-koodi</h4>
                   <p>Lue sovelluksen näytöllä näkyvä 9-numeroinen <strong>ID-koodi</strong> DigiKaveri-auttajallesi puhelimessa.</p>
                 </div>
               </div>
-            </div>
-
-            <div class="safety-indicator">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
             </div>
 
             <!-- Detailed Help Section (Android) -->
@@ -488,36 +480,33 @@
             </div>
           </div>
 
-          <!-- iOS Card (Hidden by default, shown if detected or toggled) -->
-          <div id="ios-card" class="mobile-guide-card platform-card hidden">
-            <div class="guide-detected-badge hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Automaattisesti tunnistettu
-            </div>
-            <div class="mobile-platform-header">
-              <img src="svg/apple.svg" alt="Apple" width="32" height="32" />
+          <!-- iOS Card -->
+          <div id="ios-card" class="pc-guide-card platform-card hidden">
+            <div class="pc-download-info">
+              <div class="guide-detected-badge hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Automaattisesti tunnistettu
+              </div>
+              <img src="svg/apple.svg" alt="Apple" class="tv-logo" style="height: 50px;">
               <h3>iPhone & iPad -ohje</h3>
+              <p>Lataa <strong>QuickSupport</strong>-sovellus App Storesta aloittaaksesi.</p>
+              <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" class="btn-app-store-pill btn-apple-black">
+                <img src="svg/appstore.svg" alt="App Store" width="22" height="22" />
+                <div class="store-info">
+                  <span>Lataa täältä:</span>
+                  <span>App Store</span>
+                </div>
+              </a>
+              <div class="official-download-container">
+                <p class="official-download-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock lucide-sm"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan.
+                </p>
+              </div>
             </div>
 
             <div class="step-v-container">
               <div class="step-v-item">
                 <div class="step-v-number">1</div>
-                <div class="step-v-content">
-                  <h4>Lataa sovellus</h4>
-                  <p>Klikkaa alla olevaa painiketta ladataksesi <strong>QuickSupport</strong>-sovelluksen App Storesta.</p>
-                  <div class="mt-15">
-                    <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" class="btn-app-store-pill btn-apple-black">
-                      <img src="svg/appstore.svg" alt="App Store" width="22" height="22" />
-                      <div class="store-info">
-                        <span>Lataa täältä:</span>
-                        <span>App Store</span>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="step-v-item">
-                <div class="step-v-number">2</div>
                 <div class="step-v-content">
                   <h4>Avaa ja salli luvat</h4>
                   <p>Avaa sovellus ja salli tarvittavat luvat (kuten ilmoitukset ja näytön jako), jotta voimme auttaa sinua etänä.</p>
@@ -525,17 +514,12 @@
               </div>
 
               <div class="step-v-item">
-                <div class="step-v-number">3</div>
+                <div class="step-v-number">2</div>
                 <div class="step-v-content">
                   <h4>Kerro ID-koodi</h4>
                   <p>Lue sovelluksen näytöllä näkyvä 9-numeroinen <strong>ID-koodi</strong> DigiKaveri-auttajallesi puhelimessa.</p>
                 </div>
               </div>
-            </div>
-
-            <div class="safety-indicator">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <span>Yhteys on suojattu. Näemme laitteesi vain tämän puhelun ajan, kun sovellus on auki.</span>
             </div>
 
             <!-- Detailed Help Section (iOS) -->
