@@ -599,6 +599,12 @@
 /* --- Smart Header (Adaptive) --- */
 .guide-smart-header {
   margin-bottom: 40px;
+  display: none; /* Hide by default */
+}
+
+.guide-section.is-collapsed .guide-smart-header {
+  display: block; /* Show only when collapsed */
+  animation: fadeInDown 0.6s ease-out forwards;
 }
 
 .smart-header-card {
