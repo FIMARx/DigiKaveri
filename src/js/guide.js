@@ -1,255 +1,200 @@
+/* guide.js - DigiKaveri Remote Support Logic (V2 - Ground Up) */
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Mobile Guide Elements ---
-    const androidCard = document.getElementById('android-card');
-    const iosCard = document.getElementById('ios-card');
-    const btnAndroid = document.getElementById('android-switch');
-    const btnIos = document.getElementById('ios-switch');
+    // --- 1. State Management Helpers ---
+    const setElementActive = (el, active = true) => {
+        if (!el) return;
+        el.classList.toggle('active', active);
+        if (el.tagName === 'BUTTON') el.setAttribute('aria-expanded', active);
+    };
 
-    // --- PC Guide Elements ---
-    const windowsCard = document.getElementById('windows-card-pc');
-    const macCard = document.getElementById('mac-card-pc');
-    const btnWindows = document.getElementById('windows-switch');
-    const btnMac = document.getElementById('mac-switch');
+    const setElementVisible = (el, visible = true) => {
+        if (!el) return;
+        el.classList.toggle('hidden', !visible);
+    };
 
-    // Detect platform
+    const toggleSectionCollapsed = (sectionId, collapsed = true) => {
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+        section.classList.toggle('is-collapsed', collapsed);
+    };
+
+    // --- 2. Platform Detection ---
     const ua = navigator.userAgent.toLowerCase();
     const isIOS = /iphone|ipad|ipod/.test(ua);
     const isAndroid = /android/.test(ua);
     const isWindows = /win/.test(ua);
     const isMac = /mac/.test(ua) && !isIOS;
+    const isMobile = isIOS || isAndroid;
 
-    // Bug 2 fix: Define scrollToGuide HERE, before any event listeners use it.
-    // const arrow functions are NOT hoisted - using them before definition throws ReferenceError.
-    const scrollToGuide = (sectionId) => {
-        const guideSection = document.getElementById(sectionId);
-        if (guideSection && window.innerWidth < 1024) {
-            guideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    };
+    // --- 3. Platform Switcher Logic (Windows/Mac and Android/iOS) ---
+    const initSwitcher = (config) => {
+        const { buttons, cards, scrollTargetId } = config;
+        
+        Object.entries(buttons).forEach(([platform, btnId]) => {
+            const btn = document.getElementById(btnId);
+            if (!btn) return;
 
-    // --- Show "Automatically Detected" badge only for the actual platform ---
-    const showPlatformBadge = () => {
-        document.querySelectorAll('.guide-detected-badge').forEach(b => b.classList.add('hidden'));
-
-        // PC Section Badge
-        let detectedPCCard = null;
-        if (isWindows) detectedPCCard = windowsCard;
-        else if (isMac) detectedPCCard = macCard;
-
-        if (detectedPCCard) {
-            const badge = detectedPCCard.querySelector('.guide-detected-badge');
-            if (badge) badge.classList.remove('hidden');
-        }
-
-        // Mobile Section Badge
-        let detectedMobileCard = null;
-        if (isIOS) detectedMobileCard = iosCard;
-        else if (isAndroid) detectedMobileCard = androidCard;
-
-        if (detectedMobileCard) {
-            const badge = detectedMobileCard.querySelector('.guide-detected-badge');
-            if (badge) badge.classList.remove('hidden');
-        }
-    };
-    showPlatformBadge();
-
-    // --- Mobile Switcher Logic ---
-    if (androidCard && iosCard && btnAndroid && btnIos) {
-        let currentMobilePlatform = 'android';
-
-        const updateMobileUI = (platform) => {
-            if (platform === 'ios') {
-                androidCard.classList.add('hidden');
-                iosCard.classList.remove('hidden');
-                btnIos.classList.add('active');
-                btnAndroid.classList.remove('active');
-            } else {
-                iosCard.classList.add('hidden');
-                androidCard.classList.remove('hidden');
-                btnAndroid.classList.add('active');
-                btnIos.classList.remove('active');
-            }
-            createIcons({ icons: ICON_SET });
-            currentMobilePlatform = platform;
-        };
-
-        // Initial Mobile Detection
-        if (isIOS) updateMobileUI('ios');
-        else updateMobileUI('android');
-
-        btnAndroid.addEventListener('click', () => {
-            if (currentMobilePlatform !== 'android') {
-                updateMobileUI('android');
-                scrollToGuide('mobile-guide');
-            }
-        });
-
-        btnIos.addEventListener('click', () => {
-            if (currentMobilePlatform !== 'ios') {
-                updateMobileUI('ios');
-                scrollToGuide('mobile-guide');
-            }
-        });
-    }
-
-    // --- PC Switcher Logic ---
-    if (windowsCard && macCard && btnWindows && btnMac) {
-        let currentPCPlatform = 'windows';
-
-        const updatePCUI = (platform) => {
-            if (platform === 'mac') {
-                windowsCard.classList.add('hidden');
-                macCard.classList.remove('hidden');
-                btnMac.classList.add('active');
-                btnWindows.classList.remove('active');
-            } else {
-                macCard.classList.add('hidden');
-                windowsCard.classList.remove('hidden');
-                btnWindows.classList.add('active');
-                btnMac.classList.remove('active');
-            }
-            createIcons({ icons: ICON_SET });
-            currentPCPlatform = platform;
-        };
-
-        // Initial PC Detection
-        if (isMac) updatePCUI('mac');
-        else updatePCUI('windows');
-
-        btnWindows.addEventListener('click', () => {
-            if (currentPCPlatform !== 'windows') {
-                updatePCUI('windows');
-                scrollToGuide('pc-guide');
-            }
-        });
-
-        btnMac.addEventListener('click', () => {
-            if (currentPCPlatform !== 'mac') {
-                updatePCUI('mac');
-                scrollToGuide('pc-guide');
-            }
-        });
-    }
-
-    // --- Detailed Help Toggle Logic (Support for multiple toggles) ---
-    const helpToggles = document.querySelectorAll('.help-toggle-btn');
-
-    helpToggles.forEach(btn => {
-        const targetId = btn.getAttribute('data-target');
-        const helpContent = document.getElementById(targetId);
-
-        if (btn && helpContent) {
             btn.addEventListener('click', () => {
-                const isActive = btn.classList.toggle('active');
-                helpContent.classList.toggle('active');
-                btn.setAttribute('aria-expanded', isActive);
-                if (isActive) {
-                    setTimeout(() => {
-                        const rect = helpContent.getBoundingClientRect();
-                        if (rect.bottom > window.innerHeight) {
-                            helpContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
-                    }, 300);
+                // Update Buttons
+                Object.values(buttons).forEach(id => {
+                    const b = document.getElementById(id);
+                    if (b) b.classList.toggle('active', id === btnId);
+                });
+
+                // Update Cards
+                Object.entries(cards).forEach(([p, cardId]) => {
+                    const c = document.getElementById(cardId);
+                    if (c) c.classList.toggle('hidden', p !== platform);
+                });
+
+                // Refresh Icons
+                createIcons({ icons: ICON_SET });
+
+                // Scroll to section on mobile
+                if (window.innerWidth < 1024 && scrollTargetId) {
+                    const target = document.getElementById(scrollTargetId);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        }
-    });
-
-    // --- Help Sub-tabs Switching logic (Video vs Manual) ---
-    const subTabs = document.querySelectorAll('.help-tab-btn');
-    
-    subTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const container = tab.closest('.help-content-wrapper');
-            const targetView = tab.getAttribute('data-view');
-            
-            container.querySelectorAll('.help-tab-btn').forEach(btn => btn.classList.remove('active'));
-            tab.classList.add('active');
-            
-            container.querySelectorAll('.help-view').forEach(view => view.classList.remove('active'));
-            const viewToShow = container.querySelector(`.help-view[data-view-id="${targetView}"]`);
-            if (viewToShow) viewToShow.classList.add('active');
-            
-            createIcons({ icons: ICON_SET });
         });
+    };
+
+    // PC Switcher
+    initSwitcher({
+        buttons: { windows: 'windows-switch', mac: 'mac-switch' },
+        cards: { windows: 'windows-card-pc', mac: 'mac-card-pc' },
+        scrollTargetId: 'pc-guide'
     });
 
-    // --- Smart Adaptive Guide Logic ---
-    const pcGuideSection = document.getElementById('pc-guide');
-    const mobileGuideSection = document.getElementById('mobile-guide');
-    const smartHeaders = document.querySelectorAll('.guide-smart-header');
+    // Mobile Switcher
+    initSwitcher({
+        buttons: { android: 'android-switch', ios: 'ios-switch' },
+        cards: { android: 'android-card', ios: 'ios-card' },
+        scrollTargetId: 'mobile-guide'
+    });
 
-    if (pcGuideSection && mobileGuideSection) {
-        const isMobileDevice = isIOS || isAndroid;
+    // --- 4. Adaptive Section Logic (Auto-Expand/Collapse) ---
+    const pcSection = document.getElementById('pc-guide');
+    const mobileSection = document.getElementById('mobile-guide');
 
-        if (isMobileDevice) {
-            pcGuideSection.classList.add('is-collapsed');
-            setTimeout(() => {
-                mobileGuideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 500);
+    if (pcSection && mobileSection) {
+        if (isMobile) {
+            toggleSectionCollapsed('pc-guide', true);
+            toggleSectionCollapsed('mobile-guide', false);
         } else {
-            mobileGuideSection.classList.add('is-collapsed');
+            toggleSectionCollapsed('pc-guide', false);
+            toggleSectionCollapsed('mobile-guide', true);
         }
 
-        smartHeaders.forEach(header => {
+        // Add click events to Smart Headers for expansion
+        document.querySelectorAll('.guide-smart-header').forEach(header => {
             header.addEventListener('click', () => {
                 const targetId = header.getAttribute('data-target');
-                const section = document.getElementById(targetId);
-                
-                if (section && section.classList.contains('is-collapsed')) {
-                    section.classList.remove('is-collapsed');
-                    
-                    setTimeout(() => {
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 100);
-                    
-                    createIcons({ icons: ICON_SET });
+                if (targetId) {
+                    toggleSectionCollapsed(targetId, false);
+                    // Optionally collapse the other one? User didn't specify, but usually better to stay expanded.
+                    const otherId = targetId === 'pc-guide' ? 'mobile-guide' : 'pc-guide';
+                    toggleSectionCollapsed(otherId, true);
+
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        setTimeout(() => {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
                 }
             });
         });
     }
 
-    // --- Image Zoom (Lightbox) Logic ---
-    const lightbox = document.getElementById('imageLightbox');
-    const lightboxImg = lightbox ? lightbox.querySelector('img') : null;
-    const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
-    const manualImages = document.querySelectorAll('.v-step-image img');
+    // --- 5. Detailed Help & Sub-tabs ---
+    // Help Toggles
+    document.querySelectorAll('.help-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-target');
+            const target = document.getElementById(targetId);
+            if (!target) return;
 
-    if (lightbox && lightboxImg && manualImages.length > 0) {
-        manualImages.forEach(img => {
-            img.parentElement.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
+            const isOpen = target.classList.toggle('active');
+            btn.classList.toggle('active', isOpen);
+            btn.setAttribute('aria-expanded', isOpen);
+
+            if (isOpen) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        });
+    });
+
+    // Sub-tab Switching
+    document.querySelectorAll('.help-tab-btn').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const container = tab.closest('.help-content-wrapper');
+            if (!container) return;
+
+            const viewId = tab.getAttribute('data-view');
+            
+            // Switch tabs
+            container.querySelectorAll('.help-tab-btn').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            // Switch views
+            container.querySelectorAll('.help-view').forEach(v => {
+                v.classList.toggle('active', v.getAttribute('data-view-id') === viewId);
+            });
+
+            createIcons({ icons: ICON_SET });
+        });
+    });
+
+    // --- 6. Lightbox & Video Helpers ---
+    const lightbox = document.getElementById('imageLightbox');
+    if (lightbox) {
+        const img = lightbox.querySelector('img');
+        const close = lightbox.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.v-step-image img').forEach(vImg => {
+            vImg.parentElement.addEventListener('click', () => {
+                img.src = vImg.src;
+                img.alt = vImg.alt;
                 lightbox.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
         });
 
-        const closeLightbox = () => {
+        const hideLightbox = () => {
             lightbox.classList.remove('active');
             document.body.style.overflow = '';
-            setTimeout(() => { lightboxImg.src = ''; }, 300);
         };
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                closeLightbox();
-            }
-        });
-
-        if (lightboxClose) {
-            lightboxClose.addEventListener('click', closeLightbox);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
+        close?.addEventListener('click', hideLightbox);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) hideLightbox(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideLightbox(); });
     }
+
+    // --- 7. Initial Setup ---
+    // Set detected platform badges
+    document.querySelectorAll('.guide-detected-badge').forEach(badge => {
+        const card = badge.closest('.platform-card');
+        if (!card) return;
+
+        let detected = false;
+        const id = card.id;
+        if (id === 'windows-card-pc' && isWindows) detected = true;
+        if (id === 'mac-card-pc' && isMac) detected = true;
+        if (id === 'android-card' && isAndroid) detected = true;
+        if (id === 'ios-card' && isIOS) detected = true;
+
+        badge.classList.toggle('hidden', !detected);
+    });
+
+    // Set initial switcher states based on platform
+    if (isMac) document.getElementById('mac-switch')?.click();
+    if (isIOS) document.getElementById('ios-switch')?.click();
 
     createIcons({ icons: ICON_SET });
 });
