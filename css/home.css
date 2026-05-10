@@ -1156,6 +1156,13 @@ header#home::before {
   font-size: 0.95rem;
 }
 
+.section-process {
+  background: #f1f5f9;
+  border-radius: var(--radius-lg);
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 .process-steps {
   display: flex;
   justify-content: space-between;
@@ -1289,7 +1296,7 @@ header#home::before {
 }
 
 .guarantee-banner-full {
-  background: #f8fafc;
+  background: #f1f5f9;
   position: relative;
   overflow: hidden;
   padding: 80px 20px;
@@ -1377,17 +1384,7 @@ header#home::before {
   margin-top: 3px;
   flex-shrink: 0;
 }
-.guarantee-link {
-  color: white;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: all 0.2s ease;
-  font-weight: 500;
-}
-.guarantee-link:hover {
-  opacity: 1;
-  text-decoration: none;
-}
+
 
 
 .table-wrapper {
