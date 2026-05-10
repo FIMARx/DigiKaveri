@@ -398,8 +398,8 @@ function updateScrollSpy() {
 
   let currentId = "";
 
-  // Detection zone: 150px from top
-  const triggerPoint = 150;
+  // Detection zone: 1/3 of viewport height (more natural for long content)
+  const triggerPoint = window.innerHeight / 3;
 
   // 1. Check sections in document order
   sections.forEach((s) => {
@@ -408,6 +408,14 @@ function updateScrollSpy() {
       currentId = s.id;
     }
   });
+
+  // Update TOC Progress Fill if exists
+  const tocFill = document.querySelector(".toc-progress-fill");
+  if (tocFill) {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / totalHeight) * 100;
+    tocFill.style.width = progress + "%";
+  }
 
   // 2. Special case: If we are at the very top of the page, force "home"
   if (window.scrollY < 100 && sections.length > 0) {
