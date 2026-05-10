@@ -818,8 +818,8 @@
 
 /* Specific state for collapsed sections */
 .guide-section.is-collapsed {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .guide-section.is-collapsed .section-title-center,
