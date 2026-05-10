@@ -2002,8 +2002,13 @@ header#home {
   margin-top: 0 !important;
 }
 
-#faq,
+#faq {
+  margin-bottom: 2px !important;
+  padding-bottom: 80px !important; /* Clearance for FAB */
+}
+
 #contact-detailed {
+  margin-bottom: 80px !important;
   padding-bottom: 80px !important; /* Clearance for FAB */
 }
 
