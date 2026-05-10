@@ -225,8 +225,8 @@ html[lang="en"] .nav-menu {
 .mobile-nav-link.active,
 .dropdown-trigger.active,
 .mobile-dropdown-trigger.active {
-    color: #3b82f6 !important;
-    background: rgba(59, 130, 246, 0.1) !important;
+    color: #1d4ed8 !important;
+    background: rgba(var(--primary-rgb), 0.1) !important;
     font-weight: 700 !important;
     border-radius: 8px;
 }
@@ -236,13 +236,13 @@ html[lang="en"] .nav-menu {
 .nav-link.active svg,
 .mobile-nav-link.active i,
 .mobile-nav-link.active svg {
-    color: #3b82f6 !important;
+    color: #1d4ed8 !important;
 }
 
 /* Add a little dot or underline for desktop */
 @media (min-width: 1024px) {
     .nav-menu a.nav-link.active {
-        border-bottom: 2px solid #3b82f6;
+        border-bottom: 2px solid #1d4ed8;
     }
 }
 
