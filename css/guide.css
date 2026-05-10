@@ -51,7 +51,6 @@
   align-items: center;
   text-align: center;
   gap: 16px;
-  margin-top: 100px; /* Space from previous sections */
   margin-bottom: 80px; /* Space to content below */
   max-width: 800px;
   margin-left: auto;
@@ -824,8 +823,8 @@
 
 /* Specific state for collapsed sections */
 .guide-section.is-collapsed {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .guide-section.is-collapsed .section-title-center,
@@ -862,7 +861,6 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  margin-top: 80px; /* Increased space from previous section for premium feel */
 }
 
 .smart-header-card:hover {
