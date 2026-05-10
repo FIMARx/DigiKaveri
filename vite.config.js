@@ -43,7 +43,8 @@ export default defineConfig({
         return data;
       },
       helpers: {
-        if_eq: (a, b, options) => {
+        // Must be a regular function (not arrow) so `this` is the Handlebars template context
+        if_eq: function(a, b, options) {
           if (a === b) return options.fn(this);
           return options.inverse(this);
         }
@@ -64,7 +65,7 @@ export default defineConfig({
           if (key.endsWith('.html')) {
             let html = value.source;
             html = html.replace(/<link rel="stylesheet"([^>]+)href="([^"]+)"([^>]*)>/g, (match, pre, href, post) => {
-              // Extract the filename from the href (e.g., /assets/main-hash.css -> assets/main-hash.css)
+              // Extract the filename from the href (e.g., /assets/style-hash.css -> style-hash.css)
               const fileName = href.split('/').pop();
               const assetKey = Object.keys(cssAssets).find(k => k.endsWith(fileName));
               
@@ -75,6 +76,12 @@ export default defineConfig({
             });
             value.source = html;
           }
+        }
+
+        // Bug 6 fix: Remove orphaned CSS files from the bundle after inlining.
+        // Without this, the CSS is both inlined AND emitted as a dead file in dist/assets/.
+        for (const key of Object.keys(cssAssets)) {
+          delete bundle[key];
         }
       }
     }
@@ -98,12 +105,17 @@ export default defineConfig({
         en_error404: resolve(__dirname, 'en/404.html'),
       },
       output: {
-        entryFileNames: 'assets/main-[hash].js',
+        // Bug 1+2 fix: Use [name] so each entry point (main, etayhteys, en_index, etc.) gets
+        // its own predictably-named JS file, preventing hash ambiguity across 10 entry points.
+        entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/chunk-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
         manualChunks(id) {
+          // 'vendor': all node_modules (lucide icons, fonts) into one cacheable bundle
           if (id.includes('node_modules')) return 'vendor';
-          if (id.includes('src/js/icons') || id.includes('src/js/utils')) return 'main';
+          // 'app-core': merge icons.js + utils.js so they don't emit as tiny separate chunks.
+          // Name must NOT be 'main' — that collides with the entryFileNames [name] for index.html.
+          if (id.includes('src/js/icons') || id.includes('src/js/utils')) return 'app-core';
         }
       }
     }
