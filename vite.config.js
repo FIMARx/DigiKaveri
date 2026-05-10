@@ -136,22 +136,12 @@ export default defineConfig({
       input: {
         // Automatically find all HTML files
         ...getHtmlEntries(__dirname),
-        
-        // Core JS Entry Points (Named for predictability)
-        main_app: resolve(__dirname, 'src/js/main.js'),
-        contact_app: resolve(__dirname, 'src/js/contact.js'),
-        accessibility_app: resolve(__dirname, 'src/js/accessibility.js'),
-        cookie_app: resolve(__dirname, 'src/js/cookieconsent-config.js'),
+        main: resolve(__dirname, 'src/js/main.js'),
+        contact: resolve(__dirname, 'src/js/contact.js'),
+        accessibility: resolve(__dirname, 'src/js/accessibility.js'),
+        cookie: resolve(__dirname, 'src/js/cookieconsent-config.js'),
       },
-      output: {
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
-        manualChunks(id) {
-          if (id.includes('node_modules')) return 'vendor';
-          if (id.includes('src/js/icons') || id.includes('src/js/utils')) return 'app-core';
-        }
-      }
+      output: {}
     }
   },
   server: {
