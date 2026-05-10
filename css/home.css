@@ -1731,6 +1731,7 @@ section.container {
   height: auto !important;
   display: block !important;
   padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 header#home {
@@ -1747,7 +1748,7 @@ header#home {
 #solutions,
 #reviews,
 #guarantee {
-  margin-bottom: 60px !important;
+  margin-bottom: 80px !important;
   margin-top: 0 !important;
 }
 
