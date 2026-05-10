@@ -9,14 +9,14 @@
   --secondary: #475569;
   --text-dark: #0f172a;
   --text-light: #334155;
-  --text-muted: #64748b;
+  --text-muted: #4b5563; /* Darker for accessibility (Contrast 4.63:1) */
   --border: #f1f5f9;
   --surface: #ffffff;
 
   /* Status Colors */
   --success: #059669;
   --error: #dc2626;
-  --warning: #d97706;
+  --warning: #92400e; /* Darker for accessibility (Contrast 5.48:1) */
 
   /* Typography */
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
@@ -41,4 +41,22 @@
   --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-border: rgba(255, 255, 255, 0.5);
   --nav-gap: 32px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+    transition-delay: -1ms !important;
+  }
 }
