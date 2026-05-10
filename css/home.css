@@ -117,13 +117,19 @@ header#home::before {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(circle at center, black, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+    linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(circle at center, black, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, black, transparent 85%);
   z-index: -1;
   pointer-events: none;
+  animation: grid-subtle-drift 60s linear infinite;
+}
+
+@keyframes grid-subtle-drift {
+  from { background-position: 0 0; }
+  to { background-position: 50px 50px; }
 }
 .hero-centered h1 {
   font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -706,21 +712,36 @@ header#home::before {
 .status-schedule-pill {
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 100px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 4px;
   gap: 4px;
   box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 2px 4px -2px rgba(0, 0, 0, 0.05),
+    0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05),
     inset 0 0 20px rgba(255, 255, 255, 0.5);
   margin: 0 auto 32px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   width: fit-content;
   position: relative;
+}
+
+.status-schedule-pill::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  border-radius: 100px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.status-schedule-pill:hover::before {
+  opacity: 1;
 }
 
 .status-schedule-pill:hover {
@@ -909,8 +930,34 @@ header#home::before {
 }
 .solution-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   border-color: var(--primary-light);
+}
+
+.solution-card .card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.solution-card:hover .card-shine {
+  animation: card-shine-anim 0.8s ease-out forwards;
+}
+
+@keyframes card-shine-anim {
+  0% { left: -100%; }
+  100% { left: 200%; }
 }
 .solution-card::after {
   content: "";
