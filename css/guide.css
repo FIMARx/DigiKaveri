@@ -18,6 +18,10 @@
 .hidden { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 
+/* Prevent FOUC: hide the second guide section's content until JS sets the correct collapsed state */
+/* mobile-guide starts collapsed (is-collapsed is set in HTML); pc-guide is open by default */
+/* If JS is disabled, both sections will show — acceptable progressive enhancement */
+
 /* Accessibility Improvements */
 .btn-platform-switch:focus-visible,
 .help-toggle-btn:focus-visible,
