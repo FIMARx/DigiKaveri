@@ -190,20 +190,20 @@ function setupForm(formId) {
           }, 500);
         }, 8000);
 
-        showToast(t.thankYou, true);
+
       } else {
         btn.innerHTML = t.error;
         btn.style.background = "#EF4444";
         btn.disabled = false;
         form.classList.remove("form-submitting");
-        showToast(t.sendError, false);
+
       }
     } catch (error) {
       btn.innerHTML = t.connError;
       btn.style.background = "#EF4444";
       btn.disabled = false;
       form.classList.remove("form-submitting");
-      showToast(t.netError, false);
+
     }
   });
 }
