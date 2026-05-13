@@ -1,7 +1,7 @@
 import { triggerAnalyticsExecution } from "./utils.js";
 
 const runCookieConsent = () => {
-  if (typeof CookieConsent === "undefined") return;
+  if (typeof CookieConsent === "undefined") return false; // not ready yet
 
   CookieConsent.run({
     // Handle Global Privacy Control via config rather than hard return
@@ -167,11 +167,33 @@ const runCookieConsent = () => {
       },
     },
   });
+
+  return true; // successfully initialized
 };
 
-// Use a more reliable ready state check
+// Retry until the CDN library is ready (handles slow CDN / load-order races).
+// type="module" scripts run after defer non-module scripts, but a CDN hiccup
+// can still cause CookieConsent to be undefined when this module first executes.
+const MAX_WAIT_MS = 3000;
+const POLL_INTERVAL_MS = 50;
+
+const initWithRetry = () => {
+  if (runCookieConsent()) return; // success on first try
+
+  let elapsed = 0;
+  const poll = setInterval(() => {
+    elapsed += POLL_INTERVAL_MS;
+    if (runCookieConsent()) {
+      clearInterval(poll);
+    } else if (elapsed >= MAX_WAIT_MS) {
+      clearInterval(poll);
+      console.warn("CookieConsent library did not load within 3 s — banner skipped.");
+    }
+  }, POLL_INTERVAL_MS);
+};
+
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", runCookieConsent);
+  document.addEventListener("DOMContentLoaded", initWithRetry);
 } else {
-  runCookieConsent();
+  initWithRetry();
 }

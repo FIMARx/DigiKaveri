@@ -24,9 +24,10 @@ const lazyLoadAll = () => {
   initMobileDropdowns();
   initFAB();
   loadAnalytics();
-  // Bug 3 fix: checkStatus() is intentionally NOT called here.
-  // The inline IIFE in index.html already runs checkStatus on page load.
-  // Only the 60s polling interval (in initApp) should update after that.
+  // checkStatus() is NOT called here intentionally.
+  // It is called once immediately in initApp() (covers all pages),
+  // and the inline IIFE in index.html also calls it for the homepage.
+  // The 30 s throttle inside checkStatus() prevents redundant fetches.
 
   if (typeof AOS !== 'undefined') {
     AOS.init({ duration: 800, once: true, disable: 'mobile' });
@@ -43,6 +44,11 @@ function initApp() {
   initMobileNav();
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
+
+  // Run status check immediately on every page so the closed modal
+  // shows promptly — not just on the homepage (which has an inline IIFE)
+  // or after the 60 s polling interval fires for the first time.
+  checkStatus();
 
   // Listen for any user interaction
   ["mousedown", "mousemove", "touchstart", "scroll", "keydown"].forEach((e) =>
