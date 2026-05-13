@@ -124,6 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.classList.toggle("active", isOpen);
       btn.setAttribute("aria-expanded", isOpen);
 
+      // Pause any playing video when the section is collapsed
+      if (!isOpen) {
+        target.querySelectorAll("video").forEach((v) => {
+          if (!v.paused) v.pause();
+        });
+      }
+
       if (isOpen) {
         setTimeout(() => {
           target.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -139,6 +146,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!container) return;
 
       const viewId = tab.getAttribute("data-view");
+
+      // Pause any playing video before switching away from the video view
+      const activeVideoView = container.querySelector(".help-view.active[data-view-id='video']");
+      if (activeVideoView && viewId !== "video") {
+        activeVideoView.querySelectorAll("video").forEach((v) => {
+          if (!v.paused) v.pause();
+        });
+      }
 
       // Switch tabs
       container
