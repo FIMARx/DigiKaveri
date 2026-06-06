@@ -1,6 +1,9 @@
 <!doctype html>
-<html lang="{{lang}}">
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 Page Not Found | DigiKaveri</title>
   {{> header 
     title="404 Page Not Found | DigiKaveri" 
     description="Oops! The page you were looking for could not be found."
@@ -8,6 +11,7 @@
     fi_path="404.html"
     en_path="404.html"
     extra_css="home"
+    skip_basic_meta=true
   }}
   <style>
     body {
@@ -18,6 +22,30 @@
     .hero-centered {
       flex-grow: 1;
     }
+    .err-header {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 60px;
+      flex-grow: 1;
+    }
+    .err-title {
+      margin-top: 20px;
+    }
+    .err-actions {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .btn-err-link {
+      display: inline-flex;
+      width: auto;
+      padding: 15px 30px;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -25,8 +53,8 @@
   {{> mobile-nav }}
 
     
-    <header class="hero-centered" style="min-height: 50vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 60px; flex-grow: 1;">
-      <h1 style="margin-top: 20px;">
+    <header class="hero-centered err-header">
+      <h1 class="err-title">
         Oops! Page not found. <br /><span class="highlight-text"
           >404 Error</span
         >
@@ -34,8 +62,8 @@
       <p class="hero-subtitle">
         The page you are looking for does not exist or has been moved.
       </p>
-      <div style="margin-top: 30px; display: flex; justify-content: center;">
-        <a href="/en/" class="btn-submit" style="display: inline-flex; width: auto; padding: 15px 30px; align-items: center; gap: 8px; text-decoration: none;">
+      <div class="err-actions">
+        <a href="/en/" class="btn-submit btn-err-link">
           Return to homepage <i data-lucide="arrow-right" aria-hidden="true"></i>
         </a>
       </div>

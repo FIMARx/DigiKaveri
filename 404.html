@@ -1,6 +1,9 @@
 <!doctype html>
-<html lang="{{lang}}">
+<html lang="fi">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 Sivua ei löytynyt | DigiKaveri</title>
   <script>
     if (window.location.pathname.startsWith('/en/')) {
       window.location.replace('/en/404.html');
@@ -13,6 +16,7 @@
     fi_path="404.html"
     en_path="en/404.html"
     extra_css="home"
+    skip_basic_meta=true
   }}
   <style>
     body {
@@ -23,6 +27,29 @@
     .hero-centered {
       flex-grow: 1;
     }
+    .err-header {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+    .err-title {
+      margin-top: 20px;
+    }
+    .err-actions {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .btn-err-link {
+      display: inline-flex;
+      width: auto;
+      padding: 15px 30px;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -32,8 +59,8 @@
 
 
     
-    <header class="hero-centered" style="min-height: 50vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 60px;">
-      <h1 style="margin-top: 20px;">
+    <header class="hero-centered err-header">
+      <h1 class="err-title">
         Hups! Sivua ei löytynyt. <br /><span class="highlight-text"
           >404 Virhe</span
         >
@@ -41,8 +68,8 @@
       <p class="hero-subtitle">
         Etsimääsi sivua ei valitettavasti löydy tai se on siirretty.
       </p>
-      <div style="margin-top: 30px; display: flex; justify-content: center;">
-        <a href="/" class="btn-submit" style="display: inline-flex; width: auto; padding: 15px 30px; align-items: center; gap: 8px; text-decoration: none;">
+      <div class="err-actions">
+        <a href="/" class="btn-submit btn-err-link">
           Palaa etusivulle <i data-lucide="arrow-right" aria-hidden="true"></i>
         </a>
       </div>

@@ -1,6 +1,9 @@
 <!doctype html>
-<html lang="{{lang}}">
+<html lang="fi">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etätuki-opas | DigiKaveri - Miten etäyhteys toimii?</title>
   {{> header 
     title="Etätuki-opas | DigiKaveri - Miten etäyhteys toimii?"
     description="Lue ohjeet etätuen aloittamiseen. Ladattava TeamViewer-etäyhteysohjelma ja helpot askeleet tietokoneen etähuoltoon."
@@ -9,6 +12,7 @@
     fi_path="etayhteys.html"
     en_path="remote-support.html"
     extra_css="guide"
+    skip_basic_meta=true
   }}
 </head>
 <body>
@@ -410,10 +414,10 @@
               <div class="guide-detected-badge hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Automaattisesti tunnistettu
               </div>
-              <img src="svg/android.svg" alt="Android" class="tv-logo" style="height: 50px;">
+              <img src="svg/android.svg" alt="Android" class="tv-logo logo-platform">
               <h3>Android-ohje</h3>
               <p>Lataa <strong>QuickSupport</strong>-sovellus Google Play -kaupasta aloittaaksesi.</p>
-              <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" class="btn-app-store-pill btn-android-green">
+              <a href="https://play.google.com/store/apps/details?id=com.teamviewer.quicksupport.market" target="_blank" rel="noopener" class="btn-app-store-pill btn-android-green">
                 <img src="svg/googleplay.svg" alt="Google Play" width="22" height="22" />
                   <div class="store-info">
                     <span>Lataa täältä:</span>
@@ -872,10 +876,10 @@
               <div class="guide-detected-badge hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Automaattisesti tunnistettu
               </div>
-              <img src="svg/apple.svg" alt="Apple" class="tv-logo" style="height: 50px;">
+              <img src="svg/apple.svg" alt="Apple" class="tv-logo logo-platform">
               <h3>iPhone & iPad -ohje</h3>
               <p>Lataa <strong>QuickSupport</strong>-sovellus App Storesta aloittaaksesi.</p>
-              <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" class="btn-app-store-pill btn-apple-black">
+              <a href="https://apps.apple.com/us/app/teamviewer-remote-control/id692035811" target="_blank" rel="noopener" class="btn-app-store-pill btn-apple-black">
                 <img src="svg/appstore.svg" alt="App Store" width="22" height="22" />
                 <div class="store-info">
                   <span>Lataa täältä:</span>
