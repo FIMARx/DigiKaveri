@@ -87,7 +87,7 @@
       </div>
 
       <div class="hero-form-card" id="contact">
-        <h2>Request a Callback</h2>
+        <h2>Contact Us</h2>
         <form
           id="contactForm"
           action="https://api.web3forms.com/submit"
@@ -104,62 +104,102 @@
             class="botcheck-hidden"
             title="Bot check"
           />
+          <input type="hidden" id="quiz-device-input" name="service" value="" />
+          <input type="hidden" id="quiz-issue-input" name="issue" value="" />
 
-          <div class="form-row">
-            <div class="input-group">
-              <label for="c-name"><i data-lucide="user" aria-hidden="true"></i> Name</label>
-              <input
-                type="text"
-                id="c-name"
-                name="name"
-                autocomplete="name"
-                placeholder="John Doe"
-                required
-                minlength="2"
-              />
-            </div>
-            <div class="input-group">
-              <label for="c-phone"
-                ><i data-lucide="phone" aria-hidden="true"></i> Phone Number</label
-              >
-              <input
-                type="tel"
-                id="c-phone"
-                name="phone"
-                autocomplete="tel"
-                placeholder="040 123 4567"
-                required
-                minlength="6"
-                pattern="[\d\s\-\+\(\)]+"
-              />
+          <!-- Step 1: Device Selection -->
+          <div class="quiz-step active" data-step="1">
+            <h3>Which device is having issues?</h3>
+            <div class="quiz-options-grid">
+              <button type="button" class="quiz-opt-btn" data-value="Computer (Windows)">
+                <i data-lucide="laptop"></i> <span>Computer (Windows)</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Computer (Mac)">
+                <i data-lucide="monitor"></i> <span>Computer (Mac)</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Phone / Tablet">
+                <i data-lucide="smartphone"></i> <span>Phone / Tablet</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Printer / Network">
+                <i data-lucide="printer"></i> <span>Printer / Network</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Other issue">
+                <i data-lucide="more-horizontal"></i> <span>Other issue</span>
+              </button>
             </div>
           </div>
 
-          <div class="input-group">
-            <label for="c-service"
-              ><i data-lucide="wrench" aria-hidden="true"></i> How can we help?</label
-            >
-            <select
-              id="c-service"
-              name="service"
-              title="Select service"
-              aria-label="How can we help?"
-            >
-              <option>Computer Problem</option>
-              <option>Phone / Tablet</option>
-              <option>Printer / Network</option>
-              <option>Purchase Advice</option>
-              <option>Other issue</option>
-            </select>
+          <!-- Step 2: Issue Selection -->
+          <div class="quiz-step" data-step="2">
+            <h3>What is the main symptom/issue?</h3>
+            <div class="quiz-options-grid">
+              <button type="button" class="quiz-opt-btn" data-value="Computer is very slow">
+                <i data-lucide="rocket" style="transform: rotate(180deg);"></i> <span>Device is very slow</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Malware / Virus suspicion">
+                <i data-lucide="shield-alert"></i> <span>Virus suspicion / Security</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Software or install issue">
+                <i data-lucide="settings"></i> <span>Software install / Update</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Internet or printing not working">
+                <i data-lucide="wifi"></i> <span>Internet / Print issue</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="New device purchase / guidance">
+                <i data-lucide="book-open"></i> <span>Purchase Advice / Setup</span>
+              </button>
+            </div>
+            <div class="quiz-nav-row">
+              <button type="button" class="btn-quiz-nav prev">
+                <i data-lucide="arrow-left"></i> Back
+              </button>
+            </div>
           </div>
 
-          <button type="submit" class="btn-submit">
-            Send Request <i data-lucide="arrow-right"></i>
-          </button>
+          <!-- Step 3: Contact details -->
+          <div class="quiz-step" data-step="3">
+            <h3>Contact Info for Callback</h3>
+            <div class="form-row">
+              <div class="input-group">
+                <label for="c-name"><i data-lucide="user" aria-hidden="true"></i> Name</label>
+                <input
+                  type="text"
+                  id="c-name"
+                  name="name"
+                  autocomplete="name"
+                  placeholder="John Doe"
+                  required
+                  minlength="2"
+                />
+              </div>
+              <div class="input-group">
+                <label for="c-phone"
+                  ><i data-lucide="phone" aria-hidden="true"></i> Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="c-phone"
+                  name="phone"
+                  autocomplete="tel"
+                  placeholder="040 123 4567"
+                  required
+                  minlength="6"
+                  pattern="[\d\s\-\+\(\)]+"
+                />
+              </div>
+            </div>
+            <div class="quiz-nav-row flex-between">
+              <button type="button" class="btn-quiz-nav prev">
+                <i data-lucide="arrow-left"></i> Back
+              </button>
+              <button type="submit" class="btn-submit">
+                Send Request <i data-lucide="send" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
         </form>
         <p class="form-footer">
-          <i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Your data
-          is secure.
+          <i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Your data is secure.
         </p>
       </div>
     </header>
@@ -515,76 +555,7 @@
         </p>
       </div>
 
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="card-header">
-            <h3>Remote Support</h3>
-            <p>Quick help for small problems</p>
-          </div>
-          <div class="price">
-            <span class="amount">29€</span>
-            <span class="period">/ 30 min</span>
-          </div>
-          <ul class="features-list">
-            <li><i data-lucide="check" aria-hidden="true"></i> Virus removal</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Email setup</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Software updates</li>
-            <li>
-              <i data-lucide="check" aria-hidden="true"></i> <strong>No travel costs</strong>
-            </li>
-          </ul>
-          <a href="tel:+3584578338105" class="btn-pricing outline"
-            >Call and order</a
-          >
-        </div>
-
-        <div class="pricing-card popular">
-          <div class="badge-popular">Most Popular</div>
-          <div class="card-header">
-            <h3>Home Visit</h3>
-            <p>When you need help on-site</p>
-          </div>
-          <div class="price">
-            <span class="amount">59€</span>
-            <span class="period">/ hour</span>
-          </div>
-          <p class="tax-note">Price after deduction: <strong>~24€</strong></p>
-          <ul class="features-list">
-            <li><i data-lucide="check" aria-hidden="true"></i> Printer setup</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Wi-Fi network improvement</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Setting up a new device</li>
-            <li>
-              <i data-lucide="check" aria-hidden="true"></i>
-              <strong>Personal guidance</strong>
-            </li>
-          </ul>
-          <a href="#contact-detailed" class="btn-pricing primary"
-            >Book a home visit</a
-          >
-        </div>
-
-        <div class="pricing-card">
-          <div class="card-header">
-            <h3>Annual Maintenance</h3>
-            <p>Full computer clean-up</p>
-          </div>
-          <div class="price">
-            <span class="amount">89€</span>
-            <span class="period">/ session</span>
-          </div>
-          <ul class="features-list">
-            <li><i data-lucide="check" aria-hidden="true"></i> Physical dust removal</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Junk file cleanup</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Cybersecurity check</li>
-            <li>
-              <i data-lucide="check" aria-hidden="true"></i> <strong>Speeds up the PC</strong>
-            </li>
-          </ul>
-          <a href="#contact-detailed" class="btn-pricing outline"
-            >Order maintenance</a
-          >
-        </div>
-      </div>
+      <div id="interactive-estimator"></div>
     </section>
 
     <section id="team" class="container section-team section-spy" data-aos="fade-up" data-aos-delay="100">

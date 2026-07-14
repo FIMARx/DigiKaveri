@@ -4,6 +4,8 @@ import "/css/home.css";
 import { createIcons } from "lucide";
 import { ICON_SET } from "./icons";
 import { getFinlandHour, triggerAnalyticsExecution } from "./utils.js";
+import "./estimator.js";
+import "./quiz.js";
 
 let isInitialized = false;
 let statusController = null;
@@ -271,6 +273,27 @@ function onDOMReady(fn) {
     fn();
   }
 }
+
+function initTheme() {
+  const savedTheme = localStorage.getItem("theme");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = savedTheme || (systemDark ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+  
+  onDOMReady(() => {
+    const toggleBtns = document.querySelectorAll(".theme-toggle-btn");
+    toggleBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
+    });
+  });
+}
+
+initTheme();
 
 onDOMReady(initApp);
 

@@ -2646,3 +2646,453 @@ section[id],
 div[id] {
   scroll-margin-top: 100px;
 }
+
+/* =======================================================
+   2026 Theme Switcher Button & Smooth Transitions
+   ======================================================= */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+  margin: 0 10px;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  transform: scale(1.08) rotate(15deg);
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.theme-toggle-btn .sun-icon {
+  display: none;
+}
+
+.theme-toggle-btn .moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle-btn .sun-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle-btn .moon-icon {
+  display: none;
+}
+
+/* Smooth color theme transitions */
+body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .contact-form-box, .status-schedule-pill, .theme-toggle-btn {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* =======================================================
+   2026 Interactive Price Estimator
+   ======================================================= */
+.estimator-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 30px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+@media (max-width: 992px) {
+  .estimator-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.estimator-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.estimator-service-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.estimator-service-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.service-checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.service-checkbox-wrapper input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--primary);
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.service-checkbox-wrapper label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.service-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.service-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.service-pricing-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 140px;
+}
+
+.service-price-rate {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  overflow: hidden;
+  background: var(--bg);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.quantity-control.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+.qty-btn {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.qty-btn:hover {
+  background-color: var(--border);
+  color: var(--primary);
+}
+
+.qty-val {
+  padding: 0 12px;
+  font-weight: 700;
+  color: var(--text-dark);
+  min-width: 30px;
+  text-align: center;
+}
+
+.estimator-deduction-toggle {
+  background: var(--primary-light);
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toggle-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toggle-switch-wrapper input[type="checkbox"] {
+  width: 44px;
+  height: 24px;
+  appearance: none;
+  background: #cbd5e1;
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-switch-wrapper input[type="checkbox"]:checked {
+  background: var(--primary);
+}
+
+.toggle-switch-wrapper input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch-wrapper input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+.toggle-text {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary-dark);
+}
+
+.deduction-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.estimator-summary-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: fit-content;
+}
+
+.summary-header h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.summary-header p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.summary-breakdown {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.deduction-row {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.free-val {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.summary-divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 8px 0;
+}
+
+.total-row {
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.final-val {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.btn-estimator-cta {
+  background: var(--primary);
+  color: white;
+  border-radius: 9999px;
+  padding: 16px 24px;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-estimator-cta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+/* =======================================================
+   2026 Troubleshooter Quiz Styles
+   ======================================================= */
+.quiz-step {
+  display: none;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.quiz-step.active {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.quiz-step h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.quiz-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-opt-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.quiz-opt-btn i,
+.quiz-opt-btn svg {
+  color: var(--primary);
+  width: 20px;
+  height: 20px;
+  transition: transform 0.25s ease;
+}
+
+.quiz-opt-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: translateX(4px);
+}
+
+.quiz-opt-btn:hover i,
+.quiz-opt-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.quiz-opt-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.quiz-opt-btn.active i,
+.quiz-opt-btn.active svg {
+  color: white;
+}
+
+.quiz-nav-row {
+  display: flex;
+  margin-top: 15px;
+  gap: 12px;
+}
+
+.quiz-nav-row.flex-between {
+  justify-content: space-between;
+}
+
+.btn-quiz-nav {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-quiz-nav:hover {
+  background-color: var(--border);
+  color: var(--text-dark);
+}
+
+/* Form transition wrapper during AJAX submittal */
+.form-submitting .quiz-step {
+  pointer-events: none;
+  opacity: 0.5;
+}

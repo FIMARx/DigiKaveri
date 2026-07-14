@@ -42,6 +42,10 @@
       <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')" aria-label="{{nav_lang_fi_aria}}">FI</a>
       <span class="mobile-lang-divider">|</span>
       <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
+      <button type="button" class="theme-toggle-btn" aria-label="Vaihda teemaa" title="Vaihda teemaa" style="margin-left: 20px;">
+        <i data-lucide="sun" class="sun-icon"></i>
+        <i data-lucide="moon" class="moon-icon"></i>
+      </button>
     </div>
   </div>
 </div>

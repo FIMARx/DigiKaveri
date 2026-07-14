@@ -86,7 +86,7 @@
       </div>
 
       <div class="hero-form-card" id="contact">
-        <h2>Jätä soittopyyntö</h2>
+        <h2>Ota yhteyttä</h2>
         <form
           id="contactForm"
           action="https://api.web3forms.com/submit"
@@ -103,58 +103,99 @@
             class="botcheck-hidden"
             title="Bot check"
           />
+          <input type="hidden" id="quiz-device-input" name="service" value="" />
+          <input type="hidden" id="quiz-issue-input" name="issue" value="" />
 
-          <div class="form-row">
-            <div class="input-group">
-              <label for="c-name"><i data-lucide="user" aria-hidden="true"></i> Nimi</label>
-              <input
-                type="text"
-                id="c-name"
-                name="name"
-                autocomplete="name"
-                placeholder="Matti Meikäläinen"
-                required
-                minlength="2"
-              />
-            </div>
-            <div class="input-group">
-              <label for="c-phone"
-                ><i data-lucide="phone" aria-hidden="true"></i> Puhelinnumero</label
-              >
-              <input
-                type="tel"
-                id="c-phone"
-                name="phone"
-                autocomplete="tel"
-                placeholder="040 123 4567"
-                required
-                minlength="6"
-                pattern="[\d\s\-\+\(\)]+"
-              />
+          <!-- Step 1: Device Selection -->
+          <div class="quiz-step active" data-step="1">
+            <h3>Mitä laitetta ongelma koskee?</h3>
+            <div class="quiz-options-grid">
+              <button type="button" class="quiz-opt-btn" data-value="Tietokone (Windows)">
+                <i data-lucide="laptop"></i> <span>Tietokone (Windows)</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Tietokone (Mac)">
+                <i data-lucide="monitor"></i> <span>Tietokone (Mac)</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Puhelin / Tabletti">
+                <i data-lucide="smartphone"></i> <span>Puhelin / Tabletti</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Tulostin / Verkko">
+                <i data-lucide="printer"></i> <span>Tulostin / Verkko</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Muu asia">
+                <i data-lucide="more-horizontal"></i> <span>Muu asia</span>
+              </button>
             </div>
           </div>
 
-          <div class="input-group">
-            <label for="c-service"
-              ><i data-lucide="wrench" aria-hidden="true"></i> Miten voimme auttaa?</label
-            >
-            <select
-              id="c-service"
-              name="service"
-              title="Valitse palvelu"
-              aria-label="Miten voimme auttaa?"
-            >
-              <option>Tietokoneongelma</option>
-              <option>Puhelin / Tabletti</option>
-              <option>Tulostin / Verkko</option>
-              <option>Osto-opastus</option>
-              <option>Muu asia</option>
-            </select>
+          <!-- Step 2: Issue Selection -->
+          <div class="quiz-step" data-step="2">
+            <h3>Mikä on laitteen pääasiallinen ongelma?</h3>
+            <div class="quiz-options-grid">
+              <button type="button" class="quiz-opt-btn" data-value="Laite on erittäin hidas">
+                <i data-lucide="rocket" style="transform: rotate(180deg);"></i> <span>Erittäin hidas kone</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Haittaohjelma- tai virusepäily">
+                <i data-lucide="shield-alert"></i> <span>Virusepäily / Tietoturva</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Ohjelmisto- tai asennusongelma">
+                <i data-lucide="settings"></i> <span>Ohjelma-asennus / Päivitys</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Netti tai tulostus ei toimi">
+                <i data-lucide="wifi"></i> <span>Netti / Tulostusongelma</span>
+              </button>
+              <button type="button" class="quiz-opt-btn" data-value="Uuden laitteen osto / opastus">
+                <i data-lucide="book-open"></i> <span>Osto-opastus / Käyttöönotto</span>
+              </button>
+            </div>
+            <div class="quiz-nav-row">
+              <button type="button" class="btn-quiz-nav prev">
+                <i data-lucide="arrow-left"></i> Takaisin
+              </button>
+            </div>
           </div>
 
-          <button type="submit" class="btn-submit">
-            Lähetä pyyntö <i data-lucide="arrow-right" aria-hidden="true"></i>
-          </button>
+          <!-- Step 3: Contact details -->
+          <div class="quiz-step" data-step="3">
+            <h3>Yhteystiedot soittopyynnölle</h3>
+            <div class="form-row">
+              <div class="input-group">
+                <label for="c-name"><i data-lucide="user" aria-hidden="true"></i> Nimi</label>
+                <input
+                  type="text"
+                  id="c-name"
+                  name="name"
+                  autocomplete="name"
+                  placeholder="Matti Meikäläinen"
+                  required
+                  minlength="2"
+                />
+              </div>
+              <div class="input-group">
+                <label for="c-phone"
+                  ><i data-lucide="phone" aria-hidden="true"></i> Puhelinnumero</label
+                >
+                <input
+                  type="tel"
+                  id="c-phone"
+                  name="phone"
+                  autocomplete="tel"
+                  placeholder="040 123 4567"
+                  required
+                  minlength="6"
+                  pattern="[\d\s\-\+\(\)]+"
+                />
+              </div>
+            </div>
+            <div class="quiz-nav-row flex-between">
+              <button type="button" class="btn-quiz-nav prev">
+                <i data-lucide="arrow-left"></i> Takaisin
+              </button>
+              <button type="submit" class="btn-submit">
+                Lähetä pyyntö <i data-lucide="send" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
         </form>
         <p class="form-footer">
           <i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Tietosi ovat turvassa.
@@ -500,76 +541,7 @@
         </p>
       </div>
 
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="card-header">
-            <h3>Etätuki</h3>
-            <p>Nopea apu pieniin ongelmiin</p>
-          </div>
-          <div class="price">
-            <span class="amount">29€</span>
-            <span class="period">/ 30 min</span>
-          </div>
-          <ul class="features-list">
-            <li><i data-lucide="check" aria-hidden="true"></i> Virusten poisto</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Sähköpostin asetukset</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Ohjelmistopäivitykset</li>
-            <li>
-              <i data-lucide="check" aria-hidden="true"></i> <strong>Ei matkakuluja</strong>
-            </li>
-          </ul>
-          <a href="tel:+3584578338105" class="btn-pricing outline"
-            >Soita ja tilaa</a
-          >
-        </div>
-
-        <div class="pricing-card popular">
-          <div class="badge-popular">Suosituin</div>
-          <div class="card-header">
-            <h3>Kotikäynti</h3>
-            <p>Kun tarvitset apua paikan päällä</p>
-          </div>
-          <div class="price">
-            <span class="amount">59€</span>
-            <span class="period">/ tunti</span>
-          </div>
-          <p class="tax-note">Hinta vähennyksen jälkeen: <strong>~24€</strong></p>
-          <ul class="features-list">
-            <li><i data-lucide="check" aria-hidden="true"></i> Tulostimen asennus</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> WLAN-verkon parantaminen</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Uuden laitteen käyttöönotto</li>
-            <li>
-              <i data-lucide="check" aria-hidden="true"></i>
-              <strong>Henkilökohtainen opastus</strong>
-            </li>
-          </ul>
-          <a href="#contact-detailed" class="btn-pricing primary"
-            >Varaa kotikäynti</a
-          >
-        </div>
-
-        <div class="pricing-card">
-          <div class="card-header">
-            <h3>Vuosihuolto</h3>
-            <p>Täydellinen tietokoneen puhdistus</p>
-          </div>
-          <div class="price">
-            <span class="amount">89€</span>
-            <span class="period">/ kerta</span>
-          </div>
-          <ul class="features-list">
-            <li><i data-lucide="check" aria-hidden="true"></i> Fyysinen pölyjen poisto</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Turhien tiedostojen siivous</li>
-            <li><i data-lucide="check" aria-hidden="true"></i> Tietoturvan tarkistus</li>
-            <li>
-              <i data-lucide="check" aria-hidden="true"></i> <strong>Nopeuttaa konetta</strong>
-            </li>
-          </ul>
-          <a href="#contact-detailed" class="btn-pricing outline"
-            >Tilaa huolto</a
-          >
-        </div>
-      </div>
+      <div id="interactive-estimator"></div>
     </section>
 
     <section id="team" class="container section-team section-spy" data-aos="fade-up" data-aos-delay="100">
