@@ -2220,3 +2220,12 @@ header#home {
   color: #86efac !important;
   border-color: rgba(34, 197, 94, 0.2) !important;
 }
+
+[data-theme="dark"] .brand-name {
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .trust-logos img[alt="Apple"],
+[data-theme="dark"] .trust-logos img[alt="Windows"] {
+  filter: invert(1) !important;
+}

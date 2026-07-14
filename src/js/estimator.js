@@ -23,6 +23,14 @@ const translations = {
     unitHalfHour: "/ 30 min",
     unitHour: "/ tunti",
     unitFlat: "/ laite",
+    summaryTitle: "Yhteenveto",
+    summaryDesc: "Alustava hinta-arvio valituille palveluille",
+    addressLabel: "Laske matkakulut sijainnistasi (Paapuuri 2, Espoo)",
+    addressPlaceholder: "Syötä katuosoite ja kaupunki...",
+    calcBtn: "Laske",
+    calculating: "Lasketaan...",
+    distLabel: "Etäisyys:",
+    routeError: "Osoitetta ei löytynyt tai reittiä ei voitu laskea.",
   },
   en: {
     remote: "Remote Support",
@@ -42,6 +50,14 @@ const translations = {
     unitHalfHour: "/ 30 min",
     unitHour: "/ hour",
     unitFlat: "/ device",
+    summaryTitle: "Summary",
+    summaryDesc: "Estimated price for selected services",
+    addressLabel: "Calculate travel costs from your location (Paapuuri 2, Espoo)",
+    addressPlaceholder: "Enter street address and city...",
+    calcBtn: "Calculate",
+    calculating: "Calculating...",
+    distLabel: "Distance:",
+    routeError: "Address not found or route could not be calculated.",
   }
 };
 
@@ -52,6 +68,10 @@ const SERVICES = {
   home: { id: 'home', basePrice: 59, isEligible: true, step: 1, unit: t.unitHour },
   annual: { id: 'annual', basePrice: 89, isEligible: true, step: 1, unit: t.unitFlat }
 };
+
+// Base coordinates for Paapuuri 2, Espoo
+const START_LAT = 60.1585;
+const START_LON = 24.6468;
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("interactive-estimator");
@@ -125,13 +145,23 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <p class="deduction-hint"><i data-lucide="info"></i> ${t.deductionNote}</p>
         </div>
+
+        <!-- Location Calculator -->
+        <div class="estimator-address-group" id="est-address-group">
+          <label for="est-address" class="address-label">${t.addressLabel}</label>
+          <div class="address-input-wrapper">
+            <input type="text" id="est-address" placeholder="${t.addressPlaceholder}" class="address-input">
+            <button type="button" id="est-calc-btn" class="btn-address-calc">${t.calcBtn}</button>
+          </div>
+          <p id="est-dist-feedback" class="dist-feedback hidden"></p>
+        </div>
       </div>
 
       <!-- Right: Summary -->
       <div class="estimator-summary-card">
         <div class="summary-header">
-          <h3>Yhteenveto</h3>
-          <p>Alustava hinta-arvio valituille palveluille</p>
+          <h3>${t.summaryTitle}</h3>
+          <p>${t.summaryDesc}</p>
         </div>
         
         <div class="summary-breakdown">
@@ -145,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="summary-row">
             <span>${t.travelFee}</span>
-            <span class="price-val free-val">${t.free}</span>
+            <span class="price-val" id="summary-travel-total">${t.free}</span>
           </div>
           <hr class="summary-divider">
           <div class="summary-row total-row">
@@ -166,12 +196,23 @@ document.addEventListener("DOMContentLoaded", () => {
     remote: { checked: false, qty: 1 },
     home: { checked: true, qty: 1 },
     annual: { checked: false, qty: 1 },
-    deduction: true
+    deduction: true,
+    address: "",
+    distanceKm: 0,
+    travelCost: 0
   };
 
   const updateCalculator = () => {
     let invoiceTotal = 0;
     let savingsTotal = 0;
+
+    const requiresHomeVisit = state.home.checked || state.annual.checked;
+
+    // Toggle address calculator visibility based on home visits selected
+    const addressGroup = document.getElementById("est-address-group");
+    if (addressGroup) {
+      addressGroup.classList.toggle("hidden", !requiresHomeVisit);
+    }
 
     Object.keys(SERVICES).forEach(key => {
       const service = SERVICES[key];
@@ -193,11 +234,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    const finalTotal = invoiceTotal - savingsTotal;
+    // Reset travel cost if no home visit is required
+    const currentTravelCost = requiresHomeVisit ? state.travelCost : 0;
+    const finalTotal = invoiceTotal + currentTravelCost - savingsTotal;
 
     // Update DOM
     document.getElementById("summary-invoice-total").textContent = `${invoiceTotal} €`;
     
+    // Update Travel cost line
+    const travelTotalEl = document.getElementById("summary-travel-total");
+    if (requiresHomeVisit && currentTravelCost > 0) {
+      travelTotalEl.textContent = `${currentTravelCost.toFixed(2)} €`;
+      travelTotalEl.classList.remove("free-val");
+    } else {
+      travelTotalEl.textContent = t.free;
+      travelTotalEl.classList.add("free-val");
+    }
+
     const savingsRow = document.getElementById("summary-savings-row");
     const savingsVal = document.getElementById("summary-savings-total");
     if (state.deduction && savingsTotal > 0) {
@@ -212,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("summary-final-total").textContent = `${Math.round(finalTotal)} €`;
   };
 
-  // Wire events
+  // Wire checkbox events
   container.querySelectorAll(".est-checkbox").forEach(chk => {
     chk.addEventListener("change", (e) => {
       const serviceKey = e.target.id.replace("est-", "");
@@ -246,6 +299,88 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCalculator();
     });
   });
+
+  // Calculate Travel Costs via Nominatim + OSRM
+  const addressInput = document.getElementById("est-address");
+  const calcBtn = document.getElementById("est-calc-btn");
+  const feedbackEl = document.getElementById("est-dist-feedback");
+
+  if (calcBtn && addressInput) {
+    calcBtn.addEventListener("click", async () => {
+      const query = addressInput.value.trim();
+      if (!query) return;
+
+      calcBtn.textContent = t.calculating;
+      calcBtn.disabled = true;
+      feedbackEl.classList.add("hidden");
+
+      try {
+        // Geocode user input address via Nominatim OpenStreetMap (restricted to Finland)
+        const geoUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}+Finland`;
+        const geoRes = await fetch(geoUrl, {
+          headers: { 'User-Agent': 'DigiKaveri-Distance-Estimator' }
+        });
+        const geoData = await geoRes.json();
+
+        if (!geoData || geoData.length === 0) {
+          throw new Error("Address not geocoded");
+        }
+
+        const userLat = parseFloat(geoData[0].lat);
+        const userLon = parseFloat(geoData[0].lon);
+
+        // Fetch routing driving distance via OpenSourceRoutingMachine (OSRM)
+        const routeUrl = `https://router.project-osrm.org/route/v1/driving/${START_LON},${START_LAT};${userLon},${userLat}?overview=false`;
+        const routeRes = await fetch(routeUrl);
+        const routeData = await routeRes.json();
+
+        if (!routeData || !routeData.routes || routeData.routes.length === 0) {
+          throw new Error("Route not found");
+        }
+
+        const distanceKm = routeData.routes[0].distance / 1000;
+        
+        // standard kilometer support rate in Finland (approx 0.55€ / km driving cost)
+        const travelRate = 0.55;
+        const totalTravelCost = distanceKm * travelRate;
+
+        state.address = query;
+        state.distanceKm = distanceKm;
+        state.travelCost = totalTravelCost;
+
+        feedbackEl.textContent = `${t.distLabel} ${distanceKm.toFixed(1)} km`;
+        feedbackEl.classList.remove("hidden");
+      } catch (err) {
+        console.error(err);
+        feedbackEl.textContent = t.routeError;
+        feedbackEl.classList.remove("hidden");
+        state.address = "";
+        state.distanceKm = 0;
+        state.travelCost = 0;
+      } finally {
+        calcBtn.textContent = t.calcBtn;
+        calcBtn.disabled = false;
+        updateCalculator();
+      }
+    });
+  }
+
+  // Pre-fill calculated distance inside final contact textarea on click
+  const ctaBtn = container.querySelector(".btn-estimator-cta");
+  if (ctaBtn) {
+    ctaBtn.addEventListener("click", () => {
+      const messageField = document.getElementById("d-message") || document.getElementById("c-message");
+      if (messageField) {
+        let msg = "";
+        if (isEn) {
+          msg = `Hello, I'd like to book a home visit. My address is: ${state.address || ''}.\n(Estimated driving distance from Paapuuri 2: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, travel fee: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
+        } else {
+          msg = `Hei, haluaisin varata kotikäynnin. Osoitteeni on: ${state.address || ''}.\n(Arvioitu ajomatka Paapuuri 2:sta: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, matkakulut: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
+        }
+        messageField.value = msg;
+      }
+    });
+  }
 
   // Run initial state
   updateCalculator();

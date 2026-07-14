@@ -3160,3 +3160,101 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   color: var(--primary-dark);
   box-shadow: var(--shadow-sm);
 }
+
+/* Estimator Location Calculator Styles */
+.estimator-address-group {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.estimator-address-group.hidden {
+  display: none !important;
+}
+
+.address-label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+}
+
+.address-input-wrapper {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.address-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-dark);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.address-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btn-address-calc {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.btn-address-calc:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.btn-address-calc:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.dist-feedback {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dist-feedback.hidden {
+  display: none !important;
+}
+
+[data-theme="dark"] .address-input {
+  background: var(--white) !important;
+  border-color: var(--border) !important;
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .btn-address-calc {
+  background: var(--primary) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .btn-address-calc:hover {
+  background: var(--primary-dark) !important;
+}
