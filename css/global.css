@@ -2659,8 +2659,8 @@ div[id] {
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--glass-bg);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: var(--text-dark);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2896,8 +2896,8 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 
 .estimator-summary-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 32px;
@@ -3095,4 +3095,8 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 .form-submitting .quiz-step {
   pointer-events: none;
   opacity: 0.5;
+}
+
+.icon-slow {
+  transform: rotate(180deg);
 }
