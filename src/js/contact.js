@@ -61,7 +61,7 @@ function setupForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
 
-  const isEn = window.location.pathname.includes('/en/');
+  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
   const t = isEn ? translations.en : translations.fi;
 
   const inputs = form.querySelectorAll("input, select, textarea");
@@ -78,7 +78,10 @@ function setupForm(formId) {
         input.type === "email"
       ) {
         input.setCustomValidity(t.invalidEmail);
-      } else if (input.validity.typeMismatch && input.type === "tel") {
+      } else if (
+        (input.validity.typeMismatch || input.validity.patternMismatch) &&
+        input.type === "tel"
+      ) {
         input.setCustomValidity(t.invalidPhone);
       }
     });
@@ -152,7 +155,7 @@ function setupForm(formId) {
 
       const result = await response.json();
 
-      if (response.status === 200) {
+      if (response.status === 200 && result && result.success) {
         btn.innerHTML = `${t.success} <i data-lucide="check"></i>`;
         btn.style.background = "#10B981";
         createIcons({ icons: ICON_SET });

@@ -22,7 +22,7 @@
   <main id="main-content">
     <header id="home" class="hero-centered section-spy">
       <div class="status-schedule-pill">
-        <div id="serviceStatus" class="status-part loading">
+        <div id="serviceStatus" class="status-part loading" aria-live="polite">
           <div class="signal-dot"></div>
           <span id="statusText">Loading...</span>
         </div>
@@ -35,9 +35,10 @@
               
               const response = await fetch(statusUrl).catch(() => null);
               let isOpen = (hour >= 9 && hour < 21);
+              let data = null;
               
               if (response && response.ok) {
-                const data = await response.json();
+                data = await response.json();
                 if (data.override === "open") isOpen = true;
                 else if (data.override === "closed") isOpen = false;
                 else if (typeof data.isOpen === "boolean") isOpen = data.isOpen;
@@ -45,9 +46,15 @@
               
               const badge = document.getElementById("serviceStatus");
               const text = document.getElementById("statusText");
+              
+              const path = window.location.pathname;
+              const isEn = path === "/en" || path.startsWith("/en/");
+              const openMsg = isEn ? (data?.messageOpenEn || "Service Open") : (data?.messageOpen || "Palvelemme nyt");
+              const closedMsg = isEn ? (data?.messageClosedEn || "Closed for today") : (data?.messageClosed || "Palvelu suljettu");
+              
               if (badge && text) {
                 badge.className = "status-part " + (isOpen ? "open" : "closed");
-                text.textContent = isOpen ? "Service Open" : "Closed for today";
+                text.textContent = isOpen ? openMsg : closedMsg;
               }
             } catch (e) {
               console.error("Status check failed", e);

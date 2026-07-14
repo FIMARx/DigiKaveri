@@ -1,5 +1,5 @@
 
-const isEn = window.location.pathname.includes('/en/');
+const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
 const label = isEn ? "Increase text size" : "Suurenna tekstiä";
 
 const toggleBtn = document.createElement("button");

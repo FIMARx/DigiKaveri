@@ -63,16 +63,32 @@ function initApp() {
     if (document.visibilityState === "visible") checkStatus();
   });
 
-  // Handle browser back-button/bfcache: Refresh status on page show
+  let statusInterval = null;
+
+  const startPolling = () => {
+    if (!statusInterval) {
+      statusInterval = setInterval(() => {
+        if (document.visibilityState === "visible") checkStatus();
+      }, 60000);
+    }
+  };
+
+  const stopPolling = () => {
+    if (statusInterval) {
+      clearInterval(statusInterval);
+      statusInterval = null;
+    }
+  };
+
+  // Handle browser back-button/bfcache: Refresh status and restart polling
   window.addEventListener("pageshow", (event) => {
     if (event.persisted) checkStatus();
+    startPolling();
   });
 
-  const statusInterval = setInterval(() => {
-    if (document.visibilityState === "visible") checkStatus();
-  }, 60000);
-
-  window.addEventListener("pagehide", () => clearInterval(statusInterval));
+  window.addEventListener("pagehide", () => {
+    stopPolling();
+  });
 
   window.addEventListener("load", () => {
     if (typeof AOS !== "undefined") {
@@ -106,7 +122,7 @@ async function checkStatus() {
   if (statusController) statusController.abort();
   statusController = new AbortController();
 
-  const isEn = window.location.pathname.includes("/en/");
+  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
   let data = {};
 
   try {
@@ -149,7 +165,7 @@ function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
   if (!modal || isOpen) return;
 
-  const isEn = window.location.pathname.includes("/en/");
+  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
 
   // Accessibility: Focus Trap Logic
   modal.addEventListener("keydown", (e) => {
@@ -318,7 +334,7 @@ function loadAnalytics() {
 
 function initLanguageDetection() {
   const path = window.location.pathname;
-  const isEn = path.includes("/en/");
+  const isEn = path === "/en" || path.startsWith("/en/");
 
   // Sync HTML lang attribute for SEO/Accessibility
   document.documentElement.lang = isEn ? "en" : "fi";
@@ -342,9 +358,9 @@ function initSmoothNav() {
       const href = this.getAttribute("href");
       if (!href || !href.includes("#")) return;
       
-      const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
-      const linkPath = href.split('#')[0];
-      const isSamePage = !linkPath || linkPath === "index.html" && (currentPath === "/" || currentPath === "/index.html");
+      const normalize = (p) => p.replace(/\/$/, "").replace(/\/index\.html$/, "") || "/";
+      const targetUrl = new URL(href, window.location.href);
+      const isSamePage = targetUrl.origin === window.location.origin && normalize(targetUrl.pathname) === normalize(window.location.pathname);
 
       if (isSamePage) {
         e.preventDefault();
