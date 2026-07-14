@@ -369,16 +369,89 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctaBtn = container.querySelector(".btn-estimator-cta");
   if (ctaBtn) {
     ctaBtn.addEventListener("click", () => {
-      const messageField = document.getElementById("d-message") || document.getElementById("c-message");
-      if (messageField) {
-        let msg = "";
-        if (isEn) {
-          msg = `Hello, I'd like to book a home visit. My address is: ${state.address || ''}.\n(Estimated driving distance from Saunalahti, Espoo: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, travel fee: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
-        } else {
-          msg = `Hei, haluaisin varata kotikäynnin. Osoitteeni on: ${state.address || ''}.\n(Arvioitu ajomatka Saunalahdesta, Espoosta: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, matkakulut: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
+      const messageField = document.getElementById("d-message");
+      if (!messageField) return;
+
+      let msg = "";
+      if (isEn) {
+        msg = `Hello, I would like to request a booking for the following services:\n`;
+        
+        if (state.remote.checked) {
+          msg += `- Remote Support (${state.remote.qty}x 30 min)\n`;
         }
-        messageField.value = msg;
+        if (state.home.checked) {
+          msg += `- Home Visit (${state.home.qty}x hour)\n`;
+        }
+        if (state.annual.checked) {
+          msg += `- Annual Maintenance (${state.annual.qty}x device)\n`;
+        }
+
+        msg += `\nTax Deduction: ${state.deduction ? 'Yes (-60% on labor)' : 'No'}\n`;
+        
+        if (state.home.checked || state.annual.checked) {
+          msg += `\nTravel Details:\n`;
+          msg += `- Address: ${state.address || 'Not calculated'}\n`;
+          msg += `- Distance from Saunalahti, Espoo: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}\n`;
+          msg += `- Travel Fee (0.90 €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
+        }
+
+        const invoiceTotal = (state.remote.checked ? 29 * state.remote.qty : 0) + 
+                            (state.home.checked ? 59 * state.home.qty : 0) + 
+                            (state.annual.checked ? 89 * state.annual.qty : 0);
+        let savings = 0;
+        if (state.deduction) {
+          savings += (state.home.checked ? 59 * state.home.qty * 0.60 : 0) + 
+                     (state.annual.checked ? 89 * state.annual.qty * 0.60 : 0);
+        }
+        const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
+        const finalTotal = invoiceTotal + currentTravelCost - savings;
+
+        msg += `\nPrice Estimate:\n`;
+        msg += `- Invoice Total: ${invoiceTotal.toFixed(2)} €\n`;
+        if (savings > 0) {
+          msg += `- Actual Cost (after deduction): ~${finalTotal.toFixed(2)} €\n`;
+        }
+      } else {
+        msg = `Hei, haluaisin tilailla seuraavat palvelut:\n`;
+        
+        if (state.remote.checked) {
+          msg += `- Etätuki (${state.remote.qty}x 30 min)\n`;
+        }
+        if (state.home.checked) {
+          msg += `- Kotikäynti (${state.home.qty}x tunti)\n`;
+        }
+        if (state.annual.checked) {
+          msg += `- Vuosihuolto (${state.annual.qty}x laite)\n`;
+        }
+
+        msg += `\nKotitalousvähennys: ${state.deduction ? 'Kyllä (-60% työn osuudesta)' : 'Ei'}\n`;
+        
+        if (state.home.checked || state.annual.checked) {
+          msg += `\nSijainti & Matkakulut:\n`;
+          msg += `- Osoite: ${state.address || 'Ei laskettu'}\n`;
+          msg += `- Arvioitu ajomatka Saunalahdesta, Espoosta: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}\n`;
+          msg += `- Matkakulut (0.90 €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
+        }
+
+        const invoiceTotal = (state.remote.checked ? 29 * state.remote.qty : 0) + 
+                            (state.home.checked ? 59 * state.home.qty : 0) + 
+                            (state.annual.checked ? 89 * state.annual.qty : 0);
+        let savings = 0;
+        if (state.deduction) {
+          savings += (state.home.checked ? 59 * state.home.qty * 0.60 : 0) + 
+                     (state.annual.checked ? 89 * state.annual.qty * 0.60 : 0);
+        }
+        const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
+        const finalTotal = invoiceTotal + currentTravelCost - savings;
+
+        msg += `\nHinta-arvio:\n`;
+        msg += `- Laskun loppusumma: ${invoiceTotal.toFixed(2)} €\n`;
+        if (savings > 0) {
+          msg += `- Todellinen hinta vähennyksen jälkeen: ~${finalTotal.toFixed(2)} €\n`;
+        }
       }
+      
+      messageField.value = msg;
     });
   }
 
