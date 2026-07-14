@@ -2043,3 +2043,28 @@ header#home {
     margin-bottom: 40px !important;
   }
 }
+
+/* 2026 Dark Mode Layout Overrides */
+[data-theme="dark"] .testimonial-card {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+[data-theme="dark"] .reviewer-meta h3,
+[data-theme="dark"] .testimonial-author-info h4 {
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .review-date,
+[data-theme="dark"] .testimonial-source {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .testimonial-quote {
+  color: var(--text-light) !important;
+}
+
+[data-theme="dark"] .testimonial-footer {
+  border-top-color: var(--border) !important;
+}

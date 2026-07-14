@@ -283,3 +283,28 @@ aside.legal-toc {
         font-size: 0.95rem;
     }
 }
+
+/* 2026 Dark Mode Layout Overrides */
+[data-theme="dark"] .legal-hero {
+  background: var(--white) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .legal-toc a {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .legal-toc a.active {
+  color: var(--primary) !important;
+  background: rgba(var(--primary-rgb), 0.15) !important;
+}
+
+[data-theme="dark"] .legal-toc a:hover {
+  color: var(--primary) !important;
+  background: rgba(var(--primary-rgb), 0.15) !important;
+}
+
+[data-theme="dark"] .legal-content p,
+[data-theme="dark"] .legal-content li {
+  color: var(--text-light) !important;
+}
