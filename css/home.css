@@ -2069,14 +2069,13 @@ header#home {
   border-top-color: var(--border) !important;
 }
 
-/* 2026 Dark Mode Layout Overrides (Part 2) */
 [data-theme="dark"] .trust-logos {
-  filter: grayscale(1) invert(1) brightness(1.8) !important;
+  filter: grayscale(1) brightness(1.8) !important;
   opacity: 0.6 !important;
 }
 
 [data-theme="dark"] .trust-logos:hover {
-  filter: grayscale(0) invert(0) brightness(1) !important;
+  filter: grayscale(0) brightness(1) !important;
   opacity: 1 !important;
 }
 
@@ -2227,5 +2226,10 @@ header#home {
 
 [data-theme="dark"] .trust-logos img[alt="Apple"],
 [data-theme="dark"] .trust-logos img[alt="Windows"] {
-  filter: invert(1) !important;
+  filter: invert(1) brightness(1.8) !important;
+}
+
+[data-theme="dark"] .trust-logos:hover img[alt="Apple"],
+[data-theme="dark"] .trust-logos:hover img[alt="Windows"] {
+  filter: invert(1) brightness(1) !important;
 }

@@ -25,7 +25,7 @@ const translations = {
     unitFlat: "/ laite",
     summaryTitle: "Yhteenveto",
     summaryDesc: "Alustava hinta-arvio valituille palveluille",
-    addressLabel: "Laske matkakulut sijainnistasi (Paapuuri 2, Espoo)",
+    addressLabel: "Laske matkakulut sijainnistasi (Saunalahti, Espoo)",
     addressPlaceholder: "Syötä katuosoite ja kaupunki...",
     calcBtn: "Laske",
     calculating: "Lasketaan...",
@@ -52,7 +52,7 @@ const translations = {
     unitFlat: "/ device",
     summaryTitle: "Summary",
     summaryDesc: "Estimated price for selected services",
-    addressLabel: "Calculate travel costs from your location (Paapuuri 2, Espoo)",
+    addressLabel: "Calculate travel costs from your location (Saunalahti, Espoo)",
     addressPlaceholder: "Enter street address and city...",
     calcBtn: "Calculate",
     calculating: "Calculating...",
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const distanceKm = routeData.routes[0].distance / 1000;
         
         // standard kilometer support rate in Finland (approx 0.55€ / km driving cost)
-        const travelRate = 0.55;
+        const travelRate = 0.90;
         const totalTravelCost = distanceKm * travelRate;
 
         state.address = query;
@@ -373,9 +373,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (messageField) {
         let msg = "";
         if (isEn) {
-          msg = `Hello, I'd like to book a home visit. My address is: ${state.address || ''}.\n(Estimated driving distance from Paapuuri 2: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, travel fee: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
+          msg = `Hello, I'd like to book a home visit. My address is: ${state.address || ''}.\n(Estimated driving distance from Saunalahti, Espoo: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, travel fee: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
         } else {
-          msg = `Hei, haluaisin varata kotikäynnin. Osoitteeni on: ${state.address || ''}.\n(Arvioitu ajomatka Paapuuri 2:sta: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, matkakulut: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
+          msg = `Hei, haluaisin varata kotikäynnin. Osoitteeni on: ${state.address || ''}.\n(Arvioitu ajomatka Saunalahdesta, Espoosta: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}, matkakulut: ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0 €'}).`;
         }
         messageField.value = msg;
       }
