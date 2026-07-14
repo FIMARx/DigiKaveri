@@ -3104,17 +3104,28 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin-top: 24px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: var(--shadow-sm);
-  width: auto;
-  min-width: 150px;
 }
 
 .btn-quiz-nav.prev:hover {
   background: var(--border);
   transform: translateY(-4px) scale(1.02);
   box-shadow: var(--shadow);
+}
+
+.quiz-nav-row.flex-between {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.quiz-nav-row.flex-between .btn-quiz-nav.prev,
+.quiz-nav-row.flex-between .btn-submit {
+  flex: 1 !important;
+  margin-top: 0 !important;
+  width: 100% !important;
 }
 
 /* Form transition wrapper during AJAX submittal */

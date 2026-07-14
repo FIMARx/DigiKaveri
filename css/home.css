@@ -2068,3 +2068,108 @@ header#home {
 [data-theme="dark"] .testimonial-footer {
   border-top-color: var(--border) !important;
 }
+
+/* 2026 Dark Mode Layout Overrides (Part 2) */
+[data-theme="dark"] .trust-logos {
+  filter: grayscale(1) invert(1) brightness(1.8) !important;
+  opacity: 0.6 !important;
+}
+
+[data-theme="dark"] .trust-logos:hover {
+  filter: grayscale(0) invert(0) brightness(1) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="dark"] .score-value {
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .score-label {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .score-divider {
+  background: var(--border) !important;
+}
+
+[data-theme="dark"] .btn-review-outline.google {
+  background: var(--white) !important;
+  color: #60a5fa !important;
+  border-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .btn-review-outline.google:hover {
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-review-outline.tp {
+  background: var(--white) !important;
+  color: #3ddc84 !important;
+  border-color: #00b67a !important;
+}
+
+[data-theme="dark"] .btn-review-outline.tp:hover {
+  background: rgba(0, 182, 122, 0.1) !important;
+}
+
+[data-theme="dark"] .guarantee-banner-full {
+  background: var(--bg) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .guarantee-content {
+  background: var(--white) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .guarantee-icon-large {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+}
+
+[data-theme="dark"] .table-wrapper {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .service-table th {
+  background: var(--bg) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+[data-theme="dark"] .service-table td {
+  border-bottom-color: var(--border) !important;
+}
+
+[data-theme="dark"] .service-table tbody tr:hover {
+  background-color: var(--bg) !important;
+}
+
+[data-theme="dark"] .contact-wrapper {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .contact-info {
+  background: var(--bg) !important;
+}
+
+[data-theme="dark"] .contact-info p,
+[data-theme="dark"] .contact-info .contact-intro,
+[data-theme="dark"] .info-item p {
+  color: var(--text-light) !important;
+}
+
+[data-theme="dark"] .info-item strong {
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] .icon-box:not(.whatsapp-bg) {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--primary-dark) !important;
+}
+
+[data-theme="dark"] .text-whatsapp {
+  color: #4ade80 !important;
+}
