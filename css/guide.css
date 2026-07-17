@@ -462,6 +462,7 @@
   align-items: center;
   gap: 8px;
   transition: all 0.2s ease;
+  color: var(--guide-text-light);
 }
 
 .help-tab-btn.active {
@@ -636,7 +637,7 @@
 
 /* 2026 Dark Mode Layout Overrides */
 [data-theme="dark"] .pc-download-info {
-  background: var(--white) !important;
+  background: var(--bg) !important;
   border-color: var(--border) !important;
 }
 
@@ -646,7 +647,7 @@
 }
 
 [data-theme="dark"] .visual-step {
-  background: var(--white) !important;
+  background: var(--bg) !important;
   border-color: var(--border) !important;
 }
 
@@ -657,4 +658,13 @@
 
 [data-theme="dark"] .security-note p {
   color: #86efac !important;
+}
+
+/* Dark Mode Icon Visibility Fixes */
+[data-theme="dark"] img[src*="teamviewer.svg"] {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] img[src*="apple.svg"] {
+  filter: brightness(0) invert(1) !important;
 }

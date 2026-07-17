@@ -11,6 +11,13 @@
   box-sizing: border-box;
 }
 
+/* Scroll lock when mobile menu is open */
+/* JS also adds touchmove preventDefault for iOS Safari scroll-through */
+html.menu-open,
+body.menu-open {
+  overflow: hidden !important;
+}
+
 html {
   scroll-behavior: smooth !important;
   scroll-padding-top: 110px !important;
@@ -1966,6 +1973,7 @@ h3 {
   flex-direction: column; /* Changed from column-reverse to correctly place Toggle at bottom when Options are first in HTML */
   align-items: flex-end;
   gap: 0.75rem;
+  pointer-events: none; /* Wrapper itself doesn't intercept clicks — only real children do */
 }
 
 /* Main Toggle Button */
@@ -1986,6 +1994,7 @@ h3 {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   z-index: 10;
+  pointer-events: auto; /* Re-enable clicks on the actual button */
 }
 
 .fab-main:hover {
@@ -3257,4 +3266,69 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 
 [data-theme="dark"] .btn-address-calc:hover {
   background: var(--primary-dark) !important;
+}
+
+/* Dark Mode Mobile Navigation Overrides */
+[data-theme="dark"] .mobile-nav-overlay {
+  background: rgba(11, 15, 25, 0.98) !important;
+}
+
+[data-theme="dark"] .mobile-nav-close {
+  background: var(--white) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .mobile-nav-close:hover {
+  background: var(--border) !important;
+}
+
+/* Dark Mode Active Navigation Links High-Contrast Overrides */
+[data-theme="dark"] .nav-menu a.nav-link.active,
+[data-theme="dark"] .mobile-nav-link.active,
+[data-theme="dark"] .dropdown-trigger.active,
+[data-theme="dark"] .mobile-dropdown-trigger.active {
+  color: var(--primary-dark) !important;
+  background: rgba(var(--primary-rgb), 0.15) !important;
+}
+
+[data-theme="dark"] .nav-link.active i, 
+[data-theme="dark"] .nav-link.active svg,
+[data-theme="dark"] .mobile-nav-link.active i,
+[data-theme="dark"] .mobile-nav-link.active svg {
+  color: var(--primary-dark) !important;
+}
+
+/* Dark Mode Navigation Bar Background & Hover Overrides */
+[data-theme="dark"] .glass-nav {
+  background: rgba(19, 27, 46, 0.95) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+[data-theme="dark"] .mobile-menu-btn:hover {
+  background: var(--border) !important;
+}
+
+/* Responsive Overrides for Estimator Cards on Mobile (prevent floating button overlap) */
+@media (max-width: 600px) {
+  .estimator-service-item {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 20px !important;
+  }
+  
+  .service-checkbox-wrapper {
+    width: 100% !important;
+  }
+
+  .service-pricing-control {
+    width: 100% !important;
+    min-width: unset !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 20px !important;
+    border-top: 1px solid var(--border) !important;
+    padding-top: 12px !important;
+  }
 }

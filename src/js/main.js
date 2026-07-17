@@ -542,6 +542,21 @@ function initMobileNav() {
 
   if (!menuBtn || !closeBtn || !overlay) return;
 
+  // Prevent touchmove for iOS Safari scroll-through
+  const preventTouchScroll = (e) => e.preventDefault();
+
+  const lockScroll = () => {
+    document.documentElement.classList.add("menu-open");
+    document.body.classList.add("menu-open");
+    document.addEventListener("touchmove", preventTouchScroll, { passive: false });
+  };
+
+  const unlockScroll = () => {
+    document.documentElement.classList.remove("menu-open");
+    document.body.classList.remove("menu-open");
+    document.removeEventListener("touchmove", preventTouchScroll);
+  };
+
   menuBtn.addEventListener(
     "click",
     (e) => {
@@ -553,7 +568,7 @@ function initMobileNav() {
       }
 
       overlay.classList.add("active");
-      document.body.style.overflow = "hidden";
+      lockScroll();
 
       // Force an update of the scroll spy so links highlight immediately
       if (typeof updateScrollSpy === "function") {
@@ -565,20 +580,20 @@ function initMobileNav() {
 
   closeBtn.addEventListener("click", () => {
     overlay.classList.remove("active");
-    document.body.style.overflow = "";
+    unlockScroll();
   });
 
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) {
       overlay.classList.remove("active");
-      document.body.style.overflow = "";
+      unlockScroll();
     }
   });
 
   mobileLinks.forEach((link) => {
     link.addEventListener("click", () => {
       overlay.classList.remove("active");
-      document.body.style.overflow = "";
+      unlockScroll();
     });
   });
 }
