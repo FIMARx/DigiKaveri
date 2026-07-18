@@ -577,7 +577,7 @@ html[lang="en"] .nav-menu {
 }
 
 .mobile-nav-item-dropdown.active .mobile-dropdown-menu {
-  max-height: 350px;
+  max-height: 600px;
 }
 
 .mobile-dropdown-menu a {
@@ -972,9 +972,12 @@ h3 {
     padding: 24px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateX(100%);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   .mobile-nav-overlay.active {
@@ -1015,8 +1018,7 @@ h3 {
     flex-direction: column;
     gap: 0;
     text-align: left;
-    padding-bottom: 120px; /* Safety space for language buttons */
-    overflow-y: visible;
+    padding-bottom: 40px;
   }
 
   .footer-container {
@@ -1567,7 +1569,7 @@ h3 {
 
 @media (max-width: 768px) {
   main {
-    padding-bottom: 120px;
+    padding-bottom: 0;
   }
 }
 
@@ -2728,6 +2730,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
 }
 
 .estimator-service-item {
@@ -2762,6 +2765,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   accent-color: var(--primary);
   margin-top: 3px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .service-checkbox-wrapper label {
@@ -2866,6 +2870,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s ease;
+  flex-shrink: 0;
 }
 
 .toggle-switch-wrapper input[type="checkbox"]:checked {
@@ -2915,6 +2920,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   flex-direction: column;
   justify-content: space-between;
   height: fit-content;
+  min-width: 0;
 }
 
 .summary-header h3 {
@@ -2938,8 +2944,15 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 .summary-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.95rem;
   color: var(--text-light);
+  gap: 12px;
+}
+
+.price-val {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .deduction-row {
@@ -3206,6 +3219,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   font-family: inherit;
   font-size: 1rem;
   transition: all 0.3s ease;
+  min-width: 0;
 }
 
 .address-input:focus {
@@ -3218,7 +3232,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   color: white;
   border: none;
   border-radius: var(--radius-sm);
-  padding: 0 24px;
+  padding: 14px 24px;
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
@@ -3331,4 +3345,307 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
     border-top: 1px solid var(--border) !important;
     padding-top: 12px !important;
   }
+
+  .estimator-summary-card {
+    padding: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-input-wrapper {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .btn-address-calc {
+    padding: 16px 24px !important;
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* =======================================================
+   Ultra-Narrow Viewports Support (220px to 320px)
+   ======================================================= */
+@media (max-width: 320px) {
+  /* Prevent horizontal layout expansion by breaking long words */
+  *, *::before, *::after {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  /* Reduce root containers margins & paddings */
+  .container {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    padding-top: 30px !important;
+    padding-bottom: 20px !important;
+  }
+
+  /* Logo size scaling to fit in 220px nav bar beside menu button */
+  .logo img {
+    height: 28px !important;
+  }
+  
+  .mobile-menu-btn {
+    padding: 6px !important;
+  }
+
+  /* Fluid typography scaling */
+  h1, .hero-centered h1 {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+  }
+  h2, .home-section-header h2 {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+  }
+  h3 {
+    font-size: 0.95rem !important;
+  }
+  p, span, label, a, li, td {
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+  }
+  .highlight-text {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    padding-bottom: 0.08em !important;
+    vertical-align: baseline !important;
+  }
+
+  /* Trust badges wrap nicely */
+  .trust-logos {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  .trust-logos img, .trust-logos svg {
+    max-height: 20px !important;
+    width: auto !important;
+  }
+
+  /* Reviews Score Header grid correction */
+  .reviews-score-header {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+    margin-bottom: 30px !important;
+    padding: 0 4px !important;
+  }
+  .score-side {
+    min-width: 0 !important;
+    padding: 8px !important;
+  }
+  .score-divider {
+    display: none !important;
+  }
+  .score-value {
+    font-size: 2rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Testimonial cards grid layout */
+  .reviews-grid-new {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  .testimonial-card {
+    min-width: 0 !important;
+    padding: 16px !important;
+  }
+  .testimonial-quote {
+    font-size: 0.95rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Pricing Estimator adjustments */
+  .estimator-service-item {
+    padding: 10px !important;
+    gap: 8px !important;
+  }
+  .service-checkbox-wrapper {
+    gap: 8px !important;
+  }
+  .estimator-deduction-toggle {
+    padding: 12px !important;
+  }
+  .estimator-summary-card {
+    padding: 16px !important;
+  }
+  .toggle-text {
+    font-size: 0.82rem !important;
+  }
+  .deduction-hint {
+    font-size: 0.72rem !important;
+  }
+  .btn-estimator-cta {
+    padding: 12px 16px !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Address calculator wrapper stack */
+  .address-input-wrapper {
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+  .btn-address-calc {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 0.85rem !important;
+  }
+  .address-input {
+    padding: 10px 12px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Form & inputs general updates */
+  input, select, textarea {
+    padding: 10px 12px !important;
+    font-size: 0.85rem !important;
+  }
+  .form-group label {
+    font-size: 0.82rem !important;
+  }
+
+  /* Footer container alignment */
+  .footer-container {
+    gap: 20px !important;
+  }
+  .footer-logo img {
+    width: 160px !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+}
+
+/* =======================================================
+   Universal Interactive Micro-Animations & Glow Effects
+   ======================================================= */
+.logo img {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.logo:hover img {
+  transform: scale(1.05);
+}
+
+.faq-question {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.faq-question:hover {
+  transform: translateX(6px);
+  padding-left: 12px !important;
+}
+
+.footer-social a {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.footer-social a:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* =======================================================
+   Interactive Form Micro-Animations & Glow Effects
+   ======================================================= */
+.hero-form-card, 
+.contact-form-box {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease !important;
+}
+
+.hero-form-card:hover, 
+.contact-form-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.04), var(--shadow-lg) !important;
+  border-color: rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Smooth Focus Glow on inputs/selects/textareas */
+.form-group input, 
+.form-group select, 
+.form-group textarea,
+.input-group input,
+.input-group select {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus,
+.input-group input:focus,
+.input-group select:focus {
+  outline: none !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+  background-color: var(--white) !important;
+  transform: translateY(-1px);
+}
+
+/* Focused input label icon jumps slightly and lights up */
+.form-group:focus-within label,
+.input-group:focus-within label {
+  color: var(--primary) !important;
+}
+
+.form-group label i, 
+.form-group label svg,
+.input-group label i,
+.input-group label svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.form-group:focus-within label i, 
+.form-group:focus-within label svg,
+.input-group:focus-within label i, 
+.input-group:focus-within label svg {
+  transform: translateY(-1px) scale(1.15) !important;
+  color: var(--primary) !important;
+}
+
+/* Button hover slide-in/scale and arrow shift */
+.btn-primary, 
+.hero-form-card button[type="submit"], 
+.contact-form-box button[type="submit"] {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover, 
+.hero-form-card button[type="submit"]:hover, 
+.contact-form-box button[type="submit"]:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3) !important;
+}
+
+.btn-primary i, .btn-primary svg,
+.hero-form-card button[type="submit"] i, .hero-form-card button[type="submit"] svg,
+.contact-form-box button[type="submit"] i, .contact-form-box button[type="submit"] svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover i, .btn-primary:hover svg,
+.hero-form-card button[type="submit"]:hover i, .hero-form-card button[type="submit"]:hover svg,
+.contact-form-box button[type="submit"]:hover i, .contact-form-box button[type="submit"]:hover svg {
+  transform: translateX(4px);
+}
+
+/* Spinner for form submit loading state — global so it works on all pages */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spin {
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+/* Form submitting state — prevent double-tap layout shift */
+.form-submitting .btn-submit {
+  cursor: not-allowed;
+  opacity: 0.9;
 }

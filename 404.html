@@ -24,56 +24,144 @@
       flex-direction: column;
       min-height: 100vh;
     }
-    .hero-centered {
-      flex-grow: 1;
-    }
+    .hero-centered { flex-grow: 1; }
+
     .err-header {
-      min-height: 50vh;
+      min-height: 60vh;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
+      text-align: center;
       margin-bottom: 60px;
+      padding: 40px 24px;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Glowing animated 404 number */
+    .err-code {
+      font-size: clamp(5rem, 18vw, 10rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      background: linear-gradient(to right, #2563eb 0%, #8b5cf6 40%, #ec4899 70%, #2563eb 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: text-shimmer 6s linear infinite, err-code-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      display: block;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.2));
+    }
+
+    @keyframes err-code-in {
+      from { opacity: 0; transform: scale(0.8) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
     .err-title {
-      margin-top: 20px;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin: 8px 0 16px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: hero-title-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
+
+    .err-subtitle {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: hero-title-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-light);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
     .err-actions {
-      margin-top: 30px;
       display: flex;
       justify-content: center;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: hero-title-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
     }
+
     .btn-err-link {
       display: inline-flex;
-      width: auto;
-      padding: 15px 30px;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 100px;
       text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-err-link:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-err-link i,
+    .btn-err-link svg {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-err-link:hover i,
+    .btn-err-link:hover svg {
+      transform: translateX(5px);
+    }
+
+    /* Floating decorative ambient orbs */
+    .err-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+      animation: orb-float 8s ease-in-out infinite alternate;
+    }
+    .err-orb-1 {
+      width: 320px; height: 320px;
+      background: rgba(37, 99, 235, 0.07);
+      top: 5%; left: 3%;
+    }
+    .err-orb-2 {
+      width: 260px; height: 260px;
+      background: rgba(139, 92, 246, 0.08);
+      top: 15%; right: 5%;
+      animation-delay: -3s;
+    }
+    @keyframes orb-float {
+      from { transform: translateY(0) scale(1); }
+      to   { transform: translateY(-30px) scale(1.06); }
     }
   </style>
 </head>
 <body>
   {{> nav }}
-
   {{> mobile-nav }}
 
+  <header class="hero-centered err-header">
+    <div class="err-orb err-orb-1"></div>
+    <div class="err-orb err-orb-2"></div>
+    <span class="err-code" aria-hidden="true">404</span>
+    <h1 class="err-title">Hups! Sivua ei löytynyt.</h1>
+    <p class="err-subtitle">
+      Etsimääsi sivua ei valitettavasti löydy tai se on siirretty toiseen paikkaan.
+    </p>
+    <div class="err-actions">
+      <a href="/" class="btn-submit btn-err-link">
+        Palaa etusivulle <i data-lucide="arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </header>
 
-    
-    <header class="hero-centered err-header">
-      <h1 class="err-title">
-        Hups! Sivua ei löytynyt. <br /><span class="highlight-text"
-          >404 Virhe</span
-        >
-      </h1>
-      <p class="hero-subtitle">
-        Etsimääsi sivua ei valitettavasti löydy tai se on siirretty.
-      </p>
-      <div class="err-actions">
-        <a href="/" class="btn-submit btn-err-link">
-          Palaa etusivulle <i data-lucide="arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-    </header>
   {{> footer }}
   {{> scripts extra_js="contact" }}
 </body>

@@ -542,8 +542,11 @@ function initMobileNav() {
 
   if (!menuBtn || !closeBtn || !overlay) return;
 
-  // Prevent touchmove for iOS Safari scroll-through
-  const preventTouchScroll = (e) => e.preventDefault();
+  // Prevent touchmove on body/background — but allow it inside the overlay
+  const preventTouchScroll = (e) => {
+    if (overlay.contains(e.target)) return; // allow scroll inside the menu
+    e.preventDefault();
+  };
 
   const lockScroll = () => {
     document.documentElement.classList.add("menu-open");
