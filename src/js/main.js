@@ -47,6 +47,15 @@ function initApp() {
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
 
+  // Register PWA Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.error('Service Worker registration failed:', err);
+      });
+    });
+  }
+
   // Run status check immediately on every page so the closed modal
   // shows promptly — not just on the homepage (which has an inline IIFE)
   // or after the 60 s polling interval fires for the first time.
@@ -276,9 +285,16 @@ function onDOMReady(fn) {
 
 function initTheme() {
   const savedTheme = localStorage.getItem("theme");
-  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = savedTheme || (systemDark ? "dark" : "light");
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const theme = savedTheme || (mediaQuery.matches ? "dark" : "light");
   document.documentElement.setAttribute("data-theme", theme);
+  
+  // Real-time system theme change synchronization (2026 OS-level standard)
+  mediaQuery.addEventListener("change", (e) => {
+    if (!localStorage.getItem("theme")) {
+      document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+    }
+  });
   
   onDOMReady(() => {
     const toggleBtns = document.querySelectorAll(".theme-toggle-btn");

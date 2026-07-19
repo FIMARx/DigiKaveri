@@ -976,7 +976,6 @@ h3 {
                 transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateX(100%);
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
   }
 
@@ -1629,7 +1628,7 @@ h3 {
   top: 45px;
   bottom: 0;
   width: 2px;
-  background: #e2e8f0;
+  background: var(--border);
   z-index: 0;
 }
 
@@ -1643,7 +1642,7 @@ h3 {
 .step-v-number {
   width: 46px;
   height: 46px;
-  background: white;
+  background: var(--white);
   border: 3px solid var(--primary);
   color: var(--primary);
   border-radius: 50%;
@@ -1663,14 +1662,14 @@ h3 {
 .step-v-content h4 {
   margin: 0 0 8px 0;
   font-size: 1.25rem;
-  color: #0f172a;
+  color: var(--text-dark);
   font-weight: 800;
 }
 
 .step-v-content p {
   margin: 0;
   font-size: 1.05rem;
-  color: #475569;
+  color: var(--text-light);
   line-height: 1.7;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -3148,6 +3147,71 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   flex: 1 !important;
   margin-top: 0 !important;
   width: 100% !important;
+}
+
+@media (max-width: 480px) {
+  .hero-form-card {
+    padding: 24px 16px !important;
+  }
+  
+  .hero-form-card h2 {
+    margin-bottom: 24px !important;
+  }
+
+  .quiz-step.active {
+    gap: 16px !important;
+  }
+
+  .form-row {
+    gap: 0 !important;
+  }
+
+  .input-group,
+  .form-group {
+    margin-bottom: 16px !important;
+  }
+
+  .input-group label,
+  .form-group label {
+    font-size: 0.95rem !important;
+    margin-bottom: 8px !important;
+    gap: 8px !important;
+  }
+
+  .input-group label svg,
+  .form-group label svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .input-group input,
+  .input-group select,
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 14px 16px !important;
+    font-size: 1rem !important;
+    border-radius: var(--radius-sm) !important;
+  }
+
+  .quiz-nav-row.flex-between {
+    flex-direction: column-reverse !important;
+    gap: 10px !important;
+    margin-top: 16px !important;
+  }
+
+  .quiz-nav-row.flex-between .btn-quiz-nav.prev,
+  .quiz-nav-row.flex-between .btn-submit {
+    padding: 16px 24px !important;
+    font-size: 1.1rem !important;
+    border-radius: var(--radius-sm) !important;
+    flex: none !important;
+    width: 100% !important;
+  }
+  
+  .quiz-nav-row.flex-between .btn-submit {
+    margin-top: 0 !important;
+  }
 }
 
 /* Form transition wrapper during AJAX submittal */

@@ -7,8 +7,9 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 
-<link rel="dns-prefetch" href="https://api.web3forms.com">
-<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://api.web3forms.com" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +55,19 @@
 {{#if extra_css}}
 <link rel="stylesheet" href="/css/{{extra_css}}.css" />
 {{/if}}
+<noscript>
+  <style>
+    .quiz-step {
+      display: block !important;
+      opacity: 1 !important;
+      transform: none !important;
+      margin-bottom: 30px;
+    }
+    .btn-quiz-nav.prev {
+      display: none !important;
+    }
+  </style>
+</noscript>
 <!-- Non-blocking CSS: loads after initial render -->
 <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" /></noscript>
