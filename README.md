@@ -38,6 +38,20 @@ The flagship feature of the platform. The guide at `/etayhteys.html` automatical
 - **Step-by-step Visuals** — Numbered vertical steps with zoomable screenshots
 - **Safety First** — Built-in security notes about TeamViewer session encryption
 
+### 📲 Progressive Web App (PWA)
+Full PWA capabilities enabling users to install the website as a native application on Android, iOS, and desktop:
+- **Offline Caching** — Caches core pages (FI & EN) so they load instantly even without an active internet connection.
+- **Immediate Activation** — Service worker utilizes `skipWaiting` and `clients.claim` lifecycles to deploy hotfixes instantly to all tabs.
+- **Brand Aligned Manifest** — Seamlessly integrates with mobile operating systems using maskable launcher icons and theme-matched startup screens.
+
+### ✍️ Resilient troubleshooter form
+- **Form Persistence** — Employs `sessionStorage` to preserve troubleshooter selection choices so users don't lose progress on reload.
+- **Noscript Fallback** — Progressive enhancement styling displays all steps at once when JavaScript is inactive, enabling full access.
+
+### 🎨 Themed Layouts & Dynamic Color Syncing
+- **Real-Time OS Theme Syncing** — Watches system-level preferences and changes dynamically (e.g., auto dark-mode schedules) unless manually overridden.
+- **Visual Color Highlights** — Color-codes solution grids and process steps using vibrant, accessible color schemes.
+
 ### 🌐 Bilingual (FI / EN)
 Full Finnish and English versions of every page, built with a clean **Handlebars SSG** architecture. Language switching is persistent via `localStorage`.
 
@@ -56,6 +70,10 @@ A floating action button (speed dial) providing instant, thumb-friendly access t
 The platform has been "Titanium-Hardened" to meet production-grade standards for performance, privacy, and accessibility.
 
 - **Advanced Network Resilience**: Implemented `isFetchingStatus` locks and `AbortController` integration to prevent race conditions and redundant network polling.
+- **Early-Handshake Preconnections**: Upgraded connections to Web3Forms, Google Tag Manager, and Google Analytics to `preconnect` with `crossorigin`, eliminating DNS/TCP/TLS handshake lag.
+- **Cache Invalidation & SW Safeguards**: 
+  - Integrated automated cache purging during the Service Worker activation phase to delete old caches.
+  - Implemented `Cache-Control: no-cache, no-store, must-revalidate` header rules for `sw.js` in Cloudflare headers.
 - **Privacy First (Consent Mode v2)**: Fully integrated with Google Consent Mode v2, honoring GPC (Global Privacy Control) signals and loops for secure tracking revocation.
 - **Universal Accessibility (WCAG)**:
   - High-precision focus traps that filter for visible-only elements.
