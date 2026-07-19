@@ -1,4 +1,4 @@
-const CACHE_NAME = 'digikaveri-v3';
+const CACHE_NAME = 'digikaveri-v4';
 const ASSETS = [
   '/',
   '/etayhteys.html',
@@ -24,7 +24,18 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('activate', (e) => {
-  e.waitUntil(self.clients.claim());
+  e.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log('SW: purging old cache', key);
+            return caches.delete(key);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
 });
 
 self.addEventListener('fetch', (e) => {
