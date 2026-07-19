@@ -3052,17 +3052,59 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   width: 100%;
 }
 
+.quiz-step[data-step='1'] .quiz-opt-btn:nth-child(1) {
+  --btn-icon-color: #10b981;
+  --btn-icon-bg: rgba(16, 185, 129, 0.06);
+}
+.quiz-step[data-step='1'] .quiz-opt-btn:nth-child(2) {
+  --btn-icon-color: #10b981;
+  --btn-icon-bg: rgba(16, 185, 129, 0.06);
+}
+.quiz-step[data-step='1'] .quiz-opt-btn:nth-child(3) {
+  --btn-icon-color: #8b5cf6;
+  --btn-icon-bg: rgba(139, 92, 246, 0.06);
+}
+.quiz-step[data-step='1'] .quiz-opt-btn:nth-child(4) {
+  --btn-icon-color: #0ea5e9;
+  --btn-icon-bg: rgba(14, 165, 233, 0.06);
+}
+.quiz-step[data-step='1'] .quiz-opt-btn:nth-child(5) {
+  --btn-icon-color: #64748b;
+  --btn-icon-bg: rgba(100, 116, 139, 0.06);
+}
+
+.quiz-step[data-step='2'] .quiz-opt-btn:nth-child(1) {
+  --btn-icon-color: #10b981;
+  --btn-icon-bg: rgba(16, 185, 129, 0.06);
+}
+.quiz-step[data-step='2'] .quiz-opt-btn:nth-child(2) {
+  --btn-icon-color: #ef4444;
+  --btn-icon-bg: rgba(239, 68, 68, 0.06);
+}
+.quiz-step[data-step='2'] .quiz-opt-btn:nth-child(3) {
+  --btn-icon-color: #8b5cf6;
+  --btn-icon-bg: rgba(139, 92, 246, 0.06);
+}
+.quiz-step[data-step='2'] .quiz-opt-btn:nth-child(4) {
+  --btn-icon-color: #0ea5e9;
+  --btn-icon-bg: rgba(14, 165, 233, 0.06);
+}
+.quiz-step[data-step='2'] .quiz-opt-btn:nth-child(5) {
+  --btn-icon-color: #f59e0b;
+  --btn-icon-bg: rgba(245, 158, 11, 0.06);
+}
+
 .quiz-opt-btn i,
 .quiz-opt-btn svg {
-  color: var(--primary);
+  color: var(--btn-icon-color, var(--primary));
   width: 20px;
   height: 20px;
   transition: transform 0.25s ease;
 }
 
 .quiz-opt-btn:hover {
-  border-color: var(--primary);
-  background: var(--primary-light);
+  border-color: var(--btn-icon-color, var(--primary));
+  background: var(--btn-icon-bg, var(--primary-light));
   transform: translateX(4px);
 }
 
@@ -3072,8 +3114,8 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 }
 
 .quiz-opt-btn.active {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--btn-icon-color, var(--primary));
+  border-color: var(--btn-icon-color, var(--primary));
   color: white;
 }
 
