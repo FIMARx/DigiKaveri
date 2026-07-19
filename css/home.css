@@ -1364,14 +1364,28 @@ header#home::before {
 .step-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary-light);
+  border-color: var(--step-color, var(--primary-light));
+}
+
+.process-steps .step-card:nth-child(1) {
+  --step-color: #3b82f6;
+  --step-bg: rgba(59, 130, 246, 0.08);
+}
+.process-steps .step-card:nth-child(3) {
+  --step-color: #f59e0b;
+  --step-bg: rgba(245, 158, 11, 0.08);
+}
+.process-steps .step-card:nth-child(5) {
+  --step-color: #10b981;
+  --step-bg: rgba(16, 185, 129, 0.08);
 }
 
 .step-number {
   position: absolute;
   top: 20px;
   right: 20px;
-  color: rgba(var(--primary-rgb), 0.1);
+  color: var(--step-color, var(--primary));
+  opacity: 0.12;
   font-size: 4rem;
   font-weight: 900;
   line-height: 1;
@@ -1381,8 +1395,8 @@ header#home::before {
 .step-icon {
   width: 80px;
   height: 80px;
-  background: var(--primary-light);
-  color: var(--primary);
+  background: var(--step-bg, var(--primary-light));
+  color: var(--step-color, var(--primary));
   border-radius: 24px;
   display: flex;
   align-items: center;
