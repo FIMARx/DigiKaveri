@@ -26,14 +26,33 @@ const lazyLoadAll = () => {
   initMobileDropdowns();
   initFAB();
   loadAnalytics();
-  // checkStatus() is NOT called here intentionally.
-  // It is called once immediately in initApp() (covers all pages),
-  // and the inline IIFE in index.html also calls it for the homepage.
-  // The 30 s throttle inside checkStatus() prevents redundant fetches.
+  // checkStatus() is called centrally in initApp() for all pages.
+  // The 30s throttle inside checkStatus() prevents redundant fetches.
 
+  initAOS();
+};
+
+const initAOS = () => {
   if (typeof AOS !== 'undefined') {
-    AOS.init({ duration: 800, once: true, disable: 'mobile' });
+    AOS.init({
+      once: true,
+      offset: 40,
+      duration: 600,
+      easing: 'ease-out-cubic',
+      disable: false,
+    });
   }
+
+  // Safety Fallback Guard: If AOS CDN fails/blocked or elements stay hidden, force reveal after 800ms
+  setTimeout(() => {
+    document.querySelectorAll('[data-aos]').forEach((el) => {
+      if (!el.classList.contains('aos-animate')) {
+        el.classList.add('aos-animate');
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+  }, 800);
 };
 
 function initApp() {
@@ -41,11 +60,12 @@ function initApp() {
   isInitialized = true;
 
   // Critical UI (Needs to be instant)
-  createIcons({ icons: ICON_SET }); // Render icons immediately
+  try { createIcons({ icons: ICON_SET }); } catch (e) { console.warn("Lucide icon init warning:", e); }
   initLanguageDetection(); // Bug 1 fix: was defined but never called
   initMobileNav();
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
+  initAOS(); // Ensure animations initialize instantly
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
@@ -102,15 +122,7 @@ function initApp() {
   });
 
   window.addEventListener("load", () => {
-    if (typeof AOS !== "undefined") {
-      AOS.init({
-        once: true,
-        offset: 50,
-        duration: 600,
-        easing: "ease-out-cubic",
-        disable: window.innerWidth < 768,
-      });
-    }
+    initAOS();
   });
 }
 
@@ -558,62 +570,84 @@ function initMobileNav() {
 
   if (!menuBtn || !closeBtn || !overlay) return;
 
-  // Prevent touchmove on body/background — but allow it inside the overlay
   const preventTouchScroll = (e) => {
-    if (overlay.contains(e.target)) return; // allow scroll inside the menu
+    if (overlay.contains(e.target)) return;
     e.preventDefault();
   };
 
-  const lockScroll = () => {
-    document.documentElement.classList.add("menu-open");
-    document.body.classList.add("menu-open");
-    document.addEventListener("touchmove", preventTouchScroll, { passive: false });
-  };
-
-  const unlockScroll = () => {
+  const closeMenu = () => {
+    overlay.classList.remove("active");
+    menuBtn.setAttribute("aria-expanded", "false");
     document.documentElement.classList.remove("menu-open");
     document.body.classList.remove("menu-open");
     document.removeEventListener("touchmove", preventTouchScroll);
+    menuBtn.focus();
+  };
+
+  const openMenu = () => {
+    if (typeof lazyLoadAll === "function") lazyLoadAll();
+    overlay.classList.add("active");
+    menuBtn.setAttribute("aria-expanded", "true");
+    document.documentElement.classList.add("menu-open");
+    document.body.classList.add("menu-open");
+    document.addEventListener("touchmove", preventTouchScroll, { passive: false });
+
+    if (typeof updateScrollSpy === "function") updateScrollSpy();
+    closeBtn.focus();
   };
 
   menuBtn.addEventListener(
     "click",
-    (e) => {
-      // CRITICAL: Since this listener uses stopImmediatePropagation,
-      // it prevents the global lazyLoadAll from firing on the first tap.
-      // We must manually trigger lazy loading here if it hasn't happened.
-      if (typeof lazyLoadAll === "function") {
-        lazyLoadAll();
-      }
-
-      overlay.classList.add("active");
-      lockScroll();
-
-      // Force an update of the scroll spy so links highlight immediately
-      if (typeof updateScrollSpy === "function") {
-        updateScrollSpy();
+    () => {
+      if (overlay.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     },
-    { capture: true },
-  ); // 'capture' ensures we catch the click first
+    { capture: true }
+  );
 
-  closeBtn.addEventListener("click", () => {
-    overlay.classList.remove("active");
-    unlockScroll();
-  });
+  closeBtn.addEventListener("click", closeMenu);
 
   overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
-      overlay.classList.remove("active");
-      unlockScroll();
-    }
+    if (e.target === overlay) closeMenu();
   });
 
   mobileLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      overlay.classList.remove("active");
-      unlockScroll();
-    });
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Focus trap & Escape key listener for Mobile Nav
+  overlay.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMenu();
+      return;
+    }
+
+    if (e.key !== "Tab") return;
+
+    const focusables = Array.from(
+      overlay.querySelectorAll("a[href], button:not([disabled]), input, select, textarea")
+    );
+    if (focusables.length === 0) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      last.focus();
+      e.preventDefault();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      first.focus();
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("active")) {
+      closeMenu();
+    }
   });
 }
 
@@ -628,7 +662,7 @@ function initFAB() {
     const shouldOpen =
       forceClose === null ? !wrapper.classList.contains("active") : !forceClose;
     wrapper.classList.toggle("active", shouldOpen);
-    mainBtn.setAttribute("aria-expanded", shouldOpen);
+    mainBtn.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
 
     if (shouldOpen) {
       if (backdrop) backdrop.classList.add("active");
@@ -647,6 +681,14 @@ function initFAB() {
   document.addEventListener("click", (e) => {
     if (wrapper.classList.contains("active") && !wrapper.contains(e.target)) {
       toggleMenu(true);
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && wrapper.classList.contains("active")) {
+      toggleMenu(true);
+      mainBtn.focus();
     }
   });
 

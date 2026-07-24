@@ -1,4 +1,4 @@
-const CACHE_NAME = 'digikaveri-v4';
+const CACHE_NAME = 'digikaveri-v5';
 const ASSETS = [
   '/',
   '/etayhteys.html',
@@ -39,6 +39,23 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  // Navigation / HTML requests: Network first, fallback to cache for offline support
+  if (e.request.mode === 'navigate' || e.request.destination === 'document') {
+    e.respondWith(
+      fetch(e.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(e.request, responseClone));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  // Static assets: Cache first, fallback to network
   e.respondWith(
     caches.match(e.request).then((response) => response || fetch(e.request))
   );

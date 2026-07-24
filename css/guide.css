@@ -660,13 +660,39 @@
   color: #86efac !important;
 }
 
-/* Dark Mode Icon Visibility Fixes */
-[data-theme="dark"] img[src*="teamviewer.svg"] {
-  filter: brightness(0) invert(1);
+/* --- Apple & Brand SVG Icon Visibility Fixes --- */
+
+/* 1. App Store Pill Button (.btn-apple-black): Always white icon because button background is black */
+.btn-apple-black img[src*="apple.svg"],
+.btn-apple-black img[src*="apple"] {
+  filter: brightness(0) invert(1) !important;
 }
 
-[data-theme="dark"] img[src*="apple.svg"] {
+/* 2. Dark Mode Global Rule: Invert black Apple & TeamViewer SVGs to crisp white on dark background */
+[data-theme="dark"] img[src*="apple.svg"],
+[data-theme="dark"] img[src*="apple"],
+[data-theme="dark"] .btn-platform-switch img[src*="apple.svg"],
+[data-theme="dark"] .btn-platform-switch img[src*="apple"],
+[data-theme="dark"] .switcher-btn img[src*="apple"] {
   filter: brightness(0) invert(1) !important;
+}
+
+/* 3. TeamViewer & Other monochrome SVG dark mode inverts */
+[data-theme="dark"] img[src*="teamviewer.svg"],
+[data-theme="dark"] .tv-logo[src*="teamviewer"] {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* 4. Dark Mode App Store pill button styling */
+[data-theme="dark"] .btn-apple-black {
+  background: #1e293b !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .btn-apple-black:hover {
+  background: #334155 !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* --- Ultra-Narrow Mobiles Support (200px - 320px) --- */

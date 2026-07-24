@@ -1,7 +1,5 @@
 /* Legal Page Premium Design */
 
-/* Legal Page Premium Design */
-
 .legal-container {
     padding: 140px 24px 100px;
     max-width: var(--max-width);
@@ -27,7 +25,7 @@ aside.legal-toc {
     grid-column: 1 / -1;
     text-align: center;
     padding: 80px 20px;
-    background: #f8fafc;
+    background: var(--surface);
     border-radius: var(--radius-lg);
     margin-bottom: 60px;
     border: 1px solid var(--border);
@@ -112,7 +110,7 @@ aside.legal-toc {
 
 .legal-toc a {
     text-decoration: none;
-    color: #64748b;
+    color: var(--secondary);
     font-size: 0.9rem;
     font-weight: 500;
     display: block;
@@ -151,17 +149,17 @@ aside.legal-toc {
     margin-bottom: 0;
 }
 
-.section-header {
-    display: flex !important;
-    flex-direction: row !important; /* Forces row layout for legal icons */
-    align-items: center !important;
-    justify-content: flex-start !important;
-    text-align: left !important;
+.legal-content .section-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
     gap: 15px;
     margin-bottom: 20px;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    max-width: none !important;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
 }
 
 .section-header i, .section-header svg {

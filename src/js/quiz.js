@@ -19,15 +19,32 @@ document.addEventListener("DOMContentLoaded", () => {
     currentStepIndex = index;
   };
 
+  // Initialize ARIA accessibility attributes on quiz option buttons
+  form.querySelectorAll(".quiz-opt-btn").forEach(btn => {
+    btn.setAttribute("role", "radio");
+    btn.setAttribute("aria-checked", "false");
+  });
+
+  const updateAriaChecked = (stepNum, activeBtn) => {
+    form.querySelectorAll(`.quiz-step[data-step='${stepNum}'] .quiz-opt-btn`).forEach(b => {
+      const isActive = b === activeBtn;
+      b.classList.toggle("active", isActive);
+      b.setAttribute("aria-checked", isActive ? "true" : "false");
+    });
+  };
+
   // Step 1 buttons
   form.querySelectorAll(".quiz-step[data-step='1'] .quiz-opt-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      // Clear active class from siblings
-      form.querySelectorAll(".quiz-step[data-step='1'] .quiz-opt-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+      updateAriaChecked("1", btn);
 
       const val = btn.getAttribute("data-value");
       if (deviceInput) deviceInput.value = val;
+
+      // Reset Step 2 selection on Step 1 device change
+      if (issueInput) issueInput.value = "";
+      sessionStorage.removeItem('quiz-issue');
+      updateAriaChecked("2", null);
 
       // Save state
       sessionStorage.setItem('quiz-device', val);
@@ -42,9 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Step 2 buttons
   form.querySelectorAll(".quiz-step[data-step='2'] .quiz-opt-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      // Clear active class from siblings
-      form.querySelectorAll(".quiz-step[data-step='2'] .quiz-opt-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+      updateAriaChecked("2", btn);
 
       const val = btn.getAttribute("data-value");
       if (issueInput) issueInput.value = val;
@@ -68,10 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (targetStep === 0) {
         sessionStorage.removeItem('quiz-device');
         sessionStorage.removeItem('quiz-issue');
-        form.querySelectorAll(".quiz-step .quiz-opt-btn").forEach(b => b.classList.remove("active"));
+        updateAriaChecked("1", null);
+        updateAriaChecked("2", null);
       } else if (targetStep === 1) {
         sessionStorage.removeItem('quiz-issue');
-        form.querySelectorAll(".quiz-step[data-step='2'] .quiz-opt-btn").forEach(b => b.classList.remove("active"));
+        updateAriaChecked("2", null);
       }
     });
   });
@@ -80,7 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("reset", () => {
     sessionStorage.removeItem('quiz-device');
     sessionStorage.removeItem('quiz-issue');
-    form.querySelectorAll(".quiz-step .quiz-opt-btn").forEach(b => b.classList.remove("active"));
+    updateAriaChecked("1", null);
+    updateAriaChecked("2", null);
     goToStep(0);
   });
 
@@ -92,14 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedDevice) {
     if (deviceInput) deviceInput.value = savedDevice;
     const deviceBtn = form.querySelector(`.quiz-step[data-step='1'] .quiz-opt-btn[data-value="${savedDevice}"]`);
-    if (deviceBtn) deviceBtn.classList.add("active");
+    if (deviceBtn) updateAriaChecked("1", deviceBtn);
     initialStep = 1;
   }
 
   if (savedIssue) {
     if (issueInput) issueInput.value = savedIssue;
     const issueBtn = form.querySelector(`.quiz-step[data-step='2'] .quiz-opt-btn[data-value="${savedIssue}"]`);
-    if (issueBtn) issueBtn.classList.add("active");
+    if (issueBtn) updateAriaChecked("2", issueBtn);
     if (savedDevice) {
       initialStep = 2;
     }
@@ -107,6 +124,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   goToStep(initialStep);
 
+  // Ensure default values on submit if skipped
+  form.addEventListener("submit", () => {
+    if (deviceInput && !deviceInput.value) {
+      deviceInput.value = "Yleinen IT-tuki / Laite (Ei valittu)";
+    }
+    if (issueInput && !issueInput.value) {
+      issueInput.value = "Soittopyyntö / Yleinen yhteydenotto";
+    }
+  });
+
   // Re-run icons initialization inside the form context
-  createIcons({ icons: ICON_SET, root: form });
+  try { createIcons({ icons: ICON_SET, root: form }); } catch (e) { console.warn("Lucide icon init warning:", e); }
 });

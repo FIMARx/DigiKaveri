@@ -6,6 +6,8 @@ function showToast(message, isSuccess = true) {
   if (!toastContainer) {
     toastContainer = document.createElement('div');
     toastContainer.id = 'toast-container';
+    toastContainer.setAttribute('role', 'alert');
+    toastContainer.setAttribute('aria-live', 'assertive');
     document.body.appendChild(toastContainer);
   }
 
@@ -16,7 +18,7 @@ function showToast(message, isSuccess = true) {
   toast.innerHTML = `<i data-lucide="${icon}"></i> <span>${message}</span>`;
   
   toastContainer.appendChild(toast);
-  createIcons({ icons: ICON_SET, root: toastContainer });
+try { createIcons({ icons: ICON_SET, root: toastContainer }); } catch (e) {}
 
   setTimeout(() => {
     toast.classList.add('removing');
@@ -137,7 +139,7 @@ function setupForm(formId) {
     btn.innerHTML = `${t.loading} <i data-lucide="loader-2" class="spin"></i>`;
     btn.style.background = "#2563EB";
     form.classList.add("form-submitting");
-    createIcons({ icons: ICON_SET });
+    try { createIcons({ icons: ICON_SET }); } catch (e) {}
 
     const formData = new FormData(form);
     const object = Object.fromEntries(formData);
@@ -158,7 +160,7 @@ function setupForm(formId) {
       if (response.status === 200 && result && result.success) {
         btn.innerHTML = `${t.success} <i data-lucide="check"></i>`;
         btn.style.background = "#10B981";
-        createIcons({ icons: ICON_SET });
+        try { createIcons({ icons: ICON_SET }); } catch (e) {}
         
         // Visual feedback: replace form content with success message
         const formParent = form.parentElement;
@@ -169,6 +171,8 @@ function setupForm(formId) {
         
         const successEl = document.createElement("div");
         successEl.className = "form-success-message";
+        successEl.setAttribute("role", "status");
+        successEl.setAttribute("aria-live", "polite");
         successEl.style.display = "flex";
         successEl.innerHTML = `
           <i data-lucide="check-circle"></i>
@@ -176,7 +180,7 @@ function setupForm(formId) {
           <p>${t.thankYou}</p>
         `;
         formParent.appendChild(successEl);
-        createIcons({ icons: ICON_SET, root: successEl });
+        try { createIcons({ icons: ICON_SET, root: successEl }); } catch (e) {}
 
         setTimeout(() => {
           successEl.style.opacity = "0";
@@ -189,7 +193,7 @@ function setupForm(formId) {
             btn.innerHTML = originalText;
             btn.style.background = "";
             btn.disabled = false;
-            createIcons({ icons: ICON_SET });
+            try { createIcons({ icons: ICON_SET }); } catch (e) {}
           }, 500);
         }, 8000);
 

@@ -457,5 +457,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Run initial state
   updateCalculator();
-  createIcons({ icons: ICON_SET, root: container });
+  try { createIcons({ icons: ICON_SET, root: container }); } catch (e) { console.warn("Lucide icon init warning:", e); }
 });

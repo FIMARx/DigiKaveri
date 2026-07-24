@@ -8,6 +8,7 @@ toggleBtn.className = "accessibility-btn";
 // Bug 8 fix: use setAttribute instead of the non-standard .ariaLabel property
 // for cross-browser compatibility (older browsers don't support ARIA reflection API)
 toggleBtn.setAttribute('aria-label', label);
+toggleBtn.setAttribute('aria-pressed', 'false');
 toggleBtn.title = label;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const scrollPct = totalScrollable > 0 ? window.scrollY / totalScrollable : 0;
 
     document.documentElement.classList.toggle("large-text");
-    toggleBtn.classList.toggle("active");
+    const isActive = toggleBtn.classList.toggle("active");
+    toggleBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
 
     // Restore relative position after layout update
     // We use requestAnimationFrame to ensure the layout has updated

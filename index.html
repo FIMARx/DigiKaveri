@@ -26,41 +26,6 @@
           <div class="signal-dot"></div>
           <span id="statusText">Ladataan...</span>
         </div>
-        <script>
-          (async function() {
-            try {
-              const finlandTime = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Helsinki"}));
-              const hour = finlandTime.getHours();
-              const statusUrl = "/data/status.json?v=" + Date.now();
-              
-              const response = await fetch(statusUrl).catch(() => null);
-              let isOpen = (hour >= 9 && hour < 21);
-              let data = null;
-              
-              if (response && response.ok) {
-                data = await response.json();
-                if (data.override === "open") isOpen = true;
-                else if (data.override === "closed") isOpen = false;
-                else if (typeof data.isOpen === "boolean") isOpen = data.isOpen;
-              }
-              
-              const badge = document.getElementById("serviceStatus");
-              const text = document.getElementById("statusText");
-              
-              const path = window.location.pathname;
-              const isEn = path === "/en" || path.startsWith("/en/");
-              const openMsg = isEn ? (data?.messageOpenEn || "Service Open") : (data?.messageOpen || "Palvelemme nyt");
-              const closedMsg = isEn ? (data?.messageClosedEn || "Closed for today") : (data?.messageClosed || "Palvelu suljettu");
-              
-              if (badge && text) {
-                badge.className = "status-part " + (isOpen ? "open" : "closed");
-                text.textContent = isOpen ? openMsg : closedMsg;
-              }
-            } catch (e) {
-              console.error("Status check failed", e);
-            }
-          })();
-        </script>
         <div class="schedule-part">
           <i data-lucide="clock" aria-hidden="true"></i>
           <span>Ma–Su 09:00–21:00</span>
@@ -97,6 +62,8 @@
             name="access_key"
             value="720c069a-c6de-4d8b-aea7-bf7822aa7ef9"
           />
+          <input type="hidden" name="from_name" value="DigiKaveri Verkkosivut" />
+          <input type="hidden" name="subject" value="Uusi soittopyyntö — DigiKaveri.com" />
           <input
             type="checkbox"
             name="botcheck"
@@ -109,7 +76,7 @@
           <!-- Step 1: Device Selection -->
           <div class="quiz-step active" data-step="1">
             <h3>Mitä laitetta ongelma koskee?</h3>
-            <div class="quiz-options-grid">
+            <div class="quiz-options-grid" role="radiogroup" aria-label="Laitteen valinta">
               <button type="button" class="quiz-opt-btn" data-value="Tietokone (Windows)">
                 <i data-lucide="laptop"></i> <span>Tietokone (Windows)</span>
               </button>
@@ -131,7 +98,7 @@
           <!-- Step 2: Issue Selection -->
           <div class="quiz-step" data-step="2">
             <h3>Mikä on laitteen pääasiallinen ongelma?</h3>
-            <div class="quiz-options-grid">
+            <div class="quiz-options-grid" role="radiogroup" aria-label="Ongelman valinta">
               <button type="button" class="quiz-opt-btn" data-value="Laite on erittäin hidas">
                 <i data-lucide="rocket" class="icon-slow"></i> <span>Erittäin hidas kone</span>
               </button>
@@ -221,15 +188,15 @@
       <p>Tuemme kaikkia yleisimpiä laitteita ja merkkejä</p>
       <div class="trust-logos">
         <img src="svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
-        <img src="https://cdn.simpleicons.org/samsung/1428A0" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
+        <img src="svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
         <img src="svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
         <img src="svg/android.svg" alt="Android" width="48" height="48" title="Android" loading="lazy" />
-        <img src="https://cdn.simpleicons.org/hp/0096D6" alt="HP" width="48" height="48" title="HP" loading="lazy" />
-        <img src="https://cdn.simpleicons.org/lenovo/E2231A" alt="Lenovo" width="48" height="48" title="Lenovo" class="logo-wide" loading="lazy" />
-        <img src="https://cdn.simpleicons.org/nokia/124191" alt="Nokia" width="48" height="48" title="Nokia" class="logo-wide" loading="lazy" />
-        <img src="https://cdn.simpleicons.org/dell/007DB8" alt="Dell" width="48" height="48" title="Dell" loading="lazy" />
-        <img src="https://cdn.simpleicons.org/asus/00539B" alt="Asus" width="48" height="48" title="Asus" loading="lazy" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" width="48" height="48" title="Microsoft" class="logo-wide" loading="lazy" />
+        <img src="svg/hp.svg" alt="HP" width="48" height="48" title="HP" loading="lazy" />
+        <img src="svg/lenovo.svg" alt="Lenovo" width="48" height="48" title="Lenovo" class="logo-wide" loading="lazy" />
+        <img src="svg/nokia.svg" alt="Nokia" width="48" height="48" title="Nokia" class="logo-wide" loading="lazy" />
+        <img src="svg/dell.svg" alt="Dell" width="48" height="48" title="Dell" loading="lazy" />
+        <img src="svg/asus.svg" alt="Asus" width="48" height="48" title="Asus" loading="lazy" />
+        <img src="svg/microsoft.svg" alt="Microsoft" width="48" height="48" title="Microsoft" class="logo-wide" loading="lazy" />
       </div>
     </div>
 
@@ -700,6 +667,8 @@
               name="access_key"
               value="720c069a-c6de-4d8b-aea7-bf7822aa7ef9"
             />
+            <input type="hidden" name="from_name" value="DigiKaveri Verkkosivut" />
+            <input type="hidden" name="subject" value="Uusi yhteydenotto — DigiKaveri.com" />
             <input
               type="checkbox"
               name="botcheck"

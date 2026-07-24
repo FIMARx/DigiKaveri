@@ -20,6 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = document.getElementById(sectionId);
     if (!section) return;
     section.classList.toggle("is-collapsed", collapsed);
+    if (!collapsed) {
+      section.querySelectorAll("[data-aos]").forEach((el) => {
+        el.classList.add("aos-animate");
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
+      if (typeof AOS !== "undefined") {
+        AOS.refresh();
+      }
+    }
   };
 
   // --- 2. Platform Detection ---
@@ -48,11 +58,27 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update Cards
         Object.entries(cards).forEach(([p, cardId]) => {
           const c = document.getElementById(cardId);
-          if (c) c.classList.toggle("hidden", p !== platform);
+          if (c) {
+            const isTarget = p === platform;
+            c.classList.toggle("hidden", !isTarget);
+            if (isTarget) {
+              c.querySelectorAll("[data-aos]").forEach((el) => {
+                el.classList.add("aos-animate");
+                el.style.opacity = "1";
+                el.style.transform = "none";
+              });
+            }
+          }
         });
 
-        // Refresh Icons
-        createIcons({ icons: ICON_SET });
+        // Refresh Icons inside active section
+        const activeCard = document.getElementById(cards[platform]);
+        if (activeCard) {
+          try { createIcons({ icons: ICON_SET, root: activeCard }); } catch (e) {}
+        }
+        if (typeof AOS !== "undefined") {
+          AOS.refresh();
+        }
 
         // Scroll to section on mobile
         if (window.innerWidth < 1024 && scrollTargetId) {
@@ -166,36 +192,89 @@ document.addEventListener("DOMContentLoaded", () => {
         v.classList.toggle("active", v.getAttribute("data-view-id") === viewId);
       });
 
-      createIcons({ icons: ICON_SET });
+      try { createIcons({ icons: ICON_SET, root: container }); } catch (e) {}
     });
   });
 
   // --- 6. Lightbox & Video Helpers ---
+  // Video Overlay Play Listeners
+  document.querySelectorAll(".video-overlay").forEach((overlay) => {
+    overlay.addEventListener("click", () => {
+      overlay.classList.add("hidden");
+      const video = overlay.nextElementSibling;
+      if (video && video.tagName === "VIDEO") {
+        video.setAttribute("controls", "true");
+        video.play();
+      }
+    });
+  });
+
   const lightbox = document.getElementById("imageLightbox");
   if (lightbox) {
     const img = lightbox.querySelector("img");
     const close = lightbox.querySelector(".lightbox-close");
+    let lastActiveElement = null;
 
     document.querySelectorAll(".v-step-image img").forEach((vImg) => {
-      vImg.parentElement.addEventListener("click", () => {
-        img.src = vImg.src;
-        img.alt = vImg.alt;
-        lightbox.classList.add("active");
-        document.body.style.overflow = "hidden";
-      });
+      const parent = vImg.parentElement;
+      if (parent) {
+        parent.setAttribute("role", "button");
+        parent.setAttribute("tabindex", "0");
+        parent.setAttribute("aria-label", vImg.alt || "Suurenna kuva");
+
+        const openLightbox = () => {
+          lastActiveElement = document.activeElement;
+          img.src = vImg.src;
+          img.alt = vImg.alt;
+          lightbox.classList.add("active");
+          document.body.style.overflow = "hidden";
+          if (close) close.focus();
+        };
+
+        parent.addEventListener("click", openLightbox);
+        parent.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openLightbox();
+          }
+        });
+      }
     });
 
     const hideLightbox = () => {
       lightbox.classList.remove("active");
       document.body.style.overflow = "";
+      if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+        lastActiveElement.focus();
+      }
     };
 
     close?.addEventListener("click", hideLightbox);
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) hideLightbox();
     });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") hideLightbox();
+
+    lightbox.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        hideLightbox();
+        return;
+      }
+      if (e.key === "Tab") {
+        const focusables = Array.from(
+          lightbox.querySelectorAll("button, a[href], input, select, textarea, [tabindex]:not([tabindex='-1'])")
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          last.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          first.focus();
+          e.preventDefault();
+        }
+      }
     });
   }
 
@@ -215,9 +294,20 @@ document.addEventListener("DOMContentLoaded", () => {
     badge.classList.toggle("hidden", !detected);
   });
 
-  // Set initial switcher states based on platform
-  if (isMac) document.getElementById("mac-switch")?.click();
-  if (isIOS) document.getElementById("ios-switch")?.click();
+  // Check URL hash fragment or User-Agent for initial platform tab selection
+  const hash = window.location.hash.toLowerCase();
+  if (hash === "#mac" || hash === "#macos") {
+    document.getElementById("mac-switch")?.click();
+  } else if (hash === "#windows" || hash === "#win") {
+    document.getElementById("windows-switch")?.click();
+  } else if (hash === "#android") {
+    document.getElementById("android-switch")?.click();
+  } else if (hash === "#ios" || hash === "#iphone" || hash === "#ipad") {
+    document.getElementById("ios-switch")?.click();
+  } else {
+    if (isMac) document.getElementById("mac-switch")?.click();
+    if (isIOS) document.getElementById("ios-switch")?.click();
+  }
 
-  createIcons({ icons: ICON_SET });
+  try { createIcons({ icons: ICON_SET }); } catch (e) {}
 });

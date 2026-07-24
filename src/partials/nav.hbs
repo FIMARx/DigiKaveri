@@ -1,3 +1,4 @@
+<a href="#main-content" class="skip-link">{{nav_skip_link}}</a>
 <nav class="glass-nav">
   <div id="scrollProgressBar" class="scroll-progress-bar"></div>
   <div class="nav-content">
@@ -63,7 +64,7 @@
         <span class="lang-divider">|</span>
         <a href="{{base_en}}{{current_page_en}}" class="lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
       </div>
-      <button type="button" class="theme-toggle-btn" aria-label="Vaihda teemaa" title="Vaihda teemaa">
+      <button type="button" class="theme-toggle-btn" aria-label="{{nav_theme_toggle}}" title="{{nav_theme_toggle}}">
         <i data-lucide="sun" class="sun-icon"></i>
         <i data-lucide="moon" class="moon-icon"></i>
       </button>
