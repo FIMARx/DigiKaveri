@@ -79,6 +79,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Build the estimator UI dynamically
   container.innerHTML = `
+    <div class="estimator-quick-rates">
+      <div class="quick-rate-chip" data-chip="remote" role="button" tabindex="0" aria-label="Valitse Etätuki">
+        <span class="chip-label">⚡ ${t.remote}</span>
+        <span class="chip-price">29€ ${t.unitHalfHour}</span>
+      </div>
+      <div class="quick-rate-chip" data-chip="home" role="button" tabindex="0" aria-label="Valitse Kotikäynti">
+        <span class="chip-label">🚗 ${t.homeVisit}</span>
+        <span class="chip-price">59€ ${t.unitHour}</span>
+      </div>
+      <div class="quick-rate-chip" data-chip="annual" role="button" tabindex="0" aria-label="Valitse Vuosihuolto">
+        <span class="chip-label">🛡️ ${t.annual}</span>
+        <span class="chip-price">89€ ${t.unitFlat}</span>
+      </div>
+    </div>
+
     <div class="estimator-layout" data-aos="fade-up">
       <!-- Left: Choices -->
       <div class="estimator-choices">
@@ -93,9 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="service-pricing-control">
             <span class="service-price-rate">29€ ${t.unitHalfHour}</span>
             <div class="quantity-control hidden" id="qty-ctrl-remote">
-              <button type="button" class="qty-btn minus" data-service="remote">-</button>
+              <button type="button" class="qty-btn minus" data-service="remote" aria-label="Vähennä määrää">-</button>
               <span class="qty-val" id="qty-val-remote">1</span>
-              <button type="button" class="qty-btn plus" data-service="remote">+</button>
+              <button type="button" class="qty-btn plus" data-service="remote" aria-label="Lisää määrää">+</button>
             </div>
           </div>
         </div>
@@ -111,9 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="service-pricing-control">
             <span class="service-price-rate">59€ ${t.unitHour}</span>
             <div class="quantity-control" id="qty-ctrl-home">
-              <button type="button" class="qty-btn minus" data-service="home">-</button>
+              <button type="button" class="qty-btn minus" data-service="home" aria-label="Vähennä määrää">-</button>
               <span class="qty-val" id="qty-val-home">1</span>
-              <button type="button" class="qty-btn plus" data-service="home">+</button>
+              <button type="button" class="qty-btn plus" data-service="home" aria-label="Lisää määrää">+</button>
             </div>
           </div>
         </div>
@@ -129,9 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="service-pricing-control">
             <span class="service-price-rate">89€ ${t.unitFlat}</span>
             <div class="quantity-control hidden" id="qty-ctrl-annual">
-              <button type="button" class="qty-btn minus" data-service="annual">-</button>
+              <button type="button" class="qty-btn minus" data-service="annual" aria-label="Vähennä määrää">-</button>
               <span class="qty-val" id="qty-val-annual">1</span>
-              <button type="button" class="qty-btn plus" data-service="annual">+</button>
+              <button type="button" class="qty-btn plus" data-service="annual" aria-label="Lisää määrää">+</button>
             </div>
           </div>
         </div>
@@ -218,10 +233,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const service = SERVICES[key];
       const userChoice = state[key];
 
-      // Update quantity control visibility
+      // Update quantity control visibility & quick rate chip highlighting
       const qtyCtrl = document.getElementById(`qty-ctrl-${key}`);
       if (qtyCtrl) {
         qtyCtrl.classList.toggle("hidden", !userChoice.checked);
+      }
+
+      const rateChip = container.querySelector(`.quick-rate-chip[data-chip="${key}"]`);
+      if (rateChip) {
+        rateChip.classList.toggle("highlighted", userChoice.checked);
       }
 
       if (userChoice.checked) {
@@ -265,6 +285,27 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("summary-final-total").textContent = `${Math.round(finalTotal)} €`;
   };
 
+  // Wire quick rate chip click shortcuts
+  container.querySelectorAll(".quick-rate-chip").forEach(chip => {
+    const serviceKey = chip.getAttribute("data-chip");
+    const chk = document.getElementById(`est-${serviceKey}`);
+
+    chip.addEventListener("click", () => {
+      if (chk) {
+        chk.checked = !chk.checked;
+        state[serviceKey].checked = chk.checked;
+        updateCalculator();
+      }
+    });
+
+    chip.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        chip.click();
+      }
+    });
+  });
+
   // Wire checkbox events
   container.querySelectorAll(".est-checkbox").forEach(chk => {
     chk.addEventListener("change", (e) => {
@@ -306,6 +347,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const feedbackEl = document.getElementById("est-dist-feedback");
 
   if (calcBtn && addressInput) {
+    addressInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        calcBtn.click();
+      }
+    });
+
     calcBtn.addEventListener("click", async () => {
       const query = addressInput.value.trim();
       if (!query) return;

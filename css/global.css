@@ -502,7 +502,7 @@ html[lang="en"] .nav-menu {
 
 .dropdown-menu a:hover,
 .dropdown-menu a.active {
-  background: #f1f5f9;
+  background: var(--primary-light);
   color: var(--primary) !important;
 }
 
@@ -617,7 +617,7 @@ html[lang="en"] .nav-menu {
   text-decoration: none;
   font-size: 1.05rem;
   font-weight: 600;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
   transition: all 0.2s ease;
 }
 
@@ -810,17 +810,41 @@ h3 {
 }
 .footer-logo img {
   display: block;
-  width: 480px; /* Force large size on desktop */
-  max-width: 100%; /* Ensure it fits on smaller desktop views */
+  width: 220px;
+  max-width: 100%;
   height: auto;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  filter: brightness(1.1);
 }
 .footer-desc {
   color: #cbd5e1;
   line-height: 1.8;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   max-width: 360px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+}
+.footer-trust-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.footer-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.footer-trust-badge i,
+.footer-trust-badge svg {
+  color: #22c55e;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 .footer-social {
   display: flex;
@@ -1069,7 +1093,7 @@ h3 {
   }
 
   .modern-footer {
-    padding: 60px 20px 80px;
+    padding: 60px 20px 120px;
     margin-top: 40px;
   }
 }
@@ -1426,77 +1450,6 @@ h3 {
     flex-direction: column;
     text-align: center;
     gap: 12px;
-  }
-}
-
-.quick-guide-cta {
-  background: #f8fafc;
-  padding: 30px 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.quick-guide-cta .cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  background: var(--white);
-  padding: 24px 32px;
-  border-radius: 28px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  max-width: 900px;
-  margin: 0 auto;
-  min-height: 100px;
-}
-
-.quick-guide-cta .cta-text {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  color: var(--text-dark);
-}
-
-.quick-guide-cta .cta-text i,
-.quick-guide-cta .cta-text svg {
-  color: var(--primary);
-  width: 32px !important;
-  height: 32px !important;
-  flex-shrink: 0;
-}
-
-.quick-guide-cta .cta-text p {
-  margin: 0;
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-.quick-guide-cta .btn-cta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 1rem;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  white-space: normal;
-}
-
-.quick-guide-cta .btn-cta-link:hover {
-  transform: translateX(6px) scale(1.02);
-}
-
-@media (max-width: 768px) {
-  .quick-guide-cta {
-    padding: 25px 15px;
-  }
-  .quick-guide-cta .cta-inner {
-    flex-direction: column;
-    border-radius: 24px;
-    text-align: center;
-    padding: 25px 20px;
-    gap: 15px;
   }
   .accessibility-btn {
     bottom: 120px;
@@ -3291,11 +3244,76 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 /* =======================================================
    2026 Interactive Price Estimator
    ======================================================= */
+.estimator-quick-rates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+@keyframes chipPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.quick-rate-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 9999px;
+  padding: 10px 20px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: chipPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) ease forwards;
+}
+
+.quick-rate-chip:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.15);
+  border-color: var(--primary);
+}
+
+.quick-rate-chip:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.quick-rate-chip.highlighted {
+  border-color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.08);
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.18);
+}
+
+.chip-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.chip-price {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
 .estimator-layout {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 30px;
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: left;
 }
 
@@ -3425,7 +3443,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 
 .estimator-deduction-toggle {
   background: var(--primary-light);
-  border: 1px solid rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
   border-radius: var(--radius);
   padding: 20px;
   display: flex;
@@ -3443,7 +3461,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
   width: 44px;
   height: 24px;
   appearance: none;
-  background: #cbd5e1;
+  background: var(--border);
   border-radius: 9999px;
   position: relative;
   cursor: pointer;
@@ -3675,11 +3693,18 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 }
 
 .quiz-opt-btn i,
-.quiz-opt-btn svg {
+.quiz-opt-btn svg,
+.quiz-opt-btn img.quiz-opt-icon {
   color: var(--btn-icon-color, var(--primary));
   width: 20px;
   height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
   transition: transform 0.25s ease;
+}
+
+[data-theme="dark"] .quiz-opt-btn img[src*="apple"] {
+  filter: brightness(0) invert(1);
 }
 
 .quiz-opt-btn:hover {
@@ -3689,7 +3714,8 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 }
 
 .quiz-opt-btn:hover i,
-.quiz-opt-btn:hover svg {
+.quiz-opt-btn:hover svg,
+.quiz-opt-btn:hover img.quiz-opt-icon {
   transform: scale(1.1);
 }
 
@@ -3752,7 +3778,8 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 }
 
 .btn-quiz-nav.prev:hover {
-  background: var(--border);
+  background: var(--primary-light);
+  border-color: var(--primary);
   transform: translateY(-4px) scale(1.02);
   box-shadow: var(--shadow);
 }
@@ -3847,16 +3874,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 }
 
 /* 2026 Dark Mode Layout Overrides */
-[data-theme="dark"] .quick-guide-cta {
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
 
-[data-theme="dark"] .quick-guide-cta .cta-inner {
-  background: var(--white);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
 
 [data-theme="dark"] .lang-switcher {
   background: var(--bg);
@@ -4034,6 +4052,7 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 
   .estimator-summary-card {
     padding: 24px !important;
+    margin-bottom: 32px !important;
   }
 }
 

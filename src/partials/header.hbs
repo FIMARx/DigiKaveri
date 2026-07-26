@@ -50,6 +50,15 @@
 <meta name="apple-mobile-web-app-title" content="DigiKaveri" />
 <link rel="manifest" href="/site.webmanifest" />
 
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem("theme");
+      var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {}
+  })();
+</script>
 <link rel="stylesheet" href="/css/variables.css" />
 <link rel="stylesheet" href="/css/global.css" />
 {{#if extra_css}}

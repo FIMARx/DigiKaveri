@@ -21,7 +21,7 @@
 
   <main id="main-content">
     <header id="home" class="hero-centered section-spy">
-      <div class="status-schedule-pill">
+      <div class="status-schedule-pill" role="button" tabindex="0" aria-label="Check opening hours and service status">
         <div id="serviceStatus" class="status-part loading" aria-live="polite">
           <div class="signal-dot"></div>
           <span id="statusText">Loading...</span>
@@ -38,16 +38,18 @@
         >
       </h1>
       <p class="hero-subtitle">
-        Fast help in Uusimaa and remotely across Finland. Leave a contact
-        request, and our experts will call you back.
+        Home visits in Espoo & Uusimaa, remote support across Finland. Leave a request – we reply within 1–2 hours.
       </p>
 
       <div class="trust-badges-centered">
         <div class="trust-item">
-          <i data-lucide="check-circle" aria-hidden="true"></i> Tax deduction -60%
+          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Tax deduction -60%</span>
         </div>
         <div class="trust-item">
-          <i data-lucide="shield-check" aria-hidden="true"></i> 100% Satisfaction Guarantee
+          <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span>100% Satisfaction Guarantee</span>
+        </div>
+        <div class="trust-item">
+          <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>No fix, no fee guarantee</span>
         </div>
       </div>
 
@@ -78,19 +80,19 @@
           <div class="quiz-step active" data-step="1">
             <h3>Which device is having issues?</h3>
             <div class="quiz-options-grid" role="radiogroup" aria-label="Device selection">
-              <button type="button" class="quiz-opt-btn" data-value="Computer (Windows)">
-                <i data-lucide="laptop"></i> <span>Computer (Windows)</span>
+              <button type="button" class="quiz-opt-btn" data-key="win" data-value="Computer (Windows)">
+                <img src="/svg/windows.svg" alt="Windows" class="quiz-opt-icon" width="20" height="20" /> <span>Computer (Windows)</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Computer (Mac)">
-                <i data-lucide="monitor"></i> <span>Computer (Mac)</span>
+              <button type="button" class="quiz-opt-btn" data-key="mac" data-value="Computer (Mac)">
+                <img src="/svg/apple.svg" alt="Mac" class="quiz-opt-icon" width="20" height="20" /> <span>Computer (Mac)</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Phone / Tablet">
+              <button type="button" class="quiz-opt-btn" data-key="mobile" data-value="Phone / Tablet">
                 <i data-lucide="smartphone"></i> <span>Phone / Tablet</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Printer / Network">
+              <button type="button" class="quiz-opt-btn" data-key="printer" data-value="Printer / Network">
                 <i data-lucide="printer"></i> <span>Printer / Network</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Other issue">
+              <button type="button" class="quiz-opt-btn" data-key="other" data-value="Other issue">
                 <i data-lucide="more-horizontal"></i> <span>Other issue</span>
               </button>
             </div>
@@ -100,19 +102,19 @@
           <div class="quiz-step" data-step="2">
             <h3>What is the main symptom/issue?</h3>
             <div class="quiz-options-grid" role="radiogroup" aria-label="Issue selection">
-              <button type="button" class="quiz-opt-btn" data-value="Computer is very slow">
+              <button type="button" class="quiz-opt-btn" data-key="slow" data-value="Computer is very slow">
                 <i data-lucide="rocket" class="icon-slow"></i> <span>Device is very slow</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Malware / Virus suspicion">
+              <button type="button" class="quiz-opt-btn" data-key="virus" data-value="Malware / Virus suspicion">
                 <i data-lucide="shield-alert"></i> <span>Virus suspicion / Security</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Software or install issue">
+              <button type="button" class="quiz-opt-btn" data-key="software" data-value="Software or install issue">
                 <i data-lucide="settings"></i> <span>Software install / Update</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Internet or printing not working">
+              <button type="button" class="quiz-opt-btn" data-key="network" data-value="Internet or printing not working">
                 <i data-lucide="wifi"></i> <span>Internet / Print issue</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="New device purchase / guidance">
+              <button type="button" class="quiz-opt-btn" data-key="purchase" data-value="New device purchase / guidance">
                 <i data-lucide="book-open"></i> <span>Purchase Advice / Setup</span>
               </button>
             </div>
@@ -187,7 +189,7 @@
 
     <div class="trust-bar container">
       <p>We support all major devices and brands</p>
-      <div class="trust-logos">
+      <div class="trust-logos" role="region" aria-label="Supported brands and devices">
         <img src="../svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
         <img src="../svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
         <img src="../svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
@@ -202,6 +204,26 @@
     </div>
 
     <section id="reviews" class="container section-spy section-reviews section-grid-bg" data-aos="fade-up">
+      <div class="home-section-header">
+        <span class="badge"><i data-lucide="star" aria-hidden="true"></i> Customer Reviews</span>
+        <h2>What Our Customers Say</h2>
+      </div>
+
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "DigiKaveri",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5.0",
+          "worstRating": "1.0",
+          "ratingCount": "10"
+        }
+      }
+      </script>
+
       <div class="reviews-score-header">
         <div class="score-side">
           <div class="score-stars google">
@@ -322,6 +344,7 @@
             Virus removal, software updates, and physical cleaning. We will make
             your device fast again.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -331,6 +354,7 @@
             We help you choose the right phone, tablet, or computer and handle
             data transfer from old to new.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -340,6 +364,7 @@
             Improving Wi-Fi range at home and connecting new devices to the
             network.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -349,6 +374,7 @@
             Ink issues, paper jams, and wireless printing setup for computer or
             phone.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -358,6 +384,7 @@
             Recover forgotten passwords, create new accounts, and configure
             email software.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -367,6 +394,7 @@
             Antivirus installation, backup configuration, and guidance on
             avoiding scam messages.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -375,6 +403,25 @@
           <p>
             Help with smart TV settings, setting up streaming services (like Netflix or YouTube), and connecting devices.
           </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a href="#services" class="solution-card">
+          <div class="card-shine"></div>
+          <div class="solution-icon"><i data-lucide="key-round" aria-hidden="true"></i></div>
+          <h3>Passwords & accounts</h3>
+          <p>
+            Password recovery, 2-factor authentication (2FA) setup, and account security management.
+          </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a href="#services" class="solution-card">
+          <div class="card-shine"></div>
+          <div class="solution-icon"><i data-lucide="hard-drive" aria-hidden="true"></i></div>
+          <h3>Backups & file recovery</h3>
+          <p>
+            Automatic backups for your photos and important files to cloud or external drives.
+          </p>
+          <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
       </div>
     </section>
@@ -397,6 +444,10 @@
           <p>
             Call or leave a message. Tell us briefly what device is acting up.
           </p>
+          <div class="step-hint">
+            <i data-lucide="clock" class="highlight-icon" aria-hidden="true"></i>
+            <span>Fast 1-2h response</span>
+          </div>
         </div>
         <div class="step-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
         <div class="step-card">
@@ -407,6 +458,10 @@
             We come to you or fix the issue remotely. You don't need to do
             anything.
           </p>
+          <div class="step-hint">
+            <i data-lucide="shield-check" class="highlight-icon" aria-hidden="true"></i>
+            <span>Remote or home visit</span>
+          </div>
         </div>
         <div class="step-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
         <div class="step-card">
@@ -437,6 +492,11 @@
             aren't satisfied with the result, you pay nothing for our work. The
             risk is completely on us.
           </p>
+          <div class="guarantee-badges">
+            <span class="guarantee-badge"><i data-lucide="check-circle" aria-hidden="true"></i> No fix, no fee</span>
+            <span class="guarantee-badge"><i data-lucide="check-circle" aria-hidden="true"></i> Pay only after completion</span>
+            <span class="guarantee-badge"><i data-lucide="check-circle" aria-hidden="true"></i> Tax deductible (-60%)</span>
+          </div>
           <div class="guarantee-legal-note">
             <i data-lucide="info" class="lucide-sm" aria-hidden="true"></i>
             <span>
@@ -503,12 +563,30 @@
             </tr>
             <tr>
               <td class="service-name">Network & Wi-Fi</td>
-              <td class="center"><i data-lucide="check" class="check" aria-hidden="true"></i></td>
-              <td class="center"><i data-lucide="check" class="check" aria-hidden="true"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Included in remote support"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Included in home visit"></i></td>
               <td class="desc">Router installation and slow network fixes.</td>
+            </tr>
+            <tr>
+              <td class="service-name">Email & Accounts</td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Included in remote support"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Included in home visit"></i></td>
+              <td class="desc">Password recovery, account setup, and 2FA protection.</td>
+            </tr>
+            <tr>
+              <td class="service-name">Backups & Data Transfer</td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Included in remote support"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Included in home visit"></i></td>
+              <td class="desc">Photo & file backups and data transfer to a new device.</td>
             </tr>
           </tbody>
         </table>
+        <div class="services-footer-cta">
+          <span>Want an instant price estimate for your service?</span>
+          <a href="#pricing" class="btn-cta-sm">
+            Calculate price <i data-lucide="arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -536,12 +614,18 @@
 
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-img">
-            <i data-lucide="user" aria-hidden="true"></i>
+          <div class="team-img avatar-chatani">
+            <span class="avatar-initials">C</span>
+            <span class="status-badge"><i data-lucide="shield-check" aria-hidden="true"></i> Verified</span>
           </div>
           <div class="team-info">
             <h3>Chatani</h3>
             <span class="role">Founder & IT Expert</span>
+            <div class="team-tags">
+              <span class="team-tag">Windows & Mac</span>
+              <span class="team-tag">Cybersecurity</span>
+              <span class="team-tag">🌐 FI / EN</span>
+            </div>
             <p>
               Chatani is a calm and reliable IT professional who solves everyday
               device problems with a smile. His goal is to make technology easy
@@ -551,12 +635,18 @@
         </div>
 
         <div class="team-card">
-          <div class="team-img">
-            <i data-lucide="user" aria-hidden="true"></i>
+          <div class="team-img avatar-tahir">
+            <span class="avatar-initials">T</span>
+            <span class="status-badge"><i data-lucide="shield-check" aria-hidden="true"></i> Verified</span>
           </div>
           <div class="team-info">
             <h3>Tahir</h3>
             <span class="role">IT Support Specialist</span>
+            <div class="team-tags">
+              <span class="team-tag">Smart Devices & Wi-Fi</span>
+              <span class="team-tag">Device Support</span>
+              <span class="team-tag">🌐 FI / EN</span>
+            </div>
             <p>
               Tahir is a polite and patient IT expert for whom no question is
               too small. He is happy to help with phone setup, speeding up slow
@@ -565,6 +655,10 @@
             </p>
           </div>
         </div>
+      </div>
+      <div class="team-trust-note">
+        <i data-lucide="shield-check" class="highlight-icon" aria-hidden="true"></i>
+        <span>All our experts have verified identity and a local background in the Uusimaa region.</span>
       </div>
     </section>
 
@@ -581,37 +675,72 @@
           </button>
           <div class="faq-answer">
             <p>
-              Then we do not charge anything for the visit. We have a strict "No
-              fix, no fee" guarantee.
+              Then we do not charge anything for our work. We have a strict "No fix, no fee" guarantee.
             </p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span>Can I pay with cash?</span>
+            <span>How do I pay for the service?</span>
             <i data-lucide="chevron-down" aria-hidden="true"></i>
           </button>
           <div class="faq-answer">
             <p>
-              We prefer card payments or invoices (by email or paper to your
-              home). You get plenty of time with 14 days payment terms on
-              invoices.
+              You only pay after the work is complete. You can pay by card or invoice (sent by email or paper mail to your home) with a 14-day payment term.
             </p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question">
             <span>Is remote support safe?</span>
-            <i data-lucide="chevron-down"></i>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
           </button>
           <div class="faq-answer">
             <p>
-              Yes it is. The connection is one-time only. Once you close the
-              remote support software, we cannot access your device without new
-              permission.
+              Completely safe. The connection is one-time only and you can see everything on your screen. Once the session ends, we cannot re-access your computer without your explicit permission.
             </p>
           </div>
         </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does the household tax deduction (-60%) work?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              You will receive an itemized invoice meeting Finnish Tax Administration requirements. Simply declare the labor portion at vero.fi to receive a 60% credit on the labor cost.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How quickly can I get a home visit appointment?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Appointments are usually available for the same day or next business day in Espoo and across the Uusimaa region.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need to know technical details about my device?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Not at all. Just describe briefly what is happening or what you want to achieve. We handle all technical steps without using complicated jargon.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-footer-cta">
+        <span>Didn't find the answer to your question?</span>
+        <a href="#contact-detailed" class="btn-cta-sm">
+          Ask us directly <i data-lucide="arrow-right" aria-hidden="true"></i>
+        </a>
       </div>
     </section>
 
@@ -630,19 +759,24 @@
             Fill out the form, and we will reply by email.
           </p>
 
-        <div class="info-items">
-          <div class="info-item">
-            <div class="icon-box"><i data-lucide="mail" aria-hidden="true"></i></div>
-            <div>
-              <strong>Email Address</strong>
-              <p>
-                <a
-                  href="mailto:info@digikaveri.com"
-                  class="link-underline"
-                  >info@digikaveri.com</a
-                >
-              </p>
+          <div class="info-items">
+            <div class="info-item">
+              <div class="icon-box"><i data-lucide="phone" aria-hidden="true"></i></div>
+              <div>
+                <strong>Phone Support</strong>
+                <p>
+                  <a href="tel:04578338105" class="link-underline">045 7833 8105</a>
+                </p>
+              </div>
             </div>
+            <div class="info-item">
+              <div class="icon-box"><i data-lucide="mail" aria-hidden="true"></i></div>
+              <div>
+                <strong>Email Address</strong>
+                <p>
+                  <a href="mailto:info@digikaveri.com" class="link-underline">info@digikaveri.com</a>
+                </p>
+              </div>
             </div>
             <div class="info-item">
               <div class="icon-box"><i data-lucide="map-pin" aria-hidden="true"></i></div>
@@ -651,115 +785,60 @@
                 <p>Uusimaa & Remote Support across Finland</p>
               </div>
             </div>
-          <div class="info-item">
-            <div class="icon-box whatsapp-bg">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32 100.3 32 0 132.3 0 256c0 39.6 10.3 78.1 30 112L0 480l114.5-30c32.7 17.8 69.4 27.2 107.1 27.2 123.6 0 224-100.3 224-224 0-59.2-23.1-114.9-65.1-156.9zM224 446.2c-33.6 0-66.6-8.5-95.6-24.5l-6.8-4.1-71.1 18.6 19-69.3-4.5-7.1c-17.5-27.8-26.7-59.8-26.7-92.7 0-98 79.8-177.8 177.8-177.8 47.5 0 92 18.5 125.6 52.1 33.5 33.6 52 78.2 52 125.7 0 98-79.9 177.8-177.8 177.8zm98.4-134.4c-5.4-2.7-32-15.8-37-17.6-5-1.8-8.5-2.7-12.1 2.7-3.6 5.4-13.9 17.6-17.1 21.2-3.1 3.6-6.3 4.1-11.7 1.4-5.4-2.7-22.9-8.5-43.6-26.9-16.1-14.3-27-32.1-30.1-37.5-3.1-5.4-.3-8.3 2.5-11.1 2.5-2.5 5.4-6.3 8.1-9.5 2.7-3.2 3.6-5.4 5.4-9 1.8-3.6.9-6.8-.5-9.5-1.4-2.7-12.1-29.2-16.6-40.1-4.4-10.6-8.9-9.1-12.1-9.2-3.1-.1-6.7-.1-10.3-.1-3.6 0-9.5 1.4-14.4 6.8-5 5.4-18.9 18.5-18.9 45.1s19.4 52.3 22.1 55.9c2.7 3.6 38.1 58.1 92.3 81.6 12.9 5.6 23 9 30.8 11.5 13 4.1 24.8 3.5 34.2 2.1 10.5-1.5 32-13.1 36.5-25.1 4.5-12 4.5-22.3 3.1-24.4-1.3-2.1-4.9-3.4-10.3-6.1z"
-                />
-              </svg>
+            <div class="info-item">
+              <div class="icon-box whatsapp-bg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32 100.3 32 0 132.3 0 256c0 39.6 10.3 78.1 30 112L0 480l114.5-30c32.7 17.8 69.4 27.2 107.1 27.2 123.6 0 224-100.3 224-224 0-59.2-23.1-114.9-65.1-156.9zM224 446.2c-33.6 0-66.6-8.5-95.6-24.5l-6.8-4.1-71.1 18.6 19-69.3-4.5-7.1c-17.5-27.8-26.7-59.8-26.7-92.7 0-98 79.8-177.8 177.8-177.8 47.5 0 92 18.5 125.6 52.1 33.5 33.6 52 78.2 52 125.7 0 98-79.9 177.8-177.8 177.8zm98.4-134.4c-5.4-2.7-32-15.8-37-17.6-5-1.8-8.5-2.7-12.1 2.7-3.6 5.4-13.9 17.6-17.1 21.2-3.1 3.6-6.3 4.1-11.7 1.4-5.4-2.7-22.9-8.5-43.6-26.9-16.1-14.3-27-32.1-30.1-37.5-3.1-5.4-.3-8.3 2.5-11.1 2.5-2.5 5.4-6.3 8.1-9.5 2.7-3.2 3.6-5.4 5.4-9 1.8-3.6.9-6.8-.5-9.5-1.4-2.7-12.1-29.2-16.6-40.1-4.4-10.6-8.9-9.1-12.1-9.2-3.1-.1-6.7-.1-10.3-.1-3.6 0-9.5 1.4-14.4 6.8-5 5.4-18.9 18.5-18.9 45.1s19.4 52.3 22.1 55.9c2.7 3.6 38.1 58.1 92.3 81.6 12.9 5.6 23 9 30.8 11.5 13 4.1 24.8 3.5 34.2 2.1 10.5-1.5 32-13.1 36.5-25.1 4.5-12 4.5-22.3 3.1-24.4-1.3-2.1-4.9-3.4-10.3-6.1z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>WhatsApp</strong>
+                <p>
+                  <a href="https://wa.me/3584578338105" target="_blank" rel="noopener noreferrer" aria-label="Send a message via WhatsApp" class="text-whatsapp">Send a message here</a>
+                </p>
+              </div>
             </div>
-            <div>
-              <strong>WhatsApp</strong>
-              <p>
-                <a
-                  href="https://wa.me/3584578338105"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Send a message via WhatsApp"
-                  class="text-whatsapp"
-                  >Send a message here</a
-                >
-              </p>
-            </div>
-          </div>
           </div>
         </div>
 
         <div class="contact-form-box">
-          <form
-            id="detailedForm"
-            action="https://api.web3forms.com/submit"
-            method="POST"
-          >
-            <input
-              type="hidden"
-              name="access_key"
-              value="720c069a-c6de-4d8b-aea7-bf7822aa7ef9"
-            />
+          <form id="detailedForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="720c069a-c6de-4d8b-aea7-bf7822aa7ef9" />
             <input type="hidden" name="from_name" value="DigiKaveri Website (EN)" />
             <input type="hidden" name="subject" value="New Contact Inquiry — DigiKaveri.com" />
-            <input
-              type="checkbox"
-              name="botcheck"
-              class="botcheck-hidden"
-              title="Bot check"
-            />
+            <input type="checkbox" name="botcheck" class="botcheck-hidden" title="Bot check" />
 
             <div class="form-group">
               <label for="d-name"><i data-lucide="user" aria-hidden="true"></i> Name</label>
-              <input
-                type="text"
-                id="d-name"
-                name="name"
-                autocomplete="name"
-                placeholder="First Name Last Name"
-                required
-                minlength="2"
-              />
+              <input type="text" id="d-name" name="name" autocomplete="name" placeholder="First Name Last Name" required minlength="2" />
             </div>
             <div class="form-group">
-              <label for="d-email"
-                ><i data-lucide="at-sign" aria-hidden="true"></i> Email Address</label
-              >
-              <input
-                type="email"
-                id="d-email"
-                name="email"
-                autocomplete="email"
-                placeholder="john@example.com"
-                required
-                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-              />
+              <label for="d-email"><i data-lucide="at-sign" aria-hidden="true"></i> Email Address</label>
+              <input type="email" id="d-email" name="email" autocomplete="email" placeholder="john@example.com" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" />
             </div>
             <div class="form-group">
-              <label for="d-subject"
-                ><i data-lucide="message-square" aria-hidden="true"></i> What is the message
-                about?</label
-              >
-              <select
-                id="d-subject"
-                name="aihe"
-                title="Select topic"
-                aria-label="Select topic"
-                required
-              >
+              <label for="d-phone"><i data-lucide="phone" aria-hidden="true"></i> Phone Number <span class="opt-label">(optional)</span></label>
+              <input type="tel" id="d-phone" name="phone" autocomplete="tel" placeholder="040 123 4567" />
+            </div>
+            <div class="form-group">
+              <label for="d-subject"><i data-lucide="message-square" aria-hidden="true"></i> What is the message about?</label>
+              <select id="d-subject" name="aihe" title="Select topic" aria-label="Select topic" required>
                 <option value="" disabled selected>Select topic...</option>
-                <option>I need help (IT Problem)</option>
-                <option>Feedback / Customer Experience</option>
-                <option>Partnership / Collaboration</option>
+                <option>I need help (IT problem)</option>
+                <option>Feedback / Customer experience</option>
+                <option>Collaboration proposal</option>
                 <option>Other matter</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="d-message"
-                ><i data-lucide="pen-tool" aria-hidden="true"></i> Message</label
-              >
-              <textarea
-                id="d-message"
-                name="message"
-                rows="5"
-                placeholder="Type your message here..."
-                required
-                minlength="5"
-              ></textarea>
+              <label for="d-message"><i data-lucide="pen-tool" aria-hidden="true"></i> Your Message</label>
+              <textarea id="d-message" name="message" rows="5" placeholder="How can we help?" required minlength="5"></textarea>
             </div>
+
+            <div id="contact-status-msg" class="status-msg hidden"></div>
+
             <button type="submit" class="btn-submit">
-              Send Message <i data-lucide="send" aria-hidden="true"></i>
+              Send message <i data-lucide="send" aria-hidden="true"></i>
             </button>
           </form>
         </div>

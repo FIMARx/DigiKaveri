@@ -21,7 +21,7 @@
 
   <main id="main-content">
     <header id="home" class="hero-centered section-spy">
-      <div class="status-schedule-pill">
+      <div class="status-schedule-pill" role="button" tabindex="0" aria-label="Tarkista aukioloajat ja palvelun tila">
         <div id="serviceStatus" class="status-part loading" aria-live="polite">
           <div class="signal-dot"></div>
           <span id="statusText">Ladataan...</span>
@@ -38,15 +38,18 @@
         >
       </h1>
       <p class="hero-subtitle">
-        Nopea apu Uudellamaalla ja etänä koko Suomeen. Jätä soittopyyntö, niin asiantuntijamme soittaa sinulle takaisin.
+        Kotikäynnit Espoossa & Uudellamaalla, etätuki koko Suomeen. Jätä yhteydenottopyyntö – vastaamme arkisin 1–2 tunnissa.
       </p>
 
       <div class="trust-badges-centered">
         <div class="trust-item">
-          <i data-lucide="check-circle" aria-hidden="true"></i> Kotitalousvähennys -60%
+          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Kotitalousvähennys -60%</span>
         </div>
         <div class="trust-item">
-          <i data-lucide="shield-check" aria-hidden="true"></i> 100% Tyytyväisyystakuu
+          <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span>100% Tyytyväisyystakuu</span>
+        </div>
+        <div class="trust-item">
+          <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>Ei ratkaisua = Ei laskua</span>
         </div>
       </div>
 
@@ -77,19 +80,19 @@
           <div class="quiz-step active" data-step="1">
             <h3>Mitä laitetta ongelma koskee?</h3>
             <div class="quiz-options-grid" role="radiogroup" aria-label="Laitteen valinta">
-              <button type="button" class="quiz-opt-btn" data-value="Tietokone (Windows)">
-                <i data-lucide="laptop"></i> <span>Tietokone (Windows)</span>
+              <button type="button" class="quiz-opt-btn" data-key="win" data-value="Tietokone (Windows)">
+                <img src="/svg/windows.svg" alt="Windows" class="quiz-opt-icon" width="20" height="20" /> <span>Tietokone (Windows)</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Tietokone (Mac)">
-                <i data-lucide="monitor"></i> <span>Tietokone (Mac)</span>
+              <button type="button" class="quiz-opt-btn" data-key="mac" data-value="Tietokone (Mac)">
+                <img src="/svg/apple.svg" alt="Mac" class="quiz-opt-icon" width="20" height="20" /> <span>Tietokone (Mac)</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Puhelin / Tabletti">
+              <button type="button" class="quiz-opt-btn" data-key="mobile" data-value="Puhelin / Tabletti">
                 <i data-lucide="smartphone"></i> <span>Puhelin / Tabletti</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Tulostin / Verkko">
+              <button type="button" class="quiz-opt-btn" data-key="printer" data-value="Tulostin / Verkko">
                 <i data-lucide="printer"></i> <span>Tulostin / Verkko</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Muu asia">
+              <button type="button" class="quiz-opt-btn" data-key="other" data-value="Muu asia">
                 <i data-lucide="more-horizontal"></i> <span>Muu asia</span>
               </button>
             </div>
@@ -99,19 +102,19 @@
           <div class="quiz-step" data-step="2">
             <h3>Mikä on laitteen pääasiallinen ongelma?</h3>
             <div class="quiz-options-grid" role="radiogroup" aria-label="Ongelman valinta">
-              <button type="button" class="quiz-opt-btn" data-value="Laite on erittäin hidas">
+              <button type="button" class="quiz-opt-btn" data-key="slow" data-value="Laite on erittäin hidas">
                 <i data-lucide="rocket" class="icon-slow"></i> <span>Erittäin hidas kone</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Haittaohjelma- tai virusepäily">
+              <button type="button" class="quiz-opt-btn" data-key="virus" data-value="Haittaohjelma- tai virusepäily">
                 <i data-lucide="shield-alert"></i> <span>Virusepäily / Tietoturva</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Ohjelmisto- tai asennusongelma">
+              <button type="button" class="quiz-opt-btn" data-key="software" data-value="Ohjelmisto- tai asennusongelma">
                 <i data-lucide="settings"></i> <span>Ohjelma-asennus / Päivitys</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Netti tai tulostus ei toimi">
+              <button type="button" class="quiz-opt-btn" data-key="network" data-value="Netti tai tulostus ei toimi">
                 <i data-lucide="wifi"></i> <span>Netti / Tulostusongelma</span>
               </button>
-              <button type="button" class="quiz-opt-btn" data-value="Uuden laitteen osto / opastus">
+              <button type="button" class="quiz-opt-btn" data-key="purchase" data-value="Uuden laitteen osto / opastus">
                 <i data-lucide="book-open"></i> <span>Osto-opastus / Käyttöönotto</span>
               </button>
             </div>
@@ -186,7 +189,7 @@
 
     <div class="trust-bar container">
       <p>Tuemme kaikkia yleisimpiä laitteita ja merkkejä</p>
-      <div class="trust-logos">
+      <div class="trust-logos" role="region" aria-label="Tuetut laitemerkit ja tuotemerkit">
         <img src="svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
         <img src="svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
         <img src="svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
@@ -201,6 +204,26 @@
     </div>
 
     <section id="reviews" class="container section-spy section-reviews section-grid-bg" data-aos="fade-up">
+      <div class="home-section-header">
+        <span class="badge"><i data-lucide="star" aria-hidden="true"></i> Asiakaskokemukset</span>
+        <h2>Mitä mieltä asiakkaamme ovat?</h2>
+      </div>
+
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "DigiKaveri",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5.0",
+          "worstRating": "1.0",
+          "ratingCount": "10"
+        }
+      }
+      </script>
+
       <div class="reviews-score-header">
         <div class="score-side">
           <div class="score-stars google">
@@ -320,6 +343,7 @@
           <p>
             Virusten poisto, ohjelmistopäivitykset ja fyysinen puhdistus. Teemme laitteestasi taas nopean.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -328,6 +352,7 @@
           <p>
             Autamme valitsemaan oikean puhelimen, tabletin tai tietokoneen ja hoidamme tiedonsiirron vanhasta uuteen.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -336,6 +361,7 @@
           <p>
             WLAN-verkon kantavuuden parantaminen kotona ja uusien laitteiden yhdistäminen verkkoon.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -344,6 +370,7 @@
           <p>
             Musteongelmat, paperitukokset ja langattoman tulostuksen asennus tietokoneelle tai puhelimelle.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -352,6 +379,7 @@
           <p>
             Unohtuneiden salasanojen palautus, uusien tilien luonti ja sähköpostiohjelmien asetukset.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -360,6 +388,7 @@
           <p>
             Virusturvan asennus, varmuuskopioiden määritys ja opastus huijausviestien tunnistamiseen.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
         <a href="#services" class="solution-card">
           <div class="card-shine"></div>
@@ -368,6 +397,25 @@
           <p>
             Apua älytelevision asetuksissa, suoratoistopalveluiden (kuten Yle Areena) käyttöönotossa ja laitteiden yhdistämisessä.
           </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a href="#services" class="solution-card">
+          <div class="card-shine"></div>
+          <div class="solution-icon"><i data-lucide="key-round" aria-hidden="true"></i></div>
+          <h3>Salasanat & käyttäjätilit</h3>
+          <p>
+            Unohtuneiden salasanojen palautus, 2-vaiheisen tunnistautumisen (2FA) aktivointi ja tilien suojaaminen.
+          </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a href="#services" class="solution-card">
+          <div class="card-shine"></div>
+          <div class="solution-icon"><i data-lucide="hard-drive" aria-hidden="true"></i></div>
+          <h3>Varmuuskopiot & tiedostot</h3>
+          <p>
+            Kuvien ja tärkeiden tiedostojen automaattinen varmuuskopiointi pilveen tai ulkoiselle kiintolevylle.
+          </p>
+          <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
       </div>
     </section>
@@ -389,6 +437,10 @@
           <p>
             Soita tai jätä viesti. Kerro lyhyesti mikä laite takkuaa.
           </p>
+          <div class="step-hint">
+            <i data-lucide="clock" class="highlight-icon" aria-hidden="true"></i>
+            <span>Vastaamme 1-2h kuluessa</span>
+          </div>
         </div>
         <div class="step-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
         <div class="step-card">
@@ -398,6 +450,10 @@
           <p>
             Tulemme luoksesi tai korjaamme ongelman etänä. Sinun ei tarvitse tehdä mitään.
           </p>
+          <div class="step-hint">
+            <i data-lucide="shield-check" class="highlight-icon" aria-hidden="true"></i>
+            <span>Etätuki tai kotikäynti</span>
+          </div>
         </div>
         <div class="step-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
         <div class="step-card">
@@ -425,6 +481,11 @@
           <p>
             Et maksa tyhjästä. Jos emme pysty ratkaisemaan ongelmaasi tai et ole tyytyväinen lopputulokseen, et maksa työstämme mitään. Riski on täysin meillä.
           </p>
+          <div class="guarantee-badges">
+            <span class="guarantee-badge"><i data-lucide="check-circle" aria-hidden="true"></i> Ei ratkaisua = Ei laskua</span>
+            <span class="guarantee-badge"><i data-lucide="check-circle" aria-hidden="true"></i> Maksat vasta työn jälkeen</span>
+            <span class="guarantee-badge"><i data-lucide="check-circle" aria-hidden="true"></i> Kotitalousvähennys -60%</span>
+          </div>
           <div class="guarantee-legal-note">
             <i data-lucide="info" class="lucide-sm" aria-hidden="true"></i>
             <span>
@@ -490,12 +551,30 @@
             </tr>
             <tr>
               <td class="service-name">Verkko & Wi-Fi</td>
-              <td class="center"><i data-lucide="check" class="check" aria-hidden="true"></i></td>
-              <td class="center"><i data-lucide="check" class="check" aria-hidden="true"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Sisältyy etätukeen"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Sisältyy kotikäyntiin"></i></td>
               <td class="desc">Reitittimen asennus ja hitaan verkon korjaus.</td>
+            </tr>
+            <tr>
+              <td class="service-name">Sähköposti & Tilit</td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Sisältyy etätukeen"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Sisältyy kotikäyntiin"></i></td>
+              <td class="desc">Salasanojen palautus, tilien asetukset ja 2FA.</td>
+            </tr>
+            <tr>
+              <td class="service-name">Varmuuskopiointi & Datansiirto</td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Sisältyy etätukeen"></i></td>
+              <td class="center"><i data-lucide="check" class="check" aria-label="Sisältyy kotikäyntiin"></i></td>
+              <td class="desc">Kuvien ja tiedostojen siirto sekä pilvivarmuuskopiointi.</td>
             </tr>
           </tbody>
         </table>
+        <div class="services-footer-cta">
+          <span>Haluatko tietää tarkan hinnan työllesi?</span>
+          <a href="#pricing" class="btn-cta-sm">
+            Laske hinta arviolaskurilla <i data-lucide="arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -522,12 +601,18 @@
 
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-img">
-            <i data-lucide="user" aria-hidden="true"></i>
+          <div class="team-img avatar-chatani">
+            <span class="avatar-initials">C</span>
+            <span class="status-badge"><i data-lucide="shield-check" aria-hidden="true"></i> Varmennettu</span>
           </div>
           <div class="team-info">
             <h3>Chatani</h3>
             <span class="role">Perustaja & IT-asiantuntija</span>
+            <div class="team-tags">
+              <span class="team-tag">Windows & Mac</span>
+              <span class="team-tag">Tietoturva</span>
+              <span class="team-tag">🌐 FI / EN</span>
+            </div>
             <p>
               Chatani on rauhallinen ja luotettava IT-ammattilainen, joka ratkaisee arjen laiteongelmat hymyssä suin. Hänen tavoitteenaan on tehdä tekniikasta helppoa ja ymmärrettävää kaikille, ilman vaikeita termejä.
             </p>
@@ -535,17 +620,27 @@
         </div>
 
         <div class="team-card">
-          <div class="team-img">
-            <i data-lucide="user" aria-hidden="true"></i>
+          <div class="team-img avatar-tahir">
+            <span class="avatar-initials">T</span>
+            <span class="status-badge"><i data-lucide="shield-check" aria-hidden="true"></i> Varmennettu</span>
           </div>
           <div class="team-info">
             <h3>Tahir</h3>
             <span class="role">IT-tukiasiantuntija</span>
+            <div class="team-tags">
+              <span class="team-tag">Älylaitteet & Wi-Fi</span>
+              <span class="team-tag">Laitetuki</span>
+              <span class="team-tag">🌐 FI / EN</span>
+            </div>
             <p>
               Tahir on kohtelias ja kärsivällinen IT-osaaja, jolle mikään kysymys ei ole liian pieni. Hän auttaa mielellään puhelimen asetuksissa, hitaan koneen nopeutuksessa ja muissa kodin tekniikkapulmissa selkeällä suomen kielellä.
             </p>
           </div>
         </div>
+      </div>
+      <div class="team-trust-note">
+        <i data-lucide="shield-check" class="highlight-icon" aria-hidden="true"></i>
+        <span>Kaikilla asiantuntijoillamme on varmennettu henkilöllisyys ja paikallinen tausta Uudellamaalla.</span>
       </div>
     </section>
 
@@ -568,12 +663,12 @@
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span>Voinko maksaa käteisellä?</span>
+            <span>Voinko maksaa laskulla tai kortilla?</span>
             <i data-lucide="chevron-down" aria-hidden="true"></i>
           </button>
           <div class="faq-answer">
             <p>
-              Suosimme korttimaksua tai laskua (sähköpostiin tai paperisena kotiin). Laskulla saat reilusti maksuaikaa 14 päivää.
+              Kyllä! Maksat vasta kun työ on valmis. Voit maksaa kortilla tai laskulla (sähköpostitse tai kirjeenä kotiin) 14 päivän maksuajalla.
             </p>
           </div>
         </div>
@@ -584,10 +679,50 @@
           </button>
           <div class="faq-answer">
             <p>
-              Kyllä on. Yhteys on kertakäyttöinen. Kun suljet etätukiohjelman, emme pääse enää laitteellesi ilman uutta lupaa.
+              Täysin turvallista. Yhteys on kertakäyttöinen ja näet kaiken mitä ruudulla tapahtuu. Kun istunto päättyy, emme pääse koneellesi ilman uutta hyväksyntääsi.
             </p>
           </div>
         </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Miten kotitalousvähennys (-60%) hyödynnetään?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Saat meiltä työn jälkeen suoraan Verohallinnolle kelpaavan eritellyn laskun. Ilmoitat vain työn osuuden vero.fi-palvelussa ja saat 60% hyvityksen työn hinnasta.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Kuinka nopeasti saan ajan kotikäynnille?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Aikoja on yleensä saatavilla jo samalle tai seuraavalle arkipäivälle Espoossa ja muualla Uudellamaalla.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Tarvitseeko minun tietää laitteeni tarkkoja teknisiä tietoja?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Ei tarvitse. Riittää että kerrot lyhyesti mikä takkuaa tai mitä haluat tehdä. Me hoidamme teknisen puolen ilman vaikeita ammattitermejä.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-footer-cta">
+        <span>Etkö löytänyt vastausta kysymykseesi?</span>
+        <a href="#contact-detailed" class="btn-cta-sm">
+          Ota yhteyttä suoraan <i data-lucide="arrow-right" aria-hidden="true"></i>
+        </a>
       </div>
     </section>
 
@@ -606,19 +741,24 @@
             Haluatko kysyä neuvoa, antaa palautetta tai ehdottaa yhteistyötä? Täytä lomake, niin vastaamme sähköpostitse.
           </p>
 
-        <div class="info-items">
-          <div class="info-item">
-            <div class="icon-box"><i data-lucide="mail" aria-hidden="true"></i></div>
-            <div>
-              <strong>Sähköpostiosoite</strong>
-              <p>
-                <a
-                  href="mailto:info@digikaveri.com"
-                  class="link-underline"
-                  >info@digikaveri.com</a
-                >
-              </p>
+          <div class="info-items">
+            <div class="info-item">
+              <div class="icon-box"><i data-lucide="phone" aria-hidden="true"></i></div>
+              <div>
+                <strong>Puhelinpalvelu</strong>
+                <p>
+                  <a href="tel:04578338105" class="link-underline">045 7833 8105</a>
+                </p>
+              </div>
             </div>
+            <div class="info-item">
+              <div class="icon-box"><i data-lucide="mail" aria-hidden="true"></i></div>
+              <div>
+                <strong>Sähköpostiosoite</strong>
+                <p>
+                  <a href="mailto:info@digikaveri.com" class="link-underline">info@digikaveri.com</a>
+                </p>
+              </div>
             </div>
             <div class="info-item">
               <div class="icon-box"><i data-lucide="map-pin" aria-hidden="true"></i></div>
@@ -627,91 +767,44 @@
                 <p>Uusimaa & Etätuki koko Suomeen</p>
               </div>
             </div>
-          <div class="info-item">
-            <div class="icon-box whatsapp-bg">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32 100.3 32 0 132.3 0 256c0 39.6 10.3 78.1 30 112L0 480l114.5-30c32.7 17.8 69.4 27.2 107.1 27.2 123.6 0 224-100.3 224-224 0-59.2-23.1-114.9-65.1-156.9zM224 446.2c-33.6 0-66.6-8.5-95.6-24.5l-6.8-4.1-71.1 18.6 19-69.3-4.5-7.1c-17.5-27.8-26.7-59.8-26.7-92.7 0-98 79.8-177.8 177.8-177.8 47.5 0 92 18.5 125.6 52.1 33.5 33.6 52 78.2 52 125.7 0 98-79.9 177.8-177.8 177.8zm98.4-134.4c-5.4-2.7-32-15.8-37-17.6-5-1.8-8.5-2.7-12.1 2.7-3.6 5.4-13.9 17.6-17.1 21.2-3.1 3.6-6.3 4.1-11.7 1.4-5.4-2.7-22.9-8.5-43.6-26.9-16.1-14.3-27-32.1-30.1-37.5-3.1-5.4-.3-8.3 2.5-11.1 2.5-2.5 5.4-6.3 8.1-9.5 2.7-3.2 3.6-5.4 5.4-9 1.8-3.6.9-6.8-.5-9.5-1.4-2.7-12.1-29.2-16.6-40.1-4.4-10.6-8.9-9.1-12.1-9.2-3.1-.1-6.7-.1-10.3-.1-3.6 0-9.5 1.4-14.4 6.8-5 5.4-18.9 18.5-18.9 45.1s19.4 52.3 22.1 55.9c2.7 3.6 38.1 58.1 92.3 81.6 12.9 5.6 23 9 30.8 11.5 13 4.1 24.8 3.5 34.2 2.1 10.5-1.5 32-13.1 36.5-25.1 4.5-12 4.5-22.3 3.1-24.4-1.3-2.1-4.9-3.4-10.3-6.1z"
-                />
-              </svg>
+            <div class="info-item">
+              <div class="icon-box whatsapp-bg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32 100.3 32 0 132.3 0 256c0 39.6 10.3 78.1 30 112L0 480l114.5-30c32.7 17.8 69.4 27.2 107.1 27.2 123.6 0 224-100.3 224-224 0-59.2-23.1-114.9-65.1-156.9zM224 446.2c-33.6 0-66.6-8.5-95.6-24.5l-6.8-4.1-71.1 18.6 19-69.3-4.5-7.1c-17.5-27.8-26.7-59.8-26.7-92.7 0-98 79.8-177.8 177.8-177.8 47.5 0 92 18.5 125.6 52.1 33.5 33.6 52 78.2 52 125.7 0 98-79.9 177.8-177.8 177.8zm98.4-134.4c-5.4-2.7-32-15.8-37-17.6-5-1.8-8.5-2.7-12.1 2.7-3.6 5.4-13.9 17.6-17.1 21.2-3.1 3.6-6.3 4.1-11.7 1.4-5.4-2.7-22.9-8.5-43.6-26.9-16.1-14.3-27-32.1-30.1-37.5-3.1-5.4-.3-8.3 2.5-11.1 2.5-2.5 5.4-6.3 8.1-9.5 2.7-3.2 3.6-5.4 5.4-9 1.8-3.6.9-6.8-.5-9.5-1.4-2.7-12.1-29.2-16.6-40.1-4.4-10.6-8.9-9.1-12.1-9.2-3.1-.1-6.7-.1-10.3-.1-3.6 0-9.5 1.4-14.4 6.8-5 5.4-18.9 18.5-18.9 45.1s19.4 52.3 22.1 55.9c2.7 3.6 38.1 58.1 92.3 81.6 12.9 5.6 23 9 30.8 11.5 13 4.1 24.8 3.5 34.2 2.1 10.5-1.5 32-13.1 36.5-25.1 4.5-12 4.5-22.3 3.1-24.4-1.3-2.1-4.9-3.4-10.3-6.1z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>WhatsApp</strong>
+                <p>
+                  <a href="https://wa.me/3584578338105" target="_blank" rel="noopener noreferrer" aria-label="Lähetä viesti WhatsAppilla" class="text-whatsapp">Lähetä viesti tästä</a>
+                </p>
+              </div>
             </div>
-            <div>
-              <strong>WhatsApp</strong>
-              <p>
-                <a
-                  href="https://wa.me/3584578338105"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Lähetä viesti WhatsAppilla"
-                  class="text-whatsapp"
-                  >Lähetä viesti tästä</a
-                >
-              </p>
-            </div>
-          </div>
           </div>
         </div>
 
         <div class="contact-form-box">
-          <form
-            id="detailedForm"
-            action="https://api.web3forms.com/submit"
-            method="POST"
-          >
-            <input
-              type="hidden"
-              name="access_key"
-              value="720c069a-c6de-4d8b-aea7-bf7822aa7ef9"
-            />
+          <form id="detailedForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="720c069a-c6de-4d8b-aea7-bf7822aa7ef9" />
             <input type="hidden" name="from_name" value="DigiKaveri Verkkosivut" />
             <input type="hidden" name="subject" value="Uusi yhteydenotto — DigiKaveri.com" />
-            <input
-              type="checkbox"
-              name="botcheck"
-              class="botcheck-hidden"
-              title="Bot check"
-            />
+            <input type="checkbox" name="botcheck" class="botcheck-hidden" title="Bot check" />
 
             <div class="form-group">
               <label for="d-name"><i data-lucide="user" aria-hidden="true"></i> Nimi</label>
-              <input
-                type="text"
-                id="d-name"
-                name="name"
-                autocomplete="name"
-                placeholder="Etunimi Sukunimi"
-                required
-                minlength="2"
-              />
+              <input type="text" id="d-name" name="name" autocomplete="name" placeholder="Etunimi Sukunimi" required minlength="2" />
             </div>
             <div class="form-group">
-              <label for="d-email"
-                ><i data-lucide="at-sign" aria-hidden="true"></i> Sähköpostiosoite</label
-              >
-              <input
-                type="email"
-                id="d-email"
-                name="email"
-                autocomplete="email"
-                placeholder="matti@esimerkki.fi"
-                required
-              />
+              <label for="d-email"><i data-lucide="at-sign" aria-hidden="true"></i> Sähköpostiosoite</label>
+              <input type="email" id="d-email" name="email" autocomplete="email" placeholder="matti@esimerkki.fi" required />
             </div>
             <div class="form-group">
-              <label for="d-subject"
-                ><i data-lucide="message-square" aria-hidden="true"></i> Mitä asia koskee?</label
-              >
-              <select
-                id="d-subject"
-                name="aihe"
-                title="Valitse aihe"
-                aria-label="Valitse aihe"
-                required
-              >
+              <label for="d-phone"><i data-lucide="phone" aria-hidden="true"></i> Puhelinnumero <span class="opt-label">(valinnainen)</span></label>
+              <input type="tel" id="d-phone" name="phone" autocomplete="tel" placeholder="040 123 4567" />
+            </div>
+            <div class="form-group">
+              <label for="d-subject"><i data-lucide="message-square" aria-hidden="true"></i> Mitä asia koskee?</label>
+              <select id="d-subject" name="aihe" title="Valitse aihe" aria-label="Valitse aihe" required>
                 <option value="" disabled selected>Valitse aihe...</option>
                 <option>Tarvitsen apua (IT-ongelma)</option>
                 <option>Haluan antaa palautetta / Asiakaskokemus</option>
@@ -720,18 +813,11 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="d-message"
-                ><i data-lucide="pen-tool" aria-hidden="true"></i> Viestisi</label
-              >
-              <textarea
-                id="d-message"
-                name="message"
-                rows="5"
-                placeholder="Miten voimme auttaa?"
-                required
-                minlength="5"
-              ></textarea>
+              <label for="d-message"><i data-lucide="pen-tool" aria-hidden="true"></i> Viestisi</label>
+              <textarea id="d-message" name="message" rows="5" placeholder="Miten voimme auttaa?" required minlength="5"></textarea>
             </div>
+
+            <div id="contact-status-msg" class="status-msg hidden"></div>
 
             <button type="submit" class="btn-submit">
               Lähetä viesti <i data-lucide="send" aria-hidden="true"></i>

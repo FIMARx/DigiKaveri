@@ -279,6 +279,17 @@ function initStatusModal(isOpen) {
       closeStatusModal(modal);
     }
   });
+
+  const pill = document.querySelector(".status-schedule-pill");
+  if (pill && !pill.dataset.keyBound) {
+    pill.dataset.keyBound = "true";
+    pill.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        pill.click();
+      }
+    });
+  }
 }
 
 function closeStatusModal(modal) {

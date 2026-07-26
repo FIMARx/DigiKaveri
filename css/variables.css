@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   /* 2026 Color Palette - Refined & Accessible */
   --bg: #fdfdfe;
   --white: #ffffff;
@@ -44,6 +45,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0b0f19;
   --white: #131b2e;
   --primary: #3b82f6;

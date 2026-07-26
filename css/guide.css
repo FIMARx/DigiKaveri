@@ -660,6 +660,11 @@
   color: #86efac !important;
 }
 
+[data-theme="dark"] .guide-detected-badge {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+}
+
 /* --- Apple & Brand SVG Icon Visibility Fixes --- */
 
 /* 1. App Store Pill Button (.btn-apple-black): Always white icon because button background is black */
@@ -668,12 +673,10 @@
   filter: brightness(0) invert(1) !important;
 }
 
-/* 2. Dark Mode Global Rule: Invert black Apple & TeamViewer SVGs to crisp white on dark background */
-[data-theme="dark"] img[src*="apple.svg"],
-[data-theme="dark"] img[src*="apple"],
-[data-theme="dark"] .btn-platform-switch img[src*="apple.svg"],
+/* 2. Dark Mode Rule for Platform & Support Buttons: Invert black Apple & TeamViewer SVGs to crisp white on dark background */
 [data-theme="dark"] .btn-platform-switch img[src*="apple"],
-[data-theme="dark"] .switcher-btn img[src*="apple"] {
+[data-theme="dark"] .switcher-btn img[src*="apple"],
+[data-theme="dark"] .pc-download-info img[src*="apple"] {
   filter: brightness(0) invert(1) !important;
 }
 
