@@ -71,6 +71,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth 350ms Luxury Theme Dissolve — Eliminates Flashbang Eye Strain */
+header,
+nav,
+main,
+section,
+footer,
+.hero-form-card,
+.solution-card,
+.help-card,
+.platform-card,
+.table-wrapper,
+.review-card,
+.pricing-card,
+.team-card,
+.faq-item,
+.download-trust-box,
+.btn {
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :focus-visible {

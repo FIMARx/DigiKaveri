@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
   /* 2026 Color Palette - Refined & Accessible */
-  --bg: #fdfdfe;
+  --bg: #f8fafc; /* Calmer light canvas instead of stark white */
   --white: #ffffff;
   --primary: #2563eb;
   --primary-rgb: 37, 99, 235;
