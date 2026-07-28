@@ -63,7 +63,12 @@
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2026 DigiKaveri. {{footer_rights}}</p>
+    <p class="footer-copyright">&copy; 2026 DigiKaveri. {{footer_rights}}</p>
+    <div class="footer-bottom-links">
+      <a href="{{privacy_url}}">{{nav_privacy}}</a>
+      <span class="footer-divider">•</span>
+      <a href="{{terms_url}}">{{nav_terms}}</a>
+    </div>
   </div>
 </footer>
 
@@ -96,8 +101,11 @@
 </div>
 
 <!-- Service Closed Modal -->
-<div id="statusModal" class="status-modal-overlay" tabindex="-1">
+<div id="statusModal" class="status-modal-overlay" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
   <div class="status-modal-card">
+    <button class="status-modal-close" id="modalCloseBtn" aria-label="Sulje modal" type="button">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
     <div class="status-modal-icon">
       <i data-lucide="clock" aria-hidden="true"></i>
     </div>

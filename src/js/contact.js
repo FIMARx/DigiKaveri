@@ -95,11 +95,29 @@ function setupForm(formId) {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // 1. Honeypot Check: Silent abort for automated spam bots
+    const botCheckInput = form.querySelector('input[name="botcheck"]');
+    if (botCheckInput && botCheckInput.checked) {
+      return;
+    }
+
+    // 2. Rate-Limiting Cooldown (15 seconds between submissions)
+    const lastSubmit = sessionStorage.getItem("last_form_submit");
+    const now = Date.now();
+    if (lastSubmit && now - parseInt(lastSubmit) < 15000) {
+      showToast(isEn ? "Please wait a moment before sending another request." : "Ole hyvä ja odota hetki ennen uutta lähetystä.", false);
+      return;
+    }
+
     const currentInputs = form.querySelectorAll("input, select, textarea");
     let isFormValid = true;
 
     try {
       currentInputs.forEach((input) => {
+        if (typeof input.value === "string" && input.type !== "hidden" && input.type !== "checkbox") {
+          input.value = input.value.trim();
+        }
         const isValid = input.checkValidity();
         const minLengthAttr = input.getAttribute("minlength");
         const isManualTooShort =
@@ -130,6 +148,8 @@ function setupForm(formId) {
     } catch (error) {
       return;
     }
+
+    sessionStorage.setItem("last_form_submit", now.toString());
 
     const btn = form.querySelector(".btn-submit");
     if (!btn) return; // Bug 4 fix: guard against forms missing a submit button

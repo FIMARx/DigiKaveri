@@ -184,6 +184,8 @@ async function checkStatus() {
   if (typeof initStatusModal === "function") initStatusModal(isOpen);
 }
 
+let previouslyFocusedElement = null;
+
 function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
   if (!modal || isOpen) return;
@@ -194,7 +196,6 @@ function initStatusModal(isOpen) {
   modal.addEventListener("keydown", (e) => {
     if (e.key !== "Tab") return;
 
-    // Optimization: avoid offsetWidth/Height during initialization to prevent reflow
     const focusables = Array.from(
       modal.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
@@ -224,11 +225,19 @@ function initStatusModal(isOpen) {
     }
   });
 
+  // Close modal on backdrop click
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeStatusModal(modal);
+    }
+  });
+
   if (sessionStorage.getItem("closedModalShown") === "true") {
     return;
   }
 
   setTimeout(() => {
+    previouslyFocusedElement = document.activeElement;
     modal.classList.add("active");
     document.body.classList.add("is-locked");
     modal.setAttribute("tabindex", "-1");
@@ -237,6 +246,13 @@ function initStatusModal(isOpen) {
 
   const understandBtn = document.getElementById("modalUnderstand");
   const callbackBtn = document.getElementById("modalCallback");
+  const closeBtn = document.getElementById("modalCloseBtn");
+
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      closeStatusModal(modal);
+    };
+  }
 
   if (understandBtn) {
     understandBtn.onclick = () => {
@@ -254,7 +270,6 @@ function initStatusModal(isOpen) {
           : document.getElementById("contact-detailed") || contactForm;
 
         if (targetElement) {
-          // Use requestAnimationFrame to ensure modal transition finished
           requestAnimationFrame(() => {
             setTimeout(() => {
               targetElement.scrollIntoView({
@@ -266,7 +281,6 @@ function initStatusModal(isOpen) {
             }, 50);
           });
         } else {
-          // Redirect to home page with contact hash
           const homeUrl = isEn ? "/en/index.html" : "/index.html";
           window.location.href = `${homeUrl}#contact`;
         }
@@ -293,9 +307,14 @@ function initStatusModal(isOpen) {
 }
 
 function closeStatusModal(modal) {
+  if (!modal) return;
   modal.classList.remove("active");
   document.body.classList.remove("is-locked");
   sessionStorage.setItem("closedModalShown", "true");
+
+  if (previouslyFocusedElement && typeof previouslyFocusedElement.focus === "function") {
+    previouslyFocusedElement.focus();
+  }
 }
 
 function onDOMReady(fn) {
@@ -478,13 +497,14 @@ function initFAQ() {
 }
 
 function updateScrollSpy() {
-  const sections = document.querySelectorAll("section[id], header[id]");
-  const navLinks = document.querySelectorAll(".spy-link");
+  const sections = document.querySelectorAll("section[id], header[id], div[id].legal-section");
+  const navLinks = document.querySelectorAll(".spy-link, .legal-toc a");
+
+  if (sections.length === 0) return;
 
   let currentId = "";
-
-  // Detection zone: 1/3 of viewport height (more natural for long content)
-  const triggerPoint = window.innerHeight / 3;
+  const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 88;
+  const triggerPoint = navHeight + 92;
 
   // 1. Check sections in document order
   sections.forEach((s) => {
@@ -494,25 +514,25 @@ function updateScrollSpy() {
     }
   });
 
+  // 2. Special case: If we are at the very top of the page, force first section
+  if (window.scrollY < 80) {
+    currentId = sections[0].id;
+  }
+
+  // 3. Special case: Only force last section if literally scrolled to absolute bottom (within 15px)
+  const isAtAbsoluteBottom =
+    window.innerHeight + window.scrollY >=
+    document.documentElement.scrollHeight - 15;
+  if (isAtAbsoluteBottom) {
+    currentId = sections[sections.length - 1].id;
+  }
+
   // Update TOC Progress Fill if exists
   const tocFill = document.querySelector(".toc-progress-fill");
   if (tocFill) {
     const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (window.scrollY / totalHeight) * 100;
+    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
     tocFill.style.width = progress + "%";
-  }
-
-  // 2. Special case: If we are at the very top of the page, force "home"
-  if (window.scrollY < 100 && sections.length > 0) {
-    currentId = sections[0].id;
-  }
-
-  // 3. Special case: Bottom of page forces the last section
-  const isAtBottom =
-    window.innerHeight + window.scrollY >=
-    document.documentElement.scrollHeight - 80;
-  if (isAtBottom && sections.length > 0) {
-    currentId = sections[sections.length - 1].id;
   }
 
   navLinks.forEach((link) => {
@@ -521,7 +541,8 @@ function updateScrollSpy() {
     if (!href) return;
 
     const hasHash = href.includes("#");
-    const isSectionMatch = currentId && href.endsWith("#" + currentId);
+    const targetId = href.split("#")[1];
+    const isSectionMatch = currentId && targetId === currentId;
 
     const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
     const linkPath = href.split("#")[0].replace(/\/$/, "");
@@ -564,11 +585,18 @@ function initScrollSpy() {
   // Unified Scroll Progress Bar
   const progressFill = document.querySelector("#scrollProgressBar");
   if (progressFill) {
+    let ticking = false;
     window.addEventListener("scroll", () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      progressFill.style.width = scrolled + "%";
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+          progressFill.style.width = scrolled + "%";
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive: true });
   }
 }

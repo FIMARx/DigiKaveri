@@ -27,16 +27,17 @@
     .hero-centered { flex-grow: 1; }
 
     .err-header {
-      min-height: 60vh;
+      min-height: calc(85vh - 88px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin-bottom: 60px;
-      padding: 40px 24px;
+      margin-bottom: 40px;
+      padding: 140px 24px 80px;
       position: relative;
       overflow: hidden;
+      scroll-margin-top: 135px;
     }
 
     /* Glowing animated 404 number */
@@ -96,15 +97,22 @@
       gap: 10px;
       padding: 16px 36px;
       border-radius: 100px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff !important;
       text-decoration: none;
+      font-family: var(--font-heading);
       font-weight: 700;
       font-size: 1.05rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.25);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 1;
     }
 
     .btn-err-link:hover {
       transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 14px 36px rgba(var(--primary-rgb), 0.4);
+      color: #ffffff !important;
     }
 
     .btn-err-link i,
@@ -156,7 +164,7 @@
       The page you are looking for does not exist or has been moved.
     </p>
     <div class="err-actions">
-      <a href="/en/" class="btn-submit btn-err-link">
+      <a href="/en/" class="btn-err-link">
         Return to homepage <i data-lucide="arrow-right" aria-hidden="true"></i>
       </a>
     </div>
