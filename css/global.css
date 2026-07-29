@@ -217,8 +217,22 @@ img, video, iframe {
   min-width: 80px;
 }
 
+/* Flexbox Alignment Helpers */
 .flex-center {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-flex-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -251,15 +265,12 @@ html[lang="en"] .nav-menu {
   margin-left: 12px;
 }
 
-.logo a.flex-center {
+.logo a {
+  display: inline-flex;
+  align-items: center;
   justify-content: flex-start;
   text-decoration: none;
   width: 100%;
-}
-
-.logo a {
-  display: inline-flex;
-  text-decoration: none;
 }
 
 .logo img {
@@ -353,22 +364,26 @@ html[lang="en"] .nav-menu {
   align-items: center;
   gap: 10px;
   color: var(--white) !important;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 8px 20px -5px rgba(var(--primary-rgb), 0.4);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.35);
   border: 1px solid rgba(255, 255, 255, 0.2);
   white-space: nowrap;
   position: relative;
-  overflow: hidden;
   flex-shrink: 0;
 }
 
 @media (hover: hover) {
   .btn-nav-call:hover {
     background: var(--primary-dark);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -10px rgba(var(--primary-rgb), 0.5);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.45);
     border-color: rgba(255, 255, 255, 0.4);
   }
+}
+
+.btn-nav-call:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
 }
 
 .btn-nav-call-icon {
@@ -384,8 +399,8 @@ html[lang="en"] .nav-menu {
 }
 
 .btn-nav-call:hover .btn-nav-call-icon {
-  background: rgba(255, 255, 255, 0.25);
-  transform: rotate(-10deg) scale(1.1);
+  background: rgba(255, 255, 255, 0.28);
+  transform: rotate(-12deg) scale(1.1);
 }
 
 .btn-nav-call-icon i,
@@ -419,19 +434,29 @@ html[lang="en"] .nav-menu {
   letter-spacing: -0.01em;
 }
 
-/* Pulsing effect to draw attention */
-@keyframes phonePulse {
+/* Entrance subtle pulse on page load */
+@keyframes phonePulseOnce {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.04); }
   100% { transform: scale(1); }
 }
 
 .btn-nav-call {
-  animation: phonePulse 2s infinite;
+  animation: phonePulseOnce 1.5s ease-in-out 1s 2;
 }
 
-.btn-nav-call:hover {
-  animation: none;
+@media (prefers-reduced-motion: reduce) {
+  .btn-nav-call {
+    animation: none;
+    transition: none;
+  }
+}
+
+.mobile-nav-call {
+  margin-top: 24px;
+  justify-content: center;
+  padding: 12px 20px;
+  width: 100%;
 }
 
 .nav-item-dropdown {
@@ -1457,7 +1482,7 @@ h3 {
 .lang-switcher {
   display: flex;
   align-items: center;
-  background: #f1f5f9;
+  background: var(--bg-alt);
   padding: 3px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -1470,7 +1495,7 @@ h3 {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-dark);
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
@@ -1478,10 +1503,16 @@ h3 {
   color: var(--primary);
 }
 
+.lang-btn:focus-visible,
+.mobile-lang-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 .lang-btn.active {
-  background: var(--white);
+  background: var(--card-bg);
   color: var(--primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .lang-divider {
@@ -1493,28 +1524,31 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 40px;
-  padding: 0 24px;
+  margin-top: 32px;
+  padding: 0 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px;
 }
 
 .mobile-lang-btn {
   flex: 1;
   text-align: center;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--text-light);
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: all 0.25s ease;
-  background: var(--white);
+  color: var(--text-muted);
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  background: transparent;
 }
 
 .mobile-lang-btn.active {
   background: var(--primary);
   color: var(--white);
-  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
 }
 
 .mobile-lang-divider {
@@ -4040,14 +4074,18 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 
 
 [data-theme="dark"] .lang-switcher {
-  background: var(--bg);
-  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .lang-btn {
+  color: var(--text-muted);
 }
 
 [data-theme="dark"] .lang-btn.active {
-  background: var(--white);
-  color: var(--primary-dark);
-  box-shadow: var(--shadow-sm);
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.5);
 }
 
 /* Estimator Location Calculator Styles */
@@ -4527,4 +4565,76 @@ body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .co
 .form-submitting .btn-submit {
   cursor: not-allowed;
   opacity: 0.9;
+}
+
+/* --- Global Ultra-Narrow Mobile Screen Support (200px - 320px) --- */
+@media (max-width: 320px) {
+  html {
+    font-size: 14px;
+  }
+
+  .nav-content {
+    padding: 0 10px !important;
+  }
+
+  .logo {
+    max-width: 110px !important;
+    min-width: 70px !important;
+  }
+
+  .logo img {
+    height: 38px !important;
+    width: 39px !important;
+  }
+
+  .mobile-menu-btn {
+    padding: 6px !important;
+  }
+
+  .mobile-nav-content {
+    padding: 16px 10px !important;
+  }
+
+  .mobile-nav-link,
+  .mobile-dropdown-trigger {
+    padding: 14px 10px !important;
+    font-size: 1.05rem !important;
+    gap: 12px !important;
+  }
+
+  .mobile-nav-link i,
+  .mobile-nav-link svg,
+  .mobile-dropdown-trigger i:first-child,
+  .mobile-dropdown-trigger svg:first-child {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .cookie-banner {
+    width: 95% !important;
+    padding: 14px 10px !important;
+    bottom: 10px !important;
+    border-radius: 14px !important;
+  }
+
+  .cookie-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .cookie-btn {
+    width: 100% !important;
+    padding: 10px !important;
+    font-size: 0.85rem !important;
+  }
+
+  footer {
+    padding: 40px 10px !important;
+  }
+
+  .footer-content {
+    flex-direction: column !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
 }

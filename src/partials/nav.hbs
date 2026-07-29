@@ -3,7 +3,7 @@
   <div id="scrollProgressBar" class="scroll-progress-bar"></div>
   <div class="nav-content">
     <div class="logo">
-      <a href="index.html" class="flex-center" aria-label="DigiKaveri - {{nav_home}}">
+      <a href="index.html" aria-label="DigiKaveri - {{nav_home}}">
         <img
         src="/images/logo.webp"
         alt="DigiKaveri Logo"
@@ -59,16 +59,15 @@
     </div>
 
     <div class="nav-actions">
-      <div class="lang-switcher">
-        <a href="{{base_fi}}{{current_page_fi}}" class="lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')" aria-label="{{nav_lang_fi_aria}}">FI</a>
-        <span class="lang-divider">|</span>
-        <a href="{{base_en}}{{current_page_en}}" class="lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
-      </div>
+      <nav class="lang-switcher" aria-label="Kielen valinta / Language selection">
+        <a href="{{base_fi}}{{current_page_fi}}" class="lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" {{#if_eq lang "fi"}}aria-current="page"{{/if_eq}} onclick="localStorage.setItem('userLang', 'fi')" aria-label="{{nav_lang_fi_aria}}">FI</a>
+        <a href="{{base_en}}{{current_page_en}}" class="lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" {{#if_eq lang "en"}}aria-current="page"{{/if_eq}} onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
+      </nav>
       <button type="button" class="theme-toggle-btn" aria-label="{{nav_theme_toggle}}" title="{{nav_theme_toggle}}">
         <i data-lucide="sun" class="sun-icon"></i>
         <i data-lucide="moon" class="moon-icon"></i>
       </button>
-      <a href="tel:+3584578338105" class="btn-nav-call">
+      <a href="tel:+3584578338105" class="btn-nav-call" aria-label="{{nav_call}}: 045 7833 8105">
         <div class="btn-nav-call-icon">
           <i data-lucide="phone-call"></i>
         </div>

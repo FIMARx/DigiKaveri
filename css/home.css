@@ -628,13 +628,29 @@ header#home::after {
 .score-side {
     text-align: center;
     padding: 20px;
-    min-width: 250px;
+    min-width: 220px;
 }
 
 .score-divider {
     background: #e5e7eb;
     height: 100px;
     width: 1px;
+}
+
+@media (max-width: 580px) {
+  .reviews-score-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .score-side {
+    min-width: 0;
+    padding: 10px 0;
+  }
+  .score-divider {
+    width: 100%;
+    height: 1px;
+  }
 }
 
 .score-value {
@@ -1729,8 +1745,13 @@ header#home::after {
   border: 1px solid #e5e7eb;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
   overflow: hidden;
+}
+
+.table-scroll-area {
+  width: 100%;
   overflow-x: auto;
 }
+
 .service-table {
   width: 100%;
   border-collapse: collapse;
@@ -2994,4 +3015,43 @@ header#home {
 
 [data-theme="dark"] .schedule-part {
   color: var(--text-light) !important;
+}
+
+/* --- Ultra-Narrow Mobile Support (200px - 320px) --- */
+@media (max-width: 320px) {
+  .container,
+  .hero-centered,
+  .home-section-header {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  header.hero-centered {
+    padding-top: 90px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .home-section-header h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .badge {
+    padding: 6px 14px !important;
+    font-size: 0.75rem !important;
+    gap: 6px !important;
+  }
+
+  .btn-cta-sm,
+  .btn-hero {
+    padding: 10px 16px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .pricing-card,
+  .solution-card,
+  .help-card,
+  .platform-card {
+    padding: 16px 10px !important;
+    border-radius: 14px !important;
+  }
 }

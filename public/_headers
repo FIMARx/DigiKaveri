@@ -8,6 +8,12 @@
 # HTML files: NEVER cache at the edge
 # Users must always get fresh HTML so new JS/CSS chunk hashes resolve correctly.
 # ──────────────────────────────────────────────
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
 /*.html
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache

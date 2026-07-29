@@ -66,6 +66,7 @@ function initApp() {
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
   initAOS(); // Ensure animations initialize instantly
+  loadAnalytics(); // Initialize Google Analytics & Consent Mode v2 immediately
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {

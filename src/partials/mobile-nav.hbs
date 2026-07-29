@@ -38,14 +38,22 @@
         >
       </div>
     </div>
-    <div class="mobile-lang-switcher">
-      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'fi')" aria-label="{{nav_lang_fi_aria}}">FI</a>
-      <span class="mobile-lang-divider">|</span>
-      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
-      <button type="button" class="theme-toggle-btn" aria-label="{{nav_theme_toggle}}" title="{{nav_theme_toggle}}" style="margin-left: 20px;">
+    <div class="mobile-lang-switcher" aria-label="Kielen valinta / Language selection">
+      <a href="{{base_fi}}{{current_page_fi}}" class="mobile-lang-btn {{#if_eq lang "fi"}}active{{/if_eq}}" {{#if_eq lang "fi"}}aria-current="page"{{/if_eq}} onclick="localStorage.setItem('userLang', 'fi')" aria-label="{{nav_lang_fi_aria}}">FI</a>
+      <a href="{{base_en}}{{current_page_en}}" class="mobile-lang-btn {{#if_eq lang "en"}}active{{/if_eq}}" {{#if_eq lang "en"}}aria-current="page"{{/if_eq}} onclick="localStorage.setItem('userLang', 'en')" aria-label="{{nav_lang_en_aria}}">EN</a>
+      <button type="button" class="theme-toggle-btn" aria-label="{{nav_theme_toggle}}" title="{{nav_theme_toggle}}">
         <i data-lucide="sun" class="sun-icon"></i>
         <i data-lucide="moon" class="moon-icon"></i>
       </button>
     </div>
+    <a href="tel:+3584578338105" class="btn-nav-call mobile-nav-call" aria-label="{{nav_call}}: 045 7833 8105">
+      <div class="btn-nav-call-icon">
+        <i data-lucide="phone-call"></i>
+      </div>
+      <div class="btn-nav-call-text">
+        <span class="btn-nav-call-label">{{nav_call}}</span>
+        <span class="btn-nav-call-number">045 7833 8105</span>
+      </div>
+    </a>
   </div>
 </div>
