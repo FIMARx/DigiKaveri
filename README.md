@@ -67,22 +67,24 @@ A floating action button (speed dial) providing instant, thumb-friendly access t
 
 ## 💎 Titanium Hardening & Engineering
 
-The platform has been "Titanium-Hardened" to meet production-grade standards for performance, privacy, and accessibility.
+The platform has been "Titanium-Hardened" to meet production-grade standards for performance, privacy, accessibility, and security.
 
 - **Advanced Network Resilience**: Implemented `isFetchingStatus` locks and `AbortController` integration to prevent race conditions and redundant network polling.
 - **Early-Handshake Preconnections**: Upgraded connections to Web3Forms, Google Tag Manager, and Google Analytics to `preconnect` with `crossorigin`, eliminating DNS/TCP/TLS handshake lag.
+- **Cloudflare Edge Security Headers**: Configured `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy`, and `Permissions-Policy` in `public/_headers`.
+- **Google Search Rich Snippets**: Integrated structured `FAQPage`, `HowTo`, and `LocalBusiness` JSON-LD schemas across FI & EN pages for Google Search SERP prominence.
+- **Instant GA4 & Consent Mode v2**: Instant initialization of `window.gtag` and `window.dataLayer` with default `denied` consent states, updating dynamically upon GDPR consent acceptance.
+- **Ultra-Mobile Responsiveness (200px – 320px)**: Dedicated `@media` layout scaling for small screens with isolated table scroll containers.
 - **Cache Invalidation & SW Safeguards**: 
   - Integrated automated cache purging during the Service Worker activation phase to delete old caches.
   - Implemented `Cache-Control: no-cache, no-store, must-revalidate` header rules for `sw.js` in Cloudflare headers.
-- **Privacy First (Consent Mode v2)**: Fully integrated with Google Consent Mode v2, honoring GPC (Global Privacy Control) signals and loops for secure tracking revocation.
 - **Universal Accessibility (WCAG)**:
-  - High-precision focus traps that filter for visible-only elements.
-  - Dynamic `aria-expanded` and `aria-hidden` synchronization across all UI components.
-  - Smooth navigation with dynamic header offset calculation.
+  - High-precision focus traps and `:focus-visible` ring outlines.
+  - Dynamic `aria-expanded`, `aria-current`, and `aria-hidden` synchronization across all UI components.
 - **Performance Engineering**:
+  - Sub-2 second production builds.
   - 30-second throttled polling to preserve user battery.
-  - visibility-aware status checks (stops polling when tab is inactive).
-  - Robust script loading guards for external libraries (AOS, CookieConsent).
+  - Visibility-aware status checks (stops polling when tab is inactive).
 
 ---
 
@@ -121,15 +123,21 @@ The platform has been "Titanium-Hardened" to meet production-grade standards for
 DigiKaveri/
 ├── 📄 index.html               # FI Homepage
 ├── 📄 etayhteys.html           # FI Remote Support Guide
-├── 📁 en/                      # English Version
+├── 📄 kayttoehdot.html         # FI Terms of Service
+├── 📄 tietosuoja.html          # FI Privacy Policy
+├── 📄 404.html                 # FI 404 Page
+├── 📁 en/                      # English Pages (index, remote-support, legal, 404)
 ├── 📁 src/
-│   └── 📁 partials/            # Shared Handlebars Components
+│   ├── 📁 partials/            # Shared Handlebars Components (nav, mobile-nav, header, footer, scripts)
+│   ├── 📁 js/                  # Vanilla Logic Modules (main, contact, estimator, quiz, cookieconsent)
+│   └── 📁 locales/             # i18n Data Maps (fi.json, en.json)
 ├── 📁 public/
-│   ├── 📁 js/                  # Vanilla Logic Modules
+│   ├── 📄 _headers             # Cloudflare Pages Edge Security & Cache Headers
+│   ├── 📄 sw.js                # Service Worker for PWA Offline Caching
 │   ├── 📁 images/              # Premium Assets & Logo
 │   └── 📁 svg/                 # Platform & Technical Icons
-├── 📁 css/                     # Design System & Source Styles
-├── 📄 vite.config.js           # SSG & Handlebars Configuration
+├── 📁 css/                     # Design System & Source Styles (global, home, guide, legal, variables)
+├── 📄 vite.config.js           # SSG & Handlebars Build Configuration
 └── 📄 package.json             # Modern Dependency Management
 ```
 
