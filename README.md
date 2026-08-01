@@ -60,8 +60,19 @@ A real-time "Open/Closed" indicator powered by Helsinki timezone logic:
 - **Dynamic Pills**: Visual indicators of technician availability
 - **Polite Overlays**: Automatic service-closed modals outside business hours (09:00–21:00)
 
+### 🔍 Live FAQ Search & Yellow Text Highlighting
+- **Real-Time Text Matching** — Live search bar filters questions and answers as users type.
+- **Yellow Highlight Badges** — Wraps matching query words in `<mark class="faq-highlight">` yellow highlights in both questions and expanded answers.
+- **Auto-Expansion** — Matching FAQ items automatically expand so users instantly view relevant answers.
+
+### 📱 2-Column Mobile Segmented Controls
+- Native-style 2-column Segmented Controls for platform switchers (`Windows` | `macOS` and `Android` | `iOS`) that fit screens down to 320px (iPhone SE) without layout wrapping or vertical distortion.
+
+### 📡 Offline Status Banner Indicator
+- Non-intrusive floating glass status pill (`"Olet offline-tilassa — selaat välimuistiversiota"`) alerting users when connection drops or restores.
+
 ### 💬 Speed Dial FAB
-A floating action button (speed dial) providing instant, thumb-friendly access to WhatsApp and direct calling.
+A floating action button (speed dial) providing instant, thumb-friendly access to WhatsApp and direct calling with staggered popout animations and WCAG keyboard accessibility.
 
 ---
 
