@@ -97,9 +97,11 @@ aside.legal-toc {
 
 .toc-progress-fill {
   height: 100%;
+  width: 100%;
   background: var(--primary);
-  width: 0%;
-  transition: width 0.2s ease;
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  will-change: transform;
 }
 
 .legal-toc ul {

@@ -11,8 +11,25 @@ toggleBtn.setAttribute('aria-label', label);
 toggleBtn.setAttribute('aria-pressed', 'false');
 toggleBtn.title = label;
 
-document.addEventListener("DOMContentLoaded", () => {
+function onDOMReady(fn) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fn);
+  } else {
+    fn();
+  }
+}
+
+onDOMReady(() => {
   if (!document.body) return;
+
+  // Restore saved state from localStorage
+  const savedState = localStorage.getItem("largeText");
+  if (savedState === "true") {
+    document.documentElement.classList.add("large-text");
+    toggleBtn.classList.add("active");
+    toggleBtn.setAttribute("aria-pressed", "true");
+  }
+
   document.body.appendChild(toggleBtn);
 
   toggleBtn.addEventListener("click", () => {
@@ -20,12 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPct = totalScrollable > 0 ? window.scrollY / totalScrollable : 0;
 
-    document.documentElement.classList.toggle("large-text");
-    const isActive = toggleBtn.classList.toggle("active");
-    toggleBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    const isLarge = document.documentElement.classList.toggle("large-text");
+    toggleBtn.classList.toggle("active", isLarge);
+    toggleBtn.setAttribute("aria-pressed", isLarge ? "true" : "false");
+    localStorage.setItem("largeText", isLarge ? "true" : "false");
 
     // Restore relative position after layout update
-    // We use requestAnimationFrame to ensure the layout has updated
     requestAnimationFrame(() => {
       const newTotalScrollable = document.documentElement.scrollHeight - window.innerHeight;
       window.scrollTo(0, scrollPct * newTotalScrollable);

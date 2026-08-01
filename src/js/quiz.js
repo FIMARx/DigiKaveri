@@ -183,11 +183,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ensure default values on submit if skipped
   form.addEventListener("submit", () => {
+    const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
     if (deviceInput && !deviceInput.value) {
-      deviceInput.value = "Yleinen IT-tuki / Laite (Ei valittu)";
+      deviceInput.value = isEn ? "General IT Support / Device (Not selected)" : "Yleinen IT-tuki / Laite (Ei valittu)";
     }
     if (issueInput && !issueInput.value) {
-      issueInput.value = "Soittopyyntö / Yleinen yhteydenotto";
+      issueInput.value = isEn ? "General Contact / Callback Request" : "Soittopyyntö / Yleinen yhteydenotto";
     }
   });
 

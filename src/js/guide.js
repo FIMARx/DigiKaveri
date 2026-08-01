@@ -3,7 +3,15 @@ import "/css/guide.css";
 import { createIcons } from "lucide";
 import { ICON_SET } from "./icons";
 
-document.addEventListener("DOMContentLoaded", () => {
+function onDOMReady(fn) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fn);
+  } else {
+    fn();
+  }
+}
+
+onDOMReady(() => {
   // --- 1. State Management Helpers ---
   const setElementActive = (el, active = true) => {
     if (!el) return;
@@ -109,7 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileSection = document.getElementById("mobile-guide");
 
   if (pcSection && mobileSection) {
-    if (isMobile) {
+    const hash = window.location.hash.toLowerCase();
+    const isMobileHash = hash === "#android" || hash === "#ios" || hash === "#iphone" || hash === "#ipad" || hash === "#mobile-guide";
+    const isPcHash = hash === "#mac" || hash === "#macos" || hash === "#windows" || hash === "#win" || hash === "#pc-guide";
+
+    if (isMobileHash || (isMobile && !isPcHash)) {
       toggleSectionCollapsed("pc-guide", true);
       toggleSectionCollapsed("mobile-guide", false);
     } else {

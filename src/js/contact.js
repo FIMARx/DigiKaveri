@@ -235,7 +235,15 @@ function setupForm(formId) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function onDOMReady(fn) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fn);
+  } else {
+    fn();
+  }
+}
+
+onDOMReady(() => {
   setupForm("contactForm");
   setupForm("detailedForm");
 });

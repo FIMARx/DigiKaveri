@@ -39,6 +39,8 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') return;
+
   // Navigation / HTML requests: Network first, fallback to cache for offline support
   if (e.request.mode === 'navigate' || e.request.destination === 'document') {
     e.respondWith(

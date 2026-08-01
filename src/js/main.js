@@ -66,6 +66,7 @@ function initApp() {
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
   initAOS(); // Ensure animations initialize instantly
+  initOfflineIndicator(); // Initialize offline status banner
   loadAnalytics(); // Initialize Google Analytics & Consent Mode v2 immediately
 
   // Register PWA Service Worker
@@ -190,6 +191,8 @@ let previouslyFocusedElement = null;
 function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
   if (!modal || isOpen) return;
+  if (modal.dataset.initialized) return;
+  modal.dataset.initialized = "true";
 
   const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
 
@@ -472,6 +475,8 @@ function initSmoothNav() {
 
 function initFAQ() {
   const faqItems = document.querySelectorAll(".faq-item");
+  if (!faqItems.length) return;
+
   faqItems.forEach((item) => {
     const questionBtn = item.querySelector(".faq-question");
     const answer = item.querySelector(".faq-answer");
@@ -495,6 +500,97 @@ function initFAQ() {
       }
     });
   });
+
+  // FAQ Live Search Filter with Yellow Text Highlighting
+  const searchInput = document.getElementById("faqSearchInput");
+  const searchClear = document.getElementById("faqSearchClear");
+  const faqGrid = document.querySelector(".faq-grid");
+  if (!searchInput || !faqGrid) return;
+
+  // Cache original text for clean highlight restoration
+  faqItems.forEach((item) => {
+    const qSpan = item.querySelector(".faq-question span");
+    const aP = item.querySelector(".faq-answer p");
+    if (qSpan && !qSpan.dataset.originalText) qSpan.dataset.originalText = qSpan.textContent;
+    if (aP && !aP.dataset.originalText) aP.dataset.originalText = aP.textContent;
+  });
+
+  let noResultsEl = document.querySelector(".faq-no-results");
+  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+
+  const filterFAQ = () => {
+    const rawQuery = searchInput.value.trim();
+    const query = rawQuery.toLowerCase();
+
+    if (searchClear) {
+      searchClear.style.display = rawQuery.length > 0 ? "flex" : "none";
+    }
+
+    let matchCount = 0;
+    const escapedQuery = rawQuery.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const highlightRegex = rawQuery.length > 0 ? new RegExp(`(${escapedQuery})`, "gi") : null;
+
+    faqItems.forEach((item) => {
+      const qSpan = item.querySelector(".faq-question span");
+      const aP = item.querySelector(".faq-answer p");
+      const origQText = qSpan?.dataset.originalText || "";
+      const origAText = aP?.dataset.originalText || "";
+
+      const questionText = origQText.toLowerCase();
+      const answerText = origAText.toLowerCase();
+      const isMatch = query === "" || questionText.includes(query) || answerText.includes(query);
+
+      if (isMatch) {
+        item.style.display = "";
+        matchCount++;
+
+        if (query.length > 0) {
+          item.classList.add("active");
+          const q = item.querySelector(".faq-question");
+          if (q) q.setAttribute("aria-expanded", "true");
+          const a = item.querySelector(".faq-answer");
+          if (a) a.setAttribute("aria-hidden", "false");
+
+          // Apply yellow text highlight
+          if (qSpan) qSpan.innerHTML = origQText.replace(highlightRegex, '<mark class="faq-highlight">$1</mark>');
+          if (aP) aP.innerHTML = origAText.replace(highlightRegex, '<mark class="faq-highlight">$1</mark>');
+        } else {
+          item.classList.remove("active");
+          if (qSpan) qSpan.textContent = origQText;
+          if (aP) aP.textContent = origAText;
+        }
+      } else {
+        item.style.display = "none";
+        item.classList.remove("active");
+        if (qSpan) qSpan.textContent = origQText;
+        if (aP) aP.textContent = origAText;
+      }
+    });
+
+    if (matchCount === 0 && query.length > 0) {
+      if (!noResultsEl) {
+        noResultsEl = document.createElement("div");
+        noResultsEl.className = "faq-no-results";
+        faqGrid.parentNode.insertBefore(noResultsEl, faqGrid.nextSibling);
+      }
+      noResultsEl.textContent = isEn
+        ? `No FAQ items match "${searchInput.value}"`
+        : `Ei hakutuloksia hakusanalla "${searchInput.value}"`;
+      noResultsEl.style.display = "block";
+    } else if (noResultsEl) {
+      noResultsEl.style.display = "none";
+    }
+  };
+
+  searchInput.addEventListener("input", filterFAQ);
+
+  if (searchClear) {
+    searchClear.addEventListener("click", () => {
+      searchInput.value = "";
+      filterFAQ();
+      searchInput.focus();
+    });
+  }
 }
 
 function updateScrollSpy() {
@@ -532,8 +628,8 @@ function updateScrollSpy() {
   const tocFill = document.querySelector(".toc-progress-fill");
   if (tocFill) {
     const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-    tocFill.style.width = progress + "%";
+    const progressRatio = totalHeight > 0 ? Math.min(Math.max(window.scrollY / totalHeight, 0), 1) : 0;
+    tocFill.style.transform = `scaleX(${progressRatio})`;
   }
 
   navLinks.forEach((link) => {
@@ -587,18 +683,29 @@ function initScrollSpy() {
   const progressFill = document.querySelector("#scrollProgressBar");
   if (progressFill) {
     let ticking = false;
+    const updateProgress = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progressRatio = height > 0 ? Math.min(Math.max(winScroll / height, 0), 1) : 0;
+      progressFill.style.transform = `scaleX(${progressRatio})`;
+      ticking = false;
+    };
+
     window.addEventListener("scroll", () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-          progressFill.style.width = scrolled + "%";
-          ticking = false;
-        });
+        window.requestAnimationFrame(updateProgress);
         ticking = true;
       }
     }, { passive: true });
+
+    window.addEventListener("resize", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateProgress();
   }
 }
 
@@ -696,13 +803,23 @@ function initFAB() {
   const mainBtn = document.getElementById("fabMain");
   const backdrop = document.getElementById("fabBackdrop");
 
-  if (!wrapper || !mainBtn) return;
+  const options = wrapper.querySelectorAll(".fab-option");
+  const optionsContainer = wrapper.querySelector(".fab-options");
+
+  const updateTabIndices = (isOpen) => {
+    options.forEach((opt) => opt.setAttribute("tabindex", isOpen ? "0" : "-1"));
+    if (optionsContainer) optionsContainer.setAttribute("aria-hidden", isOpen ? "false" : "true");
+  };
+
+  // Initialize closed state accessibility attributes
+  updateTabIndices(false);
 
   const toggleMenu = (forceClose = null) => {
     const shouldOpen =
       forceClose === null ? !wrapper.classList.contains("active") : !forceClose;
     wrapper.classList.toggle("active", shouldOpen);
     mainBtn.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+    updateTabIndices(shouldOpen);
 
     if (shouldOpen) {
       if (backdrop) backdrop.classList.add("active");
@@ -738,10 +855,51 @@ function initFAB() {
     });
   }
 
-  const options = wrapper.querySelectorAll(".fab-option");
   options.forEach((option) => {
     option.addEventListener("click", () => {
       toggleMenu(true);
     });
   });
+}
+
+function initOfflineIndicator() {
+  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+  const msgOffline = isEn
+    ? "You are offline — browsing cached version"
+    : "Olet offline-tilassa — selaat välimuistiversiota";
+  const msgOnline = isEn ? "Connection restored" : "Yhteys palautunut";
+
+  const banner = document.createElement("div");
+  banner.className = "offline-banner";
+  banner.setAttribute("role", "status");
+  banner.setAttribute("aria-live", "polite");
+  banner.innerHTML = `<span class="offline-banner-dot"></span><span class="offline-banner-text">${msgOffline}</span>`;
+  document.body.appendChild(banner);
+
+  let timer = null;
+
+  const showBanner = (isOffline) => {
+    if (timer) clearTimeout(timer);
+    const textEl = banner.querySelector(".offline-banner-text");
+
+    if (isOffline) {
+      banner.classList.remove("online-restored");
+      if (textEl) textEl.textContent = msgOffline;
+      banner.classList.add("active");
+    } else {
+      banner.classList.add("online-restored");
+      if (textEl) textEl.textContent = msgOnline;
+      banner.classList.add("active");
+      timer = setTimeout(() => {
+        banner.classList.remove("active");
+      }, 3200);
+    }
+  };
+
+  window.addEventListener("offline", () => showBanner(true));
+  window.addEventListener("online", () => showBanner(false));
+
+  if (!navigator.onLine) {
+    showBanner(true);
+  }
 }

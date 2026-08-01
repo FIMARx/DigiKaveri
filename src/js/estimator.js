@@ -443,13 +443,13 @@ document.addEventListener("DOMContentLoaded", () => {
           msg += `- Travel Fee (0.90 €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
         }
 
-        const invoiceTotal = (state.remote.checked ? 29 * state.remote.qty : 0) + 
-                            (state.home.checked ? 59 * state.home.qty : 0) + 
-                            (state.annual.checked ? 89 * state.annual.qty : 0);
+        const invoiceTotal = (state.remote.checked ? SERVICES.remote.basePrice * state.remote.qty : 0) + 
+                            (state.home.checked ? SERVICES.home.basePrice * state.home.qty : 0) + 
+                            (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty : 0);
         let savings = 0;
         if (state.deduction) {
-          savings += (state.home.checked ? 59 * state.home.qty * 0.60 : 0) + 
-                     (state.annual.checked ? 89 * state.annual.qty * 0.60 : 0);
+          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * 0.60 : 0) + 
+                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * 0.60 : 0);
         }
         const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
         const finalTotal = invoiceTotal + currentTravelCost - savings;
@@ -481,13 +481,13 @@ document.addEventListener("DOMContentLoaded", () => {
           msg += `- Matkakulut (0.90 €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
         }
 
-        const invoiceTotal = (state.remote.checked ? 29 * state.remote.qty : 0) + 
-                            (state.home.checked ? 59 * state.home.qty : 0) + 
-                            (state.annual.checked ? 89 * state.annual.qty : 0);
+        const invoiceTotal = (state.remote.checked ? SERVICES.remote.basePrice * state.remote.qty : 0) + 
+                            (state.home.checked ? SERVICES.home.basePrice * state.home.qty : 0) + 
+                            (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty : 0);
         let savings = 0;
         if (state.deduction) {
-          savings += (state.home.checked ? 59 * state.home.qty * 0.60 : 0) + 
-                     (state.annual.checked ? 89 * state.annual.qty * 0.60 : 0);
+          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * 0.60 : 0) + 
+                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * 0.60 : 0);
         }
         const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
         const finalTotal = invoiceTotal + currentTravelCost - savings;

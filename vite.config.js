@@ -61,6 +61,9 @@ export default defineConfig({
         } else if (pagePath.includes('kayttoehdot.html') || pagePath.includes('terms-of-service.html')) {
           data.current_page_fi = 'kayttoehdot.html';
           data.current_page_en = 'terms-of-service.html';
+        } else if (pagePath.includes('404.html')) {
+          data.current_page_fi = '404.html';
+          data.current_page_en = '404.html';
         }
 
         return data;
