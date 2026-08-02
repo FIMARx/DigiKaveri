@@ -1,18 +1,12 @@
-<div align="center">
+# DigiKaveri — Digital Buddy for Everyday IT Support
 
-  <img src="public/images/logo.webp" alt="DigiKaveri Logo" width="120" height="117" />
+> **Human-first IT support & computer maintenance designed for seniors, homes, and small businesses.**
 
-  # DigiKaveri — Digital Buddy for Everyday IT Support
-
-  **Human-first IT support & computer maintenance designed for seniors, homes, and small businesses.**
-
-  [![Live Demo](https://img.shields.io/badge/🌐_Website-digikaveri.com-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://digikaveri.com/)
-  [![Deployment](https://img.shields.io/badge/🚀_Status-Deployed_PWA-10B981?style=for-the-badge&logo=githubpages&logoColor=white)](https://digikaveri.com/)
-  [![Vite](https://img.shields.io/badge/⚡_Engine-Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-  [![Locale](https://img.shields.io/badge/🌐_i18n-FI_%7C_EN-3B82F6?style=for-the-badge)](#-bilingual-architecture-fi--en)
-  [![Location](https://img.shields.io/badge/📍_Location-Uusimaa%2C_Finland-0057D9?style=for-the-badge)](#-service-portfolio)
-
-</div>
+[![Live Demo](https://img.shields.io/badge/🌐_Website-digikaveri.com-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://digikaveri.com/)
+[![Deployment](https://img.shields.io/badge/🚀_Status-Deployed_PWA-10B981?style=for-the-badge&logo=githubpages&logoColor=white)](https://digikaveri.com/)
+[![Vite](https://img.shields.io/badge/⚡_Engine-Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Locale](https://img.shields.io/badge/🌐_i18n-FI_%7C_EN-3B82F6?style=for-the-badge)](#-tech-stack--architecture)
+[![Location](https://img.shields.io/badge/📍_Location-Uusimaa%2C_Finland-0057D9?style=for-the-badge)](#-about-digikaveri)
 
 ---
 
@@ -30,29 +24,36 @@ Technology should empower people, not confuse them. **DigiKaveri** ("Digital Bud
 ## ✨ Key Features & Experience
 
 ### 🧠 Adaptive OS Auto-Detecting Remote Guide
+
 The remote support hub at [`/etayhteys.html`](https://digikaveri.com/etayhteys.html) (`/en/remote-support.html`) automatically detects the visitor's operating system (Windows, macOS, Android, iOS) on page load and customizes the UI:
+
 - **Smart OS Sniffing**: Displays native TeamViewer download links and OS-specific setup steps automatically.
 - **2-Column Mobile Segmented Controls**: Smooth platform switcher designed for touch screens down to 320px width.
 - **Interactive Lightbox & Step Media**: Zoomable step-by-step screenshots with keyboard trap accessibility.
 
 ### 📲 Progressive Web App (PWA) & Offline Cache
+
 - **Instant Service Worker (`sw.js`)**: Caches essential Finnish & English pages, assets, and styling for zero-latency offline browsing.
 - **Real-Time Offline Banner**: Floating glass indicator notifies visitors when internet connectivity is dropped or restored.
 
 ### 🌗 Silky Smooth Dark Mode & Native View Transitions
+
 - **View Transitions API**: Seamless, 350ms cross-fade animation when switching between light and dark themes using `document.startViewTransition()`.
 - **System Theme Syncing**: Automatically matches visitor OS preferences (`prefers-color-scheme`) with persistent `localStorage` override options.
 
 ### ⚡ Dynamic Price & Distance Estimator
+
 - **Interactive Rate Calculator**: Computes estimated labor costs, tax deduction savings (-60%), and travel fees dynamically.
-- **OSRM & Nominatim Distance Routing**: Calculates driving distance and travel costs directly from Paapuuri, Espoo coordinates to the visitor's street address.
+- **OSRM & Nominatim Distance Routing**: Calculates driving distance and travel costs directly from Espoo coordinates to the visitor's location.
 
 ### 🔍 Real-Time FAQ Search with Live Text Highlighting
+
 - **Instant Search Filter**: Filters questions and answers in real-time as users type.
 - **Mark Highlighting**: Highlights matching search queries with `<mark class="faq-highlight">` badges across question titles and answer paragraphs.
 
 ### ⏰ Helsinki Timezone Service Beacon
-- **Live Status Indicator**: Dynamically checks Paapuuri 2 / Helsinki business hours (09:00–21:00) with fallback polling.
+
+- **Live Status Indicator**: Dynamically checks Helsinki business hours (09:00–21:00) with fallback polling.
 - **Polite Service-Closed Modal**: Accessible focus-trapped dialog alerting visitors outside working hours while offering direct callback scheduling.
 
 ---
@@ -104,9 +105,11 @@ DigiKaveri/
 ## 🚀 Quick Start & Development
 
 ### Prerequisites
+
 - **Node.js 20+** and **npm 10+**
 
 ### Local Setup
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/FIMARx/DigiKaveri.git
@@ -118,20 +121,19 @@ npm install
 # 3. Start local development server
 npm run dev
 ```
+
 Open `http://localhost:3000/` in your browser.
 
 ### Production Build
+
 ```bash
 npm run build
 ```
+
 Generates production-ready static assets in the `dist/` directory.
 
 ---
 
-<div align="center">
+Crafted with ❤️ by **[FIMARx](https://github.com/FIMARx)**
 
-  Crafted with ❤️ by **[FIMARx](https://github.com/FIMARx)**
-
-  *“Making technology effortless and accessible, one device at a time.”*
-
-</div>
+*"Making technology effortless and accessible, one device at a time."*
