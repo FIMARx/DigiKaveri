@@ -2,14 +2,7 @@
 import "/css/guide.css";
 import { createIcons } from "lucide";
 import { ICON_SET } from "./icons";
-
-function onDOMReady(fn) {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", fn);
-  } else {
-    fn();
-  }
-}
+import { onDOMReady } from "./utils.js";
 
 onDOMReady(() => {
   // --- 1. State Management Helpers ---

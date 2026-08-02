@@ -1,5 +1,6 @@
+import { onDOMReady, isEnglish } from "./utils.js";
 
-const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+const isEn = isEnglish();
 const label = isEn ? "Increase text size" : "Suurenna tekstiä";
 
 const toggleBtn = document.createElement("button");
@@ -10,14 +11,6 @@ toggleBtn.className = "accessibility-btn";
 toggleBtn.setAttribute('aria-label', label);
 toggleBtn.setAttribute('aria-pressed', 'false');
 toggleBtn.title = label;
-
-function onDOMReady(fn) {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", fn);
-  } else {
-    fn();
-  }
-}
 
 onDOMReady(() => {
   if (!document.body) return;

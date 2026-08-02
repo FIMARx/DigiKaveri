@@ -984,7 +984,7 @@ h3 {
   padding-top: 28px;
   padding-bottom: 36px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  color: #cbd5e1;
   font-size: 0.9rem;
   font-weight: 500;
   gap: 10px;
@@ -1002,17 +1002,20 @@ h3 {
 }
 
 .footer-bottom-links a {
-  color: #94a3b8;
+  color: #e2e8f0 !important;
   text-decoration: none;
   transition: color 0.2s ease;
+  font-weight: 600;
 }
 
 .footer-bottom-links a:hover {
-  color: var(--primary-light, #60a5fa);
+  color: #60a5fa !important;
+  text-decoration: underline;
 }
 
 .footer-divider {
-  opacity: 0.4;
+  color: #cbd5e1;
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
@@ -1646,7 +1649,7 @@ h3 {
   color: #3ddc84;
 }
 .icon-ios {
-  color: #000000;
+  color: var(--text-dark);
 }
 
 .step-mini {
@@ -1655,7 +1658,8 @@ h3 {
   gap: 12px;
   margin: 20px 0;
   padding: 15px;
-  background: #f8fafc;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
 }
 
@@ -1692,9 +1696,9 @@ h3 {
 }
 
 .btn-platform-switch {
-  background: white;
-  color: #475569;
-  border: 2px solid #e2e8f0;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 2px solid var(--border);
   padding: 14px 28px;
   border-radius: 40px;
   font-size: 1rem;
@@ -3479,9 +3483,46 @@ div[id] {
   display: none;
 }
 
-/* Smooth color theme transitions */
-body, nav, header, section, footer, .hero-form-card, .price-card, .faq-item, .contact-form-box, .status-schedule-pill, .theme-toggle-btn {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+/* 2026 Native View Transitions API for theme switches */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Silky Smooth Theme Switch Transitions across all UI elements */
+html,
+body,
+nav,
+header,
+main,
+section,
+footer,
+article,
+aside,
+div,
+h1, h2, h3, h4, h5, h6,
+p, span, a, li, label, strong,
+button, input, select, textarea,
+i, svg,
+.glass-nav,
+.hero-form-card,
+.testimonial-card,
+.solution-card,
+.price-card,
+.faq-item,
+.legal-hero,
+.legal-content,
+.legal-toc,
+.status-schedule-pill,
+.status-modal-card,
+.theme-toggle-btn {
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              fill 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              stroke 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* =======================================================

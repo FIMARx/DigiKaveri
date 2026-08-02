@@ -3,12 +3,15 @@ import "/css/global.css";
 import "/css/home.css";
 import { createIcons } from "lucide";
 import { ICON_SET } from "./icons";
-import { getFinlandHour, triggerAnalyticsExecution } from "./utils.js";
+import { getFinlandHour, triggerAnalyticsExecution, onDOMReady, isEnglish, GA_MEASUREMENT_ID } from "./utils.js";
 import "./estimator.js";
 import "./quiz.js";
 
 let isInitialized = false;
 let statusController = null;
+let isMobileDropdownsInitialized = false;
+let isFAQInitialized = false;
+let isFABInitialized = false;
 
 // "Sneaky Mode" Optimization: 
 // Wait for user interaction or 3 seconds before loading heavy assets
@@ -21,11 +24,7 @@ const lazyLoadAll = () => {
     window.removeEventListener(e, lazyLoadAll)
   );
 
-  // Load non-critical components
-  initFAQ();
-  initMobileDropdowns();
-  initFAB();
-  loadAnalytics();
+  // Load non-critical heavy components if any
   // checkStatus() is called centrally in initApp() for all pages.
   // The 30s throttle inside checkStatus() prevents redundant fetches.
 
@@ -43,16 +42,14 @@ const initAOS = () => {
     });
   }
 
-  // Safety Fallback Guard: If AOS CDN fails/blocked or elements stay hidden, force reveal after 800ms
-  setTimeout(() => {
-    document.querySelectorAll('[data-aos]').forEach((el) => {
-      if (!el.classList.contains('aos-animate')) {
-        el.classList.add('aos-animate');
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      }
-    });
-  }, 800);
+  // Force-reveal ALL [data-aos] elements immediately so pointer-events are
+  // never blocked by AOS's initial hidden state. This runs synchronously
+  // so no element can block clicks during the current frame.
+  document.querySelectorAll('[data-aos]').forEach((el) => {
+    el.classList.add('aos-animate');
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
 };
 
 function initApp() {
@@ -68,6 +65,9 @@ function initApp() {
   initAOS(); // Ensure animations initialize instantly
   initOfflineIndicator(); // Initialize offline status banner
   loadAnalytics(); // Initialize Google Analytics & Consent Mode v2 immediately
+  initFAQ(); // Immediate FAQ search and accordion responsiveness
+  initMobileDropdowns();
+  initFAB();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
@@ -123,8 +123,17 @@ function initApp() {
     stopPolling();
   });
 
-  window.addEventListener("load", () => {
-    initAOS();
+  // Re-run AOS when window fully loads so late-arriving CDN script
+  // doesn't re-hide revealed elements. The guard inside initAOS is safe
+  // because we always force-reveal AFTER AOS.init().
+  window.addEventListener('load', () => {
+    // Re-reveal elements after the AOS CDN script loads and potentially
+    // re-applies hidden state. This is the final, authoritative reveal.
+    document.querySelectorAll('[data-aos]').forEach((el) => {
+      el.classList.add('aos-animate');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
   });
 }
 
@@ -147,7 +156,7 @@ async function checkStatus() {
   if (statusController) statusController.abort();
   statusController = new AbortController();
 
-  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+  const isEn = isEnglish();
   let data = {};
 
   try {
@@ -183,7 +192,7 @@ async function checkStatus() {
         ? data?.messageClosedEn || "Closed for today"
         : data?.messageClosed || "Palvelu suljettu";
   }
-  if (typeof initStatusModal === "function") initStatusModal(isOpen);
+  initStatusModal(isOpen);
 }
 
 let previouslyFocusedElement = null;
@@ -194,7 +203,7 @@ function initStatusModal(isOpen) {
   if (modal.dataset.initialized) return;
   modal.dataset.initialized = "true";
 
-  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+  const isEn = isEnglish();
 
   // Accessibility: Focus Trap Logic
   modal.addEventListener("keydown", (e) => {
@@ -235,18 +244,6 @@ function initStatusModal(isOpen) {
       closeStatusModal(modal);
     }
   });
-
-  if (sessionStorage.getItem("closedModalShown") === "true") {
-    return;
-  }
-
-  setTimeout(() => {
-    previouslyFocusedElement = document.activeElement;
-    modal.classList.add("active");
-    document.body.classList.add("is-locked");
-    modal.setAttribute("tabindex", "-1");
-    modal.focus();
-  }, 1500);
 
   const understandBtn = document.getElementById("modalUnderstand");
   const callbackBtn = document.getElementById("modalCallback");
@@ -298,6 +295,18 @@ function initStatusModal(isOpen) {
     }
   });
 
+  if (sessionStorage.getItem("closedModalShown") === "true") {
+    return;
+  }
+
+  setTimeout(() => {
+    previouslyFocusedElement = document.activeElement;
+    modal.classList.add("active");
+    document.body.classList.add("is-locked");
+    modal.setAttribute("tabindex", "-1");
+    modal.focus();
+  }, 1500);
+
   const pill = document.querySelector(".status-schedule-pill");
   if (pill && !pill.dataset.keyBound) {
     pill.dataset.keyBound = "true";
@@ -321,13 +330,7 @@ function closeStatusModal(modal) {
   }
 }
 
-function onDOMReady(fn) {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", fn);
-  } else {
-    fn();
-  }
-}
+
 
 function initTheme() {
   const savedTheme = localStorage.getItem("theme");
@@ -348,8 +351,17 @@ function initTheme() {
       btn.addEventListener("click", () => {
         const currentTheme = document.documentElement.getAttribute("data-theme");
         const newTheme = currentTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
+        
+        const applyTheme = () => {
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+        };
+
+        if (typeof document.startViewTransition === "function") {
+          document.startViewTransition(applyTheme);
+        } else {
+          applyTheme();
+        }
       });
     });
   });
@@ -357,9 +369,9 @@ function initTheme() {
 
 initTheme();
 
-onDOMReady(initApp);
-
 function initMobileDropdowns() {
+  if (isMobileDropdownsInitialized) return;
+  isMobileDropdownsInitialized = true;
   const triggers = document.querySelectorAll(".mobile-dropdown-trigger");
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
@@ -398,12 +410,12 @@ function loadAnalytics() {
     const script = document.createElement("script");
     script.type = type;
     script.setAttribute("data-cookiecategory", "analytics");
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-XL8DBWDDMD";
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     document.head.appendChild(script);
 
     // Fire config immediately if we already have consent
     if (hasConsent) {
-      gtag("config", "G-XL8DBWDDMD", { anonymize_ip: true });
+      gtag("config", GA_MEASUREMENT_ID, { anonymize_ip: true });
     }
   };
 
@@ -419,7 +431,7 @@ function loadAnalytics() {
 
 function initLanguageDetection() {
   const path = window.location.pathname;
-  const isEn = path === "/en" || path.startsWith("/en/");
+  const isEn = isEnglish();
 
   // Sync HTML lang attribute for SEO/Accessibility
   document.documentElement.lang = isEn ? "en" : "fi";
@@ -459,7 +471,7 @@ function initSmoothNav() {
             document.body.style.overflow = '';
           }
 
-          const headerHeight = 90;
+          const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 88;
           window.scrollTo({
             top: target.getBoundingClientRect().top + window.scrollY - headerHeight,
             behavior: "smooth",
@@ -474,25 +486,43 @@ function initSmoothNav() {
 }
 
 function initFAQ() {
+  if (isFAQInitialized) return;
   const faqItems = document.querySelectorAll(".faq-item");
   if (!faqItems.length) return;
+  isFAQInitialized = true;
 
-  faqItems.forEach((item) => {
+  // Store metadata safely in JS memory
+  const itemsData = Array.from(faqItems).map((item) => {
     const questionBtn = item.querySelector(".faq-question");
+    const qSpan = item.querySelector(".faq-question span");
+    const aP = item.querySelector(".faq-answer p");
     const answer = item.querySelector(".faq-answer");
+    const origQText = qSpan ? qSpan.textContent.trim() : "";
+    const origAText = aP ? aP.textContent.trim() : "";
+
+    if (questionBtn) {
+      questionBtn.type = "button";
+    }
+
+    return { item, questionBtn, answer, qSpan, aP, origQText, origAText };
+  });
+
+  // Accordion Toggle Handlers
+  itemsData.forEach(({ item, questionBtn, answer }) => {
     if (!questionBtn) return;
 
-    questionBtn.addEventListener("click", () => {
+    questionBtn.addEventListener("click", (e) => {
+      e.preventDefault();
       const isOpen = item.classList.contains("active");
 
-      faqItems.forEach((i) => {
+      // Close all items
+      itemsData.forEach(({ item: i, questionBtn: qBtn, answer: a }) => {
         i.classList.remove("active");
-        const q = i.querySelector(".faq-question");
-        if (q) q.setAttribute("aria-expanded", "false");
-        const a = i.querySelector(".faq-answer");
+        if (qBtn) qBtn.setAttribute("aria-expanded", "false");
         if (a) a.setAttribute("aria-hidden", "true");
       });
 
+      // Open clicked item if it was closed
       if (!isOpen) {
         item.classList.add("active");
         questionBtn.setAttribute("aria-expanded", "true");
@@ -507,16 +537,8 @@ function initFAQ() {
   const faqGrid = document.querySelector(".faq-grid");
   if (!searchInput || !faqGrid) return;
 
-  // Cache original text for clean highlight restoration
-  faqItems.forEach((item) => {
-    const qSpan = item.querySelector(".faq-question span");
-    const aP = item.querySelector(".faq-answer p");
-    if (qSpan && !qSpan.dataset.originalText) qSpan.dataset.originalText = qSpan.textContent;
-    if (aP && !aP.dataset.originalText) aP.dataset.originalText = aP.textContent;
-  });
-
   let noResultsEl = document.querySelector(".faq-no-results");
-  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+  const isEn = isEnglish();
 
   const filterFAQ = () => {
     const rawQuery = searchInput.value.trim();
@@ -530,15 +552,10 @@ function initFAQ() {
     const escapedQuery = rawQuery.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const highlightRegex = rawQuery.length > 0 ? new RegExp(`(${escapedQuery})`, "gi") : null;
 
-    faqItems.forEach((item) => {
-      const qSpan = item.querySelector(".faq-question span");
-      const aP = item.querySelector(".faq-answer p");
-      const origQText = qSpan?.dataset.originalText || "";
-      const origAText = aP?.dataset.originalText || "";
-
-      const questionText = origQText.toLowerCase();
-      const answerText = origAText.toLowerCase();
-      const isMatch = query === "" || questionText.includes(query) || answerText.includes(query);
+    itemsData.forEach(({ item, questionBtn, answer, qSpan, aP, origQText, origAText }) => {
+      const qTextLower = origQText.toLowerCase();
+      const aTextLower = origAText.toLowerCase();
+      const isMatch = query === "" || qTextLower.includes(query) || aTextLower.includes(query);
 
       if (isMatch) {
         item.style.display = "";
@@ -546,22 +563,27 @@ function initFAQ() {
 
         if (query.length > 0) {
           item.classList.add("active");
-          const q = item.querySelector(".faq-question");
-          if (q) q.setAttribute("aria-expanded", "true");
-          const a = item.querySelector(".faq-answer");
-          if (a) a.setAttribute("aria-hidden", "false");
+          if (questionBtn) questionBtn.setAttribute("aria-expanded", "true");
+          if (answer) answer.setAttribute("aria-hidden", "false");
 
-          // Apply yellow text highlight
-          if (qSpan) qSpan.innerHTML = origQText.replace(highlightRegex, '<mark class="faq-highlight">$1</mark>');
-          if (aP) aP.innerHTML = origAText.replace(highlightRegex, '<mark class="faq-highlight">$1</mark>');
+          if (qSpan) {
+            qSpan.innerHTML = origQText.replace(highlightRegex, '<mark class="faq-highlight">$1</mark>');
+          }
+          if (aP) {
+            aP.innerHTML = origAText.replace(highlightRegex, '<mark class="faq-highlight">$1</mark>');
+          }
         } else {
           item.classList.remove("active");
+          if (questionBtn) questionBtn.setAttribute("aria-expanded", "false");
+          if (answer) answer.setAttribute("aria-hidden", "true");
           if (qSpan) qSpan.textContent = origQText;
           if (aP) aP.textContent = origAText;
         }
       } else {
         item.style.display = "none";
         item.classList.remove("active");
+        if (questionBtn) questionBtn.setAttribute("aria-expanded", "false");
+        if (answer) answer.setAttribute("aria-hidden", "true");
         if (qSpan) qSpan.textContent = origQText;
         if (aP) aP.textContent = origAText;
       }
@@ -799,8 +821,11 @@ function initMobileNav() {
 }
 
 function initFAB() {
+  if (isFABInitialized) return;
   const wrapper = document.getElementById("fabWrapper");
   const mainBtn = document.getElementById("fabMain");
+  if (!wrapper || !mainBtn) return;
+  isFABInitialized = true;
   const backdrop = document.getElementById("fabBackdrop");
 
   const options = wrapper.querySelectorAll(".fab-option");
@@ -863,7 +888,7 @@ function initFAB() {
 }
 
 function initOfflineIndicator() {
-  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+  const isEn = isEnglish();
   const msgOffline = isEn
     ? "You are offline — browsing cached version"
     : "Olet offline-tilassa — selaat välimuistiversiota";
@@ -903,3 +928,5 @@ function initOfflineIndicator() {
     showBanner(true);
   }
 }
+
+onDOMReady(initApp);

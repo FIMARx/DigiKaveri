@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-import { readdirSync, statSync, readFileSync } from 'fs';
+import { readdirSync, statSync, readFileSync, existsSync, writeFileSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -41,6 +41,7 @@ export default defineConfig({
       context(pagePath) {
         const isEn = pagePath.includes('/en/');
         const data = isEn ? { ...en_data } : { ...fi_data };
+        data.year = new Date().getFullYear();
         
         // Page specific active state
         if (pagePath.endsWith('index.html')) data.active = 'home';
@@ -116,8 +117,9 @@ export default defineConfig({
               const fileName = href.split('/').pop().replace('.css', '');
               // Match the base name before the hash (e.g., 'guide' matches 'guide-hash.css')
               const assetKey = Object.keys(cssAssets).find(k => {
-                const baseName = k.split('/').pop().split('-')[0]; // Simple hash splitter
-                return baseName === fileName || k.includes(fileName);
+                const assetFileName = k.split('/').pop().replace('.css', '');
+                const baseName = assetFileName.replace(/-[a-zA-Z0-9_-]+$/, '');
+                return baseName === fileName || assetFileName.startsWith(fileName) || k.includes(fileName);
               });
               if (assetKey) {
                 return `<style>${cssAssets[assetKey]}</style>`;
@@ -131,6 +133,18 @@ export default defineConfig({
         // Remove CSS files from dist/assets after inlining
         for (const key of Object.keys(cssAssets)) {
           delete bundle[key];
+        }
+      }
+    },
+    {
+      name: 'auto-sitemap-lastmod',
+      closeBundle() {
+        const sitemapPath = resolve(__dirname, 'dist/sitemap.xml');
+        if (existsSync(sitemapPath)) {
+          const today = new Date().toISOString().split('T')[0];
+          let xml = readFileSync(sitemapPath, 'utf-8');
+          xml = xml.replace(/<lastmod>[^<]+<\/lastmod>/g, `<lastmod>${today}</lastmod>`);
+          writeFileSync(sitemapPath, xml);
         }
       }
     }

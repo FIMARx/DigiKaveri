@@ -1,8 +1,9 @@
 /* quiz.js - DigiKaveri Troubleshooter Quiz logic */
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
+import { onDOMReady } from './utils.js';
 
-document.addEventListener("DOMContentLoaded", () => {
+onDOMReady(() => {
   const form = document.getElementById("contactForm");
   if (!form) return;
 

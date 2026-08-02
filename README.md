@@ -1,10 +1,8 @@
-<div align="center">
-
-<img src="public/images/logo.png" width="220" alt="DigiKaveri Logo" />
-
 # DigiKaveri
 
-### Premium IT Support for Homes & Small Businesses
+![DigiKaveri Logo](public/images/logo.png)
+
+## Premium IT Support for Homes & Small Businesses
 
 **The "Digital Buddy" that speaks human — not tech jargon.**
 
@@ -13,10 +11,6 @@
 [![⚡ Build](https://img.shields.io/badge/⚡_Build-Vite_6-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![📍 Location](https://img.shields.io/badge/📍_Uusimaa-Finland-0057D9?style=for-the-badge)](https://www.google.com/maps/place/Uusimaa)
 [![🇫🇮 FI](https://img.shields.io/badge/Language-FI_%2F_EN-white?style=for-the-badge)](#-bilingual-fi--en)
-
-</div>
-
-
 
 ## 🧭 Mission
 
@@ -31,6 +25,7 @@ Based in **Uusimaa, Finland** 🇫🇮 — offering fast remote support across a
 ## ✨ Core Features
 
 ### 🧠 Smart Adaptive Remote Guide
+
 The flagship feature of the platform. The guide at `/etayhteys.html` automatically **detects the visitor's device** (Windows, macOS, Android, iOS) and presents only the relevant instructions.
 
 - **OS Auto-Detection** — Platform sniffed on page load for instant guidance
@@ -39,39 +34,50 @@ The flagship feature of the platform. The guide at `/etayhteys.html` automatical
 - **Safety First** — Built-in security notes about TeamViewer session encryption
 
 ### 📲 Progressive Web App (PWA)
+
 Full PWA capabilities enabling users to install the website as a native application on Android, iOS, and desktop:
+
 - **Offline Caching** — Caches core pages (FI & EN) so they load instantly even without an active internet connection.
 - **Immediate Activation** — Service worker utilizes `skipWaiting` and `clients.claim` lifecycles to deploy hotfixes instantly to all tabs.
 - **Brand Aligned Manifest** — Seamlessly integrates with mobile operating systems using maskable launcher icons and theme-matched startup screens.
 
 ### ✍️ Resilient troubleshooter form
+
 - **Form Persistence** — Employs `sessionStorage` to preserve troubleshooter selection choices so users don't lose progress on reload.
 - **Noscript Fallback** — Progressive enhancement styling displays all steps at once when JavaScript is inactive, enabling full access.
 
 ### 🎨 Themed Layouts & Dynamic Color Syncing
+
 - **Real-Time OS Theme Syncing** — Watches system-level preferences and changes dynamically (e.g., auto dark-mode schedules) unless manually overridden.
 - **Visual Color Highlights** — Color-codes solution grids and process steps using vibrant, accessible color schemes.
 
 ### 🌐 Bilingual (FI / EN)
+
 Full Finnish and English versions of every page, built with a clean **Handlebars SSG** architecture. Language switching is persistent via `localStorage`.
 
 ### ⏰ Live Status Beacon
+
 A real-time "Open/Closed" indicator powered by Helsinki timezone logic:
+
 - **Dynamic Pills**: Visual indicators of technician availability
 - **Polite Overlays**: Automatic service-closed modals outside business hours (09:00–21:00)
 
 ### 🔍 Live FAQ Search & Yellow Text Highlighting
+
 - **Real-Time Text Matching** — Live search bar filters questions and answers as users type.
 - **Yellow Highlight Badges** — Wraps matching query words in `<mark class="faq-highlight">` yellow highlights in both questions and expanded answers.
 - **Auto-Expansion** — Matching FAQ items automatically expand so users instantly view relevant answers.
 
 ### 📱 2-Column Mobile Segmented Controls
+
 - Native-style 2-column Segmented Controls for platform switchers (`Windows` | `macOS` and `Android` | `iOS`) that fit screens down to 320px (iPhone SE) without layout wrapping or vertical distortion.
 
 ### 📡 Offline Status Banner Indicator
+
 - Non-intrusive floating glass status pill (`"Olet offline-tilassa — selaat välimuistiversiota"`) alerting users when connection drops or restores.
 
 ### 💬 Speed Dial FAB
+
 A floating action button (speed dial) providing instant, thumb-friendly access to WhatsApp and direct calling with staggered popout animations and WCAG keyboard accessibility.
 
 ---
@@ -86,7 +92,7 @@ The platform has been "Titanium-Hardened" to meet production-grade standards for
 - **Google Search Rich Snippets**: Integrated structured `FAQPage`, `HowTo`, and `LocalBusiness` JSON-LD schemas across FI & EN pages for Google Search SERP prominence.
 - **Instant GA4 & Consent Mode v2**: Instant initialization of `window.gtag` and `window.dataLayer` with default `denied` consent states, updating dynamically upon GDPR consent acceptance.
 - **Ultra-Mobile Responsiveness (200px – 320px)**: Dedicated `@media` layout scaling for small screens with isolated table scroll containers.
-- **Cache Invalidation & SW Safeguards**: 
+- **Cache Invalidation & SW Safeguards**:
   - Integrated automated cache purging during the Service Worker activation phase to delete old caches.
   - Implemented `Cache-Control: no-cache, no-store, must-revalidate` header rules for `sw.js` in Cloudflare headers.
 - **Universal Accessibility (WCAG)**:
@@ -102,7 +108,7 @@ The platform has been "Titanium-Hardened" to meet production-grade standards for
 ## 🛠️ Service Portfolio
 
 | Service | Remote | On-Site | Description |
-|:---|:---:|:---:|:---|
+| :--- | :---: | :---: | :--- |
 | **Purchase Consulting** | ✅ | ✅ | Choosing the right laptop, tablet, or phone |
 | **Antivirus & Security** | ✅ | ✅ | Installing protection, removing malware/ads |
 | **PC Repair & Troubleshooting** | ✅ | ✅ | Fixing Windows, Mac, and Android issues |
@@ -115,12 +121,14 @@ The platform has been "Titanium-Hardened" to meet production-grade standards for
 ## ⚙️ Tech Stack
 
 ### Architecture
+
 - **Engine**: [Vite 6](https://vitejs.dev/) (Static Site Generation)
 - **Templating**: [Handlebars](https://handlebarsjs.com/) with shared partials
 - **Styling**: Vanilla CSS with a custom-built Design System
 - **Performance**: Optimized asset pipeline with sub-2s build times
 
 ### Frontend Excellence
+
 - **Typography**: Inter & Outfit via `@fontsource`
 - **Icons**: [Lucide Icons](https://lucide.dev/) (Dynamic SVG injection)
 - **Animations**: [AOS.js](https://michalsnik.github.io/aos/) (Scroll-triggered transitions)
@@ -157,9 +165,11 @@ DigiKaveri/
 ## 🚀 Development Workflow
 
 ### Prerequisites
+
 - [Node.js 22+](https://nodejs.org/)
 
 ### Quick Start
+
 ```bash
 # 1. Clone & Enter
 git clone https://github.com/FIMARx/DigiKaveri.git && cd DigiKaveri
@@ -172,6 +182,7 @@ npm run dev
 ```
 
 ### Production Build
+
 ```bash
 npm run build
 # Output ready in /dist
@@ -179,10 +190,6 @@ npm run build
 
 ---
 
-<div align="center">
+Built with ❤️ by [FIMARx](https://github.com/FIMARx)
 
-_Built with ❤️ by [FIMARx](https://github.com/FIMARx)_
-
-_"Making technology accessible, one device at a time."_
-
-</div>
+> "Making technology accessible, one device at a time."

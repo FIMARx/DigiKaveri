@@ -1,13 +1,15 @@
-const CACHE_NAME = 'digikaveri-v5';
+const CACHE_NAME = 'digikaveri-v6';
 const ASSETS = [
   '/',
   '/etayhteys.html',
   '/tietosuoja.html',
   '/kayttoehdot.html',
+  '/404.html',
   '/en/',
   '/en/remote-support.html',
   '/en/privacy-policy.html',
   '/en/terms-of-service.html',
+  '/en/404.html',
   '/favicon.ico',
   '/favicon.svg',
   '/favicon-96x96.png',

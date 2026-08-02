@@ -1,3 +1,5 @@
+export const GA_MEASUREMENT_ID = "G-XL8DBWDDMD";
+
 /**
  * Reliable Helsinki hour calculation regardless of visitor's locale.
  */
@@ -10,6 +12,25 @@ export function getFinlandHour() {
 }
 
 /**
+ * Check if current page is English version.
+ */
+export function isEnglish() {
+  const path = window.location.pathname;
+  return path === "/en" || path.startsWith("/en/");
+}
+
+/**
+ * Helper to run code when DOM is ready.
+ */
+export function onDOMReady(fn) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fn);
+  } else {
+    fn();
+  }
+}
+
+/**
  * Re-activates analytics scripts (type="text/plain") after consent is granted.
  */
 export function triggerAnalyticsExecution(category = "analytics") {
@@ -17,7 +38,7 @@ export function triggerAnalyticsExecution(category = "analytics") {
   
   if (scripts.length > 0 && category === "analytics") {
     if (typeof gtag === 'function') {
-      gtag('config', 'G-XL8DBWDDMD', { 'anonymize_ip': true });
+      gtag('config', GA_MEASUREMENT_ID, { 'anonymize_ip': true });
     }
   }
 

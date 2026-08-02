@@ -1,5 +1,6 @@
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
+import { onDOMReady, isEnglish } from './utils.js';
 
 function showToast(message, isSuccess = true) {
   let toastContainer = document.getElementById('toast-container');
@@ -63,7 +64,7 @@ function setupForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
 
-  const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+  const isEn = isEnglish();
   const t = isEn ? translations.en : translations.fi;
 
   const inputs = form.querySelectorAll("input, select, textarea");
@@ -157,7 +158,7 @@ function setupForm(formId) {
 
     btn.disabled = true;
     btn.innerHTML = `${t.loading} <i data-lucide="loader-2" class="spin"></i>`;
-    btn.style.background = "#2563EB";
+    btn.style.background = "var(--primary)";
     form.classList.add("form-submitting");
     try { createIcons({ icons: ICON_SET }); } catch (e) {}
 
@@ -179,7 +180,7 @@ function setupForm(formId) {
 
       if (response.status === 200 && result && result.success) {
         btn.innerHTML = `${t.success} <i data-lucide="check"></i>`;
-        btn.style.background = "#10B981";
+        btn.style.background = "var(--success)";
         try { createIcons({ icons: ICON_SET }); } catch (e) {}
         
         // Visual feedback: replace form content with success message
@@ -220,28 +221,22 @@ function setupForm(formId) {
 
       } else {
         btn.innerHTML = t.error;
-        btn.style.background = "#EF4444";
+        btn.style.background = "var(--error)";
         btn.disabled = false;
         form.classList.remove("form-submitting");
-
+        showToast(t.sendError, false);
       }
     } catch (error) {
       btn.innerHTML = t.connError;
-      btn.style.background = "#EF4444";
+      btn.style.background = "var(--error)";
       btn.disabled = false;
       form.classList.remove("form-submitting");
-
+      showToast(t.netError, false);
     }
   });
 }
 
-function onDOMReady(fn) {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", fn);
-  } else {
-    fn();
-  }
-}
+
 
 onDOMReady(() => {
   setupForm("contactForm");

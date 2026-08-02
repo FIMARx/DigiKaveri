@@ -1,8 +1,9 @@
 /* estimator.js - DigiKaveri Dynamic Price Calculator */
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
+import { isEnglish, onDOMReady } from './utils.js';
 
-const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+const isEn = isEnglish();
 
 const translations = {
   fi: {
@@ -69,11 +70,13 @@ const SERVICES = {
   annual: { id: 'annual', basePrice: 89, isEligible: true, step: 1, unit: t.unitFlat }
 };
 
-// Base coordinates for Paapuuri 2, Espoo
+// Base coordinates for Espoo
 const START_LAT = 60.1585;
 const START_LON = 24.6468;
+const TRAVEL_RATE_PER_KM = 0.90;
+const TAX_DEDUCTION_RATE = 0.60;
 
-document.addEventListener("DOMContentLoaded", () => {
+onDOMReady(() => {
   const container = document.getElementById("interactive-estimator");
   if (!container) return;
 
@@ -249,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
         invoiceTotal += cost;
 
         if (service.isEligible && state.deduction) {
-          savingsTotal += cost * 0.60;
+          savingsTotal += cost * TAX_DEDUCTION_RATE;
         }
       }
     });
@@ -387,10 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const distanceKm = routeData.routes[0].distance / 1000;
-        
-        // standard kilometer support rate in Finland (approx 0.55€ / km driving cost)
-        const travelRate = 0.90;
-        const totalTravelCost = distanceKm * travelRate;
+        const totalTravelCost = distanceKm * TRAVEL_RATE_PER_KM;
 
         state.address = query;
         state.distanceKm = distanceKm;
@@ -440,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
           msg += `\nTravel Details:\n`;
           msg += `- Address: ${state.address || 'Not calculated'}\n`;
           msg += `- Distance from Saunalahti, Espoo: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}\n`;
-          msg += `- Travel Fee (0.90 €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
+          msg += `- Travel Fee (${TRAVEL_RATE_PER_KM.toFixed(2)} €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
         }
 
         const invoiceTotal = (state.remote.checked ? SERVICES.remote.basePrice * state.remote.qty : 0) + 
@@ -448,8 +448,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty : 0);
         let savings = 0;
         if (state.deduction) {
-          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * 0.60 : 0) + 
-                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * 0.60 : 0);
+          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * TAX_DEDUCTION_RATE : 0) + 
+                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * TAX_DEDUCTION_RATE : 0);
         }
         const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
         const finalTotal = invoiceTotal + currentTravelCost - savings;
@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
           msg += `\nSijainti & Matkakulut:\n`;
           msg += `- Osoite: ${state.address || 'Ei laskettu'}\n`;
           msg += `- Arvioitu ajomatka Saunalahdesta, Espoosta: ${state.distanceKm ? state.distanceKm.toFixed(1) + ' km' : 'N/A'}\n`;
-          msg += `- Matkakulut (0.90 €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
+          msg += `- Matkakulut (${TRAVEL_RATE_PER_KM.toFixed(2)} €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
         }
 
         const invoiceTotal = (state.remote.checked ? SERVICES.remote.basePrice * state.remote.qty : 0) + 
@@ -486,8 +486,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty : 0);
         let savings = 0;
         if (state.deduction) {
-          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * 0.60 : 0) + 
-                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * 0.60 : 0);
+          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * TAX_DEDUCTION_RATE : 0) + 
+                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * TAX_DEDUCTION_RATE : 0);
         }
         const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
         const finalTotal = invoiceTotal + currentTravelCost - savings;
