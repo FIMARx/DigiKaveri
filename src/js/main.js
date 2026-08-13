@@ -899,9 +899,9 @@ function initFAB() {
 function initOfflineIndicator() {
   const isEn = isEnglish();
   const msgOffline = isEn
-    ? "You are offline — browsing cached version"
-    : "Olet offline-tilassa — selaat välimuistiversiota";
-  const msgOnline = isEn ? "Connection restored" : "Yhteys palautunut";
+    ? "You are offline (browsing saved version)"
+    : "Ei verkkoyhteyttä (selaat tallennettua versiota)";
+  const msgOnline = isEn ? "Connection restored" : "Verkkoyhteys palautui";
 
   const banner = document.createElement("div");
   banner.className = "offline-banner";
