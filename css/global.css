@@ -5043,6 +5043,7 @@ body.has-campaign-banner {
   font-size: 0.76rem;
   color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   white-space: nowrap;
   transition: color 0.2s ease;
