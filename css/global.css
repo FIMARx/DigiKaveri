@@ -4729,13 +4729,13 @@ i, svg,
 /* Offline Banner Status Indicator */
 .offline-banner {
   position: fixed;
-  top: 80px;
+  top: calc(env(safe-area-inset-top, 0px) + 76px);
   left: 50%;
   transform: translateX(-50%) translateY(-20px) scale(0.95);
   background: var(--surface);
   color: var(--text-dark);
   border: 1px solid var(--border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 8px 18px;
   border-radius: 100px;
   font-size: 0.85rem;
@@ -4746,6 +4746,10 @@ i, svg,
   z-index: 10001;
   opacity: 0;
   pointer-events: none;
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -4760,11 +4764,20 @@ i, svg,
   height: 9px;
   border-radius: 50%;
   background: #ef4444;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
   flex-shrink: 0;
 }
 
 .offline-banner.online-restored .offline-banner-dot {
   background: #22c55e;
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+}
+
+@media (max-width: 600px) {
+  .offline-banner {
+    top: calc(env(safe-area-inset-top, 0px) + 68px);
+    font-size: 0.78rem;
+    padding: 7px 14px;
+    gap: 8px;
+  }
 }

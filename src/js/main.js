@@ -911,8 +911,11 @@ function initOfflineIndicator() {
   document.body.appendChild(banner);
 
   let timer = null;
+  let isCurrentlyOffline = false;
 
   const showBanner = (isOffline) => {
+    if (isOffline === isCurrentlyOffline && isOffline) return;
+    isCurrentlyOffline = isOffline;
     if (timer) clearTimeout(timer);
     const textEl = banner.querySelector(".offline-banner-text");
 
@@ -930,12 +933,42 @@ function initOfflineIndicator() {
     }
   };
 
-  window.addEventListener("offline", () => showBanner(true));
-  window.addEventListener("online", () => showBanner(false));
+  const checkConnectivity = async () => {
+    if (!navigator.onLine) {
+      showBanner(true);
+      return;
+    }
+    // Mobile browsers (iOS Safari, Android Chrome) can have navigator.onLine === true even when data is turned off!
+    // Perform a fast HEAD request to check actual connectivity
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
+      const res = await fetch('/favicon.ico?_ping=' + Date.now(), {
+        method: 'HEAD',
+        cache: 'no-store',
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      if (res.ok || res.type === 'opaque') {
+        if (isCurrentlyOffline) showBanner(false);
+      } else {
+        showBanner(true);
+      }
+    } catch (err) {
+      // If network request failed (e.g. mobile data turned off), trigger offline banner
+      showBanner(true);
+    }
+  };
 
-  if (!navigator.onLine) {
-    showBanner(true);
-  }
+  window.addEventListener("offline", () => showBanner(true));
+  window.addEventListener("online", () => checkConnectivity());
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkConnectivity();
+  });
+
+  // Check immediately and poll periodically
+  checkConnectivity();
+  setInterval(checkConnectivity, 12000);
 }
 
 onDOMReady(initApp);

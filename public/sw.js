@@ -1,4 +1,4 @@
-const CACHE_NAME = 'digikaveri-v7';
+const CACHE_NAME = 'digikaveri-v8';
 const ASSETS = [
   '/',
   '/etayhteys.html',
@@ -45,9 +45,12 @@ self.addEventListener('fetch', (e) => {
 
   const url = new URL(e.request.url);
 
-  // CRITICAL FIX: Only handle same-origin requests in Service Worker!
-  // Cross-origin requests (e.g. analytics, APIs, map routing) must NOT be routed through
-  // sw.js fetch(), which triggers strict connect-src CSP violations and breaks CORS/opaque loads.
+  // Connectivity check pings bypass service worker to test actual network connection
+  if (url.searchParams.has('_ping')) {
+    return;
+  }
+
+  // Only handle same-origin requests in Service Worker
   if (url.origin !== self.location.origin) {
     return;
   }
