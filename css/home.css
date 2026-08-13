@@ -3265,7 +3265,6 @@ header#home {
 
 /* Comparison Table */
 .comparison-table-wrapper {
-  -webkit-overflow-scrolling: touch;
   overflow-x: auto;
   border-radius: var(--radius-lg, 20px);
   border: 1px solid var(--border);
@@ -3450,6 +3449,16 @@ header#home {
     width: 100%;
     justify-content: center;
   }
+}
+
+.comparison-disclaimer {
+  font-size: 0.76rem;
+  color: var(--text-muted, var(--text-light));
+  text-align: center;
+  margin: -20px auto 24px;
+  line-height: 1.45;
+  max-width: 760px;
+  opacity: 0.85;
 }
 
 @media (max-width: 600px) {
