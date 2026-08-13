@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "id": "senior-student-promo-2026",
+  "startDate": "2026-08-01T00:00:00",
+  "endDate": "2026-09-30T23:59:59",
+  "showCountdown": true,
+  "theme": "sunset",
+  "ctaLink": "#contact-detailed",
+  "fi": {
+    "badge": "Erikoisetu",
+    "title": "Seniori- ja opiskelijaetu: -15% IT-tuesta",
+    "desc": "Tarjoamme eläkeläisille ja opiskelijoille 15% alennuksen kaikista tukipalveluistamme.",
+    "ctaText": "Hyödynnä etu",
+    "countdownLabel": "Etu voimassa vielä:"
+  },
+  "en": {
+    "badge": "Special Offer",
+    "title": "Senior & Student Offer: 15% Off IT Support",
+    "desc": "We offer seniors and students 15% off all remote and on-site IT support services.",
+    "ctaText": "Claim Offer",
+    "countdownLabel": "Offer ends in:"
+  }
+}

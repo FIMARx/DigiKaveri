@@ -8,6 +8,7 @@ import { ICON_SET } from "./icons";
 import { getFinlandHour, triggerAnalyticsExecution, onDOMReady, isEnglish, GA_MEASUREMENT_ID } from "./utils.js";
 import "./estimator.js";
 import "./quiz.js";
+import { initCampaignBanner } from "./campaign.js";
 
 if (typeof window !== "undefined") {
   window.AOS = AOS;
@@ -74,6 +75,7 @@ function initApp() {
   initFAQ(); // Immediate FAQ search and accordion responsiveness
   initMobileDropdowns();
   initFAB();
+  initCampaignBanner();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
