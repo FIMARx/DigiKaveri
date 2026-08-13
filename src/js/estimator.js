@@ -3,6 +3,7 @@ import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 import { isEnglish, onDOMReady } from './utils.js';
 import campaignConfig from '../data/campaign.json';
+import { validatePromoCode, markPromoCodeRedeemed } from './promo-validator.js';
 
 const isEn = isEnglish();
 
@@ -500,31 +501,28 @@ onDOMReady(() => {
       return;
     }
 
-    const configCode = (campaignConfig.promoCode || "PROMO15").trim().toUpperCase();
-    const enteredCode = rawCode.toUpperCase();
+    const result = validatePromoCode(rawCode, campaignConfig, isEn ? "en" : "fi");
 
-    // Validate code against active campaign or general codes
-    if (enteredCode === configCode || enteredCode === "PROMO15" || enteredCode === "SENIORI15" || enteredCode === "OPISKELIJA15") {
-      const discount = campaignConfig.discountPercent || 15;
-      state.promoCode = enteredCode;
-      state.discountPercent = discount;
+    if (result.valid) {
+      state.promoCode = result.code;
+      state.discountPercent = result.discount;
+      state.isCheatCode = result.isCheatCode;
       
       if (promoFeedbackEl) {
-        promoFeedbackEl.textContent = isEn 
-          ? `✓ Code "${enteredCode}" applied (-${discount}%)!` 
-          : `✓ Koodi "${enteredCode}" aktivoitu (-${discount}%)!`;
+        promoFeedbackEl.textContent = result.message;
         promoFeedbackEl.className = "promo-feedback success";
       }
-      if (promoInput) promoInput.value = enteredCode;
+      if (promoInput) promoInput.value = result.code;
       if (promoInputWrapper) promoInputWrapper.classList.remove("hidden");
       if (promoToggleBtn) promoToggleBtn.classList.add("active");
     } else {
       state.promoCode = "";
       state.discountPercent = 0;
+      state.isCheatCode = false;
       if (promoFeedbackEl) {
-        promoFeedbackEl.textContent = isEn 
+        promoFeedbackEl.textContent = result.message || (isEn 
           ? "✗ Invalid or expired promo code" 
-          : "✗ Virheellinen tai vanhentunut alennuskoodi";
+          : "✗ Virheellinen tai vanhentunut alennuskoodi");
         promoFeedbackEl.className = "promo-feedback error";
       }
     }
@@ -553,16 +551,22 @@ onDOMReady(() => {
     }
     const summaryCard = container.querySelector(".estimator-summary-card");
     if (summaryCard) {
+      summaryCard.classList.remove("promo-highlight-pulse");
+      void summaryCard.offsetWidth; // Force reflow
       summaryCard.classList.add("promo-highlight-pulse");
-      setTimeout(() => summaryCard.classList.remove("promo-highlight-pulse"), 1600);
     }
   };
 
-  // Pre-fill calculated distance & promo inside final contact textarea on click
-  const ctaBtn = container.querySelector(".btn-estimator-cta");
-  if (ctaBtn) {
-    ctaBtn.addEventListener("click", () => {
-      const messageField = document.getElementById("d-message");
+  // Wire booking button to prefill contact textarea
+  const bookBtn = document.getElementById("est-book-btn");
+  if (bookBtn) {
+    bookBtn.addEventListener("click", () => {
+      // Mark single-use cheat code as redeemed when proceeding to booking
+      if (state.isCheatCode && state.promoCode) {
+        markPromoCodeRedeemed(state.promoCode);
+      }
+
+      const messageField = document.getElementById("message") || document.querySelector("textarea[name='message']");
       if (!messageField) return;
 
       let rawServiceCost = 0;
@@ -603,7 +607,7 @@ onDOMReady(() => {
         }
 
         if (state.promoCode && promoDiscount > 0) {
-          msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)\n`;
+          msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isCheatCode ? ' [Special 1-time referral/client benefit]' : ''}\n`;
         }
 
         msg += `Tax Deduction: ${state.deduction ? 'Yes (-60% on labor)' : 'No'}\n`;
@@ -634,7 +638,7 @@ onDOMReady(() => {
         }
 
         if (state.promoCode && promoDiscount > 0) {
-          msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)\n`;
+          msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isCheatCode ? ' [Uniikki asiakasetu]' : ''}\n`;
         }
 
         msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-60% työn osuudesta)' : 'Ei'}\n`;
