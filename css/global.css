@@ -4807,6 +4807,14 @@ i, svg,
   }
 }
 
+body {
+  transition: padding-top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.has-campaign-banner {
+  padding-top: var(--campaign-banner-height, 0px);
+}
+
 /* ==========================================================================
    CAMPAIGN & DISCOUNT PROMO BANNER
    ========================================================================== */
@@ -4821,13 +4829,9 @@ i, svg,
   padding: 10px 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
   animation: campaignSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
   box-sizing: border-box;
-  transform: translateZ(0);
-}
-
-body.has-campaign-banner {
-  padding-top: var(--campaign-banner-height, 0px);
+  transform: translateY(0);
 }
 
 @keyframes campaignSlideDown {
@@ -4842,8 +4846,8 @@ body.has-campaign-banner {
 }
 
 .campaign-banner.campaign-closing {
-  opacity: 0;
-  transform: translateY(-100%);
+  opacity: 0 !important;
+  transform: translateY(-100%) !important;
   pointer-events: none;
 }
 
@@ -5023,6 +5027,37 @@ body.has-campaign-banner {
 
 .campaign-cta-btn:hover svg {
   transform: translateX(3px);
+}
+
+.campaign-dismiss-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.campaign-dont-show-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.campaign-dont-show-label:hover {
+  color: #ffffff;
+}
+
+.campaign-dont-show-chk {
+  width: 14px;
+  height: 14px;
+  accent-color: #ffffff;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .campaign-dismiss-btn {

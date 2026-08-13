@@ -60,18 +60,24 @@ export function initCampaignBanner() {
       ` : ""}
 
       <div class="campaign-actions">
-        <a href="${campaignConfig.ctaLink || "#contact-detailed"}" class="campaign-cta-btn">
+        <a href="${campaignConfig.ctaLink || "#interactive-estimator"}" class="campaign-cta-btn">
           ${localized.ctaText || (lang === "en" ? "Claim Offer" : "Hyödynnä etu")}
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
-        <button type="button" class="campaign-dismiss-btn" id="dismissCampaignBtn" aria-label="${lang === "en" ? "Close announcement" : "Sulje ilmoitus"}">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+        <div class="campaign-dismiss-group">
+          <label class="campaign-dont-show-label" title="${lang === "en" ? "Don't show this announcement on next visits" : "Älä näytä tätä ilmoitusta enää seuraavilla kerroilla"}">
+            <input type="checkbox" id="campaignDontShowAgain" class="campaign-dont-show-chk">
+            <span>${lang === "en" ? "Don't show again" : "Älä näytä enää"}</span>
+          </label>
+          <button type="button" class="campaign-dismiss-btn" id="dismissCampaignBtn" aria-label="${lang === "en" ? "Close announcement" : "Sulje ilmoitus"}">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   `;
@@ -87,7 +93,7 @@ export function initCampaignBanner() {
   document.body.classList.add("has-campaign-banner");
 
   const updateBannerHeight = () => {
-    if (!banner || !banner.isConnected) return;
+    if (!banner || !banner.isConnected || banner.classList.contains("campaign-closing")) return;
     const h = banner.offsetHeight;
     document.documentElement.style.setProperty("--campaign-banner-height", `${h}px`);
   };
@@ -101,19 +107,25 @@ export function initCampaignBanner() {
   }
   updateBannerHeight();
 
-  // Close banner safely
+  // Close banner safely and smoothly
   const closeBanner = () => {
     banner.classList.add("campaign-closing");
     document.documentElement.style.setProperty("--campaign-banner-height", "0px");
-    document.body.classList.remove("has-campaign-banner");
-    try {
-      localStorage.setItem(storageKey, "1");
-    } catch (_) {}
+    
+    // Save to localStorage ONLY if user checked "Älä näytä enää"
+    const dontShowChk = banner.querySelector("#campaignDontShowAgain");
+    if (dontShowChk && dontShowChk.checked) {
+      try {
+        localStorage.setItem(storageKey, "1");
+      } catch (_) {}
+    }
+
     setTimeout(() => {
+      document.body.classList.remove("has-campaign-banner");
       if (banner && banner.parentNode) {
         banner.remove();
       }
-    }, 350);
+    }, 420);
   };
 
   // Handle Dismiss Button
