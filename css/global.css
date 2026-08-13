@@ -4753,8 +4753,8 @@ i, svg,
   width: max-content;
   max-width: calc(100vw - 20px);
   box-sizing: border-box;
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
