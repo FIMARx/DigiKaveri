@@ -232,7 +232,7 @@ onDOMReady(() => {
           </div>
         </div>
 
-        <a href="#contact-detailed" class="btn-estimator-cta">
+        <a href="#contact-detailed" class="btn-estimator-cta" id="est-book-btn">
           ${t.bookBtn} <i data-lucide="arrow-right"></i>
         </a>
       </div>
@@ -558,7 +558,7 @@ onDOMReady(() => {
   };
 
   // Wire booking button to prefill contact textarea
-  const bookBtn = document.getElementById("est-book-btn");
+  const bookBtn = document.getElementById("est-book-btn") || container.querySelector(".btn-estimator-cta");
   if (bookBtn) {
     bookBtn.addEventListener("click", () => {
       // Mark single-use cheat code as redeemed when proceeding to booking
@@ -566,19 +566,17 @@ onDOMReady(() => {
         markPromoCodeRedeemed(state.promoCode);
       }
 
-      const messageField = document.getElementById("message") || document.querySelector("textarea[name='message']");
+      const messageField = document.getElementById("d-message") || 
+                           document.getElementById("message") || 
+                           document.querySelector("textarea[name='message']");
       if (!messageField) return;
 
-      let rawServiceCost = 0;
-      let rawEligibleCost = 0;
+      const rawServiceCost = (state.remote.checked ? 29 * state.remote.qty : 0) +
+        (state.home.checked ? 59 * state.home.qty : 0) +
+        (state.annual.checked ? 89 * state.annual.qty : 0);
 
-      Object.keys(SERVICES).forEach(k => {
-        if (state[k].checked) {
-          const c = SERVICES[k].basePrice * state[k].qty;
-          rawServiceCost += c;
-          if (SERVICES[k].isEligible) rawEligibleCost += c;
-        }
-      });
+      const rawEligibleCost = (state.home.checked ? 59 * state.home.qty : 0) +
+        (state.annual.checked ? 89 * state.annual.qty : 0);
 
       const promoDiscount = state.discountPercent > 0 
         ? (rawServiceCost * (state.discountPercent / 100)) 
@@ -658,6 +656,8 @@ onDOMReady(() => {
       }
       
       messageField.value = msg;
+      messageField.dispatchEvent(new Event('input', { bubbles: true }));
+      messageField.dispatchEvent(new Event('change', { bubbles: true }));
     });
   }
 
