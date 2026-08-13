@@ -243,3 +243,16 @@ if (document.readyState === "loading") {
 } else {
   initWithRetry();
 }
+
+// Fallback click listener for footer and custom cookie buttons
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".footer-cookie-link, [data-cc='show-preferencesModal'], [data-cc='show-preferences']");
+  if (btn) {
+    e.preventDefault();
+    if (typeof CookieConsent !== "undefined" && typeof CookieConsent.showPreferences === "function") {
+      CookieConsent.showPreferences();
+    } else if (window.CookieConsent && typeof window.CookieConsent.showPreferences === "function") {
+      window.CookieConsent.showPreferences();
+    }
+  }
+});
