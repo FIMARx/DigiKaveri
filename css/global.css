@@ -3058,7 +3058,7 @@ body[data-theme="dark"] #cc-main .pm__body::-webkit-scrollbar-thumb {
   color: var(--cc-text-color) !important;
   margin: 0 !important;
   padding-top: 12px !important;
-  border-top: none !important;
+  border-top: 1px solid var(--cc-border) !important;
 }
 
 /* ── FOOTER BUTTONS ── */
