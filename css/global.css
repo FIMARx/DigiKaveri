@@ -3047,6 +3047,7 @@ body[data-theme="dark"] #cc-main .pm__body::-webkit-scrollbar-thumb {
 #cc-main .pm__section--toggle .pm__section-desc-wrapper,
 #cc-main .pm__section--expandable .pm__section-desc-wrapper {
   background: transparent !important;
+  border: none !important;
   padding: 0 18px 16px 18px !important;
 }
 
@@ -3057,7 +3058,7 @@ body[data-theme="dark"] #cc-main .pm__body::-webkit-scrollbar-thumb {
   color: var(--cc-text-color) !important;
   margin: 0 !important;
   padding-top: 12px !important;
-  border-top: 1px solid var(--cc-border) !important;
+  border-top: none !important;
 }
 
 /* ── FOOTER BUTTONS ── */
