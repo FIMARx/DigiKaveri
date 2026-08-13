@@ -34,7 +34,7 @@ const translations = {
     distLabel: "Etäisyys:",
     routeError: "Osoitetta ei löytynyt tai matkaa ei voitu laskea. Tarkista osoite ja kokeile uudelleen.",
     havePromoCode: "Onko sinulla alennuskoodi?",
-    promoPlaceholder: "Syötä koodi (esim. PROMO15)",
+    promoPlaceholder: "Syötä alennuskoodi...",
     apply: "Käytä",
     promoDiscountLabel: "Alennuskoodi",
   },
@@ -65,7 +65,7 @@ const translations = {
     distLabel: "Distance:",
     routeError: "Address not found or route could not be calculated. Please check the address and try again.",
     havePromoCode: "Have a promo code?",
-    promoPlaceholder: "Enter code (e.g. PROMO15)",
+    promoPlaceholder: "Enter promo code...",
     apply: "Apply",
     promoDiscountLabel: "Promo discount",
   }
@@ -185,12 +185,15 @@ onDOMReady(() => {
 
         <!-- Promo Code Section -->
         <div class="estimator-promo-group" id="est-promo-group">
-          <button type="button" class="promo-toggle-btn" id="promo-toggle-btn">
-            <i data-lucide="tag" aria-hidden="true"></i>
-            <span>${t.havePromoCode}</span>
+          <button type="button" class="promo-toggle-btn" id="promo-toggle-btn" aria-expanded="false">
+            <div class="promo-toggle-left">
+              <i data-lucide="tag" aria-hidden="true"></i>
+              <span>${t.havePromoCode}</span>
+            </div>
+            <i data-lucide="chevron-down" class="promo-chevron" aria-hidden="true"></i>
           </button>
           <div class="promo-input-wrapper hidden" id="promo-input-wrapper">
-            <input type="text" id="est-promo-input" placeholder="${t.promoPlaceholder}" class="promo-input" maxlength="24">
+            <input type="text" id="est-promo-input" placeholder="${t.promoPlaceholder}" class="promo-input" maxlength="24" autocomplete="off" spellcheck="false">
             <button type="button" id="est-promo-apply-btn" class="btn-promo-apply">${t.apply}</button>
           </div>
           <p id="est-promo-feedback" class="promo-feedback hidden"></p>
