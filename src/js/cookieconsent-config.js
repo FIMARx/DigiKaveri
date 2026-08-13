@@ -1,7 +1,14 @@
+import "vanilla-cookieconsent/dist/cookieconsent.css";
+import * as CookieConsent from "vanilla-cookieconsent";
 import { triggerAnalyticsExecution } from "./utils.js";
 
+// Make CookieConsent globally available for inline or other module access
+if (typeof window !== "undefined") {
+  window.CookieConsent = CookieConsent;
+}
+
 const runCookieConsent = () => {
-  if (typeof CookieConsent === "undefined") return false; // not ready yet
+  if (!CookieConsent || typeof CookieConsent.run !== "function") return false;
 
   CookieConsent.run({
     // Handle Global Privacy Control via config rather than hard return

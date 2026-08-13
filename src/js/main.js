@@ -1,3 +1,5 @@
+import "aos/dist/aos.css";
+import AOS from "aos";
 import "/css/variables.css";
 import "/css/global.css";
 import "/css/home.css";
@@ -6,6 +8,10 @@ import { ICON_SET } from "./icons";
 import { getFinlandHour, triggerAnalyticsExecution, onDOMReady, isEnglish, GA_MEASUREMENT_ID } from "./utils.js";
 import "./estimator.js";
 import "./quiz.js";
+
+if (typeof window !== "undefined") {
+  window.AOS = AOS;
+}
 
 let isInitialized = false;
 let statusController = null;
@@ -411,6 +417,9 @@ function loadAnalytics() {
     script.type = type;
     script.setAttribute("data-cookiecategory", "analytics");
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    script.onerror = () => {
+      // Silently ignore if blocked by browser ad blocker / privacy extension
+    };
     document.head.appendChild(script);
 
     // Fire config immediately if we already have consent

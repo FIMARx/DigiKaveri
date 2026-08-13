@@ -1,4 +1,4 @@
-const CACHE_NAME = 'digikaveri-v6';
+const CACHE_NAME = 'digikaveri-v7';
 const ASSETS = [
   '/',
   '/etayhteys.html',
@@ -43,6 +43,15 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
 
+  const url = new URL(e.request.url);
+
+  // CRITICAL FIX: Only handle same-origin requests in Service Worker!
+  // Cross-origin requests (e.g. analytics, APIs, map routing) must NOT be routed through
+  // sw.js fetch(), which triggers strict connect-src CSP violations and breaks CORS/opaque loads.
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
   // Navigation / HTML requests: Network first, fallback to cache for offline support
   if (e.request.mode === 'navigate' || e.request.destination === 'document') {
     e.respondWith(
@@ -59,8 +68,24 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Static assets: Cache first, fallback to network
+  // Static assets (same origin): Cache first, fallback to network
   e.respondWith(
-    caches.match(e.request).then((response) => response || fetch(e.request))
+    caches.match(e.request).then((response) => {
+      if (response) {
+        return response;
+      }
+      return fetch(e.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(e.request, responseClone));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          // Graceful fallback if offline or network error
+          return caches.match(e.request);
+        });
+    })
   );
 });
