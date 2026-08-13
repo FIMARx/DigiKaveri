@@ -2,6 +2,7 @@
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 import { isEnglish, onDOMReady } from './utils.js';
+import campaignConfig from '../data/campaign.json';
 
 const isEn = isEnglish();
 
@@ -32,6 +33,10 @@ const translations = {
     calculating: "Lasketaan...",
     distLabel: "Etäisyys:",
     routeError: "Osoitetta ei löytynyt tai matkaa ei voitu laskea. Tarkista osoite ja kokeile uudelleen.",
+    havePromoCode: "Onko sinulla alennuskoodi?",
+    promoPlaceholder: "Syötä koodi (esim. PROMO15)",
+    apply: "Käytä",
+    promoDiscountLabel: "Alennuskoodi",
   },
   en: {
     remote: "Remote Support",
@@ -59,6 +64,10 @@ const translations = {
     calculating: "Calculating...",
     distLabel: "Distance:",
     routeError: "Address not found or route could not be calculated. Please check the address and try again.",
+    havePromoCode: "Have a promo code?",
+    promoPlaceholder: "Enter code (e.g. PROMO15)",
+    apply: "Apply",
+    promoDiscountLabel: "Promo discount",
   }
 };
 
@@ -173,6 +182,19 @@ onDOMReady(() => {
           </div>
           <p id="est-dist-feedback" class="dist-feedback hidden"></p>
         </div>
+
+        <!-- Promo Code Section -->
+        <div class="estimator-promo-group" id="est-promo-group">
+          <button type="button" class="promo-toggle-btn" id="promo-toggle-btn">
+            <i data-lucide="tag" aria-hidden="true"></i>
+            <span>${t.havePromoCode}</span>
+          </button>
+          <div class="promo-input-wrapper hidden" id="promo-input-wrapper">
+            <input type="text" id="est-promo-input" placeholder="${t.promoPlaceholder}" class="promo-input" maxlength="24">
+            <button type="button" id="est-promo-apply-btn" class="btn-promo-apply">${t.apply}</button>
+          </div>
+          <p id="est-promo-feedback" class="promo-feedback hidden"></p>
+        </div>
       </div>
 
       <!-- Right: Summary -->
@@ -186,6 +208,10 @@ onDOMReady(() => {
           <div class="summary-row">
             <span>${t.invoiceTotal}</span>
             <span class="price-val" id="summary-invoice-total">0 €</span>
+          </div>
+          <div class="summary-row promo-row" id="summary-promo-row" style="display: none;">
+            <span id="summary-promo-label">${t.promoDiscountLabel}:</span>
+            <span class="price-val promo-val" id="summary-promo-total">-0 €</span>
           </div>
           <div class="summary-row deduction-row" id="summary-savings-row">
             <span>${t.savings}</span>
@@ -217,12 +243,14 @@ onDOMReady(() => {
     deduction: true,
     address: "",
     distanceKm: 0,
-    travelCost: 0
+    travelCost: 0,
+    promoCode: "",
+    discountPercent: 0
   };
 
   const updateCalculator = () => {
-    let invoiceTotal = 0;
-    let savingsTotal = 0;
+    let rawServiceTotal = 0;
+    let rawEligibleTotal = 0;
 
     const requiresHomeVisit = state.home.checked || state.annual.checked;
 
@@ -249,21 +277,46 @@ onDOMReady(() => {
 
       if (userChoice.checked) {
         const cost = service.basePrice * userChoice.qty;
-        invoiceTotal += cost;
+        rawServiceTotal += cost;
 
-        if (service.isEligible && state.deduction) {
-          savingsTotal += cost * TAX_DEDUCTION_RATE;
+        if (service.isEligible) {
+          rawEligibleTotal += cost;
         }
       }
     });
 
+    // Compute Promo discount
+    const promoDiscountAmount = state.discountPercent > 0 
+      ? (rawServiceTotal * (state.discountPercent / 100)) 
+      : 0;
+
+    const discountedEligibleTotal = state.discountPercent > 0
+      ? (rawEligibleTotal * (1 - (state.discountPercent / 100)))
+      : rawEligibleTotal;
+
+    const savingsTotal = state.deduction 
+      ? (discountedEligibleTotal * TAX_DEDUCTION_RATE)
+      : 0;
+
     // Reset travel cost if no home visit is required
     const currentTravelCost = requiresHomeVisit ? state.travelCost : 0;
-    const finalTotal = invoiceTotal + currentTravelCost - savingsTotal;
+    const finalTotal = (rawServiceTotal - promoDiscountAmount) + currentTravelCost - savingsTotal;
 
     // Update DOM
-    document.getElementById("summary-invoice-total").textContent = `${invoiceTotal} €`;
+    document.getElementById("summary-invoice-total").textContent = `${rawServiceTotal} €`;
     
+    // Promo Row
+    const promoRow = document.getElementById("summary-promo-row");
+    const promoLabel = document.getElementById("summary-promo-label");
+    const promoVal = document.getElementById("summary-promo-total");
+    if (promoRow && promoDiscountAmount > 0) {
+      promoRow.style.display = "flex";
+      if (promoLabel) promoLabel.textContent = `${t.promoDiscountLabel} (${state.promoCode}):`;
+      if (promoVal) promoVal.textContent = `-${Math.round(promoDiscountAmount)} €`;
+    } else if (promoRow) {
+      promoRow.style.display = "none";
+    }
+
     // Update Travel cost line
     const travelTotalEl = document.getElementById("summary-travel-total");
     if (requiresHomeVisit && currentTravelCost > 0) {
@@ -413,12 +466,124 @@ onDOMReady(() => {
     });
   }
 
-  // Pre-fill calculated distance inside final contact textarea on click
+  // Promo code interaction
+  const promoToggleBtn = document.getElementById("promo-toggle-btn");
+  const promoInputWrapper = document.getElementById("promo-input-wrapper");
+  const promoInput = document.getElementById("est-promo-input");
+  const promoApplyBtn = document.getElementById("est-promo-apply-btn");
+  const promoFeedbackEl = document.getElementById("est-promo-feedback");
+
+  if (promoToggleBtn && promoInputWrapper) {
+    promoToggleBtn.addEventListener("click", () => {
+      const isHidden = promoInputWrapper.classList.contains("hidden");
+      promoInputWrapper.classList.toggle("hidden", !isHidden);
+      promoToggleBtn.classList.toggle("active", isHidden);
+      if (isHidden && promoInput) {
+        promoInput.focus();
+      }
+    });
+  }
+
+  const applyPromo = (codeToApply) => {
+    const rawCode = (codeToApply || (promoInput ? promoInput.value : "")).trim();
+    if (!rawCode) {
+      state.promoCode = "";
+      state.discountPercent = 0;
+      if (promoFeedbackEl) {
+        promoFeedbackEl.textContent = "";
+        promoFeedbackEl.className = "promo-feedback hidden";
+      }
+      updateCalculator();
+      return;
+    }
+
+    const configCode = (campaignConfig.promoCode || "PROMO15").trim().toUpperCase();
+    const enteredCode = rawCode.toUpperCase();
+
+    // Validate code against active campaign or general codes
+    if (enteredCode === configCode || enteredCode === "PROMO15" || enteredCode === "SENIORI15" || enteredCode === "OPISKELIJA15") {
+      const discount = campaignConfig.discountPercent || 15;
+      state.promoCode = enteredCode;
+      state.discountPercent = discount;
+      
+      if (promoFeedbackEl) {
+        promoFeedbackEl.textContent = isEn 
+          ? `✓ Code "${enteredCode}" applied (-${discount}%)!` 
+          : `✓ Koodi "${enteredCode}" aktivoitu (-${discount}%)!`;
+        promoFeedbackEl.className = "promo-feedback success";
+      }
+      if (promoInput) promoInput.value = enteredCode;
+      if (promoInputWrapper) promoInputWrapper.classList.remove("hidden");
+      if (promoToggleBtn) promoToggleBtn.classList.add("active");
+    } else {
+      state.promoCode = "";
+      state.discountPercent = 0;
+      if (promoFeedbackEl) {
+        promoFeedbackEl.textContent = isEn 
+          ? "✗ Invalid or expired promo code" 
+          : "✗ Virheellinen tai vanhentunut alennuskoodi";
+        promoFeedbackEl.className = "promo-feedback error";
+      }
+    }
+    updateCalculator();
+  };
+
+  if (promoApplyBtn) {
+    promoApplyBtn.addEventListener("click", () => applyPromo());
+  }
+
+  if (promoInput) {
+    promoInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        applyPromo();
+      }
+    });
+  }
+
+  // Global helper to trigger promo code from banner or outside
+  window.applyEstimatorPromoCode = (code) => {
+    applyPromo(code);
+    const estEl = document.getElementById("pricing") || document.getElementById("interactive-estimator");
+    if (estEl) {
+      estEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    const summaryCard = container.querySelector(".estimator-summary-card");
+    if (summaryCard) {
+      summaryCard.classList.add("promo-highlight-pulse");
+      setTimeout(() => summaryCard.classList.remove("promo-highlight-pulse"), 1600);
+    }
+  };
+
+  // Pre-fill calculated distance & promo inside final contact textarea on click
   const ctaBtn = container.querySelector(".btn-estimator-cta");
   if (ctaBtn) {
     ctaBtn.addEventListener("click", () => {
       const messageField = document.getElementById("d-message");
       if (!messageField) return;
+
+      let rawServiceCost = 0;
+      let rawEligibleCost = 0;
+
+      Object.keys(SERVICES).forEach(k => {
+        if (state[k].checked) {
+          const c = SERVICES[k].basePrice * state[k].qty;
+          rawServiceCost += c;
+          if (SERVICES[k].isEligible) rawEligibleCost += c;
+        }
+      });
+
+      const promoDiscount = state.discountPercent > 0 
+        ? (rawServiceCost * (state.discountPercent / 100)) 
+        : 0;
+
+      const discountedEligible = state.discountPercent > 0
+        ? (rawEligibleCost * (1 - (state.discountPercent / 100)))
+        : rawEligibleCost;
+
+      const savings = state.deduction ? (discountedEligible * TAX_DEDUCTION_RATE) : 0;
+      const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
+      const finalTotal = (rawServiceCost - promoDiscount) + currentTravelCost - savings;
 
       let msg = "";
       if (isEn) {
@@ -434,7 +599,11 @@ onDOMReady(() => {
           msg += `- Annual Maintenance (${state.annual.qty}x device)\n`;
         }
 
-        msg += `\nTax Deduction: ${state.deduction ? 'Yes (-60% on labor)' : 'No'}\n`;
+        if (state.promoCode && promoDiscount > 0) {
+          msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)\n`;
+        }
+
+        msg += `Tax Deduction: ${state.deduction ? 'Yes (-60% on labor)' : 'No'}\n`;
         
         if (state.home.checked || state.annual.checked) {
           msg += `\nTravel Details:\n`;
@@ -443,21 +612,10 @@ onDOMReady(() => {
           msg += `- Travel Fee (${TRAVEL_RATE_PER_KM.toFixed(2)} €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
         }
 
-        const invoiceTotal = (state.remote.checked ? SERVICES.remote.basePrice * state.remote.qty : 0) + 
-                            (state.home.checked ? SERVICES.home.basePrice * state.home.qty : 0) + 
-                            (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty : 0);
-        let savings = 0;
-        if (state.deduction) {
-          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * TAX_DEDUCTION_RATE : 0) + 
-                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * TAX_DEDUCTION_RATE : 0);
-        }
-        const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
-        const finalTotal = invoiceTotal + currentTravelCost - savings;
-
         msg += `\nPrice Estimate:\n`;
-        msg += `- Invoice Total: ${invoiceTotal.toFixed(2)} €\n`;
+        msg += `- Invoice Total: ${(rawServiceCost - promoDiscount).toFixed(2)} €\n`;
         if (savings > 0) {
-          msg += `- Actual Cost (after deduction): ~${finalTotal.toFixed(2)} €\n`;
+          msg += `- Actual Cost (after tax deduction): ~${finalTotal.toFixed(2)} €\n`;
         }
       } else {
         msg = `Hei, haluaisin tilailla seuraavat palvelut:\n`;
@@ -472,7 +630,11 @@ onDOMReady(() => {
           msg += `- Vuosihuolto (${state.annual.qty}x laite)\n`;
         }
 
-        msg += `\nKotitalousvähennys: ${state.deduction ? 'Kyllä (-60% työn osuudesta)' : 'Ei'}\n`;
+        if (state.promoCode && promoDiscount > 0) {
+          msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)\n`;
+        }
+
+        msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-60% työn osuudesta)' : 'Ei'}\n`;
         
         if (state.home.checked || state.annual.checked) {
           msg += `\nSijainti & Matkakulut:\n`;
@@ -481,19 +643,8 @@ onDOMReady(() => {
           msg += `- Matkakulut (${TRAVEL_RATE_PER_KM.toFixed(2)} €/km): ${state.travelCost ? state.travelCost.toFixed(2) + ' €' : '0.00 €'}\n`;
         }
 
-        const invoiceTotal = (state.remote.checked ? SERVICES.remote.basePrice * state.remote.qty : 0) + 
-                            (state.home.checked ? SERVICES.home.basePrice * state.home.qty : 0) + 
-                            (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty : 0);
-        let savings = 0;
-        if (state.deduction) {
-          savings += (state.home.checked ? SERVICES.home.basePrice * state.home.qty * TAX_DEDUCTION_RATE : 0) + 
-                     (state.annual.checked ? SERVICES.annual.basePrice * state.annual.qty * TAX_DEDUCTION_RATE : 0);
-        }
-        const currentTravelCost = (state.home.checked || state.annual.checked) ? state.travelCost : 0;
-        const finalTotal = invoiceTotal + currentTravelCost - savings;
-
         msg += `\nHinta-arvio:\n`;
-        msg += `- Laskun loppusumma: ${invoiceTotal.toFixed(2)} €\n`;
+        msg += `- Laskun loppusumma: ${(rawServiceCost - promoDiscount).toFixed(2)} €\n`;
         if (savings > 0) {
           msg += `- Todellinen hinta vähennyksen jälkeen: ~${finalTotal.toFixed(2)} €\n`;
         }

@@ -1,11 +1,14 @@
 {
+  "_README": "Voit muokata tätä tiedostoa vapaasti. Teemat: sunset (oranssi-pinkki-liila), aurora (sininen-indigo-violetti), emerald (vihreä-turkoosi-sininen), royal (sininen-violetti).",
   "enabled": true,
   "id": "senior-student-promo-2026",
   "startDate": "2026-08-01T00:00:00",
   "endDate": "2026-09-30T23:59:59",
   "showCountdown": true,
   "theme": "sunset",
-  "ctaLink": "#contact-detailed",
+  "promoCode": "PROMO15",
+  "discountPercent": 15,
+  "ctaLink": "#interactive-estimator",
   "fi": {
     "badge": "Erikoisetu",
     "title": "Seniori- ja opiskelijaetu: -15% IT-tuesta",

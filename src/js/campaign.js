@@ -122,6 +122,18 @@ export function initCampaignBanner() {
     dismissBtn.addEventListener("click", closeBanner);
   }
 
+  // Handle CTA button click - auto apply promo code and scroll to estimator
+  const ctaBtn = banner.querySelector(".campaign-cta-btn");
+  if (ctaBtn) {
+    ctaBtn.addEventListener("click", (e) => {
+      const code = campaignConfig.promoCode || "PROMO15";
+      if (typeof window.applyEstimatorPromoCode === "function") {
+        e.preventDefault();
+        window.applyEstimatorPromoCode(code);
+      }
+    });
+  }
+
   // Handle Countdown Timer
   if (showCountdown) {
     const daysEl = banner.querySelector("#timerDays");

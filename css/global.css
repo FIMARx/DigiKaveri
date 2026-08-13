@@ -4865,21 +4865,22 @@ body.has-campaign-banner {
 }
 
 .campaign-container {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: center;
+  gap: 14px 20px;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .campaign-content {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  flex: 1 1 auto;
-  min-width: 260px;
+  justify-content: center;
+  gap: 10px;
+  flex: 0 1 auto;
 }
 
 .campaign-badge {
@@ -4910,12 +4911,14 @@ body.has-campaign-banner {
 }
 
 .campaign-text-wrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-size: 0.92rem;
   line-height: 1.35;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .campaign-title {
@@ -4986,7 +4989,7 @@ body.has-campaign-banner {
 
 /* Actions */
 .campaign-actions {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
@@ -5085,4 +5088,127 @@ body.has-campaign-banner {
     padding: 1px 4px;
     min-width: 24px;
   }
+}
+
+/* ==========================================================================
+   ESTIMATOR PROMO CODE STYLES
+   ========================================================================== */
+.estimator-promo-group {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-color, rgba(226, 232, 240, 0.8));
+}
+
+.promo-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--primary, #2563eb);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+
+.promo-toggle-btn:hover,
+.promo-toggle-btn.active {
+  color: var(--primary-dark, #1d4ed8);
+  text-decoration: underline;
+}
+
+.promo-toggle-btn i,
+.promo-toggle-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.promo-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+}
+
+.promo-input-wrapper.hidden {
+  display: none !important;
+}
+
+.promo-input {
+  flex: 1;
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-color, #e2e8f0);
+  background: var(--bg-card, #ffffff);
+  color: var(--text-dark, #0f172a);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promo-input:focus {
+  outline: none;
+  border-color: var(--primary, #2563eb);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 37, 99, 235), 0.15);
+}
+
+.btn-promo-apply {
+  background: var(--primary, #2563eb);
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-promo-apply:hover {
+  background: var(--primary-dark, #1d4ed8);
+  transform: translateY(-1px);
+}
+
+.promo-feedback {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.promo-feedback.success {
+  color: #16a34a;
+}
+
+.promo-feedback.error {
+  color: #dc2626;
+}
+
+.promo-feedback.hidden {
+  display: none !important;
+}
+
+.summary-row.promo-row .promo-val {
+  color: #16a34a !important;
+  font-weight: 700;
+}
+
+/* Pulsing highlight when promo code is applied */
+@keyframes promoCardPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.promo-highlight-pulse {
+  animation: promoCardPulse 0.8s ease-in-out 2;
 }
