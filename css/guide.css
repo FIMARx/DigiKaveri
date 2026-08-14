@@ -91,7 +91,7 @@
   margin: 0 auto;
   padding: 80px 24px;
   transition: padding 0.4s ease, opacity 0.4s ease;
-  scroll-margin-top: 135px !important;
+  scroll-margin-top: calc(var(--nav-height, 80px) + var(--campaign-banner-height, 0px) + 24px) !important;
 }
 
 .guide-section.is-collapsed {

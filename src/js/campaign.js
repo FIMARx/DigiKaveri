@@ -136,6 +136,8 @@ export function initCampaignBanner() {
       if (banner && banner.parentNode) {
         banner.remove();
       }
+      window.dispatchEvent(new Event('scroll'));
+      window.dispatchEvent(new Event('resize'));
     }, 420);
   };
 

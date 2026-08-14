@@ -1136,7 +1136,7 @@ h3 {
     background: rgba(255, 255, 255, 0.98);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    z-index: 10000 !important;
+    z-index: 100000 !important;
     display: flex;
     flex-direction: column;
     padding: max(20px, env(safe-area-inset-top)) 24px max(32px, env(safe-area-inset-bottom));
@@ -3432,10 +3432,12 @@ body.is-locked {
   overflow: hidden;
 }
 
-/* Bulletproof Scroll Alignment (Fixes header overlap for external links/Ctrl+F) */
+/* Bulletproof Dynamic Scroll Alignment (Fixes header overlap with dynamic campaign banner + sticky nav) */
 section[id],
-div[id] {
-  scroll-margin-top: 100px;
+div[id],
+header[id],
+main[id] {
+  scroll-margin-top: calc(var(--nav-height, 80px) + var(--campaign-banner-height, 0px) + 24px) !important;
 }
 
 /* =======================================================
