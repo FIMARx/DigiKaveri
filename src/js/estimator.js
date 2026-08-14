@@ -15,7 +15,7 @@ const translations = {
     homeVisitDesc: "Apua paikan päällä kotonasi (Uusimaa)",
     annual: "Vuosihuolto",
     annualDesc: "Tietokoneen perusteellinen puhdistus ja tarkistus",
-    deductionLabel: "Hyödynnä kotitalousvähennys (-60%)",
+    deductionLabel: "Hyödynnä kotitalousvähennys (-40%)",
     deductionNote: "Kotitalousvähennys koskee kotikäyntejä ja huoltotöitä, ei etätukea.",
     invoiceTotal: "Laskun loppusumma:",
     actualCost: "Oma osuutesi vähennyksen jälkeen:",
@@ -46,7 +46,7 @@ const translations = {
     homeVisitDesc: "Help on-site at your home (Uusimaa)",
     annual: "Annual Maintenance",
     annualDesc: "Thorough physical & digital computer tune-up",
-    deductionLabel: "Apply household tax deduction (-60%)",
+    deductionLabel: "Apply household tax deduction (-40%)",
     deductionNote: "The household tax deduction applies to home visits and maintenance, not remote support.",
     invoiceTotal: "Invoice total:",
     actualCost: "Your cost after tax deduction:",
@@ -84,7 +84,7 @@ const SERVICES = {
 const START_LAT = 60.1585;
 const START_LON = 24.6468;
 const TRAVEL_RATE_PER_KM = 0.90;
-const TAX_DEDUCTION_RATE = 0.60;
+const TAX_DEDUCTION_RATE = 0.40;
 
 onDOMReady(() => {
   const container = document.getElementById("interactive-estimator");
@@ -615,7 +615,7 @@ onDOMReady(() => {
           msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isCheatCode ? ' [Special 1-time referral/client benefit]' : ''}\n`;
         }
 
-        msg += `Tax Deduction: ${state.deduction ? 'Yes (-60% on labor)' : 'No'}\n`;
+        msg += `Tax Deduction: ${state.deduction ? 'Yes (-40% on labor)' : 'No'}\n`;
         
         if (state.home.checked || state.annual.checked) {
           msg += `\nTravel Details:\n`;
@@ -646,7 +646,7 @@ onDOMReady(() => {
           msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isCheatCode ? ' [Uniikki asiakasetu]' : ''}\n`;
         }
 
-        msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-60% työn osuudesta)' : 'Ei'}\n`;
+        msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-40% työn osuudesta)' : 'Ei'}\n`;
         
         if (state.home.checked || state.annual.checked) {
           msg += `\nSijainti & Matkakulut:\n`;

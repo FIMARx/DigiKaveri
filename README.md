@@ -22,7 +22,7 @@ Technology should empower people, not confuse them. **DigiKaveri** ("Digital Bud
 
 - 🚗 **On-site Home Visits**: Hands-on computer repair, device setup, and home Wi-Fi fixes across Uusimaa.
 - ⚡ **Instant Remote Help**: Secure, 1-click TeamViewer remote support nationwide.
-- 🏛️ **Tax Savings**: Eligible for Finland's **-60% Kotitalousvähennys** (household tax deduction) on labor.
+- 🏛️ **Tax Savings**: Eligible for Finland's **-40% Kotitalousvähennys** (household tax deduction) on labor.
 - 🛡️ **No Fix, No Fee Guarantee**: Zero charges if we cannot solve the technical issue.
 
 ---
@@ -49,7 +49,7 @@ The remote support hub at [`/etayhteys.html`](https://digikaveri.com/etayhteys.h
 
 ### ⚡ Dynamic Price & Distance Estimator
 
-- **Interactive Rate Calculator**: Computes estimated labor costs, tax deduction savings (-60%), and travel fees dynamically.
+- **Interactive Rate Calculator**: Computes estimated labor costs, tax deduction savings (-40%), and travel fees dynamically.
 - **OSRM & Nominatim Distance Routing**: Calculates driving distance and travel costs directly from Espoo coordinates to the visitor's location.
 
 ### 🔍 Real-Time FAQ Search with Live Text Highlighting
