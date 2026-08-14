@@ -105,10 +105,11 @@
             <li>Etunimi ja sukunimi</li>
             <li>Puhelinnumero ja sähköpostiosoite</li>
             <li>Asiakkaan antamat laitetiedot ja ongelman kuvaus</li>
-            <li>Palvelun toimitusosoite (kotikäynneillä)</li>
+            <li>Palvelun toimitusosoite (kotikäynneillä matkakulujen ja käynnin toteuttamiseksi)</li>
             <li>Laskutustiedot ja asiakashistoria</li>
+            <li>Mahdolliset kampanja- ja alennuskooditiedot (kuten kertakäyttöiset asiakasedut)</li>
           </ul>
-          <p><strong>Säilytysaika:</strong> Asiakas- ja laskutustietoja säilytetään kirjanpitolain (1339/1997) edellyttämän ajan (6 vuotta tilikauden päättymisestä). Yhteydenottotietoja säilytetään 12 kuukautta asiakaspalvelutapahtuman päättymisen jälkeen.</p>
+          <p><strong>Säilytysaika:</strong> Asiakas- ja laskutustietoja säilytetään kirjanpitolain (1339/1997) edellyttämän ajan (6 vuotta tilikauden päättymisestä). Yhteydenottolomakkeiden tietoja säilytetään enintään 12 kuukautta asiakaspalvelutapahtuman päättymisen jälkeen, jonka jälkeen ne poistetaan turvallisesti.</p>
         </section>
 
         <section id="section-6" class="legal-section">
@@ -116,24 +117,36 @@
             <i data-lucide="search" aria-hidden="true"></i>
             <h2>6. Säännönmukaiset tietolähteet</h2>
           </div>
-          <p>Tiedot saadaan säännönmukaisesti asiakkaalta itseltään yhteydenottolomakkeen, WhatsApp-viestien, sähköpostin, puhelimen tai asiakastapaamisten kautta.</p>
+          <p>Tiedot saadaan säännönmukaisesti asiakkaalta itseltään verkkosivuston yhteydenottolomakkeen, hinta-arviolaskurin, WhatsApp-viestien, sähköpostin, puhelinkeskusteluiden tai asiakastapaamisten kautta.</p>
         </section>
 
         <section id="section-7" class="legal-section">
           <div class="section-header">
             <i data-lucide="share-2" aria-hidden="true"></i>
-            <h2>7. Tietojen säännönmukaiset luovutukset</h2>
+            <h2>7. Tietojen luovutukset ja alihankkijat (Tietojen käsittelijät)</h2>
           </div>
-          <p>Tietoja ei luovuteta kolmansille osapuolille suoramarkkinointitarkoituksiin. Tietoja voidaan luovuttaa viranomaisille lakiin perustuvissa tapauksissa tai perintätoimistoille. Palveluiden toteuttamiseksi voimme käyttää luotettuja kolmannen osapuolen palveluntarjoajia (esim. laskutusohjelmistot, arvostelupalvelut), jotka käsittelevät tietoja puolestamme GDPR-asetuksen mukaisesti.</p>
-          <p>Tietoja ei pääsääntöisesti siirretä EU:n tai ETA-alueen ulkopuolelle, ellei se ole teknisesti välttämätöntä käyttämiemme pilvipalveluiden (esim. Google Workspace) vuoksi, jolloin noudatetaan EU:n hyväksymiä suojatoimia ja EU-US Data Privacy Framework -sopimusmalleja.</p>
+          <p>Tietoja ei koskaan myydä tai luovuteta kolmansille osapuolille suoramarkkinointitarkoituksiin. Tietoja voidaan luovuttaa viranomaisille lakiin perustuvissa tapauksissa tai perintätoimistoille maksulaiminlyöntien yhteydessä.</p>
+          <p>Käytämme palveluidemme teknisessä toteutuksessa luotettuja sopimuskumppaneita (GDPR:n mukaiset henkilötietojen käsittelijät):</p>
+          <ul>
+            <li><strong>Supabase Cloud Inc.:</strong> Kertakäyttöisten asiakasetukoodien ja järjestelmän tietokantapalvelut (palvelimet EU-alueella, ISO 27001 & SOC 2 Type II -sertifioidut).</li>
+            <li><strong>Web3Forms:</strong> Yhteydenottolomakkeiden suojattu ja salattu sähköpostivälitys.</li>
+            <li><strong>Google Workspace & Cloud:</strong> Suojatut sähköposti- ja asiakaspalvelutyökalut.</li>
+            <li><strong>OpenStreetMap & OSRM:</strong> Anonyymit välimatkalaskennat matkakuluarvioita varten (ei tallenna henkilötietoja).</li>
+          </ul>
+          <p>Tietoja käsitellään ensisijaisesti EU/ETA-alueella. Mikäli tietoja siirretään EU/ETA-alueen ulkopuolelle, noudatetaan Euroopan komission hyväksymiä mallisopimuslausekkeita (Standard Contractual Clauses, SCC) sekä EU-US Data Privacy Framework -järjestelyä.</p>
         </section>
 
         <section id="section-8" class="legal-section">
           <div class="section-header">
             <i data-lucide="cookie" aria-hidden="true"></i>
-            <h2>8. Evästeet (Cookies)</h2>
+            <h2>8. Evästeet ja Analytiikka (Cookies & Consent Mode v2)</h2>
           </div>
-          <p>Käytämme sivustollamme evästeitä parantaaksemme käyttäjäkokemusta ja analysoidaksemme sivuston käyttöä (esim. Google Analytics). Käyttäjä voi hallita evästeasetuksiaan sivuston evästeilmoituksesta tai selaimen asetuksista.</p>
+          <p>Sivustolla käytetään evästeitä (cookies) sivuston teknisen toimivuuden varmistamiseksi ja kävijäkokemuksen parantamiseksi.</p>
+          <ul>
+            <li><strong>Välttämättömät evästeet:</strong> Sivuston perustoiminnot, kuten valitsemasi ulkoasuteeman (vaalea/tumma) ja evästevalintojesi muistaminen. Nämä ovat aina päällä.</li>
+            <li><strong>Analytiikkaevästeet (Google Analytics 4):</strong> Keräävät anonyymejä tilastoja sivuston käytöstä (IP-osoitteiden anonymisointi käytössä). Nämä aktivoituvat vasta, kun annat siihen nimenomaisen suostumuksen evästebannerissamme (Google Consent Mode v2 -yhteensopiva).</li>
+          </ul>
+          <p>Voit muuttaa tai peruuttaa evästevalintasi milloin tahansa sivuston alalaidan "Evästeasetukset"-linkistä.</p>
         </section>
 
         <section id="section-9" class="legal-section">
@@ -141,23 +154,26 @@
             <i data-lucide="lock" aria-hidden="true"></i>
             <h2>9. Rekisterin suojauksen periaatteet</h2>
           </div>
-          <p>Rekisterin käsittelyssä noudatetaan huolellisuutta ja tietojärjestelmien avulla käsiteltävät tiedot suojataan asianmukaisesti. Tiedot säilytetään suojatuilla palvelimilla, joihin on pääsy vain nimetyillä henkilöillä.</p>
+          <p>Henkilötietojen käsittelyssä noudatetaan huolellisuutta ja korkeita tietoturvastandardeja. Kaikki verkkoliikenne on suojattu modernilla SSL/TLS-salauksella (HTTPS). Pääsy asiakastietoihin on rajattu vain nimetyille, vaitiolovelvollisille asiantuntijoille vahvalla monivaiheisella tunnistautumisella (MFA).</p>
         </section>
 
         <section id="section-10" class="legal-section">
           <div class="section-header">
             <i data-lucide="check-square" aria-hidden="true"></i>
-            <h2>10. Sinun oikeutesi</h2>
+            <h2>10. Sinun oikeutesi rekisteröitynä</h2>
           </div>
-          <p>Sinulla on oikeus:</p>
+          <p>EU:n yleisen tietosuoja-asetuksen (GDPR 15–22 artiklat) mukaisesti sinulla on seuraavat oikeudet:</p>
           <ul>
-            <li>Tarkistaa sinusta tallennetut tiedot.</li>
-            <li>Vaatia virheellisen tiedon korjaamista.</li>
-            <li>Pyytää tietojesi poistamista ("oikeus tulla unohdetuksi").</li>
-            <li>Peruuttaa suostumuksesi tietojen käsittelyyn.</li>
-            <li>Tehdä valitus valvontaviranomaiselle (Tietosuojavaltuutetun toimisto, <a href="https://tietosuoja.fi" target="_blank" rel="noopener noreferrer">tietosuoja.fi</a>), mikäli katsot henkilötietojasi käsitellyn lainvastaisesti.</li>
+            <li><strong>Tarkastusoikeus (Art. 15):</strong> Oikeus saada vahvistus siitä, käsitelläänkö henkilötietojasi, ja tarkastaa tallennetut tiedot.</li>
+            <li><strong>Oikaisuoikeus (Art. 16):</strong> Oikeus vaatia virheellisten, vanhentuneiden tai puutteellisten tietojen oikaisemista.</li>
+            <li><strong>Poisto-oikeus (Art. 17):</strong> Oikeus pyytää tietojesi poistamista ("oikeus tulla unohdetuksi"), mikäli lakisääteinen säilytysvelvollisuus (esim. kirjanpitolaki) ei edellytä niiden säilyttämistä.</li>
+            <li><strong>Käsittelyn rajoittamisoikeus (Art. 18):</strong> Oikeus rajoittaa tietojesi käsittelyä tietyissä lakisääteisissä tilanteissa.</li>
+            <li><strong>Siirto-oikeus (Art. 20):</strong> Oikeus saada meille toimittamasi tiedot jäsennellyssä ja koneellisesti luettavassa muodossa.</li>
+            <li><strong>Vastustamisoikeus (Art. 21):</strong> Oikeus vastustaa tietojen käsittelyä henkilökohtaiseen erityiseen tilanteeseesi liittyvällä perusteella.</li>
+            <li><strong>Suostumuksen peruuttaminen:</strong> Oikeus peruuttaa antamasi suostumus milloin tahansa.</li>
+            <li><strong>Valitusoikeus valvontaviranomaiselle:</strong> Oikeus tehdä valitus tietosuojavaltuutetulle, mikäli katsot henkilötietojasi käsitellyn tietosuojalainsäädännön vastaisesti (<a href="https://tietosuoja.fi" target="_blank" rel="noopener noreferrer">Tietosuojavaltuutetun toimisto, tietosuoja.fi</a>).</li>
           </ul>
-          <p>Oikeuksien käyttämistä koskevat pyynnöt tulee lähettää kirjallisesti rekisterinpitäjälle (<a href="mailto:info@digikaveri.com">info@digikaveri.com</a>).</p>
+          <p>Kaikki tietosuojaa ja omien oikeuksien käyttämistä koskevat pyynnöt voi toimittaa sähköpostitse osoitteeseen <a href="mailto:info@digikaveri.com">info@digikaveri.com</a>. Vastaamme pyyntöihin kuukauden kuluessa.</p>
         </section>
       </div>
     </main>
