@@ -639,27 +639,30 @@ function updateScrollSpy() {
 
   if (sections.length === 0) return;
 
-  let currentId = "";
   const headerOffset = getStickyHeaderOffset();
-  // Smart Title Visibility Threshold:
-  // As soon as a section's title/heading appears into the reading area of the screen (<= 52% of viewport height)
-  // and the section is active, mark it active!
-  const titleAppearThreshold = Math.max(headerOffset + 60, window.innerHeight * 0.52);
+  // Focus line: active reading zone right below sticky navigation
+  const focusLine = headerOffset + 80;
 
-  // 1. Check sections in document order: evaluate by title appearance
-  sections.forEach((s) => {
-    const titleEl = s.querySelector(".section-header, h2, h1, h3") || s;
-    const titleRect = titleEl.getBoundingClientRect();
-    const sectionRect = s.getBoundingClientRect();
+  let currentId = "";
 
-    if (titleRect.top <= titleAppearThreshold && sectionRect.bottom > headerOffset + 20) {
+  // 1. Find the section that spans the focus reading line
+  for (let i = 0; i < sections.length; i++) {
+    const s = sections[i];
+    const rect = s.getBoundingClientRect();
+
+    if (rect.top <= focusLine && rect.bottom > focusLine) {
       currentId = s.id;
+      break;
     }
-  });
+  }
 
-  // 2. Special case: If we are at the very top of the page, force first section
-  if (window.scrollY < 60) {
-    currentId = sections[0].id;
+  // 2. Boundary Fallbacks
+  if (!currentId) {
+    if (window.scrollY < 80 || sections[0].getBoundingClientRect().top > focusLine) {
+      currentId = sections[0].id;
+    } else {
+      currentId = sections[sections.length - 1].id;
+    }
   }
 
   // Update TOC Progress Fill if exists
