@@ -1082,6 +1082,11 @@
   color: #ffffff;
 }
 
+.lightbox-close:focus-visible {
+  outline: 3px solid var(--primary-light, #60a5fa);
+  outline-offset: 3px;
+}
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .pc-guide-card {

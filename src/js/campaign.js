@@ -29,6 +29,17 @@ export function initCampaignBanner() {
 
   const showCountdown = campaignConfig.showCountdown !== false;
 
+  const ctaLinkHref = (function() {
+    const code = campaignConfig.promoCode || "PROMO15";
+    const onHomePage = !!document.getElementById("interactive-estimator");
+    if (onHomePage) {
+      return "#interactive-estimator";
+    }
+    return lang === "en" 
+      ? `/en/?promo=${encodeURIComponent(code)}#interactive-estimator` 
+      : `/?promo=${encodeURIComponent(code)}#interactive-estimator`;
+  })();
+
   banner.innerHTML = `
     <div class="campaign-container">
       <div class="campaign-content">
@@ -60,7 +71,7 @@ export function initCampaignBanner() {
       ` : ""}
 
       <div class="campaign-actions">
-        <a href="${campaignConfig.ctaLink || "#interactive-estimator"}" class="campaign-cta-btn">
+        <a href="${ctaLinkHref}" class="campaign-cta-btn">
           ${localized.ctaText || (lang === "en" ? "Claim Offer" : "Hyödynnä etu")}
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7"/>

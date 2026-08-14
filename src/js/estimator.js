@@ -564,6 +564,15 @@ onDOMReady(() => {
     }
   };
 
+  // Auto-apply promo code from URL query parameters (e.g. ?promo=PROMO15)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryPromo = urlParams.get("promo") || urlParams.get("code");
+    if (queryPromo) {
+      applyPromo(queryPromo);
+    }
+  } catch (_) {}
+
   // Wire booking button to prefill contact textarea
   const bookBtn = document.getElementById("est-book-btn") || container.querySelector(".btn-estimator-cta");
   if (bookBtn) {
