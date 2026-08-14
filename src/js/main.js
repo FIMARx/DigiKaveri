@@ -641,7 +641,8 @@ function updateScrollSpy() {
 
   let currentId = "";
   const headerOffset = getStickyHeaderOffset();
-  const triggerPoint = headerOffset + 64;
+  // Trigger threshold: dynamically adapt to 30% of viewport or headerOffset + 80px
+  const triggerPoint = Math.max(headerOffset + 80, window.innerHeight * 0.3);
 
   // 1. Check sections in document order
   sections.forEach((s) => {
@@ -651,7 +652,19 @@ function updateScrollSpy() {
     }
   });
 
-  // 2. Special case: If we are at the very top of the page, force first section
+  // 2. Bottom of page detection: activate the latest section visible in viewport
+  const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+  if (isNearBottom && sections.length > 0) {
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const rect = sections[i].getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        currentId = sections[i].id;
+        break;
+      }
+    }
+  }
+
+  // 3. Special case: If we are at the very top of the page, force first section
   if (window.scrollY < 60) {
     currentId = sections[0].id;
   }
