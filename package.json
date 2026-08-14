@@ -16,6 +16,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
     "@fontsource/outfit": "^5.2.8",
+    "@supabase/supabase-js": "^2.112.3",
     "aos": "^2.3.4",
     "lucide": "^1.11.0",
     "vanilla-cookieconsent": "^3.1.0"

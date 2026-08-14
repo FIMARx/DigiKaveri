@@ -3,7 +3,7 @@ import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 import { isEnglish, onDOMReady } from './utils.js';
 import campaignConfig from '../data/campaign.json';
-import { validatePromoCode, markPromoCodeRedeemed } from './promo-validator.js';
+import { validatePromoCode, validatePromoCodeAsync, markPromoCodeRedeemed } from './promo-validator.js';
 
 const isEn = isEnglish();
 
@@ -488,11 +488,12 @@ onDOMReady(() => {
     });
   }
 
-  const applyPromo = (codeToApply) => {
+  const applyPromo = async (codeToApply) => {
     const rawCode = (codeToApply || (promoInput ? promoInput.value : "")).trim();
     if (!rawCode) {
       state.promoCode = "";
       state.discountPercent = 0;
+      state.isUniqueCode = false;
       if (promoFeedbackEl) {
         promoFeedbackEl.textContent = "";
         promoFeedbackEl.className = "promo-feedback hidden";
@@ -501,12 +502,18 @@ onDOMReady(() => {
       return;
     }
 
-    const result = validatePromoCode(rawCode, campaignConfig, isEn ? "en" : "fi");
+    if (promoFeedbackEl) {
+      promoFeedbackEl.textContent = isEn ? "Validating code..." : "Tarkistetaan koodia...";
+      promoFeedbackEl.className = "promo-feedback success";
+      promoFeedbackEl.classList.remove("hidden");
+    }
+
+    const result = await validatePromoCodeAsync(rawCode, campaignConfig, isEn ? "en" : "fi");
 
     if (result.valid) {
       state.promoCode = result.code;
       state.discountPercent = result.discount;
-      state.isCheatCode = result.isCheatCode;
+      state.isUniqueCode = result.isUniqueCode;
       
       if (promoFeedbackEl) {
         promoFeedbackEl.textContent = result.message;
@@ -518,7 +525,7 @@ onDOMReady(() => {
     } else {
       state.promoCode = "";
       state.discountPercent = 0;
-      state.isCheatCode = false;
+      state.isUniqueCode = false;
       if (promoFeedbackEl) {
         promoFeedbackEl.textContent = result.message || (isEn 
           ? "✗ Invalid or expired promo code" 
@@ -561,8 +568,8 @@ onDOMReady(() => {
   const bookBtn = document.getElementById("est-book-btn") || container.querySelector(".btn-estimator-cta");
   if (bookBtn) {
     bookBtn.addEventListener("click", () => {
-      // Mark single-use cheat code as redeemed when proceeding to booking
-      if (state.isCheatCode && state.promoCode) {
+      // Mark single-use promo code as redeemed in Supabase when proceeding to booking
+      if (state.isUniqueCode && state.promoCode) {
         markPromoCodeRedeemed(state.promoCode);
       }
 

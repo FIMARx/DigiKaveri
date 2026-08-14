@@ -1,51 +1,47 @@
 #!/usr/bin/env node
 /**
- * DigiKaveri Cheat Code Generator CLI
+ * DigiKaveri Unique Promo Code Generator CLI
+ * 
+ * Generates clean unique codes and formats them for Supabase SQL insert or customer flyers.
  * 
  * Usage:
- *   node scripts/generate-codes.js [discountPercent] [count]
+ *   node scripts/generate-codes.js [prefix] [discountPercent] [count]
  * 
  * Examples:
- *   node scripts/generate-codes.js 15 5    -> Generates 5 unique 15% discount codes
- *   node scripts/generate-codes.js 20 1    -> Generates 1 unique 20% discount code
+ *   npm run generate-codes
+ *   node scripts/generate-codes.js ESPOO 15 10
  */
 
-const SECRET_SALT = "DK_KAUPUNKI_AVAIN_2026_DIGIKAVERI";
 const chars = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
-function computeChecksum(discount, seed) {
-  const payload = `${discount}-${seed}-${SECRET_SALT}`;
-  let hash = 0x811c9dc5;
-  for (let i = 0; i < payload.length; i++) {
-    hash ^= payload.charCodeAt(i);
-    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+function randomString(len = 4) {
+  let res = "";
+  for (let i = 0; i < len; i++) {
+    res += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-  const hex = Math.abs(hash).toString(16).toUpperCase().padStart(4, "0");
-  return hex.substring(0, 2);
-}
-
-function generateCode(discount) {
-  let seed = "";
-  for (let i = 0; i < 4; i++) {
-    seed += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  const checksum = computeChecksum(discount, seed);
-  return `DK${discount}-${seed}${checksum}`;
+  return res;
 }
 
 const args = process.argv.slice(2);
-const discount = parseInt(args[0] || "15", 10);
-const count = parseInt(args[1] || "5", 10);
+const prefix = (args[0] || "DK15").toUpperCase();
+const discount = parseInt(args[1] || "15", 10);
+const count = parseInt(args[2] || "5", 10);
 
-console.log("\n==========================================");
-console.log(`🎟️  DigiKaveri Uniikit Alennuskoodit (-${discount}%)`);
-console.log("==========================================");
-console.log(`Voit antaa näitä koodeja asiakkaille tai tutuille:\n`);
+console.log("\n=======================================================");
+console.log(`🎟️  DigiKaveri Generated Unique Promo Codes (-${discount}%)`);
+console.log("=======================================================");
+console.log("Here are your generated codes for customers/flyers:\n");
 
+const codes = [];
 for (let i = 1; i <= count; i++) {
-  const code = generateCode(discount);
+  const code = `${prefix}-${randomString(4)}`;
+  codes.push(code);
   console.log(`  ${i}. ${code}`);
 }
 
-console.log("\n💡 Koodit toimivat suoraan hintalaskurissa ja lukittuvat laitekohtaisesti.");
-console.log("==========================================\n");
+console.log("\n-------------------------------------------------------");
+console.log("📋 Ready-to-paste SQL for Supabase SQL Editor:");
+console.log("-------------------------------------------------------");
+const sqlValues = codes.map(c => `  ('${c}', ${discount})`).join(",\n");
+console.log(`INSERT INTO promo_codes (code, discount) VALUES\n${sqlValues}\nON CONFLICT (code) DO NOTHING;\n`);
+console.log("=======================================================\n");
