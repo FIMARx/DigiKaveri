@@ -612,7 +612,7 @@ onDOMReady(() => {
         }
 
         if (state.promoCode && promoDiscount > 0) {
-          msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isCheatCode ? ' [Special 1-time referral/client benefit]' : ''}\n`;
+          msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isUniqueCode ? ' [Special 1-time client code]' : ''}\n`;
         }
 
         msg += `Tax Deduction: ${state.deduction ? 'Yes (-40% on labor)' : 'No'}\n`;
@@ -643,7 +643,7 @@ onDOMReady(() => {
         }
 
         if (state.promoCode && promoDiscount > 0) {
-          msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isCheatCode ? ' [Uniikki asiakasetu]' : ''}\n`;
+          msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isUniqueCode ? ' [Uniikki asiakasetu]' : ''}\n`;
         }
 
         msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-40% työn osuudesta)' : 'Ei'}\n`;

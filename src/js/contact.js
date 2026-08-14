@@ -220,6 +220,7 @@ function setupForm(formId) {
 
 
       } else {
+        sessionStorage.removeItem("last_form_submit");
         btn.innerHTML = t.error;
         btn.style.background = "var(--error)";
         btn.disabled = false;
@@ -227,6 +228,7 @@ function setupForm(formId) {
         showToast(t.sendError, false);
       }
     } catch (error) {
+      sessionStorage.removeItem("last_form_submit");
       btn.innerHTML = t.connError;
       btn.style.background = "var(--error)";
       btn.disabled = false;
