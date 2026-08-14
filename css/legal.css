@@ -65,7 +65,7 @@ aside.legal-toc {
 /* Sticky Navigation / Table of Contents */
 .legal-toc {
   position: sticky;
-  top: 124px;
+  top: calc(var(--nav-height, 80px) + var(--campaign-banner-height, 0px) + 24px);
   z-index: 100;
   will-change: transform;
   transform: translateZ(0);
@@ -141,6 +141,7 @@ aside.legal-toc {
 .legal-content {
   background: var(--surface);
   padding: clamp(28px, 4vw, 56px);
+  padding-bottom: clamp(60px, 15vh, 220px);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
@@ -148,11 +149,11 @@ aside.legal-toc {
 
 .legal-section {
   margin-bottom: 48px;
-  scroll-margin-top: 175px !important;
+  scroll-margin-top: calc(var(--nav-height, 80px) + var(--campaign-banner-height, 0px) + 32px) !important;
 }
 
 .legal-section:last-child {
-  margin-bottom: 0;
+  margin-bottom: clamp(30px, 6vh, 80px);
 }
 
 .legal-content .section-header {

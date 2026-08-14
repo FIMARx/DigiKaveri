@@ -452,15 +452,20 @@ function initLanguageDetection() {
   } else if (path.length > 1 && !isEn) {
     localStorage.setItem("userLang", "fi");
   }
-
   if (path === "/" && !localStorage.getItem("userLang")) {
     const isEnBrowser = navigator.language.toLowerCase().startsWith("en");
     if (isEnBrowser) window.location.href = "/en/";
   }
 }
 
+function getStickyHeaderOffset() {
+  const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 80;
+  const bannerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--campaign-banner-height')) || 0;
+  return navHeight + bannerHeight;
+}
+
 function initSmoothNav() {
-  const navLinks = document.querySelectorAll('.spy-link');
+  const navLinks = document.querySelectorAll('.spy-link, .legal-toc a');
   navLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
@@ -482,9 +487,11 @@ function initSmoothNav() {
             document.body.style.overflow = '';
           }
 
-          const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 88;
+          const headerOffset = getStickyHeaderOffset() + 24;
+          const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
           window.scrollTo({
-            top: target.getBoundingClientRect().top + window.scrollY - headerHeight,
+            top: targetY,
             behavior: "smooth",
           });
 
@@ -548,15 +555,15 @@ function initFAQ() {
   const faqGrid = document.querySelector(".faq-grid");
   if (!searchInput || !faqGrid) return;
 
-  let noResultsEl = document.querySelector(".faq-no-results");
+  let noResultsEl = null;
   const isEn = isEnglish();
 
   const filterFAQ = () => {
-    const rawQuery = searchInput.value.trim();
+    const rawQuery = (searchInput.value || "").trim();
     const query = rawQuery.toLowerCase();
 
     if (searchClear) {
-      searchClear.style.display = rawQuery.length > 0 ? "flex" : "none";
+      searchClear.classList.toggle("visible", rawQuery.length > 0);
     }
 
     let matchCount = 0;
@@ -633,8 +640,8 @@ function updateScrollSpy() {
   if (sections.length === 0) return;
 
   let currentId = "";
-  const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 88;
-  const triggerPoint = navHeight + 92;
+  const headerOffset = getStickyHeaderOffset();
+  const triggerPoint = headerOffset + 48;
 
   // 1. Check sections in document order
   sections.forEach((s) => {
@@ -645,7 +652,7 @@ function updateScrollSpy() {
   });
 
   // 2. Special case: If we are at the very top of the page, force first section
-  if (window.scrollY < 80) {
+  if (window.scrollY < 60) {
     currentId = sections[0].id;
   }
 
