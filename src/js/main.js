@@ -641,30 +641,23 @@ function updateScrollSpy() {
 
   let currentId = "";
   const headerOffset = getStickyHeaderOffset();
-  // Trigger threshold: dynamically adapt to 30% of viewport or headerOffset + 80px
-  const triggerPoint = Math.max(headerOffset + 80, window.innerHeight * 0.3);
+  // Smart Title Visibility Threshold:
+  // As soon as a section's title/heading appears into the reading area of the screen (<= 52% of viewport height)
+  // and the section is active, mark it active!
+  const titleAppearThreshold = Math.max(headerOffset + 60, window.innerHeight * 0.52);
 
-  // 1. Check sections in document order
+  // 1. Check sections in document order: evaluate by title appearance
   sections.forEach((s) => {
-    const rect = s.getBoundingClientRect();
-    if (rect.top <= triggerPoint) {
+    const titleEl = s.querySelector(".section-header, h2, h1, h3") || s;
+    const titleRect = titleEl.getBoundingClientRect();
+    const sectionRect = s.getBoundingClientRect();
+
+    if (titleRect.top <= titleAppearThreshold && sectionRect.bottom > headerOffset + 20) {
       currentId = s.id;
     }
   });
 
-  // 2. Bottom of page detection: activate the latest section visible in viewport
-  const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
-  if (isNearBottom && sections.length > 0) {
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const rect = sections[i].getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.85) {
-        currentId = sections[i].id;
-        break;
-      }
-    }
-  }
-
-  // 3. Special case: If we are at the very top of the page, force first section
+  // 2. Special case: If we are at the very top of the page, force first section
   if (window.scrollY < 60) {
     currentId = sections[0].id;
   }
