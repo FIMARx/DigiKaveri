@@ -1,11 +1,24 @@
-const CACHE_NAME = 'digikaveri-v8';
-const ASSETS = [
+/**
+ * DigiKaveri Service Worker (PWA Offline Engine)
+ * Version: digikaveri-v9
+ * 
+ * Strategy:
+ * - HTML / Navigations: Network-First with Offline Cache Fallback
+ * - Same-Origin Assets (CSS, JS, Images, Fonts): Stale-While-Revalidate / Cache-First
+ * - External APIs (Supabase, Nominatim, OSRM, Web3Forms): Direct Network Bypass
+ */
+
+const CACHE_NAME = 'digikaveri-v9';
+
+const PRECACHE_ASSETS = [
   '/',
+  '/index.html',
   '/etayhteys.html',
   '/tietosuoja.html',
   '/kayttoehdot.html',
   '/404.html',
   '/en/',
+  '/en/index.html',
   '/en/remote-support.html',
   '/en/privacy-policy.html',
   '/en/terms-of-service.html',
@@ -18,20 +31,30 @@ const ASSETS = [
   '/images/logo.webp'
 ];
 
-self.addEventListener('install', (e) => {
+// Install: pre-cache assets with resilient Promise.allSettled
+self.addEventListener('install', (event) => {
   self.skipWaiting();
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return Promise.allSettled(
+        PRECACHE_ASSETS.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('[SW] Pre-cache skipped asset:', url, err.message);
+          })
+        )
+      );
+    })
   );
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
+// Activate: clean up outdated legacy caches and claim clients
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('SW: purging old cache', key);
+            console.log('[SW] Purging outdated cache:', key);
             return caches.delete(key);
           }
         })
@@ -40,54 +63,82 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET') return;
+// Fetch: intercept same-origin requests
+self.addEventListener('fetch', (event) => {
+  // Only handle GET requests
+  if (event.request.method !== 'GET') return;
 
-  const url = new URL(e.request.url);
+  const url = new URL(event.request.url);
 
-  // Connectivity check pings bypass service worker to test actual network connection
-  if (url.searchParams.has('_ping')) {
-    return;
-  }
+  // Bypass non-http(s) schemes (e.g. chrome-extension://, moz-extension://)
+  if (!url.protocol.startsWith('http')) return;
 
-  // Only handle same-origin requests in Service Worker
-  if (url.origin !== self.location.origin) {
-    return;
-  }
+  // Bypass connectivity check pings
+  if (url.searchParams.has('_ping')) return;
 
-  // Navigation / HTML requests: Network first, fallback to cache for offline support
-  if (e.request.mode === 'navigate' || e.request.destination === 'document') {
-    e.respondWith(
-      fetch(e.request)
+  // Bypass all external APIs (Supabase, Web3Forms, OpenStreetMap, Google Analytics)
+  if (url.origin !== self.location.origin) return;
+
+  // 1. Navigation / Document requests: Network-First with Offline Fallback
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(e.request, responseClone));
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
           }
           return networkResponse;
         })
-        .catch(() => caches.match(e.request))
+        .catch(async () => {
+          // 1. Try matching exact requested page in cache
+          const cachedPage = await caches.match(event.request);
+          if (cachedPage) return cachedPage;
+
+          // 2. Fallback to English or Finnish homepages if offline
+          if (url.pathname.startsWith('/en')) {
+            const enFallback = await caches.match('/en/index.html') || await caches.match('/en/');
+            if (enFallback) return enFallback;
+          }
+
+          const fiFallback = await caches.match('/index.html') || await caches.match('/');
+          if (fiFallback) return fiFallback;
+
+          return caches.match('/404.html');
+        })
     );
     return;
   }
 
-  // Static assets (same origin): Cache first, fallback to network
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      if (response) {
-        return response;
+  // 2. Static Assets (CSS, JS, Images, Fonts): Cache-First with Network Fallback
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        // Fetch fresh copy in background to update cache (Stale-While-Revalidate pattern)
+        fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+              const clone = networkResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+            }
+          })
+          .catch(() => {});
+
+        return cachedResponse;
       }
-      return fetch(e.request)
+
+      // If not in cache, fetch from network and cache
+      return fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(e.request, responseClone));
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           }
           return networkResponse;
         })
         .catch(() => {
-          // Graceful fallback if offline or network error
-          return caches.match(e.request);
+          // Graceful offline fallback
+          return caches.match(event.request);
         });
     })
   );
