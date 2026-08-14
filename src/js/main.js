@@ -641,7 +641,7 @@ function updateScrollSpy() {
 
   let currentId = "";
   const headerOffset = getStickyHeaderOffset();
-  const triggerPoint = headerOffset + 48;
+  const triggerPoint = headerOffset + 64;
 
   // 1. Check sections in document order
   sections.forEach((s) => {
@@ -654,14 +654,6 @@ function updateScrollSpy() {
   // 2. Special case: If we are at the very top of the page, force first section
   if (window.scrollY < 60) {
     currentId = sections[0].id;
-  }
-
-  // 3. Special case: Only force last section if literally scrolled to absolute bottom (within 15px)
-  const isAtAbsoluteBottom =
-    window.innerHeight + window.scrollY >=
-    document.documentElement.scrollHeight - 15;
-  if (isAtAbsoluteBottom) {
-    currentId = sections[sections.length - 1].id;
   }
 
   // Update TOC Progress Fill if exists
