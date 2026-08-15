@@ -79,6 +79,9 @@ self.addEventListener('fetch', (event) => {
   // Bypass all external APIs (Supabase, Web3Forms, OpenStreetMap, Google Analytics)
   if (url.origin !== self.location.origin) return;
 
+  // Bypass local development and Vite internal module requests
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1' || url.pathname.startsWith('/@') || url.pathname.includes('node_modules')) return;
+
   // 1. Navigation / Document requests: Network-First with Offline Fallback
   if (event.request.mode === 'navigate' || event.request.destination === 'document') {
     event.respondWith(

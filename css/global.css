@@ -41,12 +41,24 @@ body.menu-open {
   overflow: hidden !important;
 }
 
+/* Tabular figures for smooth CountUp numbers */
+.countup-num, [data-counter] {
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+}
+
 html {
   scroll-behavior: smooth !important;
   scroll-padding-top: 110px !important;
   font-size: 18px; /* Slightly larger base size for better readability */
   overflow-x: hidden;
   width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
 }
 
 @supports (overflow-x: clip) {

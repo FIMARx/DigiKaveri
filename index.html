@@ -43,10 +43,10 @@
 
       <div class="trust-badges-centered">
         <div class="trust-item">
-          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Kotitalousvähennys -40%</span>
+          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Kotitalousvähennys <strong class="countup-num" data-counter="40" data-prefix="-" data-suffix="%">-40%</strong></span>
         </div>
         <div class="trust-item">
-          <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span>100% Tyytyväisyystakuu</span>
+          <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span><strong class="countup-num" data-counter="100" data-suffix="%">100%</strong> Tyytyväisyystakuu</span>
         </div>
         <div class="trust-item">
           <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>Ei ratkaisua, ei laskua</span>
@@ -229,7 +229,7 @@
           <div class="score-stars google">
             <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
           </div>
-          <div class="score-value">5.0</div>
+          <div class="score-value countup-num" data-counter="5.0" data-decimals="1">5.0</div>
           <div class="score-label">
             <span>Perustuu arvosteluihin kohteessa</span>
             <div class="score-brand">
@@ -248,7 +248,7 @@
           <div class="score-stars tp">
             <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" class="star-dimmed" aria-hidden="true"></i>
           </div>
-          <div class="score-value">3.8</div>
+          <div class="score-value countup-num" data-counter="3.8" data-decimals="1">3.8</div>
           <div class="score-label">
             <span>Perustuu arvosteluihin kohteessa</span>
             <div class="score-brand">
@@ -910,23 +910,31 @@
             "name": "Mitä jos ongelmaa ei saada korjattua?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Silloin et maksa mitään. Meillä on selkeä periaate: jos emme pysty ratkaisemaan ongelmaasi tai löytämään toimivaa ratkaisua, palvelu on sinulle maksuton."
+              "text": "Silloin et maksa mitään. Meillä on reilu 'Ei ratkaisua, ei laskua' -takuu: jos ongelma ei ratkea, emme myöskään veloita sinulta mitään."
             }
           },
           {
             "@type": "Question",
-            "name": "Miten etätuki toimii käytännössä?",
+            "name": "Voinko maksaa laskulla tai kortilla?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Lataat sivuiltamme turvallisen TeamViewer-etätukiohjelman, joka antaa meille kertakäyttöisen pääsyn ruudullesi. Näet koko ajan mitä teemme ja yhteys katkeaa heti kun suljet ohjelman."
+              "text": "Kyllä. Maksat vasta kun työ on tehty ja laite toimii. Voit maksaa kortilla tai laskulla (sähköpostiin tai paperilaskuna kotiin) 14 päivän maksuajalla."
             }
           },
           {
             "@type": "Question",
-            "name": "Miten kotitalousvähennys toimii?",
+            "name": "Onko etätuki turvallista?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Saat meiltä työn jälkeen eritellyn laskun, josta näet työn osuuden. Ilmoitat tiedot helposti OmaVerossa ja saat 40% hyvityksen työn hinnasta verotuksessasi."
+              "text": "Etätuki on täysin turvallista. Yhteys on aina kertakäyttöinen, näet ruudultasi koko ajan mitä teemme, ja yhteys katkeaa välittömästi kun suljet ohjelman."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Miten kotitalousvähennys (-40%) hyödynnetään?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Saat meiltä työn jälkeen selkeän laskun, jossa työn osuus on valmiiksi eritelty. Ilmoitat vain summan OmaVerossa ja saat 40 % hyvityksen työn hinnasta."
             }
           },
           {
@@ -942,7 +950,7 @@
             "name": "Tarvitseeko minun tietää laitteeni tarkkoja teknisiä tietoja?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Ei tarvitse. Riittää että kerrot omin sanoin, mikä laitteessa takkuaa. Me hoidamme teknisen selvityksen puolestasi."
+              "text": "Ei tarvitse. Riittää että kerrot omin sanoin, mikä laitteessa takkuaa. Me huolehdimme teknisestä puolesta ilman vaikeita ammattitermejä."
             }
           }
         ]

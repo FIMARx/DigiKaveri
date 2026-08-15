@@ -43,10 +43,10 @@
 
       <div class="trust-badges-centered">
         <div class="trust-item">
-          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Household tax deduction -40%</span>
+          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Household tax deduction <strong class="countup-num" data-counter="40" data-prefix="-" data-suffix="%">-40%</strong></span>
         </div>
         <div class="trust-item">
-          <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span>100% Satisfaction Guarantee</span>
+          <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span><strong class="countup-num" data-counter="100" data-suffix="%">100%</strong> Satisfaction Guarantee</span>
         </div>
         <div class="trust-item">
           <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>No fix, no fee guarantee</span>
@@ -229,7 +229,7 @@
           <div class="score-stars google">
             <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
           </div>
-          <div class="score-value">5.0</div>
+          <div class="score-value countup-num" data-counter="5.0" data-decimals="1">5.0</div>
           <div class="score-label">
             <span>Based on reviews on</span>
             <div class="score-brand">
@@ -248,7 +248,7 @@
           <div class="score-stars tp">
             <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" class="star-dimmed" aria-hidden="true"></i>
           </div>
-          <div class="score-value">3.8</div>
+          <div class="score-value countup-num" data-counter="3.8" data-decimals="1">3.8</div>
           <div class="score-label">
             <span>Based on reviews on</span>
             <div class="score-brand">
@@ -917,18 +917,26 @@
           },
           {
             "@type": "Question",
-            "name": "How does remote support work in practice?",
+            "name": "How do I pay for the service?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You download our secure TeamViewer remote support tool from our website, which grants us one-time temporary access to your screen. You can see everything we do, and the connection closes immediately when you close the app."
+              "text": "You only pay after the work is done and everything is functioning properly. You can pay by card or invoice (sent by email or paper mail to your home) with a 14-day payment term."
             }
           },
           {
             "@type": "Question",
-            "name": "How does the household tax deduction work?",
+            "name": "Is remote support safe?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "After the service, you receive an itemized invoice that clearly states the labor portion. You simply declare the amount in OmaVero to receive a 40% tax deduction on labor."
+              "text": "Remote support is completely safe. The connection is one-time only, you see everything that happens on your screen in real time, and the connection terminates immediately once you close the software."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the household tax deduction (-40%) work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You receive an itemized invoice where the labor cost is clearly separated. You simply enter that sum in OmaVero and get 40% of the labor cost credited in your taxes."
             }
           },
           {

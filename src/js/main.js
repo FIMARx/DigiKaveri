@@ -65,7 +65,7 @@ function initApp() {
 
   // Critical UI (Needs to be instant)
   try { createIcons({ icons: ICON_SET }); } catch (e) { console.warn("Lucide icon init warning:", e); }
-  initLanguageDetection(); // Bug 1 fix: was defined but never called
+  initCountUp();
   initMobileNav();
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
@@ -76,6 +76,7 @@ function initApp() {
   initMobileDropdowns();
   initFAB();
   initCampaignBanner();
+  initHashScrollOnLoad();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
@@ -464,6 +465,96 @@ function getStickyHeaderOffset() {
   return navHeight + bannerHeight;
 }
 
+function initHashScrollOnLoad() {
+  if (!window.location.hash) return;
+
+  const scrollToTarget = () => {
+    const id = window.location.hash.substring(1);
+    const target = document.getElementById(id);
+    if (target) {
+      const headerOffset = getStickyHeaderOffset() + 24;
+      const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: targetY,
+        behavior: 'auto'
+      });
+
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    }
+  };
+
+  // Run immediately and re-run on load event when all assets/fonts have settled
+  requestAnimationFrame(scrollToTarget);
+  window.addEventListener('load', scrollToTarget, { once: true });
+}
+
+function initCountUp() {
+  const counterElements = document.querySelectorAll("[data-counter]");
+  if (!counterElements.length) return;
+
+  const isReducedMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const animateCount = (el) => {
+    const targetVal = parseFloat(el.getAttribute("data-counter"));
+    if (isNaN(targetVal)) return;
+
+    const decimals =
+      parseInt(el.getAttribute("data-decimals"), 10) ||
+      (targetVal % 1 !== 0 ? 1 : 0);
+    const prefix = el.getAttribute("data-prefix") || "";
+    const suffix = el.getAttribute("data-suffix") || "";
+    const duration = parseInt(el.getAttribute("data-duration"), 10) || 1200;
+
+    if (isReducedMotion) {
+      el.textContent = `${prefix}${targetVal.toFixed(decimals)}${suffix}`;
+      return;
+    }
+
+    const startTime = performance.now();
+    const startVal = 0;
+
+    const updateValue = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const currentVal = startVal + (targetVal - startVal) * easeOut;
+
+      el.textContent = `${prefix}${currentVal.toFixed(decimals)}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateValue);
+      } else {
+        el.textContent = `${prefix}${targetVal.toFixed(decimals)}${suffix}`;
+      }
+    };
+
+    requestAnimationFrame(updateValue);
+  };
+
+  if (typeof IntersectionObserver !== "undefined") {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    counterElements.forEach((el) => observer.observe(el));
+  } else {
+    counterElements.forEach((el) => animateCount(el));
+  }
+}
+
 function initSmoothNav() {
   const navLinks = document.querySelectorAll('.spy-link, .legal-toc a');
   navLinks.forEach((link) => {
@@ -494,6 +585,9 @@ function initSmoothNav() {
             top: targetY,
             behavior: "smooth",
           });
+
+          navLinks.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
 
           target.setAttribute('tabindex', '-1');
           target.focus({ preventScroll: true });
@@ -634,42 +728,48 @@ function initFAQ() {
 }
 
 function updateScrollSpy() {
-  const sections = document.querySelectorAll("section[id], header[id], div[id].legal-section");
+  const sections = document.querySelectorAll("section[id], header[id]");
   const navLinks = document.querySelectorAll(".spy-link, .legal-toc a");
 
-  if (sections.length === 0) return;
+  if (navLinks.length === 0 || sections.length === 0) return;
 
   const headerOffset = getStickyHeaderOffset();
-  // Focus line: active reading zone right below sticky navigation
-  const focusLine = headerOffset + 80;
+  const scrollY = window.scrollY || document.documentElement.scrollTop;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-  let currentId = "";
+  let activeSection = null;
 
-  // 1. Find the section that spans the focus reading line
-  for (let i = 0; i < sections.length; i++) {
-    const s = sections[i];
-    const rect = s.getBoundingClientRect();
+  // 1. Bottom of page: highlight the last section
+  if (scrollY >= maxScroll - 30) {
+    activeSection = sections[sections.length - 1];
+  } else if (scrollY <= headerOffset + 50) {
+    // 2. Top of page: highlight first section
+    activeSection = sections[0];
+  } else {
+    // 3. Top-down focal trigger line:
+    // A section becomes active as its heading reaches under the sticky header (+ 60px breathing room)
+    const triggerPoint = headerOffset + 60;
+    activeSection = sections[0];
 
-    if (rect.top <= focusLine && rect.bottom > focusLine) {
-      currentId = s.id;
-      break;
+    for (let i = 0; i < sections.length; i++) {
+      const rect = sections[i].getBoundingClientRect();
+      if (rect.top <= triggerPoint) {
+        activeSection = sections[i];
+      }
     }
   }
 
-  // 2. Boundary Fallbacks
-  if (!currentId) {
-    if (window.scrollY < 80 || sections[0].getBoundingClientRect().top > focusLine) {
-      currentId = sections[0].id;
-    } else {
-      currentId = sections[sections.length - 1].id;
-    }
+  if (!activeSection && sections.length > 0) {
+    activeSection = sections[0];
   }
+
+  const currentId = activeSection ? activeSection.id : null;
 
   // Update TOC Progress Fill if exists
   const tocFill = document.querySelector(".toc-progress-fill");
   if (tocFill) {
     const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progressRatio = totalHeight > 0 ? Math.min(Math.max(window.scrollY / totalHeight, 0), 1) : 0;
+    const progressRatio = totalHeight > 0 ? Math.min(Math.max(scrollY / totalHeight, 0), 1) : 0;
     tocFill.style.transform = `scaleX(${progressRatio})`;
   }
 
@@ -716,7 +816,19 @@ function updateScrollSpy() {
 }
 
 function initScrollSpy() {
-  window.addEventListener("scroll", updateScrollSpy, { passive: true });
+  let ticking = false;
+  const onScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateScrollSpy();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
   window.addEventListener("load", updateScrollSpy);
   updateScrollSpy();
 

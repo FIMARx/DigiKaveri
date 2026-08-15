@@ -2709,7 +2709,6 @@ mark.faq-highlight {
 }
 
 html {
-  scroll-behavior: smooth !important;
   scroll-padding-top: 110px !important;
 }
 

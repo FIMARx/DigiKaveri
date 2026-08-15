@@ -79,22 +79,87 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ComputerStore",
-  "name": "DigiKaveri",
-  "url": "https://digikaveri.com/",
-  "logo": "https://digikaveri.com/images/logo.webp",
-  "description": "Everyday IT Help & Computer Repair in Uusimaa and remotely across Finland.",
-  "telephone": "+3584578338105",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Uusimaa"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressRegion": "Uusimaa",
-    "addressCountry": "FI"
-  },
-  "priceRange": "€€",
-  "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 09:00-21:00"
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": "https://digikaveri.com/#organization",
+      "name": "DigiKaveri",
+      "url": "https://digikaveri.com/",
+      "logo": "https://digikaveri.com/images/logo.webp",
+      "image": "https://digikaveri.com/images/og-image.webp",
+      "description": "Luotettava tietokonehuolto, laiteopastus ja IT-tuki kotikäynteinä Uudellamaalla ja etänä koko Suomeen.",
+      "telephone": "+3584578338105",
+      "email": "info@digikaveri.com",
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Credit Card, Debit Card, Invoice, Cash",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Espoo",
+        "addressRegion": "Uusimaa",
+        "addressCountry": "FI"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 60.2055,
+        "longitude": 24.6559
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Espoo"
+        },
+        {
+          "@type": "City",
+          "name": "Helsinki"
+        },
+        {
+          "@type": "City",
+          "name": "Vantaa"
+        },
+        {
+          "@type": "City",
+          "name": "Kauniainen"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Uusimaa"
+        },
+        {
+          "@type": "Country",
+          "name": "Suomi"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "09:00",
+          "closes": "21:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "bestRating": "5.0",
+        "worstRating": "1.0",
+        "ratingCount": "10"
+      },
+      "sameAs": [
+        "https://fi.trustpilot.com/review/digikaveri.com",
+        "https://maps.app.goo.gl/QPsYJUyiQ4ZdF89A9"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://digikaveri.com/#website",
+      "url": "https://digikaveri.com/",
+      "name": "DigiKaveri",
+      "publisher": {
+        "@id": "https://digikaveri.com/#organization"
+      },
+      "inLanguage": ["fi", "en"]
+    }
+  ]
 }
 </script>
