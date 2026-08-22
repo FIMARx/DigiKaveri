@@ -15,7 +15,7 @@ const translations = {
     homeVisitDesc: "Apua paikan päällä kotonasi (Uusimaa)",
     annual: "Vuosihuolto",
     annualDesc: "Tietokoneen perusteellinen puhdistus ja tarkistus",
-    deductionLabel: "Hyödynnä kotitalousvähennys (-40%)",
+    deductionLabel: "Hyödynnä kotitalousvähennys (-35%)",
     deductionNote: "Kotitalousvähennys koskee kotikäyntejä ja huoltotöitä, ei etätukea.",
     invoiceTotal: "Laskun loppusumma:",
     actualCost: "Oma osuutesi vähennyksen jälkeen:",
@@ -46,7 +46,7 @@ const translations = {
     homeVisitDesc: "Help on-site at your home (Uusimaa)",
     annual: "Annual Maintenance",
     annualDesc: "Thorough physical & digital computer tune-up",
-    deductionLabel: "Apply household tax deduction (-40%)",
+    deductionLabel: "Apply household tax deduction (-35%)",
     deductionNote: "The household tax deduction applies to home visits and maintenance, not remote support.",
     invoiceTotal: "Invoice total:",
     actualCost: "Your cost after tax deduction:",
@@ -84,7 +84,7 @@ const SERVICES = {
 const START_LAT = 60.1585;
 const START_LON = 24.6468;
 const TRAVEL_RATE_PER_KM = 0.90;
-const TAX_DEDUCTION_RATE = 0.40;
+const TAX_DEDUCTION_RATE = 0.35;
 
 onDOMReady(() => {
   const container = document.getElementById("interactive-estimator");
@@ -401,10 +401,11 @@ onDOMReady(() => {
     });
   });
 
-  // Calculate Travel Costs via Nominatim + OSRM
+  // Calculate Travel Costs via Nominatim + OSRM (with in-memory cache)
   const addressInput = document.getElementById("est-address");
   const calcBtn = document.getElementById("est-calc-btn");
   const feedbackEl = document.getElementById("est-dist-feedback");
+  const routeCache = new Map();
 
   if (calcBtn && addressInput) {
     addressInput.addEventListener("keydown", (e) => {
@@ -417,6 +418,18 @@ onDOMReady(() => {
     calcBtn.addEventListener("click", async () => {
       const query = addressInput.value.trim();
       if (!query) return;
+
+      const cacheKey = query.toLowerCase();
+      if (routeCache.has(cacheKey)) {
+        const cached = routeCache.get(cacheKey);
+        state.address = query;
+        state.distanceKm = cached.distanceKm;
+        state.travelCost = cached.travelCost;
+        feedbackEl.textContent = `${t.distLabel} ${cached.distanceKm.toFixed(1)} km`;
+        feedbackEl.classList.remove("hidden");
+        updateCalculator();
+        return;
+      }
 
       calcBtn.textContent = t.calculating;
       calcBtn.disabled = true;
@@ -448,6 +461,9 @@ onDOMReady(() => {
 
         const distanceKm = routeData.routes[0].distance / 1000;
         const totalTravelCost = distanceKm * TRAVEL_RATE_PER_KM;
+
+        // Save to cache
+        routeCache.set(cacheKey, { distanceKm, travelCost: totalTravelCost });
 
         state.address = query;
         state.distanceKm = distanceKm;
@@ -514,6 +530,11 @@ onDOMReady(() => {
       state.promoCode = result.code;
       state.discountPercent = result.discount;
       state.isUniqueCode = result.isUniqueCode;
+      if (result.isUniqueCode) {
+        try { sessionStorage.setItem("active_unique_promo", result.code); } catch (_) {}
+      } else {
+        try { sessionStorage.removeItem("active_unique_promo"); } catch (_) {}
+      }
       
       if (promoFeedbackEl) {
         promoFeedbackEl.textContent = result.message;
@@ -526,6 +547,7 @@ onDOMReady(() => {
       state.promoCode = "";
       state.discountPercent = 0;
       state.isUniqueCode = false;
+      try { sessionStorage.removeItem("active_unique_promo"); } catch (_) {}
       if (promoFeedbackEl) {
         promoFeedbackEl.textContent = result.message || (isEn 
           ? "✗ Invalid or expired promo code" 
@@ -577,11 +599,6 @@ onDOMReady(() => {
   const bookBtn = document.getElementById("est-book-btn") || container.querySelector(".btn-estimator-cta");
   if (bookBtn) {
     bookBtn.addEventListener("click", () => {
-      // Mark single-use promo code as redeemed in Supabase when proceeding to booking
-      if (state.isUniqueCode && state.promoCode) {
-        markPromoCodeRedeemed(state.promoCode);
-      }
-
       const messageField = document.getElementById("d-message") || 
                            document.getElementById("message") || 
                            document.querySelector("textarea[name='message']");
@@ -624,7 +641,7 @@ onDOMReady(() => {
           msg += `\nPromo Code: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isUniqueCode ? ' [Special 1-time client code]' : ''}\n`;
         }
 
-        msg += `Tax Deduction: ${state.deduction ? 'Yes (-40% on labor)' : 'No'}\n`;
+        msg += `Tax Deduction: ${state.deduction ? 'Yes (-35% on labor)' : 'No'}\n`;
         
         if (state.home.checked || state.annual.checked) {
           msg += `\nTravel Details:\n`;
@@ -655,7 +672,7 @@ onDOMReady(() => {
           msg += `\nAlennuskoodi: ${state.promoCode} (-${state.discountPercent}% / -${promoDiscount.toFixed(2)} €)${state.isUniqueCode ? ' [Uniikki asiakasetu]' : ''}\n`;
         }
 
-        msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-40% työn osuudesta)' : 'Ei'}\n`;
+        msg += `Kotitalousvähennys: ${state.deduction ? 'Kyllä (-35% työn osuudesta)' : 'Ei'}\n`;
         
         if (state.home.checked || state.annual.checked) {
           msg += `\nSijainti & Matkakulut:\n`;

@@ -1,6 +1,7 @@
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 import { onDOMReady, isEnglish } from './utils.js';
+import { markPromoCodeRedeemed } from './promo-validator.js';
 
 function showToast(message, isSuccess = true) {
   let toastContainer = document.getElementById('toast-container');
@@ -179,6 +180,15 @@ function setupForm(formId) {
       const result = await response.json();
 
       if (response.status === 200 && result && result.success) {
+        // Mark active unique promo code redeemed in Supabase and local storage
+        try {
+          const activePromo = sessionStorage.getItem("active_unique_promo");
+          if (activePromo) {
+            markPromoCodeRedeemed(activePromo);
+            sessionStorage.removeItem("active_unique_promo");
+          }
+        } catch (_) {}
+
         btn.innerHTML = `${t.success} <i data-lucide="check"></i>`;
         btn.style.background = "var(--success)";
         try { createIcons({ icons: ICON_SET }); } catch (e) {}

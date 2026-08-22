@@ -1,6 +1,6 @@
 /**
  * DigiKaveri Service Worker (PWA Offline Engine)
- * Version: digikaveri-v9
+ * Version: digikaveri-v10
  * 
  * Strategy:
  * - HTML / Navigations: Network-First with Offline Cache Fallback
@@ -8,7 +8,7 @@
  * - External APIs (Supabase, Nominatim, OSRM, Web3Forms): Direct Network Bypass
  */
 
-const CACHE_NAME = 'digikaveri-v9';
+const CACHE_NAME = 'digikaveri-v10';
 
 const PRECACHE_ASSETS = [
   '/',

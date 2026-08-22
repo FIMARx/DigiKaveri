@@ -74,6 +74,7 @@ function initApp() {
   loadAnalytics(); // Initialize Google Analytics & Consent Mode v2 immediately
   initFAQ(); // Immediate FAQ search and accordion responsiveness
   initMobileDropdowns();
+  initServicesTabs();
   initFAB();
   initCampaignBanner();
   initHashScrollOnLoad();
@@ -121,6 +122,9 @@ function initApp() {
       statusInterval = null;
     }
   };
+
+  // Start status polling immediately
+  startPolling();
 
   // Handle browser back-button/bfcache: Refresh status and restart polling
   window.addEventListener("pageshow", (event) => {
@@ -309,6 +313,7 @@ function initStatusModal(isOpen) {
   }
 
   setTimeout(() => {
+    if (sessionStorage.getItem("closedModalShown") === "true") return;
     previouslyFocusedElement = document.activeElement;
     modal.classList.add("active");
     document.body.classList.add("is-locked");
@@ -342,15 +347,25 @@ function closeStatusModal(modal) {
 
 
 function initTheme() {
+  const updateMetaThemeColor = (theme) => {
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute("content", theme === "dark" ? "#0b0f19" : "#2563eb");
+    }
+  };
+
   const savedTheme = localStorage.getItem("theme");
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
   const theme = savedTheme || (mediaQuery.matches ? "dark" : "light");
   document.documentElement.setAttribute("data-theme", theme);
+  updateMetaThemeColor(theme);
   
   // Real-time system theme change synchronization (2026 OS-level standard)
   mediaQuery.addEventListener("change", (e) => {
     if (!localStorage.getItem("theme")) {
-      document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+      const newSystemTheme = e.matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", newSystemTheme);
+      updateMetaThemeColor(newSystemTheme);
     }
   });
   
@@ -364,6 +379,7 @@ function initTheme() {
         const applyTheme = () => {
           document.documentElement.setAttribute("data-theme", newTheme);
           localStorage.setItem("theme", newTheme);
+          updateMetaThemeColor(newTheme);
         };
 
         if (typeof document.startViewTransition === "function") {
@@ -377,6 +393,44 @@ function initTheme() {
 }
 
 initTheme();
+
+function switchServicesTab(targetId) {
+  const tabBtns = document.querySelectorAll(".services-tab-btn");
+  tabBtns.forEach((b) => {
+    const isActive = b.getAttribute("data-target") === targetId;
+    b.classList.toggle("active", isActive);
+    b.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+
+  document.querySelectorAll(".services-panel").forEach((panel) => {
+    panel.classList.toggle("active", panel.id === targetId);
+  });
+
+  try {
+    const activePanel = document.getElementById(targetId);
+    if (activePanel) createIcons({ icons: ICON_SET, root: activePanel });
+  } catch (e) {}
+}
+
+function initServicesTabs() {
+  const tabBtns = document.querySelectorAll(".services-tab-btn");
+  if (!tabBtns.length) return;
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-target");
+      if (targetId) switchServicesTab(targetId);
+    });
+  });
+
+  // Also support clicking external triggers (like solution cards)
+  document.querySelectorAll("[data-services-tab]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const targetId = link.getAttribute("data-services-tab");
+      if (targetId) switchServicesTab(targetId);
+    });
+  });
+}
 
 function initMobileDropdowns() {
   if (isMobileDropdownsInitialized) return;
@@ -816,11 +870,22 @@ function updateScrollSpy() {
 }
 
 function initScrollSpy() {
+  const progressFill = document.querySelector("#scrollProgressBar");
+
+  const updateProgress = () => {
+    if (!progressFill) return;
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progressRatio = height > 0 ? Math.min(Math.max(winScroll / height, 0), 1) : 0;
+    progressFill.style.transform = `scaleX(${progressRatio})`;
+  };
+
   let ticking = false;
   const onScroll = () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         updateScrollSpy();
+        updateProgress();
         ticking = false;
       });
       ticking = true;
@@ -829,37 +894,13 @@ function initScrollSpy() {
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
-  window.addEventListener("load", updateScrollSpy);
-  updateScrollSpy();
-
-  // Unified Scroll Progress Bar
-  const progressFill = document.querySelector("#scrollProgressBar");
-  if (progressFill) {
-    let ticking = false;
-    const updateProgress = () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progressRatio = height > 0 ? Math.min(Math.max(winScroll / height, 0), 1) : 0;
-      progressFill.style.transform = `scaleX(${progressRatio})`;
-      ticking = false;
-    };
-
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateProgress);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    window.addEventListener("resize", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateProgress);
-        ticking = true;
-      }
-    }, { passive: true });
-
+  window.addEventListener("load", () => {
+    updateScrollSpy();
     updateProgress();
-  }
+  });
+
+  updateScrollSpy();
+  updateProgress();
 }
 
 function initMobileNav() {
@@ -949,6 +990,16 @@ function initMobileNav() {
       closeMenu();
     }
   });
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (window.innerWidth >= 1024 && overlay.classList.contains("active")) {
+        closeMenu();
+      }
+    },
+    { passive: true }
+  );
 }
 
 function initFAB() {
@@ -1088,9 +1139,13 @@ function initOfflineIndicator() {
     if (document.visibilityState === "visible") checkConnectivity();
   });
 
-  // Check immediately and poll periodically
+  // Check immediately and poll gently only when tab is visible
   checkConnectivity();
-  setInterval(checkConnectivity, 12000);
+  setInterval(() => {
+    if (document.visibilityState === "visible") {
+      checkConnectivity();
+    }
+  }, 60000);
 }
 
 onDOMReady(initApp);

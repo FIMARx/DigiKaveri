@@ -1,7 +1,7 @@
 /* quiz.js - DigiKaveri Troubleshooter Quiz logic */
 import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
-import { onDOMReady } from './utils.js';
+import { onDOMReady, isEnglish } from './utils.js';
 
 onDOMReady(() => {
   const form = document.getElementById("contactForm");
@@ -184,7 +184,7 @@ onDOMReady(() => {
 
   // Ensure default values on submit if skipped
   form.addEventListener("submit", () => {
-    const isEn = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/");
+    const isEn = isEnglish();
     if (deviceInput && !deviceInput.value) {
       deviceInput.value = isEn ? "General IT Support / Device (Not selected)" : "Yleinen IT-tuki / Laite (Ei valittu)";
     }

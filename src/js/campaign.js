@@ -103,6 +103,9 @@ export function initCampaignBanner() {
 
   document.body.classList.add("has-campaign-banner");
 
+  let timerInterval = null;
+  let resizeObserver = null;
+
   const updateBannerHeight = () => {
     if (!banner || !banner.isConnected || banner.classList.contains("campaign-closing")) return;
     const h = banner.offsetHeight;
@@ -111,8 +114,8 @@ export function initCampaignBanner() {
 
   // Observe resize for seamless dynamic height calculations
   if (typeof ResizeObserver !== "undefined") {
-    const ro = new ResizeObserver(updateBannerHeight);
-    ro.observe(banner);
+    resizeObserver = new ResizeObserver(updateBannerHeight);
+    resizeObserver.observe(banner);
   } else {
     window.addEventListener("resize", updateBannerHeight);
   }
@@ -120,6 +123,20 @@ export function initCampaignBanner() {
 
   // Close banner safely and smoothly
   const closeBanner = () => {
+    // Clear countdown timer interval immediately to avoid background leaks
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    // Disconnect resize observer / remove resize listener
+    if (resizeObserver) {
+      resizeObserver.disconnect();
+      resizeObserver = null;
+    } else {
+      window.removeEventListener("resize", updateBannerHeight);
+    }
+
     banner.classList.add("campaign-closing");
     document.documentElement.style.setProperty("--campaign-banner-height", "0px");
     
@@ -189,9 +206,12 @@ export function initCampaignBanner() {
     };
 
     if (updateTimer()) {
-      const timerInterval = setInterval(() => {
+      timerInterval = setInterval(() => {
         if (!updateTimer()) {
-          clearInterval(timerInterval);
+          if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+          }
         }
       }, 1000);
     }

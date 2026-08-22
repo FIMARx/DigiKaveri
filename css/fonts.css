@@ -1,12 +1,7 @@
-/* Self-hosted Typography (Inter & Outfit) */
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/inter/800.css';
+/* Self-hosted Typography (Inter & Outfit - Latin & Latin Extended subsets) */
+@import '@fontsource/inter/latin.css';
+@import '@fontsource/inter/latin-ext.css';
 
-@import '@fontsource/outfit/400.css';
-@import '@fontsource/outfit/500.css';
-@import '@fontsource/outfit/600.css';
-@import '@fontsource/outfit/700.css';
-@import '@fontsource/outfit/800.css';
+@import '@fontsource/outfit/latin.css';
+@import '@fontsource/outfit/latin-ext.css';
+

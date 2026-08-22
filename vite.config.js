@@ -100,43 +100,6 @@ export default defineConfig({
       }
     },
     {
-      name: 'inline-css',
-      enforce: 'post',
-      generateBundle(options, bundle) {
-        const cssAssets = {};
-        for (const [key, value] of Object.entries(bundle)) {
-          if (key.endsWith('.css')) {
-            cssAssets[key] = value.source;
-          }
-        }
-
-        for (const [key, value] of Object.entries(bundle)) {
-          if (key.endsWith('.html')) {
-            let html = value.source;
-            html = html.replace(/<link rel="stylesheet"([^>]+)href="([^"]+)"([^>]*)>/g, (match, pre, href, post) => {
-              const fileName = href.split('/').pop().replace('.css', '');
-              // Match the base name before the hash (e.g., 'guide' matches 'guide-hash.css')
-              const assetKey = Object.keys(cssAssets).find(k => {
-                const assetFileName = k.split('/').pop().replace('.css', '');
-                const baseName = assetFileName.replace(/-[a-zA-Z0-9_-]+$/, '');
-                return baseName === fileName || assetFileName.startsWith(fileName) || k.includes(fileName);
-              });
-              if (assetKey) {
-                return `<style>${cssAssets[assetKey]}</style>`;
-              }
-              return match;
-            });
-            value.source = html;
-          }
-        }
-
-        // Remove CSS files from dist/assets after inlining
-        for (const key of Object.keys(cssAssets)) {
-          delete bundle[key];
-        }
-      }
-    },
-    {
       name: 'auto-sitemap-lastmod',
       closeBundle() {
         const sitemapPath = resolve(__dirname, 'dist/sitemap.xml');
