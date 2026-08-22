@@ -10,7 +10,7 @@
     <a href="https://supabase.com/"><img src="https://img.shields.io/badge/⚡_Database-Supabase_Cloud-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" /></a>
     <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/⚡_Engine-Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
     <a href="#"><img src="https://img.shields.io/badge/🌐_i18n-FI_%7C_EN-3B82F6?style=for-the-badge" alt="i18n" /></a>
-    <a href="#"><img src="https://img.shields.io/badge/🏛️_Tax_Deduction-40%25_Kotitalousvähennys-059669?style=for-the-badge" alt="Tax Deduction" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/🏛️_Tax_Deduction-35%25_Kotitalousvähennys-059669?style=for-the-badge" alt="Tax Deduction" /></a>
     <a href="#"><img src="https://img.shields.io/badge/📍_Location-Uusimaa%2C_Finland-0057D9?style=for-the-badge" alt="Location" /></a>
   </p>
 
@@ -22,9 +22,12 @@
 
 Technology should empower people, not overwhelm them. **DigiKaveri** (*"Digital Buddy"*) bridges the digital divide with patient, jargon-free technical assistance in **Uusimaa, Finland** 🇫🇮 and remote support across the entire country.
 
-- 🚗 **On-site Home Visits**: Friendly in-person computer repair, Wi-Fi optimization, printer setup, and digital guidance across Espoo, Helsinki, Vantaa, and Kauniainen.
+- 🚗 **On-site Home Visits**: Friendly in-person computer repair, Wi-Fi optimization, printer setup, smart TV tuning, and digital guidance across Espoo, Helsinki, Vantaa, and Kauniainen.
 - ⚡ **Instant Remote Help**: Secure 1-click screen-sharing remote support nationwide.
-- 🏛️ **2026 Tax Savings**: 100% eligible for Finland's official **-40% Kotitalousvähennys** (household tax deduction) on labor.
+- 📸 **WhatsApp Photo-to-Help**: Snap a photo of an error screen and receive instant, free diagnosis on WhatsApp.
+- 👵 **Senior & Family Support**: Specialized patient assistance for elderly relatives (banking logins, OmaVero, TV setup) with direct billing options for adult children.
+- 💼 **Business & Remote Work**: Reliable workstation setup, secure VPNs, Microsoft 365, and on-demand maintenance without lock-in contracts.
+- 🏛️ **2026 Tax Savings**: 100% eligible for Finland's official **-35% Kotitalousvähennys** (household tax deduction) on labor (max €1,600/person).
 - 🛡️ **"Ei ratkaisua, ei laskua"**: 100% satisfaction guarantee — if an issue cannot be resolved, the client is charged 0 €.
 
 ---
@@ -35,9 +38,12 @@ Technology should empower people, not overwhelm them. **DigiKaveri** (*"Digital 
 flowchart LR
     subgraph Client["🖥️ Client Experience (Browser)"]
         Landing["🌐 Landing Page (FI / EN)"]
+        Solutions["🧩 12-Problem Solution Matrix"]
+        Tabs["🔀 Consumer vs Business Panels"]
         Guide["🧠 Adaptive Remote Guide\n(OS Sniffing)"]
         Estimator["⚡ Dynamic Price & Distance Estimator"]
         PromoInput["🎟️ Promo Code Input"]
+        WhatsApp["📸 WhatsApp Photo-Help"]
     end
 
     subgraph CloudServices["☁️ Cloud & Backend Infrastructure"]
@@ -46,7 +52,10 @@ flowchart LR
         Web3Forms["📬 Web3Forms API\n(Encrypted Booking Dispatch)"]
     end
 
+    Landing --> Solutions
+    Solutions --> Tabs
     Landing --> Estimator
+    Landing --> WhatsApp
     Estimator --> Nominatim
     PromoInput -->|"Real-time Validation"| Supabase
     Estimator -->|"Burn Code & Book"| Supabase
@@ -61,29 +70,40 @@ flowchart LR
 ### 1. 🎟️ Pure Cloud Single-Use Promo Code System (Supabase)
 - **Zero Client-Side Secrets**: No exposed algorithms, seeds, or generation formulas in frontend code or GitHub.
 - **Instant Global Validation**: Validates unique codes (e.g. `ESPOO15-A1`, `DK15-VIP1`) against Supabase in real time.
-- **Single-Use Burn Protection**: Upon booking, codes are burned globally (`is_redeemed: true`), instantly blocking double redemption across all devices, browsers, and Incognito sessions.
+- **Submit-Time Burn Protection**: Codes are redeemed globally (`is_redeemed: true`) only upon successful form submission, preventing premature burning.
 - **Local CLI Generator**: Run `npm run generate-codes` locally to batch-generate clean flyer codes with ready-to-paste SQL insert queries.
 
 ### 2. ⚡ Dynamic Price & Distance Estimator
-- **Real-Time Driving Cost Routing**: Uses OpenStreetMap Nominatim and OSRM (Open Source Routing Machine) to calculate exact driving distance and travel fees from Espoo.
-- **2026 Tax Deduction Calculator**: Accurately computes customer net cost with the official 2026 Finnish **-40% Kotitalousvähennys** on labor.
+- **Real-Time Driving Cost Routing**: Uses OpenStreetMap Nominatim and OSRM (Open Source Routing Machine) with in-memory caching to calculate exact driving distance and travel fees from Espoo.
+- **2026 Tax Deduction Calculator**: Accurately computes customer net cost with the official 2026 Finnish **-35% Kotitalousvähennys** on labor.
 - **Interactive Multi-Service Configurator**: Dynamic quantity selectors for Remote Support, Home Visits, and Annual PC Maintenance.
 
-### 3. 🧠 Adaptive OS Auto-Detecting Remote Guide
+### 3. 📸 WhatsApp "Photo-to-Help" Fast Diagnostic Pipeline
+- **Zero-Friction Help**: Floating quick-action banner allowing customers to snap a phone photo of an error dialog and launch a prefilled WhatsApp chat with a single tap.
+
+### 4. 👵 Senior & Family Support Offering
+- **Dedicated In-Home Assistance**: Tailored for seniors needing help with banking credentials, OmaVero, Digi-TV, and smartphones.
+- **Third-Party Family Invoicing**: Clean toggle in booking forms for adult children ordering support for aging parents.
+
+### 5. 🔀 Segmented Consumer vs. Business Service Tables
+- **Segmented Tab Switcher**: Seamless toggle between consumer and business offerings with full coverage of all 12 common technical problem categories.
+- **Smart Deep-Linking**: Solution grid cards automatically flip and focus the relevant service panel upon interaction.
+
+### 6. 🧠 Adaptive OS Auto-Detecting Remote Guide
 - **Platform Sniffing**: Inspects the visitor's operating system (Windows, macOS, Android, iOS) on page load and customizes setup instructions and software download links.
 - **Segmented Mobile Controls**: Smooth native touch switcher for quick platform switching.
 - **Interactive Lightbox**: Full-screen zoomable step-by-step screenshots with keyboard trap accessibility.
 
-### 4. 📢 Real-Time Campaign Engine (`campaign.json`)
+### 7. 📢 Real-Time Campaign Engine (`campaign.json`)
 - **Dynamic Themes**: Preset gradients (`sunset`, `aurora`, `emerald`, `royal`) with tailored Dark Mode variants.
-- **Live Countdown Timer**: Real-time ticker synchronizing offer expiration.
+- **Live Countdown Timer**: Real-time ticker synchronizing offer expiration with memory-safe interval cleanup.
 - **Smart Dismiss**: Persistent *"Älä näytä enää"* preference saved to `localStorage`.
 
-### 5. 🌗 Silky Smooth Dark Mode & Native View Transitions
+### 8. 🌗 Silky Smooth Dark Mode & Native View Transitions
 - **View Transitions API**: 350ms cross-fade animation when toggling themes.
-- **System Theme Sync**: Automatically respects `prefers-color-scheme` with manual toggle fallback.
+- **Dynamic Mobile Status Bar Sync**: Dynamically updates `<meta name="theme-color">` to match Dark/Light mode in mobile browsers.
 
-### 6. 🔍 Real-Time Live FAQ Search
+### 9. 🔍 Real-Time Live FAQ Search
 - **Instant Client Filter**: Zero-delay search across all questions and answers.
 - **Dynamic Search Highlighting**: Marks search keywords with `<mark class="faq-highlight">` badges in real time.
 
