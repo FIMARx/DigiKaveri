@@ -542,6 +542,15 @@ header#home::after {
   color: var(--text-dark);
 }
 
+.form-group textarea {
+  resize: vertical;
+  min-height: 140px;
+  max-height: 380px;
+  max-width: 100%;
+  min-width: 100%;
+  line-height: 1.5;
+}
+
 .input-group input::placeholder,
 .form-group input::placeholder,
 .form-group textarea::placeholder {
