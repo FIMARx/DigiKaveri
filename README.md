@@ -12,6 +12,7 @@
     <a href="#"><img src="https://img.shields.io/badge/🌐_i18n-FI_%7C_EN-3B82F6?style=for-the-badge" alt="i18n" /></a>
     <a href="#"><img src="https://img.shields.io/badge/🏛️_Tax_Deduction-35%25_Kotitalousvähennys-059669?style=for-the-badge" alt="Tax Deduction" /></a>
     <a href="#"><img src="https://img.shields.io/badge/📍_Location-Uusimaa%2C_Finland-0057D9?style=for-the-badge" alt="Location" /></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/⚖️_License-All_Rights_Reserved-dc2626?style=for-the-badge" alt="License" /></a>
   </p>
 
 </div>
@@ -193,6 +194,14 @@ npm run generate-codes
 # Generate custom batches (e.g. 10 codes with 20% discount for Espoo)
 node scripts/generate-codes.js ESPOO 20 10
 ```
+
+---
+
+## ⚖️ License & Copyright
+
+Copyright © 2026 **[FIMARx](https://github.com/FIMARx) / [DigiKaveri](https://digikaveri.com)**. All Rights Reserved.
+
+This project and all related source code, assets, branding, and written content are proprietary. Unauthorized copying, distribution, modification, or commercial re-use without explicit written consent is strictly prohibited. See [`LICENSE`](LICENSE) for complete details.
 
 ---
 
