@@ -731,7 +731,7 @@ header#home::after {
 /* Testimonial Cards */
 .reviews-grid-new {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
@@ -3789,5 +3789,82 @@ header#home {
     height: 16px;
   }
 }
+
+@media (max-width: 480px) {
+  .services-tabs {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .services-tab-btn {
+    width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    padding: 8px 12px !important;
+    font-size: 0.82rem !important;
+  }
+  .testimonial-card {
+    padding: 20px 14px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .step-card {
+    padding: 20px 14px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .step-icon {
+    width: 48px !important;
+    height: 48px !important;
+    margin: 0 auto 16px !important;
+    font-size: 20px !important;
+  }
+  .step-number {
+    font-size: 1.8rem !important;
+    top: 10px !important;
+    right: 10px !important;
+  }
+  .comp-highlight-card {
+    padding: 14px 10px !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .comp-highlight-icon {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .status-schedule-pill {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .testimonial-card {
+    padding: 14px 8px !important;
+  }
+  .step-card {
+    padding: 14px 8px !important;
+  }
+  .comp-highlight-card {
+    padding: 10px 6px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .status-schedule-pill {
+    padding: 2px !important;
+  }
+  .status-part, .schedule-part {
+    font-size: 0.7rem !important;
+    padding: 4px 6px !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+}
+
 
 
