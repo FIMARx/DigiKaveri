@@ -39,5 +39,9 @@
   "footer_trust_1": "Household tax deduction -35%",
   "footer_trust_2": "No fix, no fee guarantee",
   "footer_trust_3": "Local support in Uusimaa",
+  "copy_phone_aria": "Copy phone number",
+  "copy_email_aria": "Copy email address",
+  "copy_title": "Copy to clipboard",
+  "close_modal_aria": "Close dialog",
   "og_locale": "en_US"
 }
