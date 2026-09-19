@@ -5496,8 +5496,6 @@ html.theme-switching *::after {
     overflow-y: hidden !important;
     scroll-snap-type: x mandatory !important;
     scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     gap: 16px !important;
     margin-bottom: 12px !important;
