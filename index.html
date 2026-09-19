@@ -38,23 +38,36 @@
         >
       </h1>
       <p class="hero-subtitle">
-        Kotikäynnit Espoossa ja koko Uudellamaalla, etätuki kaikkialle Suomeen. Jätä yhteydenottopyyntö, niin vastaamme arkisin 1–2 tunnin kuluessa.
+        Kotikäynnit Espoossa ja koko Uudellamaalla, etätuki kaikkialle Suomeen. Palvelemme joka päivä klo 09:00–21:00. Vastaamme yhteydenottopyyntöihin 1–2 tunnin kuluessa.
       </p>
 
       <div class="trust-badges-centered">
         <div class="trust-item">
-          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Kotitalousvähennys <strong class="countup-num" data-counter="35" data-prefix="-" data-suffix="%">-35%</strong></span>
+          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Kotitalousvähennys <strong class="countup-num" data-counter="35" data-prefix="-" data-suffix="%">-35%</strong> <span class="trust-sub-calc">(esim. 60 € → vain 39 €)</span></span>
         </div>
         <div class="trust-item">
           <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span><strong class="countup-num" data-counter="100" data-suffix="%">100%</strong> Tyytyväisyystakuu</span>
         </div>
-        <div class="trust-item">
-          <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>Ei ratkaisua, ei laskua</span>
+        <div class="trust-item trust-item-clickable" id="guaranteeModalTrigger" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Lue lisää tyytyväisyystakuusta">
+          <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>Ei ratkaisua, ei laskua <i data-lucide="info" class="pill-info-icon" aria-hidden="true"></i></span>
         </div>
       </div>
 
       <div class="hero-form-card" id="contact">
         <h2>Pyydä apua tai jätä soittopyyntö</h2>
+        <div class="hero-quick-contact">
+          <span class="hqc-title"><i data-lucide="zap" aria-hidden="true"></i> Tarvitsetko apua heti?</span>
+          <div class="hqc-actions">
+            <a href="tel:04578338105" class="hqc-btn hqc-phone" aria-label="Soita numeroon 045 7833 8105">
+              <i data-lucide="phone" aria-hidden="true"></i> <span>Soita: 045 7833 8105</span>
+            </a>
+            <a href="https://wa.me/3584578338105?text=Hei%20DigiKaveri!%20Tarvitsisin%20apua%20laitteeni%20kanssa:" target="_blank" rel="noopener noreferrer" class="hqc-btn hqc-whatsapp" aria-label="Lähetä viesti WhatsAppissa">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-form-divider"><span>tai valitse laitteesi alta</span></div>
         <form
           id="contactForm"
           action="https://api.web3forms.com/submit"
@@ -175,7 +188,8 @@
           </div>
         </form>
         <p class="form-footer">
-          <i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Käsittelemme tietojasi aina luottamuksellisesti.
+          <span class="footer-response-badge"><i data-lucide="clock" class="lucide-sm" aria-hidden="true"></i> Vastaamme 1–2 h kuluessa (klo 09–21)</span>
+          <span class="footer-lock"><i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Luottamuksellinen</span>
         </p>
       </div>
     </header>
@@ -197,16 +211,16 @@
     <div class="trust-bar container">
       <p>Autamme kaikkien tuttujen laitteiden ja merkkien kanssa</p>
       <div class="trust-logos" role="region" aria-label="Tuetut laitemerkit ja tuotemerkit">
-        <img src="svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
-        <img src="svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
-        <img src="svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
-        <img src="svg/android.svg" alt="Android" width="48" height="48" title="Android" loading="lazy" />
-        <img src="svg/hp.svg" alt="HP" width="48" height="48" title="HP" loading="lazy" />
-        <img src="svg/lenovo.svg" alt="Lenovo" width="48" height="48" title="Lenovo" class="logo-wide" loading="lazy" />
-        <img src="svg/nokia.svg" alt="Nokia" width="48" height="48" title="Nokia" class="logo-wide" loading="lazy" />
-        <img src="svg/dell.svg" alt="Dell" width="48" height="48" title="Dell" loading="lazy" />
-        <img src="svg/asus.svg" alt="Asus" width="48" height="48" title="Asus" loading="lazy" />
-        <img src="svg/microsoft.svg" alt="Microsoft" width="48" height="48" title="Microsoft" class="logo-wide" loading="lazy" />
+        <img src="/svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
+        <img src="/svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
+        <img src="/svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
+        <img src="/svg/android.svg" alt="Android" width="48" height="48" title="Android" loading="lazy" />
+        <img src="/svg/hp.svg" alt="HP" width="48" height="48" title="HP" loading="lazy" />
+        <img src="/svg/lenovo.svg" alt="Lenovo" width="48" height="48" title="Lenovo" class="logo-wide" loading="lazy" />
+        <img src="/svg/nokia.svg" alt="Nokia" width="48" height="48" title="Nokia" class="logo-wide" loading="lazy" />
+        <img src="/svg/dell.svg" alt="Dell" width="48" height="48" title="Dell" loading="lazy" />
+        <img src="/svg/asus.svg" alt="Asus" width="48" height="48" title="Asus" loading="lazy" />
+        <img src="/svg/microsoft.svg" alt="Microsoft" width="48" height="48" title="Microsoft" class="logo-wide" loading="lazy" />
       </div>
     </div>
 
@@ -237,37 +251,38 @@
         </div>
         <div class="score-divider"></div>
         <div class="score-side">
-          <div class="score-stars tp">
-            <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" class="star-dimmed" aria-hidden="true"></i>
+          <div class="score-stars google">
+            <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i>
           </div>
-          <div class="score-value countup-num" data-counter="3.8" data-decimals="1">3.8</div>
+          <div class="score-value"><span class="countup-num" data-counter="100" data-suffix="%">100%</span></div>
           <div class="score-label">
-            <span>Perustuu arvosteluihin kohteessa</span>
+            <span>Asiakastyytyväisyys</span>
             <div class="score-brand">
-              <svg class="trustpilot-logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#00b67a" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-              </svg>
-              <span class="brand-name">Trustpilot</span>
+              <span class="brand-name">Ei ratkaisua, ei laskua</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="reviews-grid-new">
-        <!-- Card 1 (Featured) -->
-        <div class="testimonial-card featured">
+        <!-- Card 1: Safia Opiskelija -->
+        <div class="testimonial-card">
           <div class="card-header-google">
-            <div class="reviewer-avatar avatar-red">N</div>
+            <img src="/images/avatars/safia.png" alt="Safia Opiskelija" class="reviewer-avatar-img" width="48" height="48" loading="lazy" />
             <div class="reviewer-meta">
-              <h3>Nettiostaja</h3>
-              <span class="review-date">Kuukausi sitten</span>
+              <h3>Safia Opiskelija</h3>
+              <span class="review-stats">1 arvostelu · 4 kuukautta sitten</span>
             </div>
           </div>
-          <div class="testimonial-stars">
-            <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+          <div class="testimonial-stars" aria-label="5/5 tähteä">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <p class="testimonial-quote">
-            "Kannettavani ei eräänä aamuna enää käynnistynyt ollenkaan. DigiKaveri sai koneen kuntoon ja kaikki tärkeät tiedostot säilyivät tallessa. Suosittelen lämpimästi! Toisella kerralla koneesta puhdistettiin pölyt sisältä, ja nyt se käy taas hiljaisesti ja nopeasti."
+            "Koneeni oli tosi hidas montakin kuukautta, mutta digikavereiden korjausten takia se on kuin uusi. Ei mitään ongelmia enää koneen kanssa. Kiitos!"
           </p>
           <div class="testimonial-footer">
             <span class="testimonial-source">
@@ -280,20 +295,54 @@
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="testimonial-card">
+        <!-- Card 2: Nettiostaja (Featured) -->
+        <div class="testimonial-card featured">
           <div class="card-header-google">
-            <div class="reviewer-avatar avatar-blue">S</div>
+            <img src="/images/avatars/nettiostaja.png" alt="Nettiostaja" class="reviewer-avatar-img" width="48" height="48" loading="lazy" />
             <div class="reviewer-meta">
-              <h3>Safia Opiskelija</h3>
-              <span class="review-date">2 viikkoa sitten</span>
+              <h3>Nettiostaja</h3>
+              <span class="review-stats">2 arvostelua · 4 kuukautta sitten</span>
             </div>
           </div>
-          <div class="testimonial-stars">
-            <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+          <div class="testimonial-stars" aria-label="5/5 tähteä">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <p class="testimonial-quote">
-            "Koneeni takkuili ja jumitti kuukausia, mutta DigiKaverin avulla siitä tuli kuin uusi. Kaikki toimii taas nopeasti ja ilman hermojen kiristystä. Suurkiitos avusta!"
+            "Kerran kannettava kieltäytyi avautumasta, vaikka oli toiminut tavallisesti edellisenä päivänä. Digikaveri sai koneen toimimaan ilman mitään tietojen menetystä. Suosittelen! Toisella kerralla kannettavalle tehtiin siivous: pölyt poistettiin sisältä, komponenttien ympäriltä. Nyt kone on hiljaisempi ja toimii hyvin. Suosittelen!"
+          </p>
+          <div class="testimonial-footer">
+            <span class="testimonial-source">
+              <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Maps
+            </span>
+            <div class="verified-badge-google">
+              <i data-lucide="check-circle" aria-hidden="true"></i> Vahvistettu asiakas
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Liisa Keurulainen -->
+        <div class="testimonial-card">
+          <div class="card-header-google">
+            <img src="/images/avatars/liisa.png" alt="Liisa Keurulainen" class="reviewer-avatar-img" width="48" height="48" loading="lazy" />
+            <div class="reviewer-meta">
+              <h3>Liisa Keurulainen</h3>
+              <span class="review-stats">1 arvostelu · 3 viikkoa sitten</span>
+            </div>
+          </div>
+          <div class="testimonial-stars" aria-label="5/5 tähteä">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <p class="testimonial-quote">
+            "Kiitos nyt tietokone ja puhelin toimii.<br />Eläkeläinen"
           </p>
           <div class="testimonial-footer">
             <span class="testimonial-source">
@@ -328,7 +377,7 @@
         </p>
       </div>
       <div class="solutions-grid">
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="win" data-quiz-issue="slow">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="laptop" aria-hidden="true"></i></div>
           <h3>Tietokone on hidas</h3>
@@ -337,7 +386,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="purchase">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="smartphone" aria-hidden="true"></i></div>
           <h3>Uuden laitteen käyttöönotto</h3>
@@ -346,7 +395,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="printer" data-quiz-issue="network">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="wifi" aria-hidden="true"></i></div>
           <h3>Netti pätkii</h3>
@@ -355,7 +404,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="printer" data-quiz-issue="network">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="printer" aria-hidden="true"></i></div>
           <h3>Tulostin ei toimi</h3>
@@ -364,7 +413,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="mail" aria-hidden="true"></i></div>
           <h3>Sähköposti hukassa</h3>
@@ -373,7 +422,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="win" data-quiz-issue="virus">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="shield-alert" aria-hidden="true"></i></div>
           <h3>Tietoturvan kunnostus</h3>
@@ -382,7 +431,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="tv-2" aria-hidden="true"></i></div>
           <h3>Äly-TV ja suoratoisto</h3>
@@ -391,7 +440,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="key-round" aria-hidden="true"></i></div>
           <h3>Salasanat & käyttäjätilit</h3>
@@ -400,7 +449,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="win" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="hard-drive" aria-hidden="true"></i></div>
           <h3>Varmuuskopiot & tiedostot</h3>
@@ -409,12 +458,13 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#contact-detailed" class="solution-card">
+        <a href="#contact-detailed" class="solution-card solution-card-senior" data-check-relative="true">
           <div class="card-shine"></div>
+          <div class="solution-badge-senior"><i data-lucide="heart" aria-hidden="true"></i> Suosittu omaisille</div>
           <div class="solution-icon"><i data-lucide="heart-handshake" aria-hidden="true"></i></div>
           <h3>Seniori- & omaistuki</h3>
           <p>
-            Kiireetöntä ja selkokielistä tukea ikääntyville läheisillesi suoraan kotiin. Pankkitunnukset, OmaVero ja laitteet kuntoon – lasku voidaan osoittaa sinulle!
+            Kiireetöntä ja selkokielistä tukea ikääntyville läheisillesi suoraan kotiin. Pankkitunnukset, OmaVero ja laitteet kuntoon – <strong>voit vähentää työn omassa verotuksessasi (-35%)</strong> ja lasku voidaan osoittaa sinulle!
           </p>
           <span class="solution-link">Tilaa läheisellesi <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
@@ -427,7 +477,7 @@
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card" data-services-tab="services-consumer">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="purchase">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="shopping-bag" aria-hidden="true"></i></div>
           <h3>Ostoapu & laitteen tyhjennys</h3>
@@ -435,6 +485,22 @@
             Puolueeton asiantuntija-apu uuden laitteen valintaan ilman myyjän painostusta sekä vanhan koneen tietoturvallinen tyhjennys.
           </p>
           <span class="solution-link">Katso ratkaisu <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+        </a>
+      </div>
+
+      <!-- WhatsApp Photo-to-Help (Visible right after common issues) -->
+      <div class="whatsapp-photo-banner solutions-wpb" data-aos="fade-up">
+        <div class="wpb-content">
+          <div class="wpb-icon-badge">
+            <i data-lucide="camera" aria-hidden="true"></i>
+          </div>
+          <div class="wpb-text">
+            <h4>Onko ruudulla virheilmoitus tai laite jumissa?</h4>
+            <p>Ota puhelimellasi kuva ongelmasta ja lähetä se WhatsAppiin. Kerromme maksutta ja heti parhaan tavan korjata se!</p>
+          </div>
+        </div>
+        <a href="https://wa.me/3584578338105?text=Hei%20DigiKaveri!%20Tarvitsisin%20apua%20t%C3%A4m%C3%A4n%20ongelman%20kanssa%20(liit%C3%A4n%20kuvan):" target="_blank" rel="noopener noreferrer" class="btn-wpb-action">
+          <i data-lucide="message-circle" aria-hidden="true"></i> Lähetä kuva WhatsAppiin
         </a>
       </div>
     </section>
@@ -1007,9 +1073,17 @@
           <p>
             <strong>Miksi maksaisit liikaa?</strong> Valitse reilu, kotimainen ja edullinen DigiKaveri.
           </p>
-          <a href="#contact-detailed" class="btn-comparison-cta">
-            Pyydä apua tai soittopyyntö <i data-lucide="arrow-right" aria-hidden="true"></i>
-          </a>
+          <div class="comparison-cta-group">
+            <a href="tel:04578338105" class="btn-comparison-phone" aria-label="Soita numeroon 045 7833 8105">
+              <i data-lucide="phone" aria-hidden="true"></i> <span>Soita: 045 7833 8105</span>
+            </a>
+            <a href="https://wa.me/3584578338105?text=Hei%20DigiKaveri!%20Haluaisin%20kysy%C3%A4%20hinta-arvion:" target="_blank" rel="noopener noreferrer" class="btn-comparison-wa" aria-label="Kysy WhatsAppissa">
+              <i data-lucide="message-circle" aria-hidden="true"></i> <span>Kysy WhatsAppissa</span>
+            </a>
+            <a href="#contact-detailed" class="btn-comparison-cta">
+              <span>Jätä soittopyyntö</span> <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1066,6 +1140,21 @@
         <i data-lucide="shield-check" class="highlight-icon" aria-hidden="true"></i>
         <span>Kaikilla asiantuntijoillamme on varmennettu henkilöllisyys ja paikallinen tausta Uudellamaalla.</span>
       </div>
+
+      <div class="team-quick-contact">
+        <div class="tqc-text">
+          <strong>Haluatko jutella suoraan asiantuntijan kanssa?</strong>
+          <span>Autamme mielellämme heti ja annamme reilun hinta-arvion ilman sitoumuksia.</span>
+        </div>
+        <div class="tqc-actions">
+          <a href="tel:04578338105" class="btn-tqc-phone" aria-label="Soita asiantuntijalle 045 7833 8105">
+            <i data-lucide="phone" aria-hidden="true"></i> <span>Soita: 045 7833 8105</span>
+          </a>
+          <a href="https://wa.me/3584578338105?text=Hei%20DigiKaveri!%20Tarvitsisin%20apua%20laitteeni%20kanssa:" target="_blank" rel="noopener noreferrer" class="btn-tqc-wa" aria-label="Lähetä viesti WhatsAppissa">
+            <i data-lucide="message-circle" aria-hidden="true"></i> <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
     </section>
 
     <section id="faq" class="container section-faq section-spy" data-aos="fade-up" data-aos-delay="100">
@@ -1079,6 +1168,14 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Millä alueilla teette kotikäyntejä?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pääasiallisesti teemme kotikäyntejä Espoossa, Helsingissä, Vantaalla, Kauniaisissa, Kirkkonummella, Keravalla, Järvenpäässä, Tuusulassa, Nurmijärvellä ja Sipoossa. Tulemme kuitenkin mielellämme kotikäynnille minne tahansa kauemmaksikin, kunhan matkakuluista sovitaan etukäteen! Lisäksi etätuki auttaa heti sijainnistasi riippumatta koko Suomeen."
+            }
+          },
           {
             "@type": "Question",
             "name": "Mitä jos ongelmaa ei saada korjattua?",
@@ -1113,6 +1210,14 @@
           },
           {
             "@type": "Question",
+            "name": "Voinko saada kotitalousvähennyksen, jos tilaan apua vanhemmilleni?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Kyllä! Verohallinnon sääntöjen mukaan voit hyödyntää kotitalousvähennyksen (-35%), kun tilaat ja maksat työn omien tai puolisosi vanhempien tai isovanhempien asunnossa. Lähetämme laskun ja valmiin erittelyn suoraan sinulle OmaVeroa varten."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "Kuinka nopeasti saan ajan kotikäynnille?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -1125,6 +1230,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Ei tarvitse. Riittää että kerrot omin sanoin, mikä laitteessa takkuaa. Me huolehdimme teknisestä puolesta ilman vaikeita ammattitermejä."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Mitä jos työ (etätuki tai kotikäynti) kestää sovittua pidempään?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Emme koskaan jätä työtä kesken emmekä laskuta yllättäen. Etätuessa perusmaksu on 29 € / 30 min (ylimenevä aika 14 € / alkava 15 min) ja kotikäynnillä 59 € / 1. tunti (ylimenevä aika 15 € / alkava 15 min, kotitalousvähennyksellä vain n. 9,75 € / 15 min). Asiantuntijamme ilmoittaa aina hyvissä ajoin ennen perusajan täyttymistä, jos laite vaatii lisäaikaa, ja sovimme jatkosta aina yhdessä kanssasi ennen työn jatkamista. Kello ei koskaan tikitä tietämättäsi."
             }
           }
         ]
@@ -1142,6 +1255,17 @@
       </div>
 
       <div class="faq-grid">
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Millä alueilla teette kotikäyntejä?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Pääasiallisesti teemme kotikäyntejä Espoossa, Helsingissä, Vantaalla, Kauniaisissa, Kirkkonummella, Keravalla, Järvenpäässä, Tuusulassa, Nurmijärvellä ja Sipoossa. Tulemme kuitenkin mielellämme kotikäynnille minne tahansa kauemmaksikin, kunhan matkakuluista sovitaan etukäteen! Lisäksi etätuki auttaa heti sijainnistasi riippumatta koko Suomeen.
+            </p>
+          </div>
+        </div>
         <div class="faq-item">
           <button type="button" class="faq-question">
             <span>Mitä jos ongelmaa ei saada korjattua?</span>
@@ -1188,6 +1312,17 @@
         </div>
         <div class="faq-item">
           <button type="button" class="faq-question">
+            <span>Voinko saada kotitalousvähennyksen, jos tilaan apua vanhemmilleni?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Kyllä! Verohallinnon sääntöjen mukaan voit hyödyntää kotitalousvähennyksen (-35%), kun tilaat ja maksat työn omien tai puolisosi vanhempien tai isovanhempien asunnossa. Lähetämme laskun ja valmiin OmaVero-erittelyn suoraan sinulle.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
             <span>Kuinka nopeasti saan ajan kotikäynnille?</span>
             <i data-lucide="chevron-down" aria-hidden="true"></i>
           </button>
@@ -1205,6 +1340,17 @@
           <div class="faq-answer">
             <p>
               Ei tarvitse. Riittää että kerrot omin sanoin, mikä laitteessa takkuaa. Me huolehdimme teknisestä puolesta ilman vaikeita ammattitermejä.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Mitä jos työ (etätuki tai kotikäynti) kestää sovittua pidempään?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Emme koskaan jätä työtä kesken emmekä laskuta yllättäen. Etätuessa perusmaksu on 29 € / 30 min (ylimenevä aika 14 € / alkava 15 min) ja kotikäynnillä 59 € / 1. tunti (ylimenevä aika 15 € / alkava 15 min, kotitalousvähennyksellä vain n. 9,75 € / 15 min). Asiantuntijamme ilmoittaa aina hyvissä ajoin ennen perusajan täyttymistä, jos laite vaatii lisäaikaa, ja sovimme jatkosta aina yhdessä kanssasi ennen työn jatkamista. Kello ei koskaan tikitä tietämättäsi.
             </p>
           </div>
         </div>
@@ -1334,7 +1480,22 @@
               </label>
             </div>
 
+            <div class="relative-details-box hidden" id="relative-details-box">
+              <div class="form-group">
+                <label for="d-rel-name"><i data-lucide="user-check" aria-hidden="true"></i> Läheisen nimi ja puhelinnumero</label>
+                <input type="text" id="d-rel-name" name="relative_contact" placeholder="Esim. Äiti Liisa, 050 123 4567" />
+              </div>
+              <div class="form-group">
+                <label for="d-rel-address"><i data-lucide="map-pin" aria-hidden="true"></i> Läheisen käyntiosoite & ovikoodi (Uusimaa)</label>
+                <input type="text" id="d-rel-address" name="relative_address" placeholder="Esim. Kauppakatu 5 B 12, 02100 Espoo (ovikoodi 1234)" />
+              </div>
+            </div>
+
             <div id="contact-status-msg" class="status-msg hidden"></div>
+
+            <p class="form-response-notice">
+              <i data-lucide="clock" aria-hidden="true"></i> Vastaamme viesteihin yleensä 1–2 tunnin kuluessa (joka päivä klo 09:00–21:00).
+            </p>
 
             <button type="submit" class="btn-submit">
               Lähetä viesti <i data-lucide="send" aria-hidden="true"></i>
@@ -1344,6 +1505,49 @@
       </div>
     </section>
   </main>
+
+  <!-- Guarantee Explainer Modal -->
+  <div class="guarantee-modal" id="guaranteeModal" role="dialog" aria-modal="true" aria-labelledby="guaranteeModalTitle" aria-hidden="true">
+    <div class="guarantee-modal-backdrop" id="guaranteeModalBackdrop"></div>
+    <div class="guarantee-modal-dialog">
+      <button type="button" class="guarantee-modal-close" id="guaranteeModalClose" aria-label="Sulje ikkuna">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+      <div class="guarantee-modal-header">
+        <div class="guarantee-badge-icon">
+          <i data-lucide="shield-check" aria-hidden="true"></i>
+        </div>
+        <h3 id="guaranteeModalTitle">Ei ratkaisua, ei laskua -takuu</h3>
+        <p class="guarantee-subtitle">Reilu ja 100% riskitön IT-tuki sinulle</p>
+      </div>
+      <div class="guarantee-modal-body">
+        <div class="guarantee-point">
+          <i data-lucide="check-circle" class="point-icon" aria-hidden="true"></i>
+          <div>
+            <strong>100% Tyytyväisyystakuu</strong>
+            <p>Jos ongelmaasi ei saada ratkaistua tai selvitettyä teknisistä syistä johtuen, et maksa työstä euroakaan.</p>
+          </div>
+        </div>
+        <div class="guarantee-point">
+          <i data-lucide="check-circle" class="point-icon" aria-hidden="true"></i>
+          <div>
+            <strong>Rehellinen hinta-arvio etukäteen</strong>
+            <p>Kaikki hinnat sovitaan avoimesti ennen työn aloittamista. Ei yllätyskuluja tai piilotettuja lisämaksuja.</p>
+          </div>
+        </div>
+        <div class="guarantee-point">
+          <i data-lucide="check-circle" class="point-icon" aria-hidden="true"></i>
+          <div>
+            <strong>Kotitalousvähennys -35%</strong>
+            <p>Kotikäynneistä ja huoltotöistä saat verotuksessa 35% kotitalousvähennyksen suoraan työn osuudesta.</p>
+          </div>
+        </div>
+      </div>
+      <div class="guarantee-modal-footer">
+        <button type="button" class="btn btn-primary" id="guaranteeModalOk">Selvä, kiitos!</button>
+      </div>
+    </div>
+  </div>
 
   {{> footer }}
   {{> scripts extra_js="contact" }}

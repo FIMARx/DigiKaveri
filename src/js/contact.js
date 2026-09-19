@@ -2,8 +2,9 @@ import { createIcons } from 'lucide';
 import { ICON_SET } from './icons';
 import { onDOMReady, isEnglish } from './utils.js';
 import { markPromoCodeRedeemed } from './promo-validator.js';
+import { initCustomSelect } from './custom-select.js';
 
-function showToast(message, isSuccess = true) {
+export function showToast(message, isSuccess = true) {
   let toastContainer = document.getElementById('toast-container');
   if (!toastContainer) {
     toastContainer = document.createElement('div');
@@ -30,6 +31,10 @@ try { createIcons({ icons: ICON_SET, root: toastContainer }); } catch (e) {}
       }
     }, 300);
   }, 5000);
+}
+
+if (typeof window !== 'undefined') {
+  window.showToast = showToast;
 }
 
 const translations = {
@@ -68,7 +73,60 @@ function setupForm(formId) {
   const isEn = isEnglish();
   const t = isEn ? translations.en : translations.fi;
 
+  // Initialize luxury custom select dropdowns for all native select elements in form
+  const selects = form.querySelectorAll("select");
+  selects.forEach((sel) => {
+    initCustomSelect(sel);
+  });
+
   const inputs = form.querySelectorAll("input, select, textarea");
+
+  // Senior Relative helper toggle
+  const relativeCheckbox = form.querySelector('#d-relative');
+  const relativeBox = form.querySelector('#relative-details-box');
+  if (relativeCheckbox && relativeBox) {
+    relativeCheckbox.addEventListener('change', () => {
+      const isChecked = relativeCheckbox.checked;
+      relativeBox.classList.toggle('hidden', !isChecked);
+      if (isChecked) {
+        const firstInput = relativeBox.querySelector('input');
+        if (firstInput) firstInput.focus();
+      }
+    });
+
+    document.querySelectorAll("[data-check-relative='true']").forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        relativeCheckbox.checked = true;
+        relativeBox.classList.remove('hidden');
+      });
+    });
+  }
+
+  // Real-time positive validation checkmarks
+  const validateInputMicro = (input) => {
+    if (input.type === "hidden" || input.type === "checkbox" || input.type === "submit") return;
+    const parentGroup = input.closest(".form-group") || input.closest(".input-group");
+    if (!parentGroup) return;
+
+    const val = (input.value || "").trim();
+    let isValid = false;
+
+    if (input.type === "email") {
+      isValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
+    } else if (input.type === "tel") {
+      const cleanDigits = val.replace(/\D/g, "");
+      isValid = cleanDigits.length >= 7 && cleanDigits.length <= 13;
+    } else if (input.tagName === "SELECT") {
+      isValid = val !== "" && input.selectedIndex > 0;
+    } else if (input.hasAttribute("required")) {
+      const minLen = parseInt(input.getAttribute("minlength") || "2", 10);
+      isValid = val.length >= minLen;
+    } else if (val.length > 0) {
+      isValid = true;
+    }
+
+    parentGroup.classList.toggle("has-success", isValid);
+  };
 
   inputs.forEach((input) => {
     input.addEventListener("invalid", () => {
@@ -92,6 +150,16 @@ function setupForm(formId) {
 
     input.addEventListener("input", () => {
       input.setCustomValidity("");
+      validateInputMicro(input);
+    });
+
+    input.addEventListener("change", () => {
+      input.setCustomValidity("");
+      validateInputMicro(input);
+    });
+
+    input.addEventListener("blur", () => {
+      validateInputMicro(input);
     });
   });
 

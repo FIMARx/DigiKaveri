@@ -10,9 +10,9 @@ const isEn = isEnglish();
 const translations = {
   fi: {
     remote: "Etätuki",
-    remoteDesc: "Etäyhteysapua tietokoneelle tai puhelimelle",
+    remoteDesc: "Etäyhteysapua laitteelle (29 € / 30 min, lisäaika 14 € / 15 min)",
     homeVisit: "Kotikäynti",
-    homeVisitDesc: "Apua paikan päällä kotonasi (Uusimaa)",
+    homeVisitDesc: "Apua paikan päällä kotonasi (59 € / 1. tunti, lisäaika 15 € / 15 min)",
     annual: "Vuosihuolto",
     annualDesc: "Tietokoneen perusteellinen puhdistus ja tarkistus",
     deductionLabel: "Hyödynnä kotitalousvähennys (-35%)",
@@ -22,10 +22,14 @@ const translations = {
     savings: "Säästösi kotitalousvähennyksellä:",
     travelFee: "Matkakulut:",
     free: "0 €",
-    bookBtn: "Varaa palvelu tästä",
+    bookBtn: "Varaa tällä arviolla",
+    transferredToast: "Palveluvalintasi ja hinta-arvio siirretty lomakkeelle!",
+    deductionBadge: "-35% Kotitalousvähennys",
     unitHalfHour: "/ 30 min",
     unitHour: "/ tunti",
     unitFlat: "/ laite",
+    chipDeductionHome: "Vain n. 38 € vähennyksellä",
+    chipDeductionAnnual: "Vain n. 58 € vähennyksellä",
     summaryTitle: "Yhteenveto",
     summaryDesc: "Alustava hinta-arvio valitsemillesi palveluille",
     addressLabel: "Laske matkakulut kotiisi (lähtöpaikka: Espoo)",
@@ -38,12 +42,41 @@ const translations = {
     promoPlaceholder: "Syötä alennuskoodi...",
     apply: "Käytä",
     promoDiscountLabel: "Alennuskoodi",
+    printBtn: "Tulosta / Tallenna arvio (PDF)",
+    printDocTitle: "HINTA-ARVIO",
+    printDocSubtitle: "Alustava kustannusarvio valituille palveluille",
+    printDate: "Päivämäärä:",
+    printEstimateRef: "Arvio:",
+    printVatNote: "Kaikki hinnat sisältävät ALV 25,5 %",
+    printLocTitle: "Palvelupaikka & matka:",
+    printServiceCol: "Palvelu & Kuvaus",
+    printQtyCol: "Määrä",
+    printUnitCol: "Hinta",
+    printTotalCol: "Yhteensä",
+    printTravelLabel: "Matkakulut kohteeseen (Espoon Saunalahdesta)",
+    printPromoLabel: "Alennuskoodi",
+    printDeductionBoxTitle: "Kotitalousvähennys (-35 % työn osuudesta)",
+    printDeductionBoxDesc: "DigiKaverin kotikäynnit ja laitehuollot ovat kotitalousvähennyskelpoisia työn osalta (vähennys 35 % vuonna 2026, omavastuu 150 €/v). Ilmoita vähennys helposti OmaVerossa (vero.fi) DigiKaverin Y-tunnuksella 3418585-6 työn valmistuttua.",
+    printGuaranteeBoxTitle: "Tyytyväisyystakuu: Ei ratkaisua, ei laskua",
+    printGuaranteeBoxDesc: "Maksat vain onnistuneesta IT-tuesta. Mikäli emme kykene ratkaisemaan laitteesi tai verkkosi ongelmaa, emme laskuta palvelusta mitään.",
+    printFinalShare: "Oma osuutesi vähennyksen jälkeen:",
+    printFinalInvoice: "Laskun loppusumma:",
+    printValidUntil: "Voimassaolo: 30 päivää",
+    printStepsTitle: "Näin palvelu etenee:",
+    printStep1Title: "1. Ajanvaraus",
+    printStep1Desc: "Ota yhteyttä puhelimitse (045 7833 8105) tai verkkolomakkeella.",
+    printStep2Title: "2. IT-tuki & Huolto",
+    printStep2Desc: "Tulemme sovittuna aikana kotiisi tai autamme suojatulla etäyhteydellä.",
+    printStep3Title: "3. Takuu & Kotitalousvähennys",
+    printStep3Desc: "Maksat vain onnistuneesta työstä. Saat selkeän laskun OmaVeroa varten.",
+    printFooterContact: "Ajanvaraus & tiedustelut: Puh. 045 7833 8105 | info@digikaveri.com | www.digikaveri.com",
+    printFooterDisclaimer: "Tämä tuloste on verkkosivustolla laadittu alustava hinta-arvio valituilla palveluilla ja määrillä. Lopullinen lasku määräytyy toteutuneen työn mukaan.",
   },
   en: {
     remote: "Remote Support",
-    remoteDesc: "Remote assistance for your computer or mobile",
+    remoteDesc: "Remote assistance for your device (€29 / 30 min, extra time €14 / 15 min)",
     homeVisit: "Home Visit",
-    homeVisitDesc: "Help on-site at your home (Uusimaa)",
+    homeVisitDesc: "Help on-site at your home (€59 / 1st hour, extra time €15 / 15 min)",
     annual: "Annual Maintenance",
     annualDesc: "Thorough physical & digital computer tune-up",
     deductionLabel: "Apply household tax deduction (-35%)",
@@ -53,10 +86,14 @@ const translations = {
     savings: "Your savings with tax deduction:",
     travelFee: "Travel costs:",
     free: "0 €",
-    bookBtn: "Book Service Now",
+    bookBtn: "Book with this estimate",
+    transferredToast: "Your estimated services have been pre-filled below!",
+    deductionBadge: "-35% Tax deduction",
     unitHalfHour: "/ 30 min",
     unitHour: "/ hour",
     unitFlat: "/ device",
+    chipDeductionHome: "Only ~38 € with tax credit",
+    chipDeductionAnnual: "Only ~58 € with tax credit",
     summaryTitle: "Summary",
     summaryDesc: "Estimated price for selected services",
     addressLabel: "Calculate travel costs to your address (departing from Espoo)",
@@ -69,6 +106,35 @@ const translations = {
     promoPlaceholder: "Enter promo code...",
     apply: "Apply",
     promoDiscountLabel: "Promo discount",
+    printBtn: "Print / Save estimate (PDF)",
+    printDocTitle: "PRICE ESTIMATE",
+    printDocSubtitle: "Preliminary cost estimate for selected services",
+    printDate: "Date:",
+    printEstimateRef: "Estimate:",
+    printVatNote: "All prices include VAT 25.5%",
+    printLocTitle: "Service Location & Travel:",
+    printServiceCol: "Service & Description",
+    printQtyCol: "Qty",
+    printUnitCol: "Price",
+    printTotalCol: "Total",
+    printTravelLabel: "Travel expenses (from Saunalahti, Espoo)",
+    printPromoLabel: "Promo discount",
+    printDeductionBoxTitle: "Household Tax Deduction (-35% on labor)",
+    printDeductionBoxDesc: "DigiKaveri home visits and hardware maintenance are eligible for the Finnish household tax deduction (35% on labor in 2026, deductible €150/year). You can easily claim this via OmaVero (vero.fi) using our Business ID 3418585-6 after the service is completed.",
+    printGuaranteeBoxTitle: "Satisfaction Guarantee: No solution, no bill",
+    printGuaranteeBoxDesc: "You only pay for successful IT support. If we cannot solve your device or network problem, you will not be charged for the service.",
+    printFinalShare: "Your cost after tax deduction:",
+    printFinalInvoice: "Invoice total:",
+    printValidUntil: "Validity: 30 days",
+    printStepsTitle: "How to proceed with your booking:",
+    printStep1Title: "1. Contact & Booking",
+    printStep1Desc: "Contact us by phone (045 7833 8105) or submit our web form.",
+    printStep2Title: "2. IT Support & Service",
+    printStep2Desc: "We visit your home at the agreed time or solve issues via secure remote support.",
+    printStep3Title: "3. Guarantee & Tax Credit",
+    printStep3Desc: "Pay only for solved issues. We provide an itemized invoice for your tax deduction.",
+    printFooterContact: "Bookings & Inquiries: Tel. 045 7833 8105 | info@digikaveri.com | www.digikaveri.com",
+    printFooterDisclaimer: "This document is an indicative price estimate generated on our website. The final invoice will be based on actual services performed and confirmed work.",
   }
 };
 
@@ -86,6 +152,30 @@ const START_LON = 24.6468;
 const TRAVEL_RATE_PER_KM = 0.90;
 const TAX_DEDUCTION_RATE = 0.35;
 
+const MUNICIPALITY_PRESETS = {
+  "espoo": { lat: 60.2055, lon: 24.6559, defaultKm: 5 },
+  "helsinki": { lat: 60.1699, lon: 24.9384, defaultKm: 18 },
+  "vantaa": { lat: 60.2934, lon: 25.0378, defaultKm: 25 },
+  "kauniainen": { lat: 60.2096, lon: 24.7275, defaultKm: 7 },
+  "kirkkonummi": { lat: 60.1238, lon: 24.4385, defaultKm: 22 },
+  "kerava": { lat: 60.4034, lon: 25.1050, defaultKm: 38 },
+  "tuusula": { lat: 60.4033, lon: 25.0298, defaultKm: 35 },
+  "jarvenpaa": { lat: 60.4735, lon: 25.0886, defaultKm: 44 },
+  "järvenpää": { lat: 60.4735, lon: 25.0886, defaultKm: 44 },
+  "sipoo": { lat: 60.3768, lon: 25.2676, defaultKm: 45 }
+};
+
+function calculateHaversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c * 1.25; // Typical road network tortuosity
+}
+
 onDOMReady(() => {
   const container = document.getElementById("interactive-estimator");
   if (!container) return;
@@ -100,10 +190,12 @@ onDOMReady(() => {
       <div class="quick-rate-chip" data-chip="home" role="button" tabindex="0" aria-label="Valitse Kotikäynti">
         <span class="chip-label">🚗 ${t.homeVisit}</span>
         <span class="chip-price">59€ ${t.unitHour}</span>
+        <span class="chip-deduction">${t.chipDeductionHome}</span>
       </div>
       <div class="quick-rate-chip" data-chip="annual" role="button" tabindex="0" aria-label="Valitse Vuosihuolto">
         <span class="chip-label">🛡️ ${t.annual}</span>
         <span class="chip-price">89€ ${t.unitFlat}</span>
+        <span class="chip-deduction">${t.chipDeductionAnnual}</span>
       </div>
     </div>
 
@@ -227,14 +319,23 @@ onDOMReady(() => {
           </div>
           <hr class="summary-divider">
           <div class="summary-row total-row">
-            <span id="label-final-price">${t.actualCost}</span>
-            <span class="price-val final-val" id="summary-final-total">0 €</span>
+            <div class="total-label-wrap">
+              <span id="label-final-price">${t.actualCost}</span>
+              <span class="est-deduction-badge" id="est-deduction-badge" style="display: none;">${t.deductionBadge}</span>
+            </div>
+            <div class="final-price-wrap">
+              <span class="price-val original-strike" id="summary-original-strike" style="display: none;">0 €</span>
+              <span class="price-val final-val" id="summary-final-total">0 €</span>
+            </div>
           </div>
         </div>
 
         <a href="#contact-detailed" class="btn-estimator-cta" id="est-book-btn">
           ${t.bookBtn} <i data-lucide="arrow-right"></i>
         </a>
+        <button type="button" class="btn-estimator-print" id="est-print-btn">
+          <i data-lucide="printer"></i> ${t.printBtn}
+        </button>
       </div>
     </div>
   `;
@@ -333,13 +434,30 @@ onDOMReady(() => {
 
     const savingsRow = document.getElementById("summary-savings-row");
     const savingsVal = document.getElementById("summary-savings-total");
+    const origStrikeEl = document.getElementById("summary-original-strike");
+    const deductionBadgeEl = document.getElementById("est-deduction-badge");
+    const beforeDeductionTotal = (rawServiceTotal - promoDiscountAmount) + currentTravelCost;
+
     if (state.deduction && savingsTotal > 0) {
       savingsRow.style.display = "flex";
       savingsVal.textContent = `-${Math.round(savingsTotal)} €`;
       document.getElementById("label-final-price").textContent = t.actualCost;
+      if (origStrikeEl) {
+        origStrikeEl.textContent = `${Math.round(beforeDeductionTotal)} €`;
+        origStrikeEl.style.display = "inline";
+      }
+      if (deductionBadgeEl) {
+        deductionBadgeEl.style.display = "inline-flex";
+      }
     } else {
       savingsRow.style.display = "none";
       document.getElementById("label-final-price").textContent = t.invoiceTotal;
+      if (origStrikeEl) {
+        origStrikeEl.style.display = "none";
+      }
+      if (deductionBadgeEl) {
+        deductionBadgeEl.style.display = "none";
+      }
     }
 
     document.getElementById("summary-final-total").textContent = `${Math.round(finalTotal)} €`;
@@ -436,30 +554,83 @@ onDOMReady(() => {
       feedbackEl.classList.add("hidden");
 
       try {
-        // Geocode user input address via Nominatim OpenStreetMap (restricted to Finland)
-        const geoUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}+Finland`;
-        const geoRes = await fetch(geoUrl, {
-          headers: { 'User-Agent': 'DigiKaveri-Distance-Estimator' }
-        });
-        const geoData = await geoRes.json();
+        let userLat = null;
+        let userLon = null;
+        let distanceKm = null;
 
-        if (!geoData || geoData.length === 0) {
-          throw new Error("Address not geocoded");
+        // Check local municipality presets or postal codes first for instant resolution
+        const cleanLower = query.toLowerCase();
+        let matchedMuniName = "";
+        for (const [muni, data] of Object.entries(MUNICIPALITY_PRESETS)) {
+          if (cleanLower === muni || cleanLower.includes(muni)) {
+            userLat = data.lat;
+            userLon = data.lon;
+            distanceKm = data.defaultKm;
+            matchedMuniName = muni.charAt(0).toUpperCase() + muni.slice(1);
+            break;
+          }
         }
 
-        const userLat = parseFloat(geoData[0].lat);
-        const userLon = parseFloat(geoData[0].lon);
-
-        // Fetch routing driving distance via OpenSourceRoutingMachine (OSRM)
-        const routeUrl = `https://router.project-osrm.org/route/v1/driving/${START_LON},${START_LAT};${userLon},${userLat}?overview=false`;
-        const routeRes = await fetch(routeUrl);
-        const routeData = await routeRes.json();
-
-        if (!routeData || !routeData.routes || routeData.routes.length === 0) {
-          throw new Error("Route not found");
+        // Postal code regex check (e.g. 02320, 00100, 01300, 04200)
+        if (!userLat || !userLon) {
+          const postalMatch = query.match(/\b(0\d{4})\b/);
+          if (postalMatch) {
+            const pCode = postalMatch[1];
+            const pPrefix = pCode.substring(0, 2);
+            if (pPrefix === "02") {
+              if (pCode.startsWith("027")) {
+                userLat = 60.2096; userLon = 24.7275; distanceKm = 7; matchedMuniName = "Kauniainen";
+              } else if (pCode.startsWith("024") || pCode.startsWith("025")) {
+                userLat = 60.1238; userLon = 24.4385; distanceKm = 22; matchedMuniName = "Kirkkonummi";
+              } else {
+                userLat = 60.2055; userLon = 24.6559; distanceKm = 5; matchedMuniName = "Espoo";
+              }
+            } else if (pPrefix === "00") {
+              userLat = 60.1699; userLon = 24.9384; distanceKm = 18; matchedMuniName = "Helsinki";
+            } else if (pPrefix === "01") {
+              userLat = 60.2934; userLon = 25.0378; distanceKm = 25; matchedMuniName = "Vantaa";
+            } else if (pPrefix === "04") {
+              userLat = 60.4034; userLon = 25.1050; distanceKm = 38; matchedMuniName = "Keski-Uusimaa";
+            }
+          }
         }
 
-        const distanceKm = routeData.routes[0].distance / 1000;
+        // If not a simple municipality preset, geocode via Nominatim
+        if (!userLat || !userLon) {
+          try {
+            const geoUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}+Finland`;
+            const geoRes = await fetch(geoUrl);
+            const geoData = await geoRes.json();
+            if (geoData && geoData.length > 0) {
+              userLat = parseFloat(geoData[0].lat);
+              userLon = parseFloat(geoData[0].lon);
+            }
+          } catch (geoErr) {
+            console.warn("Nominatim geocoding error:", geoErr);
+          }
+        }
+
+        if (!userLat || !userLon) {
+          throw new Error("Address not found");
+        }
+
+        // Try route distance via OSRM, with fallback to Haversine
+        try {
+          const routeUrl = `https://router.project-osrm.org/route/v1/driving/${START_LON},${START_LAT};${userLon},${userLat}?overview=false`;
+          const routeRes = await fetch(routeUrl);
+          const routeData = await routeRes.json();
+          if (routeData && routeData.routes && routeData.routes.length > 0) {
+            distanceKm = routeData.routes[0].distance / 1000;
+          }
+        } catch (routeErr) {
+          console.warn("OSRM routing error, using Haversine calculation:", routeErr);
+        }
+
+        // If distanceKm still not calculated, use straight-line road estimate
+        if (!distanceKm) {
+          distanceKm = calculateHaversineKm(START_LAT, START_LON, userLat, userLon);
+        }
+
         const totalTravelCost = distanceKm * TRAVEL_RATE_PER_KM;
 
         // Save to cache
@@ -469,7 +640,8 @@ onDOMReady(() => {
         state.distanceKm = distanceKm;
         state.travelCost = totalTravelCost;
 
-        feedbackEl.textContent = `${t.distLabel} ${distanceKm.toFixed(1)} km`;
+        const muniSuffix = matchedMuniName ? ` (${matchedMuniName})` : "";
+        feedbackEl.textContent = `${t.distLabel} ${distanceKm.toFixed(1)} km${muniSuffix}`;
         feedbackEl.classList.remove("hidden");
       } catch (err) {
         console.error(err);
@@ -596,13 +768,11 @@ onDOMReady(() => {
   } catch (_) {}
 
   // Wire booking button to prefill contact textarea
+  // Wire booking button to prefill contact form, scroll and notify
   const bookBtn = document.getElementById("est-book-btn") || container.querySelector(".btn-estimator-cta");
   if (bookBtn) {
-    bookBtn.addEventListener("click", () => {
-      const messageField = document.getElementById("d-message") || 
-                           document.getElementById("message") || 
-                           document.querySelector("textarea[name='message']");
-      if (!messageField) return;
+    bookBtn.addEventListener("click", (e) => {
+      e.preventDefault();
 
       const rawServiceCost = (state.remote.checked ? 29 * state.remote.qty : 0) +
         (state.home.checked ? 59 * state.home.qty : 0) +
@@ -688,10 +858,317 @@ onDOMReady(() => {
         }
       }
       
-      messageField.value = msg;
-      messageField.dispatchEvent(new Event('input', { bubbles: true }));
-      messageField.dispatchEvent(new Event('change', { bubbles: true }));
+      const messageField = document.getElementById("d-message") || 
+                           document.getElementById("message") || 
+                           document.querySelector("textarea[name='message']");
+      if (messageField) {
+        messageField.value = msg;
+        messageField.dispatchEvent(new Event('input', { bubbles: true }));
+        messageField.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      // Auto-select subject in detailed form if present
+      const subjectSelect = document.getElementById("d-subject");
+      if (subjectSelect && subjectSelect.options.length > 1) {
+        subjectSelect.selectedIndex = 1;
+        subjectSelect.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      // Target form element to scroll to
+      const targetSection = document.getElementById("contact-detailed") || 
+                            document.getElementById("contact") || 
+                            document.querySelector(".contact-section");
+
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        setTimeout(() => {
+          const nameInput = document.getElementById("d-name") || document.getElementById("c-name");
+          if (nameInput) {
+            nameInput.focus({ preventScroll: true });
+          }
+        }, 500);
+      }
+
+      // Show toast
+      if (typeof window.showToast === "function") {
+        window.showToast(t.transferredToast, true);
+      }
     });
+  }
+
+  // Generate clean, dedicated print quotation receipt
+  const renderPrintReceipt = () => {
+    let receiptEl = document.getElementById("digikaveri-print-receipt");
+    if (!receiptEl) {
+      receiptEl = document.createElement("div");
+      receiptEl.id = "digikaveri-print-receipt";
+      document.body.appendChild(receiptEl);
+    }
+
+    const rawServiceCost = (state.remote.checked ? 29 * state.remote.qty : 0) +
+      (state.home.checked ? 59 * state.home.qty : 0) +
+      (state.annual.checked ? 89 * state.annual.qty : 0);
+
+    const rawEligibleCost = (state.home.checked ? 59 * state.home.qty : 0) +
+      (state.annual.checked ? 89 * state.annual.qty : 0);
+
+    const promoDiscount = state.discountPercent > 0 
+      ? (rawServiceCost * (state.discountPercent / 100)) 
+      : 0;
+
+    const discountedEligible = state.discountPercent > 0
+      ? (rawEligibleCost * (1 - (state.discountPercent / 100)))
+      : rawEligibleCost;
+
+    const savings = state.deduction ? (discountedEligible * TAX_DEDUCTION_RATE) : 0;
+    const requiresHomeVisit = state.home.checked || state.annual.checked;
+    const currentTravelCost = requiresHomeVisit ? state.travelCost : 0;
+    const beforeDeductionTotal = (rawServiceCost - promoDiscount) + currentTravelCost;
+    const finalTotal = beforeDeductionTotal - savings;
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString(isEn ? "en-GB" : "fi-FI", {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric"
+    });
+    const estimateNumber = `DK-${now.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    let rowsHtml = "";
+
+    if (state.remote.checked) {
+      const itemTotal = 29 * state.remote.qty;
+      rowsHtml += `
+        <tr>
+          <td>
+            <span class="dk-print-service-title">${t.remote}</span>
+            <span class="dk-print-service-desc">${t.remoteDesc}</span>
+          </td>
+          <td class="text-right">${state.remote.qty} × 30 min</td>
+          <td class="text-right">29,00 €</td>
+          <td class="text-right"><strong>${itemTotal.toFixed(2).replace('.', ',')} €</strong></td>
+        </tr>
+      `;
+    }
+
+    if (state.home.checked) {
+      const itemTotal = 59 * state.home.qty;
+      const homeUnitStr = isEn ? `${state.home.qty} × hr` : `${state.home.qty} × ${state.home.qty > 1 ? "tuntia" : "tunti"}`;
+      rowsHtml += `
+        <tr>
+          <td>
+            <span class="dk-print-service-title">${t.homeVisit}</span>
+            <span class="dk-print-service-desc">${t.homeVisitDesc}</span>
+          </td>
+          <td class="text-right">${homeUnitStr}</td>
+          <td class="text-right">59,00 €</td>
+          <td class="text-right"><strong>${itemTotal.toFixed(2).replace('.', ',')} €</strong></td>
+        </tr>
+      `;
+    }
+
+    if (state.annual.checked) {
+      const itemTotal = 89 * state.annual.qty;
+      const annualUnitStr = isEn ? `${state.annual.qty} × device` : `${state.annual.qty} × ${state.annual.qty > 1 ? "laitetta" : "laite"}`;
+      rowsHtml += `
+        <tr>
+          <td>
+            <span class="dk-print-service-title">${t.annual}</span>
+            <span class="dk-print-service-desc">${t.annualDesc}</span>
+          </td>
+          <td class="text-right">${annualUnitStr}</td>
+          <td class="text-right">89,00 €</td>
+          <td class="text-right"><strong>${itemTotal.toFixed(2).replace('.', ',')} €</strong></td>
+        </tr>
+      `;
+    }
+
+    if (requiresHomeVisit && currentTravelCost > 0) {
+      rowsHtml += `
+        <tr>
+          <td>
+            <span class="dk-print-service-title">${t.printTravelLabel}</span>
+            <span class="dk-print-service-desc">${state.address ? state.address + ' • ' : ''}${state.distanceKm.toFixed(1)} km</span>
+          </td>
+          <td class="text-right">${state.distanceKm > 0 ? state.distanceKm.toFixed(1) + ' km' : '1 × matka'}</td>
+          <td class="text-right">${TRAVEL_RATE_PER_KM.toFixed(2).replace('.', ',')} €/km</td>
+          <td class="text-right"><strong>${currentTravelCost.toFixed(2).replace('.', ',')} €</strong></td>
+        </tr>
+      `;
+    }
+
+    if (state.promoCode && promoDiscount > 0) {
+      rowsHtml += `
+        <tr class="dk-print-promo-row">
+          <td>
+            <span class="dk-print-service-title">🏷️ ${t.printPromoLabel}: ${state.promoCode} (-${state.discountPercent}%)</span>
+            <span class="dk-print-service-desc">${isEn ? "Applied promo discount" : "Arvioon myönnetty alennusetu"}</span>
+          </td>
+          <td class="text-right">1</td>
+          <td class="text-right">-${promoDiscount.toFixed(2).replace('.', ',')} €</td>
+          <td class="text-right"><strong>-${promoDiscount.toFixed(2).replace('.', ',')} €</strong></td>
+        </tr>
+      `;
+    }
+
+    if (!rowsHtml) {
+      rowsHtml = `
+        <tr>
+          <td colspan="4" style="text-align: center; color: #64748b; padding: 20px;">
+            ${isEn ? "No services selected." : "Ei valittuja palveluita."}
+          </td>
+        </tr>
+      `;
+    }
+
+    const locCardHtml = (requiresHomeVisit && (state.address || state.distanceKm > 0)) ? `
+      <div class="dk-print-loc-card">
+        <div>
+          <strong>${t.printLocTitle}</strong> ${state.address || (isEn ? "Uusimaa region" : "Uusimaa")}
+        </div>
+        <div>
+          ${state.distanceKm > 0 ? `<span>${t.distLabel} ${state.distanceKm.toFixed(1)} km</span> • ` : ''}
+          <span>${t.travelFee} ${currentTravelCost > 0 ? currentTravelCost.toFixed(2).replace('.', ',') + ' €' : t.free}</span>
+        </div>
+      </div>
+    ` : '';
+
+    receiptEl.innerHTML = `
+      <div class="dk-print-main-content">
+        <div class="dk-print-header">
+          <div class="dk-print-brand">
+            <h1>Digi<span class="dk-print-brand-blue">Kaveri</span></h1>
+            <p class="dk-print-tagline">${isEn ? "Reliable IT Support & Computer Care" : "Luotettava IT-tuki & Tietokonehuolto • Uusimaa"}</p>
+            <p class="dk-print-meta-sub">Espoo • Helsinki • Vantaa • Kauniainen • Kirkkonummi</p>
+            <p class="dk-print-meta-sub">DigiKaveri / FIMARx • Y-tunnus: 3418585-6 • ALV-rekisteröity yritys</p>
+          </div>
+          <div class="dk-print-doc-meta">
+            <h2>${t.printDocTitle}</h2>
+            <div class="dk-print-meta-grid">
+              <p class="dk-print-doc-row"><strong>${t.printDate}</strong> ${dateStr}</p>
+              <p class="dk-print-doc-row"><strong>${t.printEstimateRef}</strong> #${estimateNumber}</p>
+              <p class="dk-print-doc-row"><strong>${t.printValidUntil}</strong></p>
+            </div>
+            <div class="dk-print-vat-badge">${t.printVatNote}</div>
+          </div>
+        </div>
+
+        ${locCardHtml}
+
+        <table class="dk-print-table">
+          <thead>
+            <tr>
+              <th>${t.printServiceCol}</th>
+              <th class="text-right">${t.printQtyCol}</th>
+              <th class="text-right">${t.printUnitCol}</th>
+              <th class="text-right">${t.printTotalCol}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+        </table>
+
+        <div class="dk-print-bottom-grid">
+          <div class="dk-print-info-col">
+            <div class="dk-print-info-card">
+              <div class="dk-print-card-header">
+                <span class="dk-print-card-icon">🛡️</span>
+                <strong>${t.printGuaranteeBoxTitle}</strong>
+              </div>
+              <p>${t.printGuaranteeBoxDesc}</p>
+            </div>
+            ${state.deduction && savings > 0 ? `
+              <div class="dk-print-info-card dk-print-tax-card">
+                <div class="dk-print-card-header">
+                  <span class="dk-print-card-icon">📋</span>
+                  <strong>${t.printDeductionBoxTitle}</strong>
+                </div>
+                <p>${t.printDeductionBoxDesc}</p>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="dk-print-totals-col">
+            <div class="dk-print-totals-card">
+              <div class="dk-print-total-row">
+                <span>${t.invoiceTotal}</span>
+                <strong>${Math.round(beforeDeductionTotal)} €</strong>
+              </div>
+              ${state.promoCode && promoDiscount > 0 ? `
+                <div class="dk-print-total-row highlight-savings">
+                  <span>${t.printPromoLabel} (${state.promoCode}):</span>
+                  <strong>-${Math.round(promoDiscount)} €</strong>
+                </div>
+              ` : ''}
+              ${requiresHomeVisit && currentTravelCost > 0 ? `
+                <div class="dk-print-total-row">
+                  <span>${t.travelFee}</span>
+                  <strong>${currentTravelCost.toFixed(2).replace('.', ',')} €</strong>
+                </div>
+              ` : ''}
+              ${state.deduction && savings > 0 ? `
+                <div class="dk-print-total-row highlight-savings">
+                  <span>${t.savings}</span>
+                  <strong>-${Math.round(savings)} €</strong>
+                </div>
+              ` : ''}
+              <hr class="dk-print-total-divider">
+              <div class="dk-print-final-box">
+                <span class="dk-print-final-label">${state.deduction && savings > 0 ? t.printFinalShare : t.printFinalInvoice}</span>
+                <span class="dk-print-final-amount">${Math.round(finalTotal)} €</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dk-print-steps-section">
+          <h3 class="dk-print-steps-heading">${t.printStepsTitle}</h3>
+          <div class="dk-print-steps-grid">
+            <div class="dk-print-step-item">
+              <strong>${t.printStep1Title}</strong>
+              <p>${t.printStep1Desc}</p>
+            </div>
+            <div class="dk-print-step-item">
+              <strong>${t.printStep2Title}</strong>
+              <p>${t.printStep2Desc}</p>
+            </div>
+            <div class="dk-print-step-item">
+              <strong>${t.printStep3Title}</strong>
+              <p>${t.printStep3Desc}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dk-print-footer">
+        <p class="dk-print-footer-contacts">${t.printFooterContact}</p>
+        <p class="dk-print-footer-legal">DigiKaveri • FIMARx • Y-tunnus 3418585-6 • Espoo, Uusimaa • Hinnat sisältävät ALV 25,5 %</p>
+        <p class="dk-print-footer-disclaimer">${t.printFooterDisclaimer}</p>
+      </div>
+    `;
+  };
+
+  // Professional print handler with clean default PDF filename
+  const triggerPrintReceipt = () => {
+    renderPrintReceipt();
+    const originalTitle = document.title;
+    const cleanFileName = isEn ? "DigiKaveri-Price-Estimate" : "DigiKaveri-Hinta-arvio";
+    document.title = cleanFileName;
+    window.print();
+    setTimeout(() => {
+      document.title = originalTitle;
+    }, 1500);
+  };
+
+  window.addEventListener("beforeprint", () => {
+    renderPrintReceipt();
+  });
+
+  // Wire print button
+  const printBtn = document.getElementById("est-print-btn");
+  if (printBtn) {
+    printBtn.addEventListener("click", triggerPrintReceipt);
   }
 
   // Run initial state

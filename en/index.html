@@ -38,23 +38,36 @@
         >
       </h1>
       <p class="hero-subtitle">
-        Home visits in Espoo and Uusimaa, remote support across Finland. Leave a request and we'll get back to you within 1–2 hours.
+        Home visits in Espoo and Uusimaa, remote support across Finland. We serve every day 09:00–21:00. We reply to inquiries within 1–2 hours.
       </p>
 
       <div class="trust-badges-centered">
         <div class="trust-item">
-          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Household tax deduction <strong class="countup-num" data-counter="35" data-prefix="-" data-suffix="%">-35%</strong></span>
+          <i data-lucide="check-circle" class="icon-green" aria-hidden="true"></i> <span>Household tax deduction <strong class="countup-num" data-counter="35" data-prefix="-" data-suffix="%">-35%</strong> <span class="trust-sub-calc">(e.g. €60 → only €39)</span></span>
         </div>
         <div class="trust-item">
           <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i> <span><strong class="countup-num" data-counter="100" data-suffix="%">100%</strong> Satisfaction Guarantee</span>
         </div>
-        <div class="trust-item">
-          <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>No fix, no fee guarantee</span>
+        <div class="trust-item trust-item-clickable" id="guaranteeModalTrigger" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Read more about our satisfaction guarantee">
+          <i data-lucide="zap" class="icon-blue" aria-hidden="true"></i> <span>No fix, no fee <i data-lucide="info" class="pill-info-icon" aria-hidden="true"></i></span>
         </div>
       </div>
 
       <div class="hero-form-card" id="contact">
         <h2>Request help or a callback</h2>
+        <div class="hero-quick-contact">
+          <span class="hqc-title"><i data-lucide="zap" aria-hidden="true"></i> Need help right away?</span>
+          <div class="hqc-actions">
+            <a href="tel:04578338105" class="hqc-btn hqc-phone" aria-label="Call 045 7833 8105">
+              <i data-lucide="phone" aria-hidden="true"></i> <span>Call: 045 7833 8105</span>
+            </a>
+            <a href="https://wa.me/3584578338105?text=Hello%20DigiKaveri!%20I%20need%20help%20with%20my%20device:" target="_blank" rel="noopener noreferrer" class="hqc-btn hqc-whatsapp" aria-label="Send message on WhatsApp">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-form-divider"><span>or select your device below</span></div>
         <form
           id="contactForm"
           action="https://api.web3forms.com/submit"
@@ -175,7 +188,8 @@
           </div>
         </form>
         <p class="form-footer">
-          <i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Your contact details are always kept confidential.
+          <span class="footer-response-badge"><i data-lucide="clock" class="lucide-sm" aria-hidden="true"></i> Responding in 1–2 hours (09–21)</span>
+          <span class="footer-lock"><i data-lucide="lock" class="lucide-sm" aria-hidden="true"></i> Confidential</span>
         </p>
       </div>
     </header>
@@ -197,16 +211,16 @@
     <div class="trust-bar container">
       <p>We support all popular brands and devices</p>
       <div class="trust-logos" role="region" aria-label="Supported brands and devices">
-        <img src="../svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
-        <img src="../svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
-        <img src="../svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
-        <img src="../svg/android.svg" alt="Android" width="48" height="48" title="Android" loading="lazy" />
-        <img src="../svg/hp.svg" alt="HP" width="48" height="48" title="HP" loading="lazy" />
-        <img src="../svg/lenovo.svg" alt="Lenovo" width="48" height="48" title="Lenovo" class="logo-wide" loading="lazy" />
-        <img src="../svg/nokia.svg" alt="Nokia" width="48" height="48" title="Nokia" class="logo-wide" loading="lazy" />
-        <img src="../svg/dell.svg" alt="Dell" width="48" height="48" title="Dell" loading="lazy" />
-        <img src="../svg/asus.svg" alt="Asus" width="48" height="48" title="Asus" loading="lazy" />
-        <img src="../svg/microsoft.svg" alt="Microsoft" width="48" height="48" title="Microsoft" class="logo-wide" loading="lazy" />
+        <img src="/svg/apple.svg" alt="Apple" width="48" height="48" title="Apple" loading="lazy" />
+        <img src="/svg/samsung.svg" alt="Samsung" width="48" height="48" title="Samsung" class="logo-wide" loading="lazy" />
+        <img src="/svg/windows.svg" alt="Windows" width="48" height="48" title="Windows" loading="lazy" />
+        <img src="/svg/android.svg" alt="Android" width="48" height="48" title="Android" loading="lazy" />
+        <img src="/svg/hp.svg" alt="HP" width="48" height="48" title="HP" loading="lazy" />
+        <img src="/svg/lenovo.svg" alt="Lenovo" width="48" height="48" title="Lenovo" class="logo-wide" loading="lazy" />
+        <img src="/svg/nokia.svg" alt="Nokia" width="48" height="48" title="Nokia" class="logo-wide" loading="lazy" />
+        <img src="/svg/dell.svg" alt="Dell" width="48" height="48" title="Dell" loading="lazy" />
+        <img src="/svg/asus.svg" alt="Asus" width="48" height="48" title="Asus" loading="lazy" />
+        <img src="/svg/microsoft.svg" alt="Microsoft" width="48" height="48" title="Microsoft" class="logo-wide" loading="lazy" />
       </div>
     </div>
 
@@ -237,37 +251,38 @@
         </div>
         <div class="score-divider"></div>
         <div class="score-side">
-          <div class="score-stars tp">
-            <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" class="star-dimmed" aria-hidden="true"></i>
+          <div class="score-stars google">
+            <i data-lucide="shield-check" class="icon-amber" aria-hidden="true"></i>
           </div>
-          <div class="score-value countup-num" data-counter="3.8" data-decimals="1">3.8</div>
+          <div class="score-value"><span class="countup-num" data-counter="100" data-suffix="%">100%</span></div>
           <div class="score-label">
-            <span>Based on reviews on</span>
+            <span>Customer Satisfaction</span>
             <div class="score-brand">
-              <svg class="trustpilot-logo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#00b67a" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-              </svg>
-              <span class="brand-name">Trustpilot</span>
+              <span class="brand-name">No fix, no fee</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="reviews-grid-new">
-        <!-- Card 1 (Featured) -->
-        <div class="testimonial-card featured">
+        <!-- Card 1: Safia Opiskelija -->
+        <div class="testimonial-card">
           <div class="card-header-google">
-            <div class="reviewer-avatar avatar-red">N</div>
+            <img src="/images/avatars/safia.png" alt="Safia Opiskelija" class="reviewer-avatar-img" width="48" height="48" loading="lazy" />
             <div class="reviewer-meta">
-              <h3>Nettiostaja</h3>
-              <span class="review-date">A month ago</span>
+              <h3>Safia Opiskelija</h3>
+              <span class="review-stats">1 review · 4 months ago</span>
             </div>
           </div>
-          <div class="testimonial-stars">
-            <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <p class="testimonial-quote">
-            "One morning my laptop refused to turn on at all, even though it worked fine the day before. DigiKaveri got it running again without losing any of my files. Highly recommended! On another visit they cleaned out all the internal dust, and now it runs whisper-quiet and fast."
+            "My computer was really slow for months, but thanks to the repairs from my digital friends, it's like new. No more problems with the computer. Thank you!"
           </p>
           <div class="testimonial-footer">
             <span class="testimonial-source">
@@ -275,25 +290,29 @@
               Google Maps
             </span>
             <div class="verified-badge-google">
-              <i data-lucide="check-circle"></i> Verified Customer
+              <i data-lucide="check-circle" aria-hidden="true"></i> Verified Customer
             </div>
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="testimonial-card">
+        <!-- Card 2: Nettiostaja (Featured) -->
+        <div class="testimonial-card featured">
           <div class="card-header-google">
-            <div class="reviewer-avatar avatar-blue">S</div>
+            <img src="/images/avatars/nettiostaja.png" alt="Nettiostaja" class="reviewer-avatar-img" width="48" height="48" loading="lazy" />
             <div class="reviewer-meta">
-              <h3>Safia Opiskelija</h3>
-              <span class="review-date">2 weeks ago</span>
+              <h3>Nettiostaja</h3>
+              <span class="review-stats">2 reviews · 4 months ago</span>
             </div>
           </div>
-          <div class="testimonial-stars">
-            <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
           <p class="testimonial-quote">
-            "My computer had been painfully slow for months, but DigiKaveri tuned it up and now it runs like new. No more freezing or headaches. Thank you!"
+            "Once the laptop refused to open, even though it had worked normally the day before. Digikaveri got the machine working without any data loss. I recommend it! On another occasion, the laptop was cleaned: dust was removed from the inside, around the components. Now the computer is quieter and works well."
           </p>
           <div class="testimonial-footer">
             <span class="testimonial-source">
@@ -301,7 +320,37 @@
               Google Maps
             </span>
             <div class="verified-badge-google">
-              <i data-lucide="check-circle"></i> Verified Customer
+              <i data-lucide="check-circle" aria-hidden="true"></i> Verified Customer
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Liisa Keurulainen -->
+        <div class="testimonial-card">
+          <div class="card-header-google">
+            <img src="/images/avatars/liisa.png" alt="Liisa Keurulainen" class="reviewer-avatar-img" width="48" height="48" loading="lazy" />
+            <div class="reviewer-meta">
+              <h3>Liisa Keurulainen</h3>
+              <span class="review-stats">1 review · 3 weeks ago</span>
+            </div>
+          </div>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbc04"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <p class="testimonial-quote">
+            "Thanks now the computer and phone are working.<br />Pensioner"
+          </p>
+          <div class="testimonial-footer">
+            <span class="testimonial-source">
+              <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google Maps
+            </span>
+            <div class="verified-badge-google">
+              <i data-lucide="check-circle" aria-hidden="true"></i> Verified Customer
             </div>
           </div>
         </div>
@@ -328,7 +377,7 @@
         </p>
       </div>
       <div class="solutions-grid">
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="win" data-quiz-issue="slow">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="laptop" aria-hidden="true"></i></div>
           <h3>Computer is slow</h3>
@@ -337,7 +386,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="purchase">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="smartphone" aria-hidden="true"></i></div>
           <h3>Setting up a new device</h3>
@@ -346,7 +395,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="printer" data-quiz-issue="network">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="wifi" aria-hidden="true"></i></div>
           <h3>Internet drops</h3>
@@ -355,7 +404,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="printer" data-quiz-issue="network">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="printer" aria-hidden="true"></i></div>
           <h3>Printer doesn't work</h3>
@@ -364,7 +413,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="mail" aria-hidden="true"></i></div>
           <h3>Lost email</h3>
@@ -373,7 +422,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="win" data-quiz-issue="virus">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="shield-alert" aria-hidden="true"></i></div>
           <h3>Cybersecurity & protection</h3>
@@ -382,7 +431,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="tv-2" aria-hidden="true"></i></div>
           <h3>Smart TV & Streaming</h3>
@@ -391,7 +440,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="key-round" aria-hidden="true"></i></div>
           <h3>Passwords & accounts</h3>
@@ -400,7 +449,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card">
+        <a href="#contact" class="solution-card" data-quiz-device="win" data-quiz-issue="software">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="hard-drive" aria-hidden="true"></i></div>
           <h3>Backups & file safety</h3>
@@ -409,12 +458,13 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#contact-detailed" class="solution-card">
+        <a href="#contact-detailed" class="solution-card solution-card-senior" data-check-relative="true">
           <div class="card-shine"></div>
+          <div class="solution-badge-senior"><i data-lucide="heart" aria-hidden="true"></i> Popular for Families</div>
           <div class="solution-icon"><i data-lucide="heart-handshake" aria-hidden="true"></i></div>
           <h3>Senior & family support</h3>
           <p>
-            Patient, in-home guidance for elderly parents. Smart TV, banking logins, printer setup, and new phones – invoice can be billed directly to you!
+            Patient, in-home guidance for elderly parents. Smart TV, banking logins, printer setup, and new phones – <strong>claim the 35% household tax deduction on your own taxes</strong> and have the bill sent to you!
           </p>
           <span class="solution-link">Order for a relative <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
@@ -427,7 +477,7 @@
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a href="#services" class="solution-card" data-services-tab="services-consumer">
+        <a href="#contact" class="solution-card" data-quiz-device="other" data-quiz-issue="purchase">
           <div class="card-shine"></div>
           <div class="solution-icon"><i data-lucide="shopping-bag" aria-hidden="true"></i></div>
           <h3>Buyer guidance & secure wiping</h3>
@@ -435,6 +485,22 @@
             Unbiased advice for choosing a new laptop or phone without sales pressure, plus secure data erasure and recycling for old devices.
           </p>
           <span class="solution-link">View solution <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+        </a>
+      </div>
+
+      <!-- WhatsApp Photo-to-Help (Visible right after common issues) -->
+      <div class="whatsapp-photo-banner solutions-wpb" data-aos="fade-up">
+        <div class="wpb-content">
+          <div class="wpb-icon-badge">
+            <i data-lucide="camera" aria-hidden="true"></i>
+          </div>
+          <div class="wpb-text">
+            <h4>Have an error message on screen or stuck device?</h4>
+            <p>Snap a photo with your phone and send it to our WhatsApp. We'll reply right away with free advice on the best fix!</p>
+          </div>
+        </div>
+        <a href="https://wa.me/3584578338105?text=Hello%20DigiKaveri!%20I%20need%20help%20with%20this%20issue%20(attaching%20photo):" target="_blank" rel="noopener noreferrer" class="btn-wpb-action">
+          <i data-lucide="message-circle" aria-hidden="true"></i> Send Photo on WhatsApp
         </a>
       </div>
     </section>
@@ -1008,9 +1074,17 @@
           <p>
             <strong>Why pay more?</strong> Choose friendly, reliable, and affordable DigiKaveri.
           </p>
-          <a href="#contact-detailed" class="btn-comparison-cta">
-            Request Help or Callback <i data-lucide="arrow-right" aria-hidden="true"></i>
-          </a>
+          <div class="comparison-cta-group">
+            <a href="tel:04578338105" class="btn-comparison-phone" aria-label="Call 045 7833 8105">
+              <i data-lucide="phone" aria-hidden="true"></i> <span>Call: 045 7833 8105</span>
+            </a>
+            <a href="https://wa.me/3584578338105?text=Hello%20DigiKaveri!%20I%20would%20like%20to%20ask%20for%20a%20quote:" target="_blank" rel="noopener noreferrer" class="btn-comparison-wa" aria-label="Ask on WhatsApp">
+              <i data-lucide="message-circle" aria-hidden="true"></i> <span>Ask on WhatsApp</span>
+            </a>
+            <a href="#contact-detailed" class="btn-comparison-cta">
+              <span>Request callback</span> <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1067,6 +1141,21 @@
         <i data-lucide="shield-check" class="highlight-icon" aria-hidden="true"></i>
         <span>All our experts have verified identity and a local background in the Uusimaa region.</span>
       </div>
+
+      <div class="team-quick-contact">
+        <div class="tqc-text">
+          <strong>Want to speak directly with an expert?</strong>
+          <span>We're happy to answer your questions and provide an upfront price estimate with no obligations.</span>
+        </div>
+        <div class="tqc-actions">
+          <a href="tel:04578338105" class="btn-tqc-phone" aria-label="Call specialist at 045 7833 8105">
+            <i data-lucide="phone" aria-hidden="true"></i> <span>Call: 045 7833 8105</span>
+          </a>
+          <a href="https://wa.me/3584578338105?text=Hello%20DigiKaveri!%20I%20need%20help%20with%20my%20device:" target="_blank" rel="noopener noreferrer" class="btn-tqc-wa" aria-label="Send message on WhatsApp">
+            <i data-lucide="message-circle" aria-hidden="true"></i> <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
     </section>
 
     <section id="faq" class="container section-faq section-spy" data-aos="fade-up" data-aos-delay="100">
@@ -1080,6 +1169,14 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Which areas do you cover for home visits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our primary service area covers Espoo, Helsinki, Vantaa, Kauniainen, Kirkkonummi, Kerava, Järvenpää, Tuusula, Nurmijärvi, and Sipoo. However, we are more than happy to travel anywhere as long as travel costs are agreed upon in advance! Furthermore, remote support is available everywhere across Finland immediately."
+            }
+          },
           {
             "@type": "Question",
             "name": "What if the issue cannot be fixed?",
@@ -1114,6 +1211,14 @@
           },
           {
             "@type": "Question",
+            "name": "Can I claim the household tax deduction if I order IT help for my parents?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Under Finnish tax rules, you can claim the 35% household tax deduction when ordering and paying for IT work done in your or your spouse's parents' or grandparents' home. We provide a pre-itemized invoice directly to you for OmaVero."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "How quickly can I get a home visit appointment?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -1126,6 +1231,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "No. Just tell us in your own words what is going wrong. We take care of all technical troubleshooting for you."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if the service (remote support or home visit) takes longer than expected?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We never leave a job unfinished or add surprise charges. Remote support has a base fee of €29 / 30 min (additional time €14 / starting 15 min), and home visits start at €59 / 1st hour (additional time €15 / starting 15 min, or ~€9.75 with the 35% tax deduction). Our specialist always informs you well before the initial time runs out if the issue requires extra time, and we always agree on the continuation with you beforehand. The clock never ticks without your knowledge."
             }
           }
         ]
@@ -1143,6 +1256,17 @@
       </div>
 
       <div class="faq-grid">
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Which areas do you cover for home visits?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Our primary service area covers Espoo, Helsinki, Vantaa, Kauniainen, Kirkkonummi, Kerava, Järvenpää, Tuusula, Nurmijärvi, and Sipoo. However, we are more than happy to travel anywhere as long as travel costs are agreed upon in advance! Furthermore, remote support is available everywhere across Finland immediately.
+            </p>
+          </div>
+        </div>
         <div class="faq-item">
           <button type="button" class="faq-question">
             <span>What if the issue cannot be fixed?</span>
@@ -1189,6 +1313,17 @@
         </div>
         <div class="faq-item">
           <button type="button" class="faq-question">
+            <span>Can I claim the household tax deduction if I order IT help for my parents?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Yes! Under Finnish tax rules, you can claim the 35% household tax deduction when ordering and paying for IT work done in your or your spouse's parents' or grandparents' home. We provide a pre-itemized invoice directly to you for OmaVero.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
             <span>How quickly can I get a home visit appointment?</span>
             <i data-lucide="chevron-down" aria-hidden="true"></i>
           </button>
@@ -1206,6 +1341,17 @@
           <div class="faq-answer">
             <p>
               Not at all. Just describe in your own words what problem you are experiencing. We handle the technical side without confusing jargon.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>What happens if the service (remote support or home visit) takes longer than expected?</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              We never leave a job unfinished or add surprise charges. Remote support has a base fee of €29 / 30 min (additional time €14 / starting 15 min), and home visits start at €59 / 1st hour (additional time €15 / starting 15 min, or ~€9.75 with the 35% tax deduction). Our specialist always informs you well before the initial time runs out if the issue requires extra time, and we always agree on the continuation with you beforehand. The clock never ticks without your knowledge.
             </p>
           </div>
         </div>
@@ -1334,7 +1480,22 @@
               </label>
             </div>
 
+            <div class="relative-details-box hidden" id="relative-details-box">
+              <div class="form-group">
+                <label for="d-rel-name"><i data-lucide="user-check" aria-hidden="true"></i> Relative's name and phone number</label>
+                <input type="text" id="d-rel-name" name="relative_contact" placeholder="E.g. Mother Lisa, 050 123 4567" />
+              </div>
+              <div class="form-group">
+                <label for="d-rel-address"><i data-lucide="map-pin" aria-hidden="true"></i> Relative's visit address & door code (Uusimaa)</label>
+                <input type="text" id="d-rel-address" name="relative_address" placeholder="E.g. Kauppakatu 5 B 12, 02100 Espoo (door code 1234)" />
+              </div>
+            </div>
+
             <div id="contact-status-msg" class="status-msg hidden"></div>
+
+            <p class="form-response-notice">
+              <i data-lucide="clock" aria-hidden="true"></i> We usually respond to messages within 1–2 hours (every day 09:00–21:00).
+            </p>
 
             <button type="submit" class="btn-submit">
               Send message <i data-lucide="send" aria-hidden="true"></i>
@@ -1344,6 +1505,49 @@
       </div>
     </section>
   </main>
+
+  <!-- Guarantee Explainer Modal -->
+  <div class="guarantee-modal" id="guaranteeModal" role="dialog" aria-modal="true" aria-labelledby="guaranteeModalTitle" aria-hidden="true">
+    <div class="guarantee-modal-backdrop" id="guaranteeModalBackdrop"></div>
+    <div class="guarantee-modal-dialog">
+      <button type="button" class="guarantee-modal-close" id="guaranteeModalClose" aria-label="Close dialog">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+      <div class="guarantee-modal-header">
+        <div class="guarantee-badge-icon">
+          <i data-lucide="shield-check" aria-hidden="true"></i>
+        </div>
+        <h3 id="guaranteeModalTitle">No Fix, No Fee Guarantee</h3>
+        <p class="guarantee-subtitle">Fair and 100% risk-free IT support</p>
+      </div>
+      <div class="guarantee-modal-body">
+        <div class="guarantee-point">
+          <i data-lucide="check-circle" class="point-icon" aria-hidden="true"></i>
+          <div>
+            <strong>100% Satisfaction Guarantee</strong>
+            <p>If your technical problem cannot be resolved due to hardware failure or technical constraints, you don't pay a single cent for labor.</p>
+          </div>
+        </div>
+        <div class="guarantee-point">
+          <i data-lucide="check-circle" class="point-icon" aria-hidden="true"></i>
+          <div>
+            <strong>Transparent Upfront Pricing</strong>
+            <p>All pricing is agreed upon before starting any work. No surprise hidden charges or surprise diagnostics fees.</p>
+          </div>
+        </div>
+        <div class="guarantee-point">
+          <i data-lucide="check-circle" class="point-icon" aria-hidden="true"></i>
+          <div>
+            <strong>Household Tax Deduction (-35%)</strong>
+            <p>All on-site IT maintenance and home visits qualify for the Finnish 35% household tax credit directly on labor costs.</p>
+          </div>
+        </div>
+      </div>
+      <div class="guarantee-modal-footer">
+        <button type="button" class="btn btn-primary" id="guaranteeModalOk">Got it, thanks!</button>
+      </div>
+    </div>
+  </div>
 
   {{> footer }}
   {{> scripts extra_js="contact" }}

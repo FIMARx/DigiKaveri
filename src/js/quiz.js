@@ -193,6 +193,40 @@ onDOMReady(() => {
     }
   });
 
+  // Support external triggers (e.g. Solution cards)
+  document.querySelectorAll("[data-quiz-device], [data-quiz-issue]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const devKey = trigger.getAttribute("data-quiz-device");
+      const issKey = trigger.getAttribute("data-quiz-issue");
+
+      if (devKey) {
+        const devBtn = form.querySelector(`.quiz-step[data-step='1'] .quiz-opt-btn[data-key="${devKey}"]`);
+        if (devBtn) {
+          updateAriaChecked("1", devBtn);
+          if (deviceInput) deviceInput.value = devBtn.getAttribute("data-value");
+          sessionStorage.setItem('quiz-device', devBtn.getAttribute("data-value"));
+          sessionStorage.setItem('quiz-device-key', devKey);
+        }
+      }
+
+      if (issKey) {
+        const issBtn = form.querySelector(`.quiz-step[data-step='2'] .quiz-opt-btn[data-key="${issKey}"]`);
+        if (issBtn) {
+          updateAriaChecked("2", issBtn);
+          if (issueInput) issueInput.value = issBtn.getAttribute("data-value");
+          sessionStorage.setItem('quiz-issue', issBtn.getAttribute("data-value"));
+          sessionStorage.setItem('quiz-issue-key', issKey);
+        }
+      }
+
+      if (devKey && issKey) {
+        goToStep(2);
+      } else if (devKey) {
+        goToStep(1);
+      }
+    });
+  });
+
   // Re-run icons initialization inside the form context
   try { createIcons({ icons: ICON_SET, root: form }); } catch (e) { console.warn("Lucide icon init warning:", e); }
 });

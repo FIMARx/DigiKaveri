@@ -78,6 +78,10 @@ function initApp() {
   initFAB();
   initCampaignBanner();
   initHashScrollOnLoad();
+  initPhoneFormatting();
+  initBackToTop();
+  initQuickCopy();
+  initGuaranteeModal();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
@@ -210,9 +214,18 @@ async function checkStatus() {
 
 let previouslyFocusedElement = null;
 
+function openStatusModal(modal) {
+  if (!modal) return;
+  previouslyFocusedElement = document.activeElement;
+  modal.classList.add("active");
+  document.body.classList.add("is-locked");
+  modal.setAttribute("tabindex", "-1");
+  modal.focus();
+}
+
 function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
-  if (!modal || isOpen) return;
+  if (!modal) return;
   if (modal.dataset.initialized) return;
   modal.dataset.initialized = "true";
 
@@ -308,26 +321,17 @@ function initStatusModal(isOpen) {
     }
   });
 
-  if (sessionStorage.getItem("closedModalShown") === "true") {
-    return;
-  }
-
-  setTimeout(() => {
-    if (sessionStorage.getItem("closedModalShown") === "true") return;
-    previouslyFocusedElement = document.activeElement;
-    modal.classList.add("active");
-    document.body.classList.add("is-locked");
-    modal.setAttribute("tabindex", "-1");
-    modal.focus();
-  }, 1500);
-
+  // Wire manual click/enter on schedule pill to open status modal
   const pill = document.querySelector(".status-schedule-pill");
   if (pill && !pill.dataset.keyBound) {
     pill.dataset.keyBound = "true";
+    pill.addEventListener("click", () => {
+      openStatusModal(modal);
+    });
     pill.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        pill.click();
+        openStatusModal(modal);
       }
     });
   }
@@ -377,9 +381,11 @@ function initTheme() {
         const newTheme = currentTheme === "dark" ? "light" : "dark";
         
         const applyTheme = () => {
+          document.documentElement.classList.add("theme-switching");
           document.documentElement.setAttribute("data-theme", newTheme);
           localStorage.setItem("theme", newTheme);
           updateMetaThemeColor(newTheme);
+          setTimeout(() => document.documentElement.classList.remove("theme-switching"), 400);
         };
 
         if (typeof document.startViewTransition === "function") {
@@ -506,10 +512,6 @@ function initLanguageDetection() {
     localStorage.setItem("userLang", "en");
   } else if (path.length > 1 && !isEn) {
     localStorage.setItem("userLang", "fi");
-  }
-  if (path === "/" && !localStorage.getItem("userLang")) {
-    const isEnBrowser = navigator.language.toLowerCase().startsWith("en");
-    if (isEnBrowser) window.location.href = "/en/";
   }
 }
 
@@ -1146,6 +1148,204 @@ function initOfflineIndicator() {
       checkConnectivity();
     }
   }, 60000);
+}
+
+function formatFinnishPhone(raw) {
+  if (!raw) return "";
+  const trimmed = raw.trim();
+  const isPlus = trimmed.startsWith("+");
+  const digits = raw.replace(/\D/g, "");
+
+  if (isPlus) {
+    if (digits.startsWith("358")) {
+      let local = digits.slice(3);
+      if (local.startsWith("0")) local = local.slice(1);
+      if (local.length === 0) return "+358";
+      if (local.length <= 2) return `+358 ${local}`;
+      if (local.length <= 5) return `+358 ${local.slice(0, 2)} ${local.slice(2)}`;
+      if (local.length <= 9) return `+358 ${local.slice(0, 2)} ${local.slice(2, 5)} ${local.slice(5)}`;
+      return `+358 ${local.slice(0, 2)} ${local.slice(2, 6)} ${local.slice(6, 10)}`;
+    }
+    return "+" + digits;
+  }
+
+  if (digits.startsWith("0")) {
+    if (digits.startsWith("09")) {
+      if (digits.length <= 2) return digits;
+      if (digits.length <= 5) return `${digits.slice(0, 2)} ${digits.slice(2)}`;
+      return `${digits.slice(0, 2)} ${digits.slice(2, 5)} ${digits.slice(5, 9)}`;
+    }
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `${digits.slice(0, 3)} ${digits.slice(3)}`;
+    if (digits.length <= 10) {
+      return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
+    }
+    return `${digits.slice(0, 3)} ${digits.slice(3, 7)} ${digits.slice(7, 11)}`;
+  }
+
+  return raw;
+}
+
+function attachPhoneFormatter(input) {
+  if (!input || input.dataset.phoneFormatted) return;
+  input.dataset.phoneFormatted = "true";
+
+  input.addEventListener("input", (e) => {
+    if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
+      return;
+    }
+
+    const start = input.selectionStart;
+    const oldVal = input.value;
+    const formatted = formatFinnishPhone(oldVal);
+
+    if (formatted !== oldVal) {
+      input.value = formatted;
+      const diff = formatted.length - oldVal.length;
+      const newPos = Math.max(0, start + diff);
+      input.setSelectionRange(newPos, newPos);
+    }
+  });
+
+  input.addEventListener("blur", () => {
+    input.value = formatFinnishPhone(input.value);
+  });
+}
+
+function initPhoneFormatting() {
+  const telInputs = document.querySelectorAll('input[type="tel"], #c-phone, #d-phone, input[name="phone"]');
+  telInputs.forEach(attachPhoneFormatter);
+}
+
+function initBackToTop() {
+  if (document.getElementById("back-to-top")) return;
+
+  const isEn = isEnglish();
+  const btn = document.createElement("button");
+  btn.id = "back-to-top";
+  btn.className = "back-to-top-btn";
+  btn.setAttribute("type", "button");
+  btn.setAttribute("aria-label", isEn ? "Scroll back to top" : "Palaa sivun alkuun");
+  btn.setAttribute("title", isEn ? "Back to top" : "Palaa ylös");
+  btn.innerHTML = `<i data-lucide="arrow-up" aria-hidden="true"></i>`;
+
+  document.body.appendChild(btn);
+  try { createIcons({ icons: ICON_SET, root: btn }); } catch (_) {}
+
+  let isVisible = false;
+  const checkScroll = () => {
+    const shouldShow = window.scrollY > 600;
+    if (shouldShow !== isVisible) {
+      isVisible = shouldShow;
+      btn.classList.toggle("visible", isVisible);
+    }
+  };
+
+  window.addEventListener("scroll", checkScroll, { passive: true });
+  checkScroll();
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+function initQuickCopy() {
+  const isEn = isEnglish();
+  const copyBtns = document.querySelectorAll(".btn-copy-contact, [data-copy]");
+  copyBtns.forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const text = btn.getAttribute("data-copy");
+      if (!text) return;
+
+      let copied = false;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        }
+      } catch (_) {}
+
+      if (!copied) {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          copied = true;
+        } catch (_) {}
+      }
+
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = `<i data-lucide="check" style="color: #10b981;"></i>`;
+      try { createIcons({ icons: ICON_SET, root: btn }); } catch (_) {}
+      
+      const msg = isEn ? `Copied "${text}" to clipboard!` : `Kopioitu leikepöydälle: ${text}`;
+      if (typeof window.showToast === "function") {
+        window.showToast(msg, true);
+      }
+
+      setTimeout(() => {
+        btn.innerHTML = originalHtml;
+        try { createIcons({ icons: ICON_SET, root: btn }); } catch (_) {}
+      }, 2200);
+    });
+  });
+}
+
+function initGuaranteeModal() {
+  const trigger = document.getElementById("guaranteeModalTrigger");
+  const modal = document.getElementById("guaranteeModal");
+  if (!trigger || !modal) return;
+
+  const backdrop = document.getElementById("guaranteeModalBackdrop");
+  const closeBtn = document.getElementById("guaranteeModalClose");
+  const okBtn = document.getElementById("guaranteeModalOk");
+
+  let previouslyFocused = null;
+
+  const openModal = () => {
+    previouslyFocused = document.activeElement;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("is-locked");
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("is-locked");
+    if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+      previouslyFocused.focus({ preventScroll: true });
+    }
+  };
+
+  trigger.addEventListener("click", (e) => {
+    e.preventDefault();
+    openModal();
+  });
+  trigger.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openModal();
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  if (okBtn) okBtn.addEventListener("click", closeModal);
+  if (backdrop) backdrop.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
+      closeModal();
+    }
+  });
 }
 
 onDOMReady(initApp);

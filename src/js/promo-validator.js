@@ -1,22 +1,23 @@
 /**
- * DigiKaveri Cloud Promo Validator (Supabase Pure Cloud Setup)
+ * DigiKaveri Cloud Promo Validator (Ultralight Native REST Setup)
  * 
  * 1. Standard Campaign Codes (e.g. PROMO15 from campaign.json, SENIORI15, OPISKELIJA15)
  * 2. Unique Single-Use Promo Codes stored in Supabase `promo_codes` table.
  * 
- * 100% Secure: Zero formulas, seeds, or generation logic in the frontend/GitHub.
+ * Performance: Uses native fetch() against Supabase PostgREST, eliminating 200+ kB 
+ * of client-side SDK dependencies.
  */
-
-import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = 'https://hmwaplhxstzhhrjzgxxv.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_DZcgH9hp8lB21aeqzKdWzw_kv1pxUmz';
 
-export const supabase = (SUPABASE_URL && SUPABASE_ANON_KEY)
-  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
-
 const STORAGE_KEY = "digikaveri_redeemed_promo_codes";
+
+const supabaseHeaders = {
+  'apikey': SUPABASE_ANON_KEY,
+  'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+  'Accept': 'application/json'
+};
 
 /**
  * Standard reusable campaign codes defined locally
@@ -87,7 +88,7 @@ export function validatePromoCode(code, campaignConfig = {}, lang = "fi") {
 }
 
 /**
- * Validate promo code against Supabase Cloud Database `promo_codes` table
+ * Validate promo code against Supabase Cloud Database `promo_codes` table via native fetch
  * @param {string} code 
  * @param {object} campaignConfig 
  * @param {string} lang 
@@ -129,8 +130,8 @@ export async function validatePromoCodeAsync(code, campaignConfig = {}, lang = "
     }
   } catch (_) {}
 
-  // Check Supabase Cloud database
-  if (!supabase) {
+  // Check Supabase Cloud database via direct REST API
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     return {
       valid: false,
       discount: 0,
@@ -140,13 +141,25 @@ export async function validatePromoCodeAsync(code, campaignConfig = {}, lang = "
   }
 
   try {
-    const { data, error } = await supabase
-      .from('promo_codes')
-      .select('code, discount, is_redeemed')
-      .eq('code', cleanCode)
-      .maybeSingle();
+    const endpoint = `${SUPABASE_URL}/rest/v1/promo_codes?code=eq.${encodeURIComponent(cleanCode)}&select=code,discount,is_redeemed`;
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: supabaseHeaders
+    });
 
-    if (error || !data) {
+    if (!response.ok) {
+      return {
+        valid: false,
+        discount: 0,
+        isUniqueCode: false,
+        message: lang === "en" ? "Invalid or expired promo code." : "Virheellinen tai vanhentunut alennuskoodi."
+      };
+    }
+
+    const rows = await response.json();
+    const data = Array.isArray(rows) && rows.length > 0 ? rows[0] : null;
+
+    if (!data) {
       return {
         valid: false,
         discount: 0,
@@ -217,16 +230,22 @@ export async function markPromoCodeRedeemed(code) {
   // 1. Mark in local storage
   markPromoCodeRedeemedLocally(cleanCode);
 
-  // 2. Mark redeemed in Supabase
-  if (supabase) {
+  // 2. Mark redeemed in Supabase via REST PATCH
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
     try {
-      await supabase
-        .from('promo_codes')
-        .update({ 
+      const endpoint = `${SUPABASE_URL}/rest/v1/promo_codes?code=eq.${encodeURIComponent(cleanCode)}`;
+      await fetch(endpoint, {
+        method: 'PATCH',
+        headers: {
+          ...supabaseHeaders,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ 
           is_redeemed: true, 
           redeemed_at: new Date().toISOString() 
         })
-        .eq('code', cleanCode);
+      });
       console.log(`%c[Supabase]: Code ${cleanCode} redeemed!`, "color:#10b981;font-weight:bold;");
     } catch (err) {
       console.warn('[Supabase Redeem Error]:', err);
