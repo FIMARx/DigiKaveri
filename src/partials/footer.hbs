@@ -64,12 +64,19 @@
           <i data-lucide="map-pin" aria-hidden="true"></i>
           <a href="https://maps.app.goo.gl/ZMahtgeVwC3wE3wXA" target="_blank" rel="noopener noreferrer">{{footer_location}}</a>
         </li>
+        <li class="footer-contact-item">
+          <i data-lucide="building-2" aria-hidden="true"></i>
+          <span class="footer-contact-text">{{footer_business_id_label}}: {{business_id}}</span>
+          <button type="button" class="btn-copy-contact" data-copy="{{business_id}}" aria-label="{{copy_business_id_aria}}" title="{{copy_title}}">
+            <i data-lucide="copy" aria-hidden="true"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p class="footer-copyright">&copy; {{year}} DigiKaveri. {{footer_rights}}</p>
+    <p class="footer-copyright">&copy; {{year}} DigiKaveri • {{footer_business_id_label}}: {{business_id}}. {{footer_rights}}</p>
     <div class="footer-bottom-links">
       <a href="{{privacy_url}}">{{nav_privacy}}</a>
       <span class="footer-divider">•</span>

@@ -43,5 +43,8 @@
   "copy_email_aria": "Copy email address",
   "copy_title": "Copy to clipboard",
   "close_modal_aria": "Close dialog",
-  "og_locale": "en_US"
+  "og_locale": "en_US",
+  "footer_business_id_label": "Business ID",
+  "business_id": "3656584-7",
+  "copy_business_id_aria": "Copy Business ID"
 }

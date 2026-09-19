@@ -1006,7 +1006,8 @@ h3 {
 }
 .footer-links a,
 .footer-links .footer-cookie-link,
-.footer-contact a {
+.footer-contact a,
+.footer-contact .footer-contact-text {
   color: #cbd5e1;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -1015,9 +1016,12 @@ h3 {
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
+  cursor: default;
   font-family: inherit;
   text-align: left;
+}
+.footer-contact a {
+  cursor: pointer;
 }
 .footer-links a:hover,
 .footer-links .footer-cookie-link:hover,

@@ -56,7 +56,7 @@ const translations = {
     printTravelLabel: "Matkakulut kohteeseen (Espoon Saunalahdesta)",
     printPromoLabel: "Alennuskoodi",
     printDeductionBoxTitle: "Kotitalousvähennys (-35 % työn osuudesta)",
-    printDeductionBoxDesc: "DigiKaverin kotikäynnit ja laitehuollot ovat kotitalousvähennyskelpoisia työn osalta (vähennys 35 % vuonna 2026, omavastuu 150 €/v). Ilmoita vähennys helposti OmaVerossa (vero.fi) DigiKaverin Y-tunnuksella 3418585-6 työn valmistuttua.",
+    printDeductionBoxDesc: "DigiKaverin kotikäynnit ja laitehuollot ovat kotitalousvähennyskelpoisia työn osalta (vähennys 35 % vuonna 2026, omavastuu 150 €/v). Ilmoita vähennys helposti OmaVerossa (vero.fi) DigiKaverin Y-tunnuksella 3656584-7 työn valmistuttua.",
     printGuaranteeBoxTitle: "Tyytyväisyystakuu: Ei ratkaisua, ei laskua",
     printGuaranteeBoxDesc: "Maksat vain onnistuneesta IT-tuesta. Mikäli emme kykene ratkaisemaan laitteesi tai verkkosi ongelmaa, emme laskuta palvelusta mitään.",
     printFinalShare: "Oma osuutesi vähennyksen jälkeen:",
@@ -120,7 +120,7 @@ const translations = {
     printTravelLabel: "Travel expenses (from Saunalahti, Espoo)",
     printPromoLabel: "Promo discount",
     printDeductionBoxTitle: "Household Tax Deduction (-35% on labor)",
-    printDeductionBoxDesc: "DigiKaveri home visits and hardware maintenance are eligible for the Finnish household tax deduction (35% on labor in 2026, deductible €150/year). You can easily claim this via OmaVero (vero.fi) using our Business ID 3418585-6 after the service is completed.",
+    printDeductionBoxDesc: "DigiKaveri home visits and hardware maintenance are eligible for the Finnish household tax deduction (35% on labor in 2026, deductible €150/year). You can easily claim this via OmaVero (vero.fi) using our Business ID 3656584-7 after the service is completed.",
     printGuaranteeBoxTitle: "Satisfaction Guarantee: No solution, no bill",
     printGuaranteeBoxDesc: "You only pay for successful IT support. If we cannot solve your device or network problem, you will not be charged for the service.",
     printFinalShare: "Your cost after tax deduction:",
@@ -1040,7 +1040,7 @@ onDOMReady(() => {
             <h1>Digi<span class="dk-print-brand-blue">Kaveri</span></h1>
             <p class="dk-print-tagline">${isEn ? "Reliable IT Support & Computer Care" : "Luotettava IT-tuki & Tietokonehuolto • Uusimaa"}</p>
             <p class="dk-print-meta-sub">Espoo • Helsinki • Vantaa • Kauniainen • Kirkkonummi</p>
-            <p class="dk-print-meta-sub">DigiKaveri / FIMARx • Y-tunnus: 3418585-6 • ALV-rekisteröity yritys</p>
+            <p class="dk-print-meta-sub">DigiKaveri / FIMARx • Y-tunnus: 3656584-7 • ALV-rekisteröity yritys</p>
           </div>
           <div class="dk-print-doc-meta">
             <h2>${t.printDocTitle}</h2>
@@ -1143,7 +1143,7 @@ onDOMReady(() => {
 
       <div class="dk-print-footer">
         <p class="dk-print-footer-contacts">${t.printFooterContact}</p>
-        <p class="dk-print-footer-legal">DigiKaveri • FIMARx • Y-tunnus 3418585-6 • Espoo, Uusimaa • Hinnat sisältävät ALV 25,5 %</p>
+        <p class="dk-print-footer-legal">DigiKaveri • FIMARx • Y-tunnus 3656584-7 • Espoo, Uusimaa • Hinnat sisältävät ALV 25,5 %</p>
         <p class="dk-print-footer-disclaimer">${t.printFooterDisclaimer}</p>
       </div>
     `;

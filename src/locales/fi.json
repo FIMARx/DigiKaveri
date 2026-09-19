@@ -43,5 +43,8 @@
   "copy_email_aria": "Kopioi sähköpostiosoite",
   "copy_title": "Kopioi leikepöydälle",
   "close_modal_aria": "Sulje ikkuna",
-  "og_locale": "fi_FI"
+  "og_locale": "fi_FI",
+  "footer_business_id_label": "Y-tunnus",
+  "business_id": "3656584-7",
+  "copy_business_id_aria": "Kopioi Y-tunnus"
 }
