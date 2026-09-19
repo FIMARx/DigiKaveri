@@ -1,5 +1,11 @@
 import campaignConfig from "../data/campaign.json";
 
+// Module-level references to prevent duplicate instances and interval leaks
+let activeTimerTimeout = null;
+let activeVisibilityHandler = null;
+let activeResizeObserver = null;
+let activeResizeHandler = null;
+
 export function initCampaignBanner() {
   if (!campaignConfig || !campaignConfig.enabled) return;
 
@@ -16,6 +22,20 @@ export function initCampaignBanner() {
   try {
     if (localStorage.getItem(storageKey) === "1") return;
   } catch (_) {}
+
+  // Prevent duplicate banner insertion if one is already in the DOM
+  if (document.getElementById("campaignPromoBanner")) return;
+
+  // Clean up any stale timer or listeners from previous initializations (e.g. HMR)
+  if (activeTimerTimeout) {
+    clearTimeout(activeTimerTimeout);
+    activeTimerTimeout = null;
+  }
+  if (activeVisibilityHandler) {
+    document.removeEventListener("visibilitychange", activeVisibilityHandler);
+    window.removeEventListener("focus", activeVisibilityHandler);
+    activeVisibilityHandler = null;
+  }
 
   // Determine current page language
   const lang = document.documentElement.lang && document.documentElement.lang.startsWith("en") ? "en" : "fi";
@@ -58,14 +78,14 @@ export function initCampaignBanner() {
       ${showCountdown ? `
       <div class="campaign-timer-wrap">
         <span class="timer-label">${localized.countdownLabel || (lang === "en" ? "Offer ends in:" : "Päättyy:")}</span>
-        <div class="campaign-timer" id="campaignTimer">
-          <div class="timer-unit"><span class="timer-val" id="timerDays">00</span><span class="timer-tag">${lang === "en" ? "d" : "pv"}</span></div>
+        <div class="campaign-timer" id="campaignTimer" translate="no">
+          <div class="timer-unit" translate="no"><span class="timer-val" id="timerDays">00</span><span class="timer-tag">${lang === "en" ? "d" : "pv"}</span></div>
           <span class="timer-colon">:</span>
-          <div class="timer-unit"><span class="timer-val" id="timerHours">00</span><span class="timer-tag">${lang === "en" ? "h" : "t"}</span></div>
+          <div class="timer-unit" translate="no"><span class="timer-val" id="timerHours">00</span><span class="timer-tag">${lang === "en" ? "h" : "t"}</span></div>
           <span class="timer-colon">:</span>
-          <div class="timer-unit"><span class="timer-val" id="timerMins">00</span><span class="timer-tag">${lang === "en" ? "m" : "min"}</span></div>
+          <div class="timer-unit" translate="no"><span class="timer-val" id="timerMins">00</span><span class="timer-tag">${lang === "en" ? "m" : "min"}</span></div>
           <span class="timer-colon">:</span>
-          <div class="timer-unit"><span class="timer-val" id="timerSecs">00</span><span class="timer-tag">${lang === "en" ? "s" : "s"}</span></div>
+          <div class="timer-unit" translate="no"><span class="timer-val" id="timerSecs">00</span><span class="timer-tag">${lang === "en" ? "s" : "s"}</span></div>
         </div>
       </div>
       ` : ""}
@@ -103,9 +123,6 @@ export function initCampaignBanner() {
 
   document.body.classList.add("has-campaign-banner");
 
-  let timerInterval = null;
-  let resizeObserver = null;
-
   const updateBannerHeight = () => {
     if (!banner || !banner.isConnected || banner.classList.contains("campaign-closing")) return;
     const h = banner.offsetHeight;
@@ -114,27 +131,37 @@ export function initCampaignBanner() {
 
   // Observe resize for seamless dynamic height calculations
   if (typeof ResizeObserver !== "undefined") {
-    resizeObserver = new ResizeObserver(updateBannerHeight);
-    resizeObserver.observe(banner);
+    activeResizeObserver = new ResizeObserver(updateBannerHeight);
+    activeResizeObserver.observe(banner);
   } else {
-    window.addEventListener("resize", updateBannerHeight);
+    activeResizeHandler = updateBannerHeight;
+    window.addEventListener("resize", activeResizeHandler);
   }
   updateBannerHeight();
 
   // Close banner safely and smoothly
   const closeBanner = () => {
-    // Clear countdown timer interval immediately to avoid background leaks
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
+    // Clear countdown timer timeout immediately to avoid background leaks
+    if (activeTimerTimeout) {
+      clearTimeout(activeTimerTimeout);
+      activeTimerTimeout = null;
+    }
+
+    // Disconnect visibility & focus listeners
+    if (activeVisibilityHandler) {
+      document.removeEventListener("visibilitychange", activeVisibilityHandler);
+      window.removeEventListener("focus", activeVisibilityHandler);
+      activeVisibilityHandler = null;
     }
 
     // Disconnect resize observer / remove resize listener
-    if (resizeObserver) {
-      resizeObserver.disconnect();
-      resizeObserver = null;
-    } else {
-      window.removeEventListener("resize", updateBannerHeight);
+    if (activeResizeObserver) {
+      activeResizeObserver.disconnect();
+      activeResizeObserver = null;
+    }
+    if (activeResizeHandler) {
+      window.removeEventListener("resize", activeResizeHandler);
+      activeResizeHandler = null;
     }
 
     banner.classList.add("campaign-closing");
@@ -184,6 +211,14 @@ export function initCampaignBanner() {
     const secsEl = banner.querySelector("#timerSecs");
 
     const updateTimer = () => {
+      if (!banner.isConnected) {
+        if (activeTimerTimeout) {
+          clearTimeout(activeTimerTimeout);
+          activeTimerTimeout = null;
+        }
+        return false;
+      }
+
       const current = new Date().getTime();
       const difference = end.getTime() - current;
 
@@ -205,15 +240,30 @@ export function initCampaignBanner() {
       return true;
     };
 
-    if (updateTimer()) {
-      timerInterval = setInterval(() => {
-        if (!updateTimer()) {
-          if (timerInterval) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-          }
-        }
-      }, 1000);
-    }
+    const scheduleNextTick = () => {
+      if (activeTimerTimeout) {
+        clearTimeout(activeTimerTimeout);
+        activeTimerTimeout = null;
+      }
+
+      if (!updateTimer()) return;
+
+      // Calculate milliseconds until the next second boundary (+ 15ms buffer to land cleanly in the next second)
+      const now = Date.now();
+      const delay = (1000 - (now % 1000)) + 15;
+      activeTimerTimeout = setTimeout(scheduleNextTick, delay);
+    };
+
+    // Initial tick & scheduling
+    scheduleNextTick();
+
+    // Re-sync immediately on tab focus or visibility change to fix background throttle freeze
+    activeVisibilityHandler = () => {
+      if (document.visibilityState === "visible") {
+        scheduleNextTick();
+      }
+    };
+    document.addEventListener("visibilitychange", activeVisibilityHandler);
+    window.addEventListener("focus", activeVisibilityHandler);
   }
 }
