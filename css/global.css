@@ -222,6 +222,22 @@ img, video, iframe {
   opacity: 1 !important;
 }
 
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px !important;
+  }
+  .glass-nav {
+    padding: 3px 0;
+    min-height: 64px;
+    -webkit-backdrop-filter: blur(20px) saturate(190%);
+    backdrop-filter: blur(20px) saturate(190%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+  [data-theme="dark"] .glass-nav {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
 .nav-content {
   width: 100%;
   max-width: var(--max-width);
@@ -2256,8 +2272,8 @@ h3 {
   .accessibility-btn {
     width: 44px !important;
     height: 44px !important;
-    bottom: 16px !important;
-    left: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    left: calc(16px + env(safe-area-inset-left, 0px)) !important;
     font-size: 0.85rem !important;
   }
 }
@@ -2279,8 +2295,8 @@ h3 {
 
 @media (max-width: 600px) {
   .fab-wrapper {
-    bottom: 16px !important;
-    right: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
   }
   .fab-main {
     width: 46px !important;
@@ -2552,8 +2568,8 @@ h3 {
 
 @media (max-width: 600px) {
   .back-to-top-btn {
-    bottom: 68px;
-    left: 16px;
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    left: calc(16px + env(safe-area-inset-left, 0px)) !important;
     width: 42px;
     height: 42px;
   }

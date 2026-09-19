@@ -3930,6 +3930,41 @@ header#home {
   stroke-width: 2.2px;
 }
 
+.wpb-badge-row {
+  margin-bottom: 8px;
+}
+
+.wpb-hours-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 211, 102, 0.14);
+  color: #15803d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(37, 211, 102, 0.32);
+}
+
+[data-theme="dark"] .wpb-hours-pill {
+  background: rgba(37, 211, 102, 0.18);
+  color: #4ade80;
+  border-color: rgba(37, 211, 102, 0.4);
+}
+
+.wpb-hours-pill i,
+.wpb-hours-pill svg {
+  width: 13px;
+  height: 13px;
+  color: #16a34a;
+}
+
+[data-theme="dark"] .wpb-hours-pill i,
+[data-theme="dark"] .wpb-hours-pill svg {
+  color: #4ade80;
+}
+
 .wpb-text h4 {
   font-size: 1.15rem;
   font-weight: 800;

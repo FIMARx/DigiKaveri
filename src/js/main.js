@@ -1235,7 +1235,7 @@ function initBackToTop() {
 
   let isVisible = false;
   const checkScroll = () => {
-    const shouldShow = window.scrollY > 600;
+    const shouldShow = window.scrollY > 900;
     if (shouldShow !== isVisible) {
       isVisible = shouldShow;
       btn.classList.toggle("visible", isVisible);
@@ -1364,6 +1364,17 @@ function initMobileCarousels() {
     );
     if (!cards.length) return;
 
+    // Accessibility ARIA roles for carousels
+    grid.setAttribute('tabindex', '0');
+    grid.setAttribute('role', 'region');
+    grid.setAttribute('aria-roledescription', 'carousel');
+
+    cards.forEach((card, i) => {
+      card.setAttribute('role', 'group');
+      card.setAttribute('aria-roledescription', 'slide');
+      card.setAttribute('aria-label', `${i + 1} / ${cards.length}`);
+    });
+
     const prevBtn = container.querySelector('.mobile-carousel-btn.prev');
     const nextBtn = container.querySelector('.mobile-carousel-btn.next');
     const currentIndicator = container.querySelector(
@@ -1433,6 +1444,21 @@ function initMobileCarousels() {
         }
       });
     }
+
+    // Keyboard navigation (ArrowLeft / ArrowRight) when carousel is focused
+    grid.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        if (currentIndex < cards.length - 1) {
+          e.preventDefault();
+          scrollToIndex(currentIndex + 1);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if (currentIndex > 0) {
+          e.preventDefault();
+          scrollToIndex(currentIndex - 1);
+        }
+      }
+    });
 
     // Debounced scroll listener to update counter & disabled states on swipe
     let scrollTicking = false;
