@@ -807,6 +807,32 @@ header#home::after {
 }
 
 @media (max-width: 768px) {
+  /* Section Header on Mobile - Centered & Clean Spacing */
+  #reviews .home-section-header,
+  #solutions .home-section-header {
+    text-align: center !important;
+    align-items: center !important;
+    margin-bottom: 24px !important;
+  }
+
+  #reviews .home-section-header h2,
+  #solutions .home-section-header h2 {
+    text-align: center !important;
+    font-size: 1.75rem !important;
+    line-height: 1.25 !important;
+    margin: 0 auto 8px auto !important;
+  }
+
+  #reviews .home-section-header p,
+  #solutions .home-section-header p {
+    text-align: center !important;
+    font-size: 0.95rem !important;
+    color: var(--text-light) !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    line-height: 1.5 !important;
+  }
+
   .reviews-grid-new,
   .solutions-grid {
     display: flex !important;
@@ -844,82 +870,213 @@ header#home::after {
     margin: 0 !important;
   }
 
+  /* Solutions Card Mobile - Centered Showcase Card */
+  .solutions-grid > .solution-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 36px 24px 30px 24px !important;
+    border-radius: var(--radius-lg) !important;
+    min-height: 310px !important;
+  }
+
+  .solution-card .solution-icon {
+    margin: 0 auto 18px auto !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .solution-card .solution-icon svg,
+  .solution-card .solution-icon i {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .solution-card h3 {
+    text-align: center !important;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    margin: 0 0 10px 0 !important;
+    width: 100% !important;
+    color: var(--text-dark) !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .solution-card p {
+    text-align: center !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: var(--text-light) !important;
+    max-width: 290px !important;
+    margin: 0 auto !important;
+    flex-grow: 0 !important;
+  }
+
+  .solution-card .solution-link {
+    margin-top: 22px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px 22px !important;
+    border-radius: 999px !important;
+    background: var(--primary-light) !important;
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    border: 1px solid rgba(var(--primary-rgb), 0.15) !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+  }
+
+  .solution-card:hover .solution-link {
+    background: var(--primary) !important;
+    color: #ffffff !important;
+  }
+
+  /* Testimonial Card Mobile - Centered Showcase Card */
+  .reviews-grid-new > .testimonial-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 30px 22px 24px 22px !important;
+    border-radius: var(--radius-lg) !important;
+    min-height: 270px !important;
+  }
+
+  .testimonial-card .card-header-google {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .testimonial-card .reviewer-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .testimonial-card .reviewer-meta h3 {
+    text-align: center !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .testimonial-card .testimonial-stars {
+    justify-content: center !important;
+    margin: 4px auto 14px auto !important;
+  }
+
+  .testimonial-card .testimonial-quote {
+    text-align: center !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: var(--text-light) !important;
+    max-width: 310px !important;
+    margin: 0 auto 16px auto !important;
+  }
+
+  .testimonial-card .testimonial-footer {
+    justify-content: center !important;
+    gap: 16px !important;
+    width: 100% !important;
+    border-top: 1px solid var(--border) !important;
+    padding-top: 14px !important;
+    margin-top: auto !important;
+  }
+
+  /* Unified Pill Carousel Controls */
   .mobile-carousel-nav {
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin: 8px auto 32px;
-    width: 100%;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 16px auto 36px auto !important;
+    padding: 6px 10px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 999px !important;
+    box-shadow: var(--shadow-sm) !important;
+    width: fit-content !important;
   }
 
   .mobile-carousel-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-dark);
-    box-shadow: var(--shadow-sm);
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    padding: 0;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    color: var(--text-dark) !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    padding: 0 !important;
   }
 
   .mobile-carousel-btn:hover:not(:disabled) {
-    background: var(--primary-light);
-    border-color: var(--primary);
-    color: var(--primary);
-    transform: scale(1.06);
+    background: var(--primary-light) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    transform: scale(1.08) !important;
   }
 
   .mobile-carousel-btn:active:not(:disabled) {
-    transform: scale(0.94);
+    transform: scale(0.92) !important;
   }
 
   .mobile-carousel-btn:disabled,
   .mobile-carousel-btn[aria-disabled="true"] {
-    opacity: 0.35;
-    cursor: not-allowed;
-    pointer-events: none;
+    opacity: 0.25 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
     transform: none !important;
   }
 
   .mobile-carousel-btn i,
   .mobile-carousel-btn svg {
-    width: 22px;
-    height: 22px;
-    stroke-width: 2.2px;
+    width: 20px !important;
+    height: 20px !important;
+    stroke-width: 2.4px !important;
   }
 
   .mobile-carousel-indicator {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    padding: 6px 18px;
-    border-radius: 999px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    min-width: 76px;
-    text-align: center;
-    user-select: none;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.5px !important;
+    padding: 4px 14px !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    min-width: 54px !important;
+    text-align: center !important;
+    user-select: none !important;
   }
 
   .mobile-carousel-indicator .current-slide {
-    color: var(--primary);
-    font-weight: 800;
+    color: var(--primary) !important;
+    font-weight: 800 !important;
   }
 }
 
