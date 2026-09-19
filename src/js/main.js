@@ -82,6 +82,7 @@ function initApp() {
   initBackToTop();
   initQuickCopy();
   initGuaranteeModal();
+  initMobileCarousels();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {
@@ -1345,6 +1346,127 @@ function initGuaranteeModal() {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeModal();
     }
+  });
+}
+
+function initMobileCarousels() {
+  const containers = document.querySelectorAll('.mobile-carousel-container');
+  if (!containers.length) return;
+
+  containers.forEach((container) => {
+    const grid = container.querySelector('.reviews-grid-new, .solutions-grid');
+    if (!grid) return;
+
+    const cards = Array.from(grid.children).filter(
+      (el) =>
+        el.classList.contains('testimonial-card') ||
+        el.classList.contains('solution-card')
+    );
+    if (!cards.length) return;
+
+    const prevBtn = container.querySelector('.mobile-carousel-btn.prev');
+    const nextBtn = container.querySelector('.mobile-carousel-btn.next');
+    const currentIndicator = container.querySelector(
+      '.mobile-carousel-indicator .current-slide'
+    );
+    const totalIndicator = container.querySelector(
+      '.mobile-carousel-indicator .total-slides'
+    );
+
+    if (totalIndicator) {
+      totalIndicator.textContent = cards.length;
+    }
+
+    let currentIndex = 0;
+
+    const updateControls = (index) => {
+      currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+      if (currentIndicator) {
+        currentIndicator.textContent = currentIndex + 1;
+      }
+      if (prevBtn) {
+        prevBtn.disabled = currentIndex === 0;
+        prevBtn.setAttribute(
+          'aria-disabled',
+          currentIndex === 0 ? 'true' : 'false'
+        );
+      }
+      if (nextBtn) {
+        nextBtn.disabled = currentIndex === cards.length - 1;
+        nextBtn.setAttribute(
+          'aria-disabled',
+          currentIndex === cards.length - 1 ? 'true' : 'false'
+        );
+      }
+    };
+
+    const scrollToIndex = (index) => {
+      if (index < 0 || index >= cards.length) return;
+      const targetCard = cards[index];
+      if (!targetCard) return;
+
+      const gridRect = grid.getBoundingClientRect();
+      const cardRect = targetCard.getBoundingClientRect();
+      const scrollTarget = grid.scrollLeft + (cardRect.left - gridRect.left);
+
+      grid.scrollTo({
+        left: scrollTarget,
+        behavior: 'smooth',
+      });
+      updateControls(index);
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentIndex > 0) {
+          scrollToIndex(currentIndex - 1);
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentIndex < cards.length - 1) {
+          scrollToIndex(currentIndex + 1);
+        }
+      });
+    }
+
+    // Debounced scroll listener to update counter & disabled states on swipe
+    let scrollTicking = false;
+    grid.addEventListener(
+      'scroll',
+      () => {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(() => {
+            const gridRect = grid.getBoundingClientRect();
+            let closestIndex = 0;
+            let minDiff = Infinity;
+
+            cards.forEach((card, i) => {
+              const cardRect = card.getBoundingClientRect();
+              const diff = Math.abs(cardRect.left - gridRect.left);
+              if (diff < minDiff) {
+                minDiff = diff;
+                closestIndex = i;
+              }
+            });
+
+            if (closestIndex !== currentIndex) {
+              updateControls(closestIndex);
+            }
+            scrollTicking = false;
+          });
+          scrollTicking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    // Initial state
+    updateControls(0);
   });
 }
 

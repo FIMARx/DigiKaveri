@@ -5486,14 +5486,49 @@ html.theme-switching *::after {
     margin-bottom: 4px !important;
   }
 
-  /* Testimonial cards grid layout */
-  .reviews-grid-new {
-    grid-template-columns: 1fr !important;
-    gap: 15px !important;
+  /* Mobile Carousel for Reviews & Solutions */
+  .reviews-grid-new,
+  .solutions-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    gap: 16px !important;
+    margin-bottom: 12px !important;
+    padding: 6px 4px 16px 4px !important;
+    width: 100% !important;
   }
+
+  .reviews-grid-new::-webkit-scrollbar,
+  .solutions-grid::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .reviews-grid-new > .testimonial-card,
+  .solutions-grid > .solution-card {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
   .testimonial-card {
-    min-width: 0 !important;
-    padding: 16px !important;
+    padding: 20px !important;
+  }
+  .solution-card {
+    padding: 24px 20px !important;
   }
   .testimonial-quote {
     font-size: 0.95rem !important;

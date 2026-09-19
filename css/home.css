@@ -783,6 +783,16 @@ header#home::after {
   max-width: 1360px;
 }
 
+/* Mobile Carousel Base Styles */
+.mobile-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.mobile-carousel-nav {
+  display: none !important;
+}
+
 .reviews-grid-new {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -793,6 +803,123 @@ header#home::after {
 @media (max-width: 992px) {
   .reviews-grid-new {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews-grid-new,
+  .solutions-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    gap: 16px !important;
+    margin-bottom: 12px !important;
+    padding: 6px 4px 16px 4px !important;
+    width: 100% !important;
+  }
+
+  .reviews-grid-new::-webkit-scrollbar,
+  .solutions-grid::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .reviews-grid-new > .testimonial-card,
+  .solutions-grid > .solution-card {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
+  .mobile-carousel-nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 8px auto 32px;
+    width: 100%;
+  }
+
+  .mobile-carousel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dark);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+  }
+
+  .mobile-carousel-btn:hover:not(:disabled) {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(1.06);
+  }
+
+  .mobile-carousel-btn:active:not(:disabled) {
+    transform: scale(0.94);
+  }
+
+  .mobile-carousel-btn:disabled,
+  .mobile-carousel-btn[aria-disabled="true"] {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none !important;
+  }
+
+  .mobile-carousel-btn i,
+  .mobile-carousel-btn svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.2px;
+  }
+
+  .mobile-carousel-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    min-width: 76px;
+    text-align: center;
+    user-select: none;
+  }
+
+  .mobile-carousel-indicator .current-slide {
+    color: var(--primary);
+    font-weight: 800;
   }
 }
 
