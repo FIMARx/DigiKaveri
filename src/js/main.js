@@ -69,6 +69,7 @@ function initApp() {
   initMobileNav();
   initSmoothNav();
   initScrollSpy(); // Start tracking sections immediately
+  initLegalMobileToc(); // Mobile "jump to section" dropdown on legal pages
   initAOS(); // Ensure animations initialize instantly
   initOfflineIndicator(); // Initialize offline status banner
   loadAnalytics(); // Initialize Google Analytics & Consent Mode v2 immediately
@@ -838,6 +839,12 @@ function updateScrollSpy() {
     tocFill.style.transform = `scaleX(${progressRatio})`;
   }
 
+  // Keep the mobile "jump to section" dropdown in sync with manual scrolling
+  const mobileTocSelect = document.getElementById("legal-toc-select");
+  if (mobileTocSelect && currentId && mobileTocSelect.value !== currentId) {
+    mobileTocSelect.value = currentId;
+  }
+
   navLinks.forEach((link) => {
     link.classList.remove("active");
     const href = link.getAttribute("href");
@@ -912,6 +919,32 @@ function initScrollSpy() {
 
   updateScrollSpy();
   updateProgress();
+}
+
+function initLegalMobileToc() {
+  const select = document.getElementById("legal-toc-select");
+  const tocLinks = document.querySelectorAll(".legal-toc a.spy-link");
+  if (!select || !tocLinks.length) return;
+
+  select.innerHTML = "";
+  tocLinks.forEach((link) => {
+    const id = (link.getAttribute("href") || "").split("#")[1];
+    if (!id) return;
+    const option = document.createElement("option");
+    option.value = id;
+    option.textContent = link.textContent.trim();
+    select.appendChild(option);
+  });
+
+  select.addEventListener("change", () => {
+    const target = document.getElementById(select.value);
+    if (!target) return;
+    const headerOffset = getStickyHeaderOffset() + 24;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: targetY, behavior: "smooth" });
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+  });
 }
 
 function initMobileNav() {
