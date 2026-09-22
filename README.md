@@ -9,6 +9,7 @@
     <a href="https://digikaveri.com/"><img src="https://img.shields.io/badge/🌐_Website-digikaveri.com-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
     <a href="https://supabase.com/"><img src="https://img.shields.io/badge/⚡_Database-Supabase_Cloud-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" /></a>
     <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/⚡_Engine-Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/🏢_Y--tunnus-3656584--7-0284C7?style=for-the-badge" alt="Business ID" /></a>
     <a href="#"><img src="https://img.shields.io/badge/🌐_i18n-FI_%7C_EN-3B82F6?style=for-the-badge" alt="i18n" /></a>
     <a href="#"><img src="https://img.shields.io/badge/🏛️_Tax_Deduction-35%25_Kotitalousvähennys-059669?style=for-the-badge" alt="Tax Deduction" /></a>
     <a href="#"><img src="https://img.shields.io/badge/📍_Location-Uusimaa%2C_Finland-0057D9?style=for-the-badge" alt="Location" /></a>
@@ -29,6 +30,7 @@ Technology should empower people, not overwhelm them. **DigiKaveri** (*"Digital 
 - 👵 **Senior & Family Support**: Specialized patient assistance for elderly relatives (banking logins, OmaVero, TV setup) with direct billing options for adult children.
 - 💼 **Business & Remote Work**: Reliable workstation setup, secure VPNs, Microsoft 365, and on-demand maintenance without lock-in contracts.
 - 🏛️ **2026 Tax Savings**: 100% eligible for Finland's official **-35% Kotitalousvähennys** (household tax deduction) on labor (max €1,600/person).
+- 🏢 **Official Business**: DigiKaveri / FIMARx (Business ID / Y-tunnus: `3656584-7`, Prepayment & VAT registered).
 - 🛡️ **"Ei ratkaisua, ei laskua"**: 100% satisfaction guarantee — if an issue cannot be resolved, the client is charged 0 €.
 
 ---
@@ -108,6 +110,10 @@ flowchart LR
 - **Instant Client Filter**: Zero-delay search across all questions and answers.
 - **Dynamic Search Highlighting**: Marks search keywords with `<mark class="faq-highlight">` badges in real time.
 
+### 10. 🟢 Real-Time Service Status Engine (`status.json`)
+- **Automated Operating Hours**: Header status indicator automatically switches between open and closed (09:00–21:00 Finland time).
+- **Zero-Build Hot Override**: Instantly toggle status or set custom messages via `public/data/status.json` (e.g. for sick leave, holidays, or emergency availability) without rebuilding the site.
+
 ---
 
 ## 🛠️ Tech Stack
@@ -151,7 +157,7 @@ DigiKaveri/
 │   └── 📁 js/                  # Modular Logic (main, promo-validator, estimator, contact, quiz, guide)
 ├── 📁 css/                     # Tokenized Design System (variables, global, home, guide, legal, fonts)
 ├── 📁 scripts/                 # Private CLI Utilities (generate-codes.js)
-├── 📁 public/                  # Static Assets, Favicons, Manifest, Service Worker (sw.js), Security Headers (_headers)
+├── 📁 public/                  # Static Assets, Favicons, Manifest, Service Worker (sw.js), Status Data (status.json), Headers
 ├── 📄 vite.config.js           # Multi-Page Build Pipeline & Handlebars SSG Configuration
 └── 📄 package.json             # NPM Dependencies & Scripts
 ```
