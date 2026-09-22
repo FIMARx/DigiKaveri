@@ -1676,7 +1676,7 @@ h3 {
 
 @media (max-width: 600px) {
   #toast-container {
-    top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 12px);
+    top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + 12px);
     width: 95%;
   }
   .toast {
@@ -5972,7 +5972,7 @@ html.theme-switching *::after {
 
 @media (max-width: 600px) {
   .offline-banner {
-    top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 6px);
+    top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + 6px);
     font-size: 0.75rem;
     padding: 6px 12px;
     border-radius: 20px;
