@@ -1322,10 +1322,10 @@ h3 {
 
 #toast-container {
   position: fixed;
-  top: 40px;
+  top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 16px);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 10001;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1335,7 +1335,7 @@ h3 {
 }
 
 .toast {
-  background: white;
+  background: var(--surface);
   color: var(--text-dark);
   padding: 24px 32px;
   border-radius: 16px;
@@ -1676,7 +1676,7 @@ h3 {
 
 @media (max-width: 600px) {
   #toast-container {
-    top: 20px;
+    top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 12px);
     width: 95%;
   }
   .toast {
@@ -5891,7 +5891,7 @@ html.theme-switching *::after {
 /* Offline Banner Status Indicator */
 .offline-banner {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 76px);
+  top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 8px);
   left: 0;
   right: 0;
   margin-left: auto;
@@ -5950,7 +5950,7 @@ html.theme-switching *::after {
 
 @media (max-width: 600px) {
   .offline-banner {
-    top: calc(env(safe-area-inset-top, 0px) + 68px);
+    top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 6px);
     font-size: 0.75rem;
     padding: 6px 12px;
     border-radius: 20px;
