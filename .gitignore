@@ -49,3 +49,7 @@ Thumbs.db
 .eslintcache
 .vite/
 .parcel-cache/
+
+# Local-only cross-tool session notes (Claude Code / Gemini Antigravity both
+# run on this machine - no need for this to live on GitHub)
+AGENT_HANDOFF.md
