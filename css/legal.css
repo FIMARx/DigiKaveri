@@ -320,7 +320,6 @@ aside.legal-toc {
 .legal-content {
   background: var(--surface);
   padding: clamp(28px, 4vw, 56px);
-  padding-bottom: min(65vh, 650px);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
