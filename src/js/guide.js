@@ -35,7 +35,12 @@ onDOMReady(() => {
 
   // --- 2. Platform Detection ---
   const ua = navigator.userAgent.toLowerCase();
-  const isIOS = /iphone|ipad|ipod/.test(ua);
+  // Since iPadOS 13, Safari on iPad reports itself as desktop Mac Safari
+  // ("Macintosh" in the UA, no "iPad") unless the site requests the mobile
+  // version - "mac" + touch support is the standard way to tell them apart,
+  // since real Macs aren't touch-capable.
+  const isIPadOS = /mac/.test(ua) && navigator.maxTouchPoints > 1;
+  const isIOS = /iphone|ipad|ipod/.test(ua) || isIPadOS;
   const isAndroid = /android/.test(ua);
   const isWindows = /win/.test(ua);
   const isMac = /mac/.test(ua) && !isIOS;
