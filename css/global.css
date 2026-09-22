@@ -5948,6 +5948,28 @@ html.theme-switching *::after {
   word-break: break-word;
 }
 
+.offline-banner-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin-left: 2px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.offline-banner-close:hover {
+  background: rgba(var(--primary-rgb), 0.12);
+  color: var(--text-dark);
+}
+
 @media (max-width: 600px) {
   .offline-banner {
     top: calc(env(safe-area-inset-top, 0px) + var(--nav-height, 88px) + var(--campaign-banner-height, 0px) + 6px);

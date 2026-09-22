@@ -1228,16 +1228,26 @@ function initOfflineIndicator() {
     ? "You are offline (browsing saved version)"
     : "Ei verkkoyhteyttä (selaat tallennettua versiota)";
   const msgOnline = isEn ? "Connection restored" : "Verkkoyhteys palautui";
+  const closeLabel = isEn ? "Dismiss" : "Sulje ilmoitus";
 
   const banner = document.createElement("div");
   banner.className = "offline-banner";
   banner.setAttribute("role", "status");
   banner.setAttribute("aria-live", "polite");
-  banner.innerHTML = `<span class="offline-banner-dot"></span><span class="offline-banner-text">${msgOffline}</span>`;
+  banner.innerHTML = `
+    <span class="offline-banner-dot"></span><span class="offline-banner-text">${msgOffline}</span>
+    <button type="button" class="offline-banner-close" aria-label="${closeLabel}">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  `;
   document.body.appendChild(banner);
 
   let timer = null;
   let isCurrentlyOffline = false;
+  let dismissedByUser = false;
 
   const showBanner = (isOffline) => {
     if (isOffline === isCurrentlyOffline && isOffline) return;
@@ -1246,10 +1256,12 @@ function initOfflineIndicator() {
     const textEl = banner.querySelector(".offline-banner-text");
 
     if (isOffline) {
+      if (dismissedByUser) return; // Respect the user's dismissal until connectivity actually changes
       banner.classList.remove("online-restored");
       if (textEl) textEl.textContent = msgOffline;
       banner.classList.add("active");
     } else {
+      dismissedByUser = false;
       banner.classList.add("online-restored");
       if (textEl) textEl.textContent = msgOnline;
       banner.classList.add("active");
@@ -1258,6 +1270,15 @@ function initOfflineIndicator() {
       }, 3200);
     }
   };
+
+  const closeBtn = banner.querySelector(".offline-banner-close");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      dismissedByUser = true;
+      if (timer) clearTimeout(timer);
+      banner.classList.remove("active");
+    });
+  }
 
   const checkConnectivity = async () => {
     if (!navigator.onLine) {
@@ -1268,7 +1289,7 @@ function initOfflineIndicator() {
     // Perform a fast HEAD request to check actual connectivity
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2500);
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
       const res = await fetch('/favicon.ico?_ping=' + Date.now(), {
         method: 'HEAD',
         cache: 'no-store',
