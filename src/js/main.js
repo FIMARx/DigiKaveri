@@ -842,7 +842,11 @@ function updateScrollSpy() {
   // Keep the mobile "jump to section" dropdown in sync with manual scrolling
   const mobileTocSelect = document.getElementById("legal-toc-select");
   if (mobileTocSelect && currentId && mobileTocSelect.value !== currentId) {
-    mobileTocSelect.value = currentId;
+    if (typeof mobileTocSelect._legalTocSetActive === "function") {
+      mobileTocSelect._legalTocSetActive(currentId);
+    } else {
+      mobileTocSelect.value = currentId;
+    }
   }
 
   navLinks.forEach((link) => {
@@ -924,27 +928,132 @@ function initScrollSpy() {
 function initLegalMobileToc() {
   const select = document.getElementById("legal-toc-select");
   const tocLinks = document.querySelectorAll(".legal-toc a.spy-link");
-  if (!select || !tocLinks.length) return;
+  if (!select || !tocLinks.length || select.dataset.legalTocInitialized) return;
+  select.dataset.legalTocInitialized = "true";
 
+  const items = [];
   select.innerHTML = "";
   tocLinks.forEach((link) => {
     const id = (link.getAttribute("href") || "").split("#")[1];
     if (!id) return;
+    const text = link.textContent.trim();
     const option = document.createElement("option");
     option.value = id;
-    option.textContent = link.textContent.trim();
+    option.textContent = text;
     select.appendChild(option);
+    items.push({ id, text });
   });
+  if (!items.length) return;
 
-  select.addEventListener("change", () => {
-    const target = document.getElementById(select.value);
+  const scrollToSection = (id) => {
+    const target = document.getElementById(id);
     if (!target) return;
     const headerOffset = getStickyHeaderOffset() + 24;
     const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset;
     window.scrollTo({ top: targetY, behavior: "smooth" });
     target.setAttribute("tabindex", "-1");
     target.focus({ preventScroll: true });
+  };
+
+  // Keep the native select working (keyboard/no-JS fallback, drives the
+  // scroll-spy sync below) while layering a custom trigger + menu on top,
+  // matching the site's existing "premium" dropdown look.
+  select.addEventListener("change", () => scrollToSection(select.value));
+
+  const wrapper = select.parentElement;
+  select.classList.add("legal-toc-select-native");
+  select.setAttribute("aria-hidden", "true");
+  select.tabIndex = -1;
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "legal-toc-trigger";
+  trigger.setAttribute("aria-haspopup", "listbox");
+  trigger.setAttribute("aria-expanded", "false");
+  trigger.innerHTML = `
+    <span class="legal-toc-trigger-text"></span>
+    <span class="legal-toc-trigger-arrow" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </span>
+  `;
+
+  const menu = document.createElement("div");
+  menu.className = "legal-toc-menu";
+  menu.setAttribute("role", "listbox");
+
+  const optionButtons = items.map((item, index) => {
+    const opt = document.createElement("button");
+    opt.type = "button";
+    opt.className = "legal-toc-option";
+    opt.setAttribute("role", "option");
+    opt.dataset.value = item.id;
+    opt.innerHTML = `
+      <span class="legal-toc-option-num">${index + 1}</span>
+      <span class="legal-toc-option-text">${item.text.replace(/^\d+\.\s*/, "")}</span>
+      <span class="legal-toc-option-check" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </span>
+    `;
+    menu.appendChild(opt);
+    return opt;
   });
+
+  wrapper.appendChild(trigger);
+  wrapper.appendChild(menu);
+
+  const triggerText = trigger.querySelector(".legal-toc-trigger-text");
+
+  const setActive = (id, { scroll = false } = {}) => {
+    if (!items.some((item) => item.id === id)) return;
+    select.value = id;
+    const item = items.find((i) => i.id === id);
+    triggerText.textContent = item.text;
+    optionButtons.forEach((btn) => {
+      btn.classList.toggle("is-selected", btn.dataset.value === id);
+    });
+    if (scroll) scrollToSection(id);
+  };
+
+  let isOpen = false;
+  const closeMenu = (focusTrigger = false) => {
+    if (!isOpen) return;
+    isOpen = false;
+    wrapper.classList.remove("is-open");
+    trigger.setAttribute("aria-expanded", "false");
+    if (focusTrigger) trigger.focus({ preventScroll: true });
+  };
+  const openMenu = () => {
+    if (isOpen) return;
+    isOpen = true;
+    wrapper.classList.add("is-open");
+    trigger.setAttribute("aria-expanded", "true");
+  };
+
+  trigger.addEventListener("click", () => {
+    if (isOpen) closeMenu();
+    else openMenu();
+  });
+
+  optionButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setActive(btn.dataset.value, { scroll: true });
+      closeMenu(true);
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (isOpen && !wrapper.contains(e.target)) closeMenu();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (isOpen && e.key === "Escape") closeMenu(true);
+  });
+
+  // Expose so updateScrollSpy() can keep the trigger's label/highlight in
+  // sync with manual scrolling, without re-triggering a scroll of its own.
+  select._legalTocSetActive = setActive;
+
+  setActive(items[0].id);
 }
 
 function initMobileNav() {
