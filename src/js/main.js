@@ -661,7 +661,7 @@ function initFAQ() {
   isFAQInitialized = true;
 
   // Store metadata safely in JS memory
-  const itemsData = Array.from(faqItems).map((item) => {
+  const itemsData = Array.from(faqItems).map((item, index) => {
     const questionBtn = item.querySelector(".faq-question");
     const qSpan = item.querySelector(".faq-question span");
     const aP = item.querySelector(".faq-answer p");
@@ -671,6 +671,12 @@ function initFAQ() {
 
     if (questionBtn) {
       questionBtn.type = "button";
+      questionBtn.setAttribute("aria-expanded", "false");
+    }
+    if (answer) {
+      answer.id = answer.id || `faq-answer-${index}`;
+      answer.setAttribute("aria-hidden", "true");
+      if (questionBtn) questionBtn.setAttribute("aria-controls", answer.id);
     }
 
     return { item, questionBtn, answer, qSpan, aP, origQText, origAText };
@@ -762,6 +768,8 @@ function initFAQ() {
       if (!noResultsEl) {
         noResultsEl = document.createElement("div");
         noResultsEl.className = "faq-no-results";
+        noResultsEl.setAttribute("role", "status");
+        noResultsEl.setAttribute("aria-live", "polite");
         faqGrid.parentNode.insertBefore(noResultsEl, faqGrid.nextSibling);
       }
       noResultsEl.textContent = isEn
