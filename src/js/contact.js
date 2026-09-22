@@ -81,9 +81,11 @@ function setupForm(formId) {
 
   const inputs = form.querySelectorAll("input, select, textarea");
 
-  // Senior Relative helper toggle
-  const relativeCheckbox = form.querySelector('#d-relative');
-  const relativeBox = form.querySelector('#relative-details-box');
+  // Senior Relative helper toggle - generalized so it works on any form
+  // that has a "relative_help" checkbox alongside a .relative-details-box
+  // (both the quick hero form and the detailed contact form have one).
+  const relativeCheckbox = form.querySelector('input[name="relative_help"]');
+  const relativeBox = form.querySelector('.relative-details-box');
   if (relativeCheckbox && relativeBox) {
     relativeCheckbox.addEventListener('change', () => {
       const isChecked = relativeCheckbox.checked;
@@ -92,13 +94,6 @@ function setupForm(formId) {
         const firstInput = relativeBox.querySelector('input');
         if (firstInput) firstInput.focus();
       }
-    });
-
-    document.querySelectorAll("[data-check-relative='true']").forEach((trigger) => {
-      trigger.addEventListener('click', () => {
-        relativeCheckbox.checked = true;
-        relativeBox.classList.remove('hidden');
-      });
     });
   }
 
@@ -321,4 +316,18 @@ function setupForm(formId) {
 onDOMReady(() => {
   setupForm("contactForm");
   setupForm("detailedForm");
+
+  // "Seniori- ja omaistuki" solution-card links always jump to and
+  // pre-check the detailed contact form specifically (its own dedicated
+  // #contact-detailed path), regardless of the quick form's own checkbox.
+  const detailedRelativeCheckbox = document.querySelector('#d-relative');
+  const detailedRelativeBox = document.querySelector('#relative-details-box');
+  if (detailedRelativeCheckbox && detailedRelativeBox) {
+    document.querySelectorAll("[data-check-relative='true']").forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        detailedRelativeCheckbox.checked = true;
+        detailedRelativeBox.classList.remove('hidden');
+      });
+    });
+  }
 });
