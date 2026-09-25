@@ -2240,6 +2240,123 @@ h3 {
   }
 }
 
+/* =======================================================
+   Status Modal — Open / Closed State CSS
+   The .status-modal-card[data-status] attribute drives
+   which content block is visible. Default is "closed".
+   ======================================================= */
+
+/* Hide all state-specific blocks by default */
+.modal-icon-open,
+.modal-title-open,
+.modal-desc-open,
+.modal-actions-open,
+.modal-icon-closed,
+.modal-title-closed,
+.modal-desc-closed,
+.modal-actions-closed {
+  display: none;
+}
+
+/* Show CLOSED state blocks */
+.status-modal-card[data-status="closed"] .modal-icon-closed,
+.status-modal-card[data-status="closed"] .modal-title-closed,
+.status-modal-card[data-status="closed"] .modal-desc-closed,
+.status-modal-card[data-status="closed"] .modal-actions-closed {
+  display: block;
+}
+.status-modal-card[data-status="closed"] .modal-actions-closed {
+  display: flex;
+}
+
+/* Show OPEN state blocks */
+.status-modal-card[data-status="open"] .modal-icon-open,
+.status-modal-card[data-status="open"] .modal-title-open,
+.status-modal-card[data-status="open"] .modal-desc-open,
+.status-modal-card[data-status="open"] .modal-actions-open {
+  display: block;
+}
+.status-modal-card[data-status="open"] .modal-actions-open {
+  display: flex;
+}
+
+/* Open state icon: green pulse */
+.modal-icon-open {
+  width: 72px;
+  height: 72px;
+  background: rgba(16, 185, 129, 0.12);
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #10b981;
+  box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.08);
+  animation: pulse-green 2s infinite;
+}
+
+.modal-icon-open i,
+.modal-icon-open svg {
+  width: 36px;
+  height: 36px;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.08); }
+  50%       { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0.04); }
+}
+
+/* Open state: green "Call now" button */
+.btn-modal-call-now {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  text-decoration: none;
+}
+.btn-modal-call-now:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* WhatsApp button */
+.btn-modal-whatsapp {
+  background: #25D366;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-modal-whatsapp:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.25);
+}
+
+@media (max-width: 480px) {
+  .modal-icon-open {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+  }
+  .modal-icon-open i,
+  .modal-icon-open svg {
+    width: 28px;
+    height: 28px;
+  }
+  .btn-modal-whatsapp {
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+}
+
 .accessibility-btn {
   position: fixed;
   bottom: 24px;
