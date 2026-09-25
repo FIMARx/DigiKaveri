@@ -216,9 +216,30 @@ async function checkStatus() {
 
 let previouslyFocusedElement = null;
 
+/**
+ * Update the modal card's data-status attribute so CSS shows
+ * the correct open/closed content block.
+ */
+function updateModalState(modal, isOpen) {
+  const card = modal.querySelector(".status-modal-card");
+  if (card) card.setAttribute("data-status", isOpen ? "open" : "closed");
+  // Update ARIA labels for screen readers
+  const title = modal.querySelector("#modalTitle");
+  const desc = modal.querySelector("#modalDescription");
+  if (title) title.textContent = isOpen
+    ? (modal.dataset.openTitle || "")
+    : (modal.dataset.closedTitle || "");
+  if (desc) desc.textContent = isOpen
+    ? (modal.dataset.openDesc || "")
+    : (modal.dataset.closedDesc || "");
+}
+
 function openStatusModal(modal) {
   if (!modal) return;
   previouslyFocusedElement = document.activeElement;
+  // Refresh state at the exact moment of opening so it is always accurate
+  const isOpenNow = modal.dataset.isOpen === "true";
+  updateModalState(modal, isOpenNow);
   modal.classList.add("active");
   document.body.classList.add("is-locked");
   modal.setAttribute("tabindex", "-1");
@@ -228,10 +249,25 @@ function openStatusModal(modal) {
 function initStatusModal(isOpen) {
   const modal = document.getElementById("statusModal");
   if (!modal) return;
-  if (modal.dataset.initialized) return;
-  modal.dataset.initialized = "true";
 
   const isEn = isEnglish();
+
+  // Store latest open/closed state on element — always updated on each checkStatus()
+  modal.dataset.isOpen = String(isOpen);
+
+  // Store translated strings on the element for ARIA updates
+  modal.dataset.openTitle = isEn ? "We\u2019re open \u2013 call us now!" : "Olemme auki \u2013 soita nyt!";
+  modal.dataset.closedTitle = isEn ? "We are currently closed" : "Olemme juuri nyt suljettu";
+  modal.dataset.openDesc = isEn
+    ? "We\u2019re available today 09:00\u201321:00. Give us a call or send a WhatsApp message and we\u2019ll help you right away!"
+    : "Palvelemme t\u00e4n\u00e4\u00e4n klo 09:00\u201321:00. Soita meille tai l\u00e4het\u00e4 WhatsApp-viesti, niin autamme sinua heti!";
+  modal.dataset.closedDesc = isEn
+    ? "Our service is open daily from 09:00 to 21:00. Feel free to leave a callback request and we\u2019ll reach out to you as soon as we open!"
+    : "Asiakaspalvelumme on avoinna joka p\u00e4iv\u00e4 klo 09:00\u201321:00. Voit j\u00e4tt\u00e4\u00e4 meille soittopyynn\u00f6n, niin otamme sinuun yhteytt\u00e4 heti aukioloaikojemme puitteissa!";
+
+  // Only wire up event listeners once
+  if (modal.dataset.initialized) return;
+  modal.dataset.initialized = "true";
 
   // Accessibility: Focus Trap Logic
   modal.addEventListener("keydown", (e) => {
@@ -241,7 +277,7 @@ function initStatusModal(isOpen) {
       modal.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       ),
-    ).filter((el) => !el.hasAttribute("disabled"));
+    ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
 
     if (focusables.length === 0) return;
 
@@ -274,6 +310,7 @@ function initStatusModal(isOpen) {
   });
 
   const understandBtn = document.getElementById("modalUnderstand");
+  const understandOpenBtn = document.getElementById("modalUnderstandOpen");
   const callbackBtn = document.getElementById("modalCallback");
   const closeBtn = document.getElementById("modalCloseBtn");
 
@@ -285,6 +322,12 @@ function initStatusModal(isOpen) {
 
   if (understandBtn) {
     understandBtn.onclick = () => {
+      closeStatusModal(modal);
+    };
+  }
+
+  if (understandOpenBtn) {
+    understandOpenBtn.onclick = () => {
       closeStatusModal(modal);
     };
   }
