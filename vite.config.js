@@ -88,11 +88,16 @@ export default defineConfig({
           '</head>',
           `  <script>
     window.addEventListener('vite:preloadError', (event) => {
-      console.warn('Asset load failed! Forcing a fresh reload to sync with the latest deployment...', event.payload);
-      // Adding a timestamp to the query string forces the browser to bypass its cache and fetch the fresh HTML from the server.
-      const url = new URL(window.location.href);
-      url.searchParams.set('reload', Date.now());
-      window.location.href = url.toString();
+      console.warn('Asset load failed! Checking reload limit...', event.payload);
+      const reloads = parseInt(sessionStorage.getItem('vite_reload_count') || '0', 10);
+      if (reloads < 2) {
+        sessionStorage.setItem('vite_reload_count', (reloads + 1).toString());
+        const url = new URL(window.location.href);
+        url.searchParams.set('reload', Date.now());
+        window.location.href = url.toString();
+      } else {
+        console.error('Failed to preload asset after retries:', event.payload);
+      }
     });
   </script>
 </head>`
